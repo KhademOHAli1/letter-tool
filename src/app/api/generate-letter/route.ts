@@ -235,7 +235,7 @@ Bitte erstelle nun den Brief.`;
 					{ role: "user", content: userPrompt },
 				],
 				temperature: 0.7,
-				max_tokens: 1000,
+				max_completion_tokens: 1000,
 			}),
 		});
 

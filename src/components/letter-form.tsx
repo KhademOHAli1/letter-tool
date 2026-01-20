@@ -12,7 +12,6 @@ import {
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
-	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { FORDERUNGEN } from "@/lib/data/forderungen";
@@ -223,18 +222,20 @@ export function LetterForm() {
 						</div>
 					)}
 					{mdbs.length > 0 && (
-						<div className="space-y-2">
-							<Label className="text-sm">Wähle deine:n Abgeordnete:n</Label>
+						<div className="space-y-3">
+							<Label className="text-sm font-medium">
+								Wähle deine:n Abgeordnete:n
+							</Label>
 							<Select
 								value={selectedMdB?.id || ""}
 								onValueChange={(id) =>
 									setSelectedMdB(mdbs.find((m) => m.id === id) || null)
 								}
 							>
-								<SelectTrigger className="h-auto py-2">
+								<SelectTrigger className="w-full h-auto min-h-[60px] py-2 px-3 bg-background hover:bg-muted/30 transition-colors border hover:border-primary/40 focus:border-primary [&>span]:flex [&>span]:items-center [&>span]:w-full">
 									{selectedMdB ? (
-										<div className="flex items-center gap-3">
-											<div className="h-10 w-10 overflow-hidden rounded-full bg-muted flex-shrink-0 ring-2 ring-border">
+										<div className="flex items-center gap-3 w-full">
+											<div className="h-10 w-10 overflow-hidden rounded-full bg-muted flex-shrink-0 border-2 border-primary/20">
 												<Image
 													src={selectedMdB.imageUrl}
 													alt={selectedMdB.name}
@@ -244,10 +245,12 @@ export function LetterForm() {
 													unoptimized
 												/>
 											</div>
-											<div className="text-left">
-												<p className="font-medium">{selectedMdB.name}</p>
+											<div className="flex-1 text-left min-w-0">
+												<p className="font-medium text-foreground truncate">
+													{selectedMdB.name}
+												</p>
 												<span
-													className={`inline-block px-2 py-0.5 rounded text-xs ${
+													className={`inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${
 														PARTY_COLORS[selectedMdB.party] || "bg-gray-200"
 													}`}
 												>
@@ -256,18 +259,20 @@ export function LetterForm() {
 											</div>
 										</div>
 									) : (
-										<SelectValue placeholder="Abgeordnete:n auswählen..." />
+										<span className="text-muted-foreground">
+											Abgeordnete:n auswählen...
+										</span>
 									)}
 								</SelectTrigger>
-								<SelectContent className="max-h-80">
+								<SelectContent className="max-h-[320px]">
 									{mdbs.map((mdb) => (
 										<SelectItem
 											key={mdb.id}
 											value={mdb.id}
-											className="cursor-pointer py-2"
+											className="cursor-pointer py-2 px-2 rounded-md hover:bg-muted/60 focus:bg-muted data-[state=checked]:bg-primary/10"
 										>
 											<div className="flex items-center gap-3">
-												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted flex-shrink-0 ring-2 ring-border">
+												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted flex-shrink-0 border border-border">
 													<Image
 														src={mdb.imageUrl}
 														alt={mdb.name}
@@ -277,10 +282,12 @@ export function LetterForm() {
 														unoptimized
 													/>
 												</div>
-												<div>
-													<p className="font-medium">{mdb.name}</p>
+												<div className="flex-1 min-w-0">
+													<p className="font-medium text-foreground truncate">
+														{mdb.name}
+													</p>
 													<span
-														className={`inline-block px-2 py-0.5 rounded text-xs ${
+														className={`inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${
 															PARTY_COLORS[mdb.party] || "bg-gray-200"
 														}`}
 													>
