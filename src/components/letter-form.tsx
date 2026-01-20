@@ -175,11 +175,33 @@ export function LetterForm() {
 				</p>
 			</div>
 
-			{/* Step 1: PLZ → Wahlkreis → MdB */}
+			{/* Step 1: Name */}
 			<div className="space-y-4 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
 				<div className="flex items-center gap-2">
 					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
 						1
+					</span>
+					<h3 className="font-medium">Dein Name</h3>
+				</div>
+
+				<div className="space-y-2 pl-8">
+					<Input
+						id="name"
+						placeholder="Wie möchtest du den Brief unterschreiben?"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
+					<p className="text-xs text-muted-foreground">
+						Der Brief wird mit deinem Namen unterschrieben.
+					</p>
+				</div>
+			</div>
+
+			{/* Step 2: PLZ → Wahlkreis → MdB */}
+			<div className="space-y-4 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
+				<div className="flex items-center gap-2">
+					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+						2
 					</span>
 					<h3 className="font-medium">An wen geht dein Brief?</h3>
 				</div>
@@ -304,11 +326,38 @@ export function LetterForm() {
 				</div>
 			</div>
 
-			{/* Step 2: Forderungen */}
+			{/* Step 3: Persönliche Geschichte */}
 			<div className="space-y-4 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
 				<div className="flex items-center gap-2">
 					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-						2
+						3
+					</span>
+					<h3 className="font-medium">Deine Geschichte</h3>
+				</div>
+
+				<div className="space-y-4 pl-8">
+					<p className="text-sm text-muted-foreground">
+						Was verbindet dich mit dem Iran? Erzähle von deiner Familie, deinen
+						Erfahrungen oder warum dir das Thema am Herzen liegt.
+					</p>
+					<Textarea
+						id="story"
+						placeholder="z.B. Meine Großeltern leben noch in Teheran und ich mache mir jeden Tag Sorgen um sie..."
+						className="min-h-[120px] resize-none"
+						value={personalNote}
+						onChange={(e) => setPersonalNote(e.target.value)}
+					/>
+					<p className="text-xs text-muted-foreground">
+						💡 Persönliche Geschichten berühren mehr als Statistiken.
+					</p>
+				</div>
+			</div>
+
+			{/* Step 4: Forderungen */}
+			<div className="space-y-4 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
+				<div className="flex items-center gap-2">
+					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+						4
 					</span>
 					<h3 className="font-medium">Wofür setzt du dich ein?</h3>
 				</div>
@@ -343,55 +392,6 @@ export function LetterForm() {
 							</label>
 						))}
 					</div>
-				</div>
-			</div>
-
-			{/* Step 3: Persönliche Geschichte */}
-			<div className="space-y-4 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
-				<div className="flex items-center gap-2">
-					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-						3
-					</span>
-					<h3 className="font-medium">Deine Geschichte</h3>
-				</div>
-
-				<div className="space-y-4 pl-8">
-					<p className="text-sm text-muted-foreground">
-						Was verbindet dich mit dem Iran? Erzähle von deiner Familie, deinen
-						Erfahrungen oder warum dir das Thema am Herzen liegt.
-					</p>
-					<Textarea
-						id="story"
-						placeholder="z.B. Meine Großeltern leben noch in Teheran und ich mache mir jeden Tag Sorgen um sie..."
-						className="min-h-[120px] resize-none"
-						value={personalNote}
-						onChange={(e) => setPersonalNote(e.target.value)}
-					/>
-					<p className="text-xs text-muted-foreground">
-						💡 Persönliche Geschichten berühren mehr als Statistiken.
-					</p>
-				</div>
-			</div>
-
-			{/* Step 4: Name */}
-			<div className="space-y-4 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
-				<div className="flex items-center gap-2">
-					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-						4
-					</span>
-					<h3 className="font-medium">Dein Name</h3>
-				</div>
-
-				<div className="space-y-2 pl-8">
-					<Input
-						id="name"
-						placeholder="Wie möchtest du den Brief unterschreiben?"
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-					/>
-					<p className="text-xs text-muted-foreground">
-						Der Brief wird mit deinem Namen unterschrieben.
-					</p>
 				</div>
 			</div>
 
