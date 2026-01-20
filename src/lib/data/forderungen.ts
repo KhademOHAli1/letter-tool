@@ -1,6 +1,7 @@
 /**
  * Forderungen basierend auf dem Strategiepapier Iran 2026
- * Konkret, scharf, umsetzbar - mit klarer Zuständigkeit
+ * Fokus: Menschenrechtslage, Regime Change, R2P
+ * Scharf, direkt, symbolisch wirksam
  */
 
 export interface Forderung {
@@ -15,93 +16,75 @@ export interface Forderung {
 
 export const FORDERUNGEN: Forderung[] = [
 	{
-		id: "gba-ermittlung",
-		title: "Strafverfolgung nach Völkerstrafrecht einleiten",
+		id: "r2p",
+		title: "Schutzverantwortung (R2P) aktivieren",
 		description:
-			"Der Generalbundesanwalt soll ein Strukturermittlungsverfahren gegen iranische Verantwortliche wegen Verbrechen gegen die Menschlichkeit (§ 7 VStGB) einleiten.",
+			"Bei über 12.000 Toten und systematischen Verbrechen gegen die Menschlichkeit muss Deutschland die Schutzverantwortung (Responsibility to Protect) im UN-Rahmen aktivieren - inklusive Artikel 42 der UN-Charta.",
 		briefText:
-			"Fordern Sie das BMJ auf, den Generalbundesanwalt zur Einleitung eines Strukturermittlungsverfahrens gegen iranische Funktionsträger wegen Verbrechen gegen die Menschlichkeit zu bewegen. Das Weltrechtsprinzip ermöglicht dies.",
-		zustaendigkeit: "BMJ/Generalbundesanwalt",
+			"Ich fordere Sie auf, sich für die Aktivierung der Schutzverantwortung (R2P) einzusetzen. Bei über 12.000 Toten sind alle Artikel-41-Maßnahmen ausgeschöpft. Deutschland muss im UN-Sicherheitsrat weitergehende Schritte nach Artikel 42 der UN-Charta vorbereiten.",
+		zustaendigkeit: "AA/BK",
+	},
+	{
+		id: "regime-delegitimierung",
+		title: "Regime politisch delegitimieren",
+		description:
+			"Das iranische Regime hat jede Legitimität verloren. Deutschland muss es auf internationaler Bühne als das benennen, was es ist: ein verbrecherisches System, das sein eigenes Volk massakriert.",
+		briefText:
+			"Sprechen Sie in der UN-Generalversammlung und im Bundestag klar aus: Dieses Regime hat jede Legitimität verloren. Es massakriert sein eigenes Volk. Deutschland darf es nicht länger als legitimen Verhandlungspartner behandeln.",
+		zustaendigkeit: "AA/BK",
+	},
+	{
+		id: "gba-ermittlung",
+		title: "Strafverfolgung nach Völkerstrafrecht",
+		description:
+			"Der Generalbundesanwalt muss sofort ein Strukturermittlungsverfahren wegen Verbrechen gegen die Menschlichkeit einleiten. Haftbefehle gegen IRGC-Kommandeure, Geheimdienstchefs und Richter der Revolutionsgerichte.",
+		briefText:
+			"Fordern Sie das BMJ auf, den Generalbundesanwalt zur sofortigen Einleitung eines Strukturermittlungsverfahrens nach § 7 VStGB zu bewegen. Haftbefehle gegen die Haupttäter müssen vorbereitet werden - jetzt.",
+		zustaendigkeit: "BMJ/GBA",
 	},
 	{
 		id: "irgc-terrorliste",
-		title: "IRGC auf die EU-Terrorliste setzen",
+		title: "IRGC auf die EU-Terrorliste",
 		description:
-			"Die Islamischen Revolutionsgarden (IRGC) müssen als terroristische Organisation gelistet werden - mit Betätigungsverbot und Vermögenseinfrierung in der EU.",
+			"Die Islamischen Revolutionsgarden sind eine Terrororganisation. Sie müssen auf die EU-Terrorliste - mit Betätigungsverbot, Vermögenseinfrierung und strafrechtlicher Verfolgung von Unterstützern in Deutschland.",
 		briefText:
-			"Setzen Sie sich im Auswärtigen Ausschuss dafür ein, dass Deutschland die Listung der IRGC als terroristische Organisation auf EU-Ebene vorantreibt. Das EU-Parlament hat dies bereits 2023 gefordert.",
+			"Setzen Sie sich dafür ein, dass Deutschland die sofortige Listung der IRGC als terroristische Organisation auf EU-Ebene durchsetzt. Das EU-Parlament fordert dies seit 2023. Wann handelt die Bundesregierung?",
 		zustaendigkeit: "AA/BMI",
 	},
 	{
 		id: "interpol",
-		title: "Internationale Haftbefehle beantragen",
+		title: "Internationale Haftbefehle",
 		description:
-			"Deutschland soll über das BKA Interpol Red Notices für identifizierte Haupttäter beantragen - IRGC-Kommandeure, Geheimdienstchefs, Richter der Revolutionsgerichte.",
+			"Deutschland muss über Interpol Red Notices für die Haupttäter beantragen. Kein IRGC-General, kein Folterer, kein Henker-Richter darf sich bei Auslandsreisen sicher fühlen.",
 		briefText:
-			"Fordern Sie das BKA auf, Interpol Red Notices für dokumentierte Haupttäter zu beantragen. Kein Täter darf sich bei Auslandsreisen sicher fühlen.",
+			"Fordern Sie das BKA auf, Interpol Red Notices für dokumentierte Haupttäter zu beantragen. Die Mörder von 12.000 Menschen dürfen nirgendwo auf der Welt sicher sein.",
 		zustaendigkeit: "BKA/AA",
 	},
 	{
-		id: "defektionsprogramm",
-		title: "Defektionsprogramm für Regime-Insider",
+		id: "botschafter",
+		title: "Iranischen Botschafter ausweisen",
 		description:
-			"Ein deutsches Programm für Überläufer aus dem Regime schaffen - mit Schutz, Aufenthalt und Strafmilderung bei Kooperation.",
+			"Der iranische Botschafter in Berlin vertritt ein Regime, das Verbrechen gegen die Menschlichkeit begeht. Er muss ausgewiesen werden.",
 		briefText:
-			"Unterstützen Sie die Einrichtung eines Defektionsprogramms für Regime-Insider, die aussagen wollen. Solche Programme haben sich bei anderen Diktaturen bewährt.",
-		zustaendigkeit: "BND/BMI/AA",
-	},
-	{
-		id: "starlink",
-		title: "Freies Internet im Iran finanzieren",
-		description:
-			"Die Bundesregierung soll Starlink-Terminals und VPN-Infrastruktur für die iranische Bevölkerung beschaffen und finanzieren.",
-		briefText:
-			"Setzen Sie sich dafür ein, dass Deutschland Starlink-Terminals und VPN-Zugänge für Iraner:innen finanziert. Kommunikation ist Lebensader des Widerstands.",
-		zustaendigkeit: "AA/BMZ",
-	},
-	{
-		id: "icc",
-		title: "Verweisung an den Internationalen Strafgerichtshof",
-		description:
-			"Deutschland soll eine Art. 15-Kommunikation beim IStGH einreichen und eine Koalition für eine UN-Sicherheitsratsverweisung bilden.",
-		briefText:
-			"Unterstützen Sie eine deutsche Initiative für eine Art. 15-Kommunikation an den Internationalen Strafgerichtshof. Die Verbrechen müssen international geahndet werden.",
-		zustaendigkeit: "AA/BMJ",
-	},
-	{
-		id: "iaea",
-		title: "IAEA-Zugang zum Nuklearprogramm durchsetzen",
-		description:
-			"Keine Sanktionserleichterung ohne vollständige IAEA-Verifikation. Das Nuklearprogramm muss transparent werden.",
-		briefText:
-			"Fordern Sie: Keine Sanktionserleichterungen ohne vollständigen IAEA-Zugang. Nuklearwaffen in den Händen dieses Regimes wären eine Katastrophe.",
+			"Setzen Sie sich für die Ausweisung des iranischen Botschafters ein. Deutschland kann nicht Diplomaten eines Regimes empfangen, das gerade sein Volk massakriert.",
 		zustaendigkeit: "AA",
 	},
 	{
-		id: "sekundaersanktionen",
-		title: "Sekundärsanktionen konsequent durchsetzen",
+		id: "icc",
+		title: "Verweisung an den Strafgerichtshof",
 		description:
-			"Deutsche Unternehmen und Banken, die Sanktionen umgehen, müssen konsequent bestraft werden. Keine Schlupflöcher für das Regime.",
+			"Deutschland muss eine Koalition für die Verweisung an den Internationalen Strafgerichtshof bilden und selbst eine Art. 15-Kommunikation einreichen.",
 		briefText:
-			"Drängen Sie auf konsequente Durchsetzung der Sanktionen. Jedes deutsche Unternehmen, das dem Regime hilft, verlängert das Leid.",
-		zustaendigkeit: "BMWi/BaFin",
+			"Unterstützen Sie eine deutsche Initiative zur Verweisung der Iran-Situation an den Internationalen Strafgerichtshof. Die Täter müssen vor ein internationales Tribunal.",
+		zustaendigkeit: "AA/BMJ",
 	},
 	{
-		id: "asyl",
-		title: "Schnelle Schutzverfahren für Iraner:innen",
+		id: "starlink",
+		title: "Internet für den Widerstand",
 		description:
-			"Iranische Schutzsuchende brauchen beschleunigte Asylverfahren und sicheren Aufenthalt. Abschiebungen in den Iran müssen ausgesetzt bleiben.",
+			"Die Bundesregierung muss Starlink-Terminals und VPN-Infrastruktur für die iranische Bevölkerung finanzieren. Kommunikation ist die Lebensader des Widerstands.",
 		briefText:
-			"Setzen Sie sich für beschleunigte Asylverfahren für Iraner:innen ein. Wer vor diesem Regime flieht, braucht schnellen Schutz - nicht jahrelange Unsicherheit.",
-		zustaendigkeit: "BMI/BAMF",
-	},
-	{
-		id: "koalition",
-		title: "Internationale Koalition 'Freunde des iranischen Volkes'",
-		description:
-			"Deutschland soll eine internationale Koalition gleichgesinnter Staaten für koordinierte Maßnahmen gegen das Regime anführen.",
-		briefText:
-			"Unterstützen Sie die Bildung einer internationalen Koalition 'Freunde des iranischen Volkes' unter deutscher Führung. Nur gemeinsam kann man dieses Regime in die Knie zwingen.",
-		zustaendigkeit: "BK/AA",
+			"Setzen Sie sich dafür ein, dass Deutschland Starlink-Terminals und sichere Kommunikationskanäle für Iraner:innen finanziert. Das Regime kämpft mit Blackouts - wir müssen dem Volk Augen und Stimme geben.",
+		zustaendigkeit: "AA/BMZ",
 	},
 ];
