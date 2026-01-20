@@ -194,15 +194,26 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		// 13. Build safe user prompt
-		const forderungenTexte = forderungen
+		// 13. Build safe user prompt with detailed Forderungen
+		const selectedForderungen = forderungen
 			.map((id: string) => FORDERUNGEN.find((f) => f.id === id))
 			.filter(
-				(f): f is { id: string; title: string; description: string } =>
-					f !== undefined,
+				(
+					f,
+				): f is {
+					id: string;
+					title: string;
+					description: string;
+					briefText: string;
+					zustaendigkeit: string;
+				} => f !== undefined,
+			);
+
+		const forderungenTexte = selectedForderungen
+			.map(
+				(f) => `- ${f.title}\n  Formulierung für den Brief: "${f.briefText}"`,
 			)
-			.map((f) => `- ${f.title}: ${f.description}`)
-			.join("\n");
+			.join("\n\n");
 
 		const userPrompt = `Schreibe einen Brief mit folgenden Angaben:
 
@@ -214,10 +225,10 @@ EMPFÄNGER:
 ${mdb.name} (${mdb.party})
 Mitglied des Deutschen Bundestages
 
-FORDERUNGEN DIE ICH UNTERSTÜTZE:
+FORDERUNGEN DIE ICH UNTERSTÜTZE (nutze die Formulierungen als Basis, aber passe sie an den Briefstil an):
 ${forderungenTexte}
 
-${personalNote ? `PERSÖNLICHE ERGÄNZUNG:\n${personalNote}` : ""}
+${personalNote ? `PERSÖNLICHE ERGÄNZUNG (dies ist die emotionale Geschichte des Absenders - nutze sie für den SELF-Teil):\n${personalNote}` : "HINWEIS: Keine persönliche Ergänzung angegeben. Erfinde eine passende, authentisch wirkende persönliche Verbindung zum Thema Iran."}
 
 Bitte erstelle nun den Brief.`;
 
