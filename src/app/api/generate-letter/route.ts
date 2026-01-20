@@ -260,11 +260,15 @@ Bitte erstelle nun den Brief.`;
 		}
 
 		const data = await response.json();
-		const content = data.choices[0]?.message?.content || "";
+		const rawContent = data.choices[0]?.message?.content || "";
+
+		// Post-processing: Replace en-dashes with normal hyphens (LLM tendency)
+		const content = rawContent.replace(/–/g, "-");
+
 		const wordCount = content.split(/\s+/).filter(Boolean).length;
 
 		// Generate subject line
-		const subject = `Bitte um Unterstützung: Menschenrechte im Iran`;
+		const subject = "Bitte um Unterstützung: Menschenrechte im Iran";
 
 		return NextResponse.json(
 			{
