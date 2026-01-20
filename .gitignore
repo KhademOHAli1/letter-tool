@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large data files (source data for PLZ mapping, not needed at runtime)
+data/geo/*.geojson
+data/geo/*.geojson.br
