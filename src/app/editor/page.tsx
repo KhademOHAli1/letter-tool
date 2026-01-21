@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { LanguageSwitcher } from "@/components/language-switcher";
+import { FooterSettings } from "@/components/footer-settings";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -318,9 +318,6 @@ export default function EditorPage() {
 	if (error) {
 		return (
 			<div className="flex min-h-screen items-center justify-center bg-background">
-				<div className="fixed top-4 right-4 z-50">
-					<LanguageSwitcher />
-				</div>
 				<div className="flex flex-col items-center gap-4 p-8 max-w-md text-center">
 					<div className="h-12 w-12 rounded-full bg-destructive/10 flex items-center justify-center">
 						<svg
@@ -384,11 +381,6 @@ export default function EditorPage() {
 
 	return (
 		<div className="min-h-screen bg-background">
-			{/* Language Switcher */}
-			<div className="fixed top-4 right-4 z-50 safe-area-top">
-				<LanguageSwitcher />
-			</div>
-
 			{/* Header */}
 			<header className="border-b border-border/50 bg-linear-to-b from-accent/10 to-background safe-area-top">
 				<div className="container mx-auto max-w-3xl px-4 py-4 md:py-6">
@@ -658,6 +650,11 @@ export default function EditorPage() {
 					</p>
 				</div>
 			</main>
+
+			{/* Footer */}
+			<footer className="container max-w-3xl mx-auto px-4 py-8 text-center">
+				<FooterSettings />
+			</footer>
 		</div>
 	);
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/lib/i18n/context";
 
 interface LetterStats {
 	total_letters: number;
@@ -9,6 +10,7 @@ interface LetterStats {
 }
 
 export function ImpactStats() {
+	const { language } = useLanguage();
 	const [stats, setStats] = useState<LetterStats | null>(null);
 	const [loading, setLoading] = useState(true);
 
@@ -62,20 +64,26 @@ export function ImpactStats() {
 			<div className="container mx-auto max-w-4xl px-4 py-8">
 				<div className="text-center space-y-4">
 					<h2 className="text-lg font-semibold text-foreground">
-						Gemeinsam für Menschenrechte
+						{language === "de"
+							? "Gemeinsam für Menschenrechte"
+							: "Together for Human Rights"}
 					</h2>
 					<div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
 						<div className="text-center">
 							<p className="text-3xl md:text-4xl font-bold text-primary">
 								{stats.total_letters}
 							</p>
-							<p className="text-sm text-muted-foreground">Briefe erstellt</p>
+							<p className="text-sm text-muted-foreground">
+								{language === "de" ? "Briefe erstellt" : "Letters created"}
+							</p>
 						</div>
 						<div className="text-center">
 							<p className="text-3xl md:text-4xl font-bold text-primary">
 								{stats.unique_mdbs}
 							</p>
-							<p className="text-sm text-muted-foreground">MdBs erreicht</p>
+							<p className="text-sm text-muted-foreground">
+								{language === "de" ? "MdBs erreicht" : "MPs reached"}
+							</p>
 						</div>
 					</div>
 					{stats.letters_by_party.length > 0 && (

@@ -11,7 +11,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CampaignGoal } from "@/components/campaign-goal";
-import { LanguageSwitcher } from "@/components/language-switcher";
+import { FooterSettings } from "@/components/footer-settings";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/i18n/context";
 import { type Language, tArray, t as translate } from "@/lib/i18n/translations";
@@ -90,11 +90,6 @@ export default function SuccessPage() {
 
 	return (
 		<div className="min-h-screen bg-background">
-			{/* Language Switcher */}
-			<div className="fixed top-4 right-4 z-50">
-				<LanguageSwitcher />
-			</div>
-
 			{/* Header */}
 			<div className="bg-linear-to-b from-primary/10 to-transparent">
 				<div className="container max-w-2xl mx-auto px-4 pt-8 pb-12">
@@ -277,12 +272,13 @@ export default function SuccessPage() {
 			</div>
 
 			{/* Footer */}
-			<footer className="container max-w-2xl mx-auto px-4 py-8 text-center text-sm text-muted-foreground">
-				<p>
+			<footer className="container max-w-2xl mx-auto px-4 py-8 text-center space-y-4">
+				<p className="text-sm text-muted-foreground">
 					{language === "de"
 						? "Gemeinsam für Freiheit, Würde und Menschenrechte."
 						: "Together for freedom, dignity and human rights."}
 				</p>
+				<FooterSettings />
 			</footer>
 		</div>
 	);

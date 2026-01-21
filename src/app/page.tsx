@@ -2,10 +2,9 @@
 
 import { Vote } from "lucide-react";
 import { CampaignGoal } from "@/components/campaign-goal";
+import { FooterSettings } from "@/components/footer-settings";
 import { ImpactStats } from "@/components/impact-stats";
-import { LanguageSwitcher } from "@/components/language-switcher";
 import { LetterForm } from "@/components/letter-form";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { useLanguage } from "@/lib/i18n/context";
 
 export default function Home() {
@@ -13,20 +12,14 @@ export default function Home() {
 
 	return (
 		<div className="min-h-screen bg-background">
-			{/* Controls - fixed position */}
-			<div className="fixed top-4 right-4 z-50 flex items-center gap-2">
-				<LanguageSwitcher />
-				<ThemeToggle />
-			</div>
-
 			{/* Hero Section */}
-			<header className="border-b border-border/50 bg-linear-to-b from-accent/20 to-background">
-				<div className="container mx-auto max-w-4xl px-4 py-8 md:py-16 safe-area-top">
-					<div className="text-center space-y-4">
+			<header className="bg-linear-to-b from-accent/30 via-accent/10 to-background safe-area-top">
+				<div className="container mx-auto max-w-3xl px-6 pt-12 pb-10 md:pt-16 md:pb-14">
+					<div className="text-center space-y-4 md:space-y-6">
 						{/* Badge */}
-						<div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 md:px-4 py-1.5 text-xs md:text-sm font-medium text-primary">
+						<div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
 							<Vote className="h-4 w-4 shrink-0" />
-							<span className="whitespace-nowrap">
+							<span>
 								{language === "de"
 									? "Deine Stimme zählt"
 									: "Your Voice Matters"}
@@ -34,24 +27,26 @@ export default function Home() {
 						</div>
 
 						{/* Main Heading */}
-						<h1 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-foreground hyphenate">
+						<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight text-foreground leading-tight">
 							{language === "de" ? (
 								<>
-									Schreib deinem{" "}
-									<span className="text-primary wrap-break-word">
-										Bundestags&shy;abgeordneten
+									<span className="block">Schreib deinem</span>
+									<span className="text-primary block">
+										Bundestagsabgeordneten
 									</span>
 								</>
 							) : (
 								<>
-									Write to Your{" "}
-									<span className="text-primary">Member of Parliament</span>
+									{"Write to Your "}
+									<span className="text-primary block sm:inline">
+										Member of Parliament
+									</span>
 								</>
 							)}
 						</h1>
 
 						{/* Subheading */}
-						<p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-2">
+						<p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
 							{language === "de"
 								? "Ein persönlicher Brief kann mehr bewirken als tausend Tweets. Fordere deine Abgeordneten auf, sich für Menschenrechte im Iran einzusetzen."
 								: "A personal letter can achieve more than a thousand tweets. Ask your MP to stand up for human rights in Iran."}
@@ -181,6 +176,10 @@ export default function Home() {
 							>
 								{language === "de" ? "Datenschutz" : "Privacy Policy"}
 							</a>
+						</div>
+						{/* Settings */}
+						<div className="pt-2">
+							<FooterSettings />
 						</div>
 					</div>
 				</div>

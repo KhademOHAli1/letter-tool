@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/lib/i18n/context";
 
 interface CampaignGoalProps {
 	/** The target number of letters */
@@ -18,7 +19,10 @@ export function CampaignGoal({
 	goal = 1000,
 	compact = false,
 }: CampaignGoalProps) {
+	const { language } = useLanguage();
 	const [stats, setStats] = useState<Stats | null>(null);
+
+	const locale = language === "de" ? "de-DE" : "en-US";
 
 	useEffect(() => {
 		fetch("/api/stats")
@@ -44,8 +48,9 @@ export function CampaignGoal({
 			<div className="space-y-1.5">
 				<div className="flex justify-between text-xs text-muted-foreground">
 					<span>
-						{stats.total_letters.toLocaleString("de-DE")} von{" "}
-						{goal.toLocaleString("de-DE")} Briefen
+						{stats.total_letters.toLocaleString(locale)}{" "}
+						{language === "de" ? "von" : "of"} {goal.toLocaleString(locale)}{" "}
+						{language === "de" ? "Briefen" : "letters"}
 					</span>
 					<span>{progress.toFixed(0)}%</span>
 				</div>
@@ -64,9 +69,11 @@ export function CampaignGoal({
 			<div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
 				<span>
 					<strong className="text-foreground font-medium">
-						{stats.total_letters.toLocaleString("de-DE")}
+						{stats.total_letters.toLocaleString(locale)}
 					</strong>{" "}
-					von {goal.toLocaleString("de-DE")} Briefen geschrieben
+					{language === "de"
+						? `von ${goal.toLocaleString(locale)} Briefen geschrieben`
+						: `of ${goal.toLocaleString(locale)} letters written`}
 				</span>
 				<span>{progress.toFixed(0)}%</span>
 			</div>
@@ -81,7 +88,8 @@ export function CampaignGoal({
 
 			{stats.unique_mdbs > 0 && (
 				<p className="text-xs text-muted-foreground mt-2">
-					{stats.unique_mdbs} Abgeordnete kontaktiert
+					{stats.unique_mdbs}{" "}
+					{language === "de" ? "Abgeordnete kontaktiert" : "MPs contacted"}
 				</p>
 			)}
 		</div>

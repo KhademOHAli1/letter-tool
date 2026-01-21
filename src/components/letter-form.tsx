@@ -518,31 +518,52 @@ export function LetterForm() {
 					<p className="text-sm text-muted-foreground">
 						{t("form", "step4.hint")}
 					</p>
-					<div className="space-y-3">
-						{FORDERUNGEN.map((forderung) => (
-							<label
-								key={forderung.id}
-								htmlFor={forderung.id}
-								className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
-									selectedForderungen.includes(forderung.id)
-										? "border-primary bg-primary/5"
-										: "border-border hover:border-primary/50 hover:bg-muted/30"
-								}`}
-							>
-								<Checkbox
-									id={forderung.id}
-									checked={selectedForderungen.includes(forderung.id)}
-									onCheckedChange={() => toggleForderung(forderung.id)}
-									className="mt-0.5"
-								/>
-								<div className="space-y-0.5">
-									<span className="font-medium text-sm">{forderung.title}</span>
-									<p className="text-xs text-muted-foreground">
-										{forderung.description}
-									</p>
-								</div>
-							</label>
-						))}
+					<div className="grid gap-2">
+						{FORDERUNGEN.map((forderung) => {
+							const isSelected = selectedForderungen.includes(forderung.id);
+							return (
+								<button
+									key={forderung.id}
+									type="button"
+									onClick={() => toggleForderung(forderung.id)}
+									className={`w-full text-left p-4 rounded-xl transition-all duration-200 ${
+										isSelected
+											? "bg-primary text-primary-foreground shadow-md ring-2 ring-primary ring-offset-2 ring-offset-background"
+											: "bg-muted/40 hover:bg-muted/70 text-foreground border border-border/50 hover:border-primary/30"
+									}`}
+								>
+									<div className="flex items-start gap-3">
+										<div
+											className={`shrink-0 mt-0.5 h-5 w-5 rounded-full flex items-center justify-center transition-colors ${
+												isSelected
+													? "bg-primary-foreground/20"
+													: "bg-primary/10"
+											}`}
+										>
+											{isSelected && (
+												<Check className="h-3 w-3 text-primary-foreground" />
+											)}
+										</div>
+										<div className="space-y-1 min-w-0">
+											<span
+												className={`font-medium text-sm block ${isSelected ? "text-primary-foreground" : ""}`}
+											>
+												{forderung.title}
+											</span>
+											<p
+												className={`text-xs leading-relaxed ${
+													isSelected
+														? "text-primary-foreground/80"
+														: "text-muted-foreground"
+												}`}
+											>
+												{forderung.description}
+											</p>
+										</div>
+									</div>
+								</button>
+							);
+						})}
 					</div>
 
 					<WhyBox

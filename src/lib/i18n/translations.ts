@@ -35,8 +35,8 @@ export const translations = {
 			en: "Why Write to MPs?",
 		},
 		whyText: {
-			de: "Bundestagsabgeordnete zählen Nachrichten aus ihrem Wahlkreis. Persönliche Briefe von Wähler:innen haben nachweislich Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird die Stimme für Menschenrechte.",
-			en: "Members of Parliament count messages from their constituency. Personal letters from voters have proven influence on political decisions. The more people write, the louder the voice for human rights becomes.",
+			de: "Bundestagsabgeordnete zählen Nachrichten aus ihrem Wahlkreis. Persönliche Briefe haben nachweislich Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird die Stimme für Menschenrechte.",
+			en: "Members of Parliament count messages from their constituency. Personal letters have proven influence on political decisions. The more people write, the louder the voice for human rights becomes.",
 		},
 	},
 
@@ -69,8 +69,8 @@ export const translations = {
 			title: { de: "Dein:e Abgeordnete:r", en: "Your MP" },
 			whyTitle: { de: "Warum wichtig?", en: "Why is this important?" },
 			whyText: {
-				de: "Jeder Wahlkreis hat eine:n direkt gewählte:n Abgeordnete:n. Diese Person vertritt DICH im Bundestag. Ein Brief von dir hat besonderes Gewicht, weil du Wähler:in bist.",
-				en: "Each constituency has a directly elected MP. This person represents YOU in Parliament. A letter from you carries special weight because you are a voter.",
+				de: "Jeder Wahlkreis hat eine:n direkt gewählte:n Abgeordnete:n. Diese Person vertritt die Menschen in deinem Wahlkreis im Bundestag. Ein Brief aus dem Wahlkreis hat besonderes Gewicht.",
+				en: "Each constituency has a directly elected MP. This person represents the people in your constituency in Parliament. A letter from the constituency carries special weight.",
 			},
 			selectLabel: { de: "Wähle deine:n Abgeordnete:n", en: "Select your MP" },
 			selectPlaceholder: {
@@ -93,8 +93,8 @@ export const translations = {
 			},
 			label: { de: "Deine Geschichte", en: "Your Story" },
 			placeholder: {
-				de: "z.B. Ich bin im Iran geboren und lebe seit 2015 in Deutschland. Meine Großeltern leben noch in Teheran und ich mache mir jeden Tag Sorgen um sie. Im letzten Jahr wurde mein Cousin verhaftet...",
-				en: "e.g. I was born in Iran and have lived in Germany since 2015. My grandparents still live in Tehran and I worry about them every day. Last year my cousin was arrested...",
+				de: "z.B. Als Deutsch-Iranerin verfolge ich die Nachrichten aus dem Iran jeden Tag. Ich habe Freunde und Familie dort, die unter der Situation leiden. Die Menschenrechtslage macht mir große Sorgen und ich möchte, dass Deutschland sich stärker einsetzt.",
+				en: "e.g. As a German-Iranian, I follow the news from Iran every day. I have friends and family there who are suffering under the situation. The human rights situation deeply concerns me and I want Germany to take a stronger stance.",
 			},
 			hint: {
 				de: "Mindestens 3 Sätze. Details machen deinen Brief authentisch: Konkrete Erlebnisse, Namen, Orte, Gefühle.",
@@ -227,12 +227,12 @@ export const translations = {
 	shareMessage: {
 		de: `Ich habe gerade einen Brief an meine:n Bundestagsabgeordnete:n geschrieben - für Menschenrechte im Iran.
 
-Warum das wichtig ist: Abgeordnete zählen Briefe aus ihrem Wahlkreis. Persönliche Nachrichten von Wähler:innen haben echten Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird unsere Stimme.
+Warum das wichtig ist: Abgeordnete zählen Briefe aus ihrem Wahlkreis. Persönliche Nachrichten haben echten Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird unsere Stimme.
 
 Du kannst in 5 Minuten auch einen Brief schreiben - das Tool hilft dir dabei:`,
 		en: `I just wrote a letter to my Member of Parliament - for human rights in Iran.
 
-Why it matters: MPs count letters from their constituency. Personal messages from voters have real influence on political decisions. The more people write, the louder our voice becomes.
+Why it matters: MPs count letters from their constituency. Personal messages have real influence on political decisions. The more people write, the louder our voice becomes.
 
 You can also write a letter in 5 minutes - the tool helps you:`,
 	},

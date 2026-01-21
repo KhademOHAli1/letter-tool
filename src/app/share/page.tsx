@@ -54,7 +54,7 @@ export default function SharePage() {
 	const shareUrl = typeof window !== "undefined" ? window.location.origin : "";
 	const shareMessage = `Ich habe gerade einen Brief an meine:n Bundestagsabgeordnete:n geschrieben - für Menschenrechte im Iran.
 
-Warum das wichtig ist: Abgeordnete zählen Briefe aus ihrem Wahlkreis. Persönliche Nachrichten von Wähler:innen haben echten Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird unsere Stimme.
+Warum das wichtig ist: Abgeordnete zählen Briefe aus ihrem Wahlkreis. Persönliche Nachrichten haben echten Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird unsere Stimme.
 
 Du kannst in 5 Minuten auch einen Brief schreiben - das Tool hilft dir dabei:
 
@@ -439,7 +439,7 @@ ${shareUrl}`;
 				<div className="text-center text-muted-foreground text-sm max-w-md mx-auto">
 					<p>
 						<strong className="text-foreground">Wusstest du?</strong>{" "}
-						Persönliche Briefe von Wähler:innen werden von Abgeordneten 10x
+						Persönliche Briefe aus dem Wahlkreis werden von Abgeordneten 10x
 						häufiger gelesen als Petitions-Unterschriften.
 					</p>
 				</div>

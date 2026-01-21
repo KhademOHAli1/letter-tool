@@ -39,9 +39,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 		if (stored && (stored === "de" || stored === "en")) {
 			setLanguageState(stored);
 		} else {
-			// Detect browser language
+			// Detect system/browser language: German if system is German, else English
 			const browserLang = navigator.language.toLowerCase();
-			if (browserLang.startsWith("en")) {
+			if (browserLang.startsWith("de")) {
+				setLanguageState("de");
+			} else {
+				// Default to English for all non-German languages
 				setLanguageState("en");
 			}
 		}

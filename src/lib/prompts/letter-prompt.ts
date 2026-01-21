@@ -41,7 +41,7 @@ ANREDE (formell und respektvoll):
 - NIEMALS "Liebe/r" oder Vornamen - das ist zu informell für einen Brief an MdBs
 
 EINSTIEG (1 Satz, direkt und klar):
-- "ich schreibe Ihnen heute als Ihr Wähler aus [Wahlkreis] und als jemand, der..."
+- "ich wende mich heute an Sie als jemand, der in Ihrem Wahlkreis [Wahlkreis] lebt, und als..."
 
 DIE EIGENTLICHE GESCHICHTE (Dies ist der KERN des Briefes):
 - Erzähle die persönliche Geschichte VOLLSTÄNDIG und DETAILLIERT
