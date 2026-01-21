@@ -140,8 +140,8 @@ export function LetterForm() {
 			return;
 		}
 
-		// Speichere Formulardaten und leite sofort zur Share-Seite weiter
-		// Der Brief wird dort im Hintergrund generiert
+		// Speichere Formulardaten und leite direkt zur Editor-Seite weiter
+		// Der Brief wird dort im Hintergrund generiert mit Streaming
 		sessionStorage.setItem(
 			"formData",
 			JSON.stringify({
@@ -155,7 +155,7 @@ export function LetterForm() {
 			}),
 		);
 
-		router.push("/share");
+		router.push("/editor");
 	}
 
 	const isValid =
@@ -402,12 +402,13 @@ export function LetterForm() {
 
 				<div className="space-y-4 pl-8">
 					<p className="text-sm text-muted-foreground">
-						Was verbindet dich mit dem Iran? Erzähle von deiner Familie, deinen
-						Erfahrungen oder warum dir das Thema am Herzen liegt.
+						Erzähle deine persönliche Verbindung zum Iran. Du kannst auf
+						Deutsch, Englisch oder Farsi schreiben - wir übersetzen es für den
+						Brief.
 					</p>
 					<Textarea
 						id="story"
-						placeholder="z.B. Meine Großeltern leben noch in Teheran und ich mache mir jeden Tag Sorgen um sie..."
+						placeholder="z.B. Ich bin im Iran geboren und lebe seit 2015 in Deutschland. Meine Großeltern leben noch in Teheran und ich mache mir jeden Tag Sorgen um sie. Im letzten Jahr wurde mein Cousin verhaftet..."
 						className="min-h-30 resize-none"
 						value={personalNote}
 						onChange={(e) => setPersonalNote(e.target.value)}
@@ -420,8 +421,8 @@ export function LetterForm() {
 							</p>
 						)}
 					<p className="text-xs text-muted-foreground">
-						Schreibe mindestens 3 Sätze mit jeweils 4 Wörtern. Persönliche
-						Geschichten berühren mehr als Statistiken.
+						Mindestens 3 Sätze. Details machen deinen Brief authentisch:
+						Konkrete Erlebnisse, Namen, Orte, Gefühle.
 					</p>
 				</div>
 			</div>
