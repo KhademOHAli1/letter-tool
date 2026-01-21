@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
@@ -16,6 +16,7 @@ import {
 	type MdB,
 	type Wahlkreis,
 } from "@/lib/data/wahlkreise";
+import { useLanguage } from "@/lib/i18n/context";
 
 // Partei-Farben für Badge
 const PARTY_COLORS: Record<string, string> = {
@@ -28,13 +29,20 @@ const PARTY_COLORS: Record<string, string> = {
 };
 
 // Validate personal story: at least 3 sentences, each with 4+ words
-function validatePersonalNote(text: string): {
+function validatePersonalNote(
+	text: string,
+	t: (
+		section: "form",
+		key: string,
+		replacements?: Record<string, string | number>,
+	) => string,
+): {
 	valid: boolean;
 	message: string;
 } {
 	const trimmed = text.trim();
 	if (!trimmed)
-		return { valid: false, message: "Bitte erzähle deine Geschichte" };
+		return { valid: false, message: t("form", "step3.validation.empty") };
 
 	// Split by sentence-ending punctuation
 	const sentences = trimmed
@@ -45,7 +53,9 @@ function validatePersonalNote(text: string): {
 	if (sentences.length < 3) {
 		return {
 			valid: false,
-			message: `Bitte schreibe mindestens 3 Sätze (aktuell: ${sentences.length})`,
+			message: t("form", "step3.validation.tooFewSentences", {
+				count: sentences.length,
+			}),
 		};
 	}
 
@@ -55,7 +65,7 @@ function validatePersonalNote(text: string): {
 		if (words.length < 4) {
 			return {
 				valid: false,
-				message: `Satz ${i + 1} ist zu kurz (mindestens 4 Wörter pro Satz)`,
+				message: t("form", "step3.validation.sentenceTooShort", { num: i + 1 }),
 			};
 		}
 	}
@@ -63,8 +73,45 @@ function validatePersonalNote(text: string): {
 	return { valid: true, message: "" };
 }
 
+// Collapsible "Why we ask" component
+function WhyBox({
+	title,
+	text,
+	defaultOpen = false,
+}: {
+	title: string;
+	text: string;
+	defaultOpen?: boolean;
+}) {
+	const [open, setOpen] = useState(defaultOpen);
+
+	return (
+		<div className="mt-3 rounded-lg bg-muted/50 border border-border/40">
+			<button
+				type="button"
+				onClick={() => setOpen(!open)}
+				className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-muted-foreground hover:text-foreground transition-colors"
+			>
+				<HelpCircle className="h-3.5 w-3.5 shrink-0" />
+				<span className="font-medium">{title}</span>
+				{open ? (
+					<ChevronUp className="ml-auto h-3.5 w-3.5 shrink-0" />
+				) : (
+					<ChevronDown className="ml-auto h-3.5 w-3.5 shrink-0" />
+				)}
+			</button>
+			{open && (
+				<p className="px-3 pb-3 text-xs text-muted-foreground leading-relaxed">
+					{text}
+				</p>
+			)}
+		</div>
+	);
+}
+
 export function LetterForm() {
 	const router = useRouter();
+	const { t, language } = useLanguage();
 	const [error, setError] = useState<string | null>(null);
 
 	// Honeypot field (hidden, bots will fill it)
@@ -117,7 +164,7 @@ export function LetterForm() {
 		// Bot detection: honeypot field must be empty
 		if (honeypotRef.current?.value) {
 			console.warn("Honeypot triggered - bot detected");
-			setError("Ein Fehler ist aufgetreten. Bitte versuche es erneut.");
+			setError(t("common", "error"));
 			return;
 		}
 
@@ -125,16 +172,20 @@ export function LetterForm() {
 		const timeSinceRender = Date.now() - formRenderTime.current;
 		if (timeSinceRender < 3000) {
 			console.warn("Form submitted too quickly - bot detected");
-			setError("Bitte nimm dir Zeit, das Formular auszufüllen.");
+			setError(t("common", "error"));
 			return;
 		}
 
 		if (!selectedMdB || selectedForderungen.length === 0) {
-			setError("Bitte wähle einen MdB und mindestens eine Forderung");
+			setError(
+				language === "de"
+					? "Bitte wähle einen MdB und mindestens eine Forderung"
+					: "Please select an MP and at least one demand",
+			);
 			return;
 		}
 
-		const noteValidation = validatePersonalNote(personalNote);
+		const noteValidation = validatePersonalNote(personalNote, t);
 		if (!noteValidation.valid) {
 			setError(noteValidation.message);
 			return;
@@ -151,6 +202,7 @@ export function LetterForm() {
 				mdb: selectedMdB,
 				forderungen: selectedForderungen,
 				personalNote,
+				language, // Store selected language for letter generation
 				_timing: timeSinceRender,
 			}),
 		);
@@ -162,7 +214,7 @@ export function LetterForm() {
 		name.trim() &&
 		selectedMdB &&
 		selectedForderungen.length > 0 &&
-		validatePersonalNote(personalNote).valid &&
+		validatePersonalNote(personalNote, t).valid &&
 		consentGiven;
 
 	return (
@@ -183,54 +235,42 @@ export function LetterForm() {
 			{/* Section Header */}
 			<div className="space-y-1">
 				<h2 className="text-xl font-semibold text-foreground">
-					Dein persönlicher Brief
+					{t("home", "title")}
 				</h2>
-				<p className="text-sm text-muted-foreground">
-					Beantworte ein paar Fragen – wir erstellen daraus einen überzeugenden
-					Brief an deine:n Abgeordnete:n.
-				</p>
+				<p className="text-sm text-muted-foreground">{t("home", "subtitle")}</p>
 			</div>
 
-			{/* Step 1: Name */}
-			<div className="space-y-4 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
+			{/* Step 1: Name & PLZ */}
+			<div className="space-y-4 p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm">
 				<div className="flex items-center gap-2">
 					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
 						1
 					</span>
-					<h3 className="font-medium">Dein Name</h3>
-				</div>
-
-				<div className="space-y-2 pl-8">
-					<Input
-						id="name"
-						placeholder="Wie möchtest du den Brief unterschreiben?"
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-					/>
-					<p className="text-xs text-muted-foreground">
-						Der Brief wird mit deinem Namen unterschrieben.
-					</p>
-				</div>
-			</div>
-
-			{/* Step 2: PLZ → Wahlkreis → MdB */}
-			<div className="space-y-4 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
-				<div className="flex items-center gap-2">
-					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-						2
-					</span>
-					<h3 className="font-medium">An wen geht dein Brief?</h3>
+					<h3 className="font-medium">{t("form", "step1.title")}</h3>
 				</div>
 
 				<div className="space-y-4 pl-8">
+					{/* Name */}
+					<div className="space-y-2">
+						<Label htmlFor="name" className="text-sm">
+							{t("form", "step1.nameLabel")}
+						</Label>
+						<Input
+							id="name"
+							placeholder={t("form", "step1.namePlaceholder")}
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+						/>
+					</div>
+
 					{/* PLZ */}
 					<div className="space-y-2">
 						<Label htmlFor="plz" className="text-sm">
-							Deine Postleitzahl
+							{t("form", "step1.plzLabel")}
 						</Label>
 						<Input
 							id="plz"
-							placeholder="z.B. 10115"
+							placeholder={t("form", "step1.plzPlaceholder")}
 							maxLength={5}
 							value={plz}
 							onChange={(e) =>
@@ -240,29 +280,56 @@ export function LetterForm() {
 						/>
 						{plz.length === 5 && !wahlkreis && (
 							<p className="text-sm text-destructive">
-								Keine Abgeordneten für PLZ {plz} gefunden.
+								{t("form", "step1.wahlkreisNotFound")}
 							</p>
 						)}
 						{wahlkreis && (
 							<p className="text-sm text-muted-foreground">
-								📍 Wahlkreis {wahlkreis.id}: {wahlkreis.name}
+								📍 {t("form", "step1.wahlkreisFound")}: {wahlkreis.name}
 							</p>
 						)}
 					</div>
 
-					{/* MdB Auswahl */}
+					<WhyBox
+						title={t("form", "step1.whyTitle")}
+						text={t("form", "step1.whyText")}
+					/>
+				</div>
+			</div>
+
+			{/* Step 2: MdB Selection */}
+			<div className="space-y-4 p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm">
+				<div className="flex items-center gap-2">
+					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+						2
+					</span>
+					<h3 className="font-medium">{t("form", "step2.title")}</h3>
+				</div>
+
+				<div className="space-y-4 pl-8">
+					{!wahlkreis && (
+						<p className="text-sm text-muted-foreground">
+							{t("form", "step2.enterPlzFirst")}
+						</p>
+					)}
+
 					{wahlkreis && mdbs.length === 0 && (
 						<div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800">
-							<p className="text-sm font-medium">Keine MdBs gefunden</p>
+							<p className="text-sm font-medium">
+								{language === "de" ? "Keine MdBs gefunden" : "No MPs found"}
+							</p>
 							<p className="text-xs mt-1">
-								Für diesen Wahlkreis sind derzeit keine Daten verfügbar.
+								{language === "de"
+									? "Für diesen Wahlkreis sind derzeit keine Daten verfügbar."
+									: "No data available for this constituency."}
 							</p>
 						</div>
 					)}
+
 					{mdbs.length > 0 && (
 						<div className="space-y-3">
 							<Label className="text-sm font-medium">
-								Wähle deine:n Abgeordnete:n
+								{t("form", "step2.selectLabel")}
 							</Label>
 							{/* Inline expandable MdB selector */}
 							<div className="rounded-lg border border-border overflow-hidden transition-all duration-200">
@@ -300,7 +367,7 @@ export function LetterForm() {
 											</div>
 										) : (
 											<span className="text-muted-foreground">
-												Abgeordnete:n auswählen...
+												{t("form", "step2.selectPlaceholder")}
 											</span>
 										)}
 										<ChevronDown className="h-4 w-4 text-muted-foreground shrink-0" />
@@ -312,7 +379,7 @@ export function LetterForm() {
 									<div
 										className="divide-y divide-border"
 										role="listbox"
-										aria-label="Wähle deine:n Abgeordnete:n"
+										aria-label={t("form", "step2.selectLabel")}
 										onKeyDown={(e) => {
 											if (e.key === "Escape") {
 												setMdbSelectorOpen(false);
@@ -386,59 +453,70 @@ export function LetterForm() {
 							</div>
 						</div>
 					)}
+
+					{wahlkreis && (
+						<WhyBox
+							title={t("form", "step2.whyTitle")}
+							text={t("form", "step2.whyText")}
+						/>
+					)}
 				</div>
 			</div>
 
-			{/* Step 3: Persönliche Geschichte */}
-			<div className="space-y-4 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
+			{/* Step 3: Personal Story */}
+			<div className="space-y-4 p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm">
 				<div className="flex items-center gap-2">
 					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
 						3
 					</span>
 					<h3 className="font-medium">
-						Deine Geschichte <span className="text-destructive">*</span>
+						{t("form", "step3.title")}{" "}
+						<span className="text-destructive">*</span>
 					</h3>
 				</div>
 
 				<div className="space-y-4 pl-8">
 					<p className="text-sm text-muted-foreground">
-						Erzähle deine persönliche Verbindung zum Iran. Du kannst auf
-						Deutsch, Englisch oder Farsi schreiben - wir übersetzen es für den
-						Brief.
+						{t("form", "step3.languageHint")}
 					</p>
 					<Textarea
 						id="story"
-						placeholder="z.B. Ich bin im Iran geboren und lebe seit 2015 in Deutschland. Meine Großeltern leben noch in Teheran und ich mache mir jeden Tag Sorgen um sie. Im letzten Jahr wurde mein Cousin verhaftet..."
+						placeholder={t("form", "step3.placeholder")}
 						className="min-h-30 resize-none"
 						value={personalNote}
 						onChange={(e) => setPersonalNote(e.target.value)}
 						required
 					/>
 					{personalNote.length > 0 &&
-						!validatePersonalNote(personalNote).valid && (
+						!validatePersonalNote(personalNote, t).valid && (
 							<p className="text-xs text-destructive">
-								{validatePersonalNote(personalNote).message}
+								{validatePersonalNote(personalNote, t).message}
 							</p>
 						)}
 					<p className="text-xs text-muted-foreground">
-						Mindestens 3 Sätze. Details machen deinen Brief authentisch:
-						Konkrete Erlebnisse, Namen, Orte, Gefühle.
+						{t("form", "step3.hint")}
 					</p>
+
+					<WhyBox
+						title={t("form", "step3.whyTitle")}
+						text={t("form", "step3.whyText")}
+						defaultOpen
+					/>
 				</div>
 			</div>
 
-			{/* Step 4: Forderungen */}
-			<div className="space-y-4 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
+			{/* Step 4: Demands */}
+			<div className="space-y-4 p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm">
 				<div className="flex items-center gap-2">
 					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
 						4
 					</span>
-					<h3 className="font-medium">Wofür setzt du dich ein?</h3>
+					<h3 className="font-medium">{t("form", "step4.title")}</h3>
 				</div>
 
 				<div className="space-y-3 pl-8">
 					<p className="text-sm text-muted-foreground">
-						Wähle die Forderungen, die dir am wichtigsten sind.
+						{t("form", "step4.hint")}
 					</p>
 					<div className="space-y-3">
 						{FORDERUNGEN.map((forderung) => (
@@ -466,11 +544,16 @@ export function LetterForm() {
 							</label>
 						))}
 					</div>
+
+					<WhyBox
+						title={t("form", "step4.whyTitle")}
+						text={t("form", "step4.whyText")}
+					/>
 				</div>
 			</div>
 
 			{/* Consent Checkbox (DSGVO-required) */}
-			<div className="space-y-4 p-5 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40">
+			<div className="space-y-4 p-4 md:p-5 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40">
 				<label
 					htmlFor="consent"
 					className="flex items-start gap-3 cursor-pointer"
@@ -484,21 +567,12 @@ export function LetterForm() {
 					/>
 					<div className="space-y-1">
 						<span className="text-sm font-medium text-foreground">
-							Einwilligung zur Datenverarbeitung *
+							{language === "de"
+								? "Einwilligung zur Datenverarbeitung *"
+								: "Consent to Data Processing *"}
 						</span>
 						<p className="text-xs text-muted-foreground leading-relaxed">
-							Ich willige ein, dass meine Eingaben (Name, Wahlkreis, persönliche
-							Notiz) zur Generierung des Briefes an OpenAI (USA) übermittelt
-							werden. Ich habe die{" "}
-							<a
-								href="/datenschutz"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="text-primary underline hover:no-underline"
-							>
-								Datenschutzerklärung
-							</a>{" "}
-							gelesen und verstanden.
+							{t("form", "consent.label")}
 						</p>
 					</div>
 				</label>
@@ -515,10 +589,10 @@ export function LetterForm() {
 			<Button
 				type="submit"
 				size="lg"
-				className="w-full h-12 text-base font-medium shadow-md"
+				className="w-full h-14 text-base font-medium shadow-md"
 				disabled={!isValid}
 			>
-				Brief erstellen
+				{t("form", "submit.default")}
 			</Button>
 		</form>
 	);

@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { LanguageProvider } from "@/lib/i18n/context";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -49,6 +50,15 @@ export const metadata: Metadata = {
 	},
 };
 
+// Viewport configuration for iOS Safari
+export const viewport = {
+	width: "device-width",
+	initialScale: 1,
+	maximumScale: 5,
+	userScalable: true,
+	viewportFit: "cover" as const,
+};
+
 export default function RootLayout({
 	children,
 }: Readonly<{
@@ -59,7 +69,7 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				{children}
+				<LanguageProvider>{children}</LanguageProvider>
 				<Analytics />
 				<SpeedInsights />
 			</body>

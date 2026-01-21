@@ -52,11 +52,11 @@ export default function SharePage() {
 	const [isOffline, setIsOffline] = useState(false);
 
 	const shareUrl = typeof window !== "undefined" ? window.location.origin : "";
-	const shareMessage = `Ich habe gerade einen Brief an meine:n Bundestagsabgeordnete:n geschrieben, um mich für Menschenrechte im Iran einzusetzen.
+	const shareMessage = `Ich habe gerade einen Brief an meine:n Bundestagsabgeordnete:n geschrieben - für Menschenrechte im Iran.
 
-In 5 Minuten kannst du auch deinen eigenen Brief schreiben - direkt an den/die Abgeordnete:n in deinem Wahlkreis.
+Warum das wichtig ist: Abgeordnete zählen Briefe aus ihrem Wahlkreis. Persönliche Nachrichten von Wähler:innen haben echten Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird unsere Stimme.
 
-Je mehr Briefe, desto mehr Druck auf die Politik.
+Du kannst in 5 Minuten auch einen Brief schreiben - das Tool hilft dir dabei:
 
 ${shareUrl}`;
 

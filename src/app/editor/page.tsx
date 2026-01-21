@@ -3,10 +3,12 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useLanguage } from "@/lib/i18n/context";
 
 interface MdBData {
 	id: string;
@@ -43,7 +45,10 @@ function countWords(text: string): number {
 }
 
 // Wort-Status bestimmen
-function getWordCountStatus(count: number): {
+function getWordCountStatus(
+	count: number,
+	language: "de" | "en",
+): {
 	color: string;
 	bg: string;
 	message: string;
@@ -52,20 +57,28 @@ function getWordCountStatus(count: number): {
 		return {
 			color: "text-amber-700",
 			bg: "bg-amber-50",
-			message: "Etwas kurz",
+			message: language === "de" ? "Etwas kurz" : "A bit short",
 		};
 	}
 	if (count <= 700) {
-		return { color: "text-green-700", bg: "bg-green-50", message: "Optimal" };
+		return {
+			color: "text-green-700",
+			bg: "bg-green-50",
+			message: language === "de" ? "Optimal" : "Optimal",
+		};
 	}
 	if (count <= 900) {
 		return {
 			color: "text-amber-700",
 			bg: "bg-amber-50",
-			message: "Etwas lang",
+			message: language === "de" ? "Etwas lang" : "A bit long",
 		};
 	}
-	return { color: "text-red-700", bg: "bg-red-50", message: "Zu lang" };
+	return {
+		color: "text-red-700",
+		bg: "bg-red-50",
+		message: language === "de" ? "Zu lang" : "Too long",
+	};
 }
 
 // Partei-Farben für Badge
@@ -80,6 +93,7 @@ const PARTY_COLORS: Record<string, string> = {
 
 export default function EditorPage() {
 	const router = useRouter();
+	const { t, language } = useLanguage();
 	const [mdb, setMdb] = useState<MdBData | null>(null);
 	const [senderName, setSenderName] = useState("");
 	const [content, setContent] = useState("");
@@ -96,110 +110,119 @@ export default function EditorPage() {
 	const hasStartedGeneration = useRef(false);
 
 	// Generate letter with streaming
-	const generateLetter = useCallback(async (formData: FormData) => {
-		setIsGenerating(true);
-		setError(null);
-		setMdb(formData.mdb);
-		setSenderName(formData.senderName);
+	const generateLetter = useCallback(
+		async (formData: FormData) => {
+			setIsGenerating(true);
+			setError(null);
+			setMdb(formData.mdb);
+			setSenderName(formData.senderName);
 
-		try {
-			const response = await fetch("/api/generate-letter", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					senderName: formData.senderName,
-					senderPlz: formData.senderPlz,
-					wahlkreis: formData.wahlkreis,
-					mdb: formData.mdb,
-					forderungen: formData.forderungen,
-					personalNote: formData.personalNote,
-					_timing: formData._timing,
-				}),
-			});
+			try {
+				const response = await fetch("/api/generate-letter", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						senderName: formData.senderName,
+						senderPlz: formData.senderPlz,
+						wahlkreis: formData.wahlkreis,
+						mdb: formData.mdb,
+						forderungen: formData.forderungen,
+						personalNote: formData.personalNote,
+						_timing: formData._timing,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json();
-				throw new Error(errorData.error || "Fehler beim Generieren");
-			}
+				if (!response.ok) {
+					const errorData = await response.json();
+					throw new Error(errorData.error || "Fehler beim Generieren");
+				}
 
-			// Check if streaming is supported
-			if (response.headers.get("content-type")?.includes("text/event-stream")) {
-				// Handle streaming response
-				const reader = response.body?.getReader();
-				const decoder = new TextDecoder();
-				let accumulatedContent = "";
+				// Check if streaming is supported
+				if (
+					response.headers.get("content-type")?.includes("text/event-stream")
+				) {
+					// Handle streaming response
+					const reader = response.body?.getReader();
+					const decoder = new TextDecoder();
+					let accumulatedContent = "";
 
-				if (reader) {
-					while (true) {
-						const { done, value } = await reader.read();
-						if (done) break;
+					if (reader) {
+						while (true) {
+							const { done, value } = await reader.read();
+							if (done) break;
 
-						const chunk = decoder.decode(value, { stream: true });
-						const lines = chunk.split("\n");
+							const chunk = decoder.decode(value, { stream: true });
+							const lines = chunk.split("\n");
 
-						for (const line of lines) {
-							if (line.startsWith("data: ")) {
-								const data = line.slice(6);
-								if (data === "[DONE]") continue;
-								try {
-									const parsed = JSON.parse(data);
-									if (parsed.content) {
-										accumulatedContent += parsed.content;
-										setContent(accumulatedContent);
+							for (const line of lines) {
+								if (line.startsWith("data: ")) {
+									const data = line.slice(6);
+									if (data === "[DONE]") continue;
+									try {
+										const parsed = JSON.parse(data);
+										if (parsed.content) {
+											accumulatedContent += parsed.content;
+											setContent(accumulatedContent);
+										}
+									} catch {
+										// Ignore parse errors
 									}
-								} catch {
-									// Ignore parse errors
 								}
 							}
 						}
 					}
+
+					// Save to sessionStorage
+					sessionStorage.setItem(
+						"letterData",
+						JSON.stringify({
+							content: accumulatedContent,
+							subject: "Bitte um Unterstützung: Menschenrechte im Iran",
+							wordCount: countWords(accumulatedContent),
+							mdb: formData.mdb,
+							senderName: formData.senderName,
+						}),
+					);
+				} else {
+					// Handle regular JSON response
+					const result = await response.json();
+					setContent(result.content);
+					setSubject(
+						result.subject || "Bitte um Unterstützung: Menschenrechte im Iran",
+					);
+
+					// Save to sessionStorage
+					sessionStorage.setItem(
+						"letterData",
+						JSON.stringify({
+							content: result.content,
+							subject:
+								result.subject ||
+								"Bitte um Unterstützung: Menschenrechte im Iran",
+							wordCount: countWords(result.content),
+							mdb: formData.mdb,
+							senderName: formData.senderName,
+						}),
+					);
 				}
 
-				// Save to sessionStorage
-				sessionStorage.setItem(
-					"letterData",
-					JSON.stringify({
-						content: accumulatedContent,
-						subject: "Bitte um Unterstützung: Menschenrechte im Iran",
-						wordCount: countWords(accumulatedContent),
-						mdb: formData.mdb,
-						senderName: formData.senderName,
-					}),
+				// Clean up form data
+				sessionStorage.removeItem("formData");
+				setIsComplete(true);
+			} catch (err) {
+				setError(
+					err instanceof Error
+						? err.message
+						: language === "de"
+							? "Ein Fehler ist aufgetreten"
+							: "An error occurred",
 				);
-			} else {
-				// Handle regular JSON response
-				const result = await response.json();
-				setContent(result.content);
-				setSubject(
-					result.subject || "Bitte um Unterstützung: Menschenrechte im Iran",
-				);
-
-				// Save to sessionStorage
-				sessionStorage.setItem(
-					"letterData",
-					JSON.stringify({
-						content: result.content,
-						subject:
-							result.subject ||
-							"Bitte um Unterstützung: Menschenrechte im Iran",
-						wordCount: countWords(result.content),
-						mdb: formData.mdb,
-						senderName: formData.senderName,
-					}),
-				);
+			} finally {
+				setIsGenerating(false);
 			}
-
-			// Clean up form data
-			sessionStorage.removeItem("formData");
-			setIsComplete(true);
-		} catch (err) {
-			setError(
-				err instanceof Error ? err.message : "Ein Fehler ist aufgetreten",
-			);
-		} finally {
-			setIsGenerating(false);
-		}
-	}, []);
+		},
+		[language],
+	);
 
 	useEffect(() => {
 		// Prevent double generation in StrictMode
@@ -289,12 +312,15 @@ export default function EditorPage() {
 	};
 
 	const wordCount = countWords(content);
-	const wordStatus = getWordCountStatus(wordCount);
+	const wordStatus = getWordCountStatus(wordCount, language);
 
 	// Error state
 	if (error) {
 		return (
 			<div className="flex min-h-screen items-center justify-center bg-background">
+				<div className="fixed top-4 right-4 z-50">
+					<LanguageSwitcher />
+				</div>
 				<div className="flex flex-col items-center gap-4 p-8 max-w-md text-center">
 					<div className="h-12 w-12 rounded-full bg-destructive/10 flex items-center justify-center">
 						<svg
@@ -312,13 +338,13 @@ export default function EditorPage() {
 							/>
 						</svg>
 					</div>
-					<h2 className="text-xl font-semibold">Fehler beim Generieren</h2>
+					<h2 className="text-xl font-semibold">{t("editor", "errorTitle")}</h2>
 					<p className="text-muted-foreground">{error}</p>
 					<div className="flex gap-3">
 						<Button variant="outline" onClick={handleBack}>
-							Zurück
+							{t("common", "back")}
 						</Button>
-						<Button onClick={handleRetry}>Erneut versuchen</Button>
+						<Button onClick={handleRetry}>{t("common", "retry")}</Button>
 					</div>
 				</div>
 			</div>
@@ -350,7 +376,7 @@ export default function EditorPage() {
 							d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 						/>
 					</svg>
-					<p className="text-muted-foreground">Lade...</p>
+					<p className="text-muted-foreground">{t("common", "loading")}</p>
 				</div>
 			</div>
 		);
@@ -358,9 +384,14 @@ export default function EditorPage() {
 
 	return (
 		<div className="min-h-screen bg-background">
+			{/* Language Switcher */}
+			<div className="fixed top-4 right-4 z-50 safe-area-top">
+				<LanguageSwitcher />
+			</div>
+
 			{/* Header */}
-			<header className="border-b border-border/50 bg-linear-to-b from-accent/10 to-background">
-				<div className="container mx-auto max-w-3xl px-4 py-6">
+			<header className="border-b border-border/50 bg-linear-to-b from-accent/10 to-background safe-area-top">
+				<div className="container mx-auto max-w-3xl px-4 py-4 md:py-6">
 					<button
 						type="button"
 						onClick={handleBack}
@@ -380,27 +411,27 @@ export default function EditorPage() {
 								d="M10 19l-7-7m0 0l7-7m-7 7h18"
 							/>
 						</svg>
-						Zurück
+						{t("common", "back")}
 					</button>
-					<h1 className="text-2xl font-bold tracking-tight text-foreground">
+					<h1 className="text-xl md:text-2xl font-bold tracking-tight text-foreground">
 						{isGenerating
-							? "Brief wird geschrieben..."
-							: "Dein Brief ist fertig"}
+							? t("editor", "titleGenerating")
+							: t("editor", "titleReady")}
 					</h1>
-					<p className="mt-1 text-muted-foreground">
+					<p className="mt-1 text-sm md:text-base text-muted-foreground">
 						{isGenerating
-							? "Der Brief erscheint gleich - du kannst ihn dann noch bearbeiten."
-							: "Prüfe und bearbeite deinen Brief, bevor du ihn sendest."}
+							? t("editor", "subtitleGenerating")
+							: t("editor", "subtitleReady")}
 					</p>
 				</div>
 			</header>
 
-			<main className="container mx-auto max-w-3xl px-4 py-8">
+			<main className="container mx-auto max-w-3xl px-4 py-6 md:py-8">
 				{/* Empfänger Info Card */}
-				<div className="mb-8 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
-					<div className="flex items-start gap-4">
+				<div className="mb-6 md:mb-8 p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm">
+					<div className="flex items-start gap-3 md:gap-4">
 						{mdb.imageUrl && (
-							<div className="h-16 w-16 overflow-hidden rounded-full bg-muted shrink-0 ring-2 ring-border">
+							<div className="h-12 w-12 md:h-16 md:w-16 overflow-hidden rounded-full bg-muted shrink-0 ring-2 ring-border">
 								<Image
 									src={mdb.imageUrl}
 									alt={mdb.name}
@@ -411,9 +442,11 @@ export default function EditorPage() {
 								/>
 							</div>
 						)}
-						<div className="flex-1">
-							<div className="flex items-center gap-2 mb-1">
-								<h2 className="font-semibold text-lg">{mdb.name}</h2>
+						<div className="flex-1 min-w-0">
+							<div className="flex flex-wrap items-center gap-2 mb-1">
+								<h2 className="font-semibold text-base md:text-lg wrap-break-word">
+									{mdb.name}
+								</h2>
 								<span
 									className={`inline-block px-2 py-0.5 rounded text-xs ${
 										PARTY_COLORS[mdb.party] || "bg-gray-200"
@@ -422,9 +455,9 @@ export default function EditorPage() {
 									{mdb.party}
 								</span>
 							</div>
-							<p className="text-sm text-muted-foreground flex items-center gap-1.5">
+							<p className="text-xs md:text-sm text-muted-foreground flex items-center gap-1.5">
 								<svg
-									className="h-4 w-4"
+									className="h-4 w-4 shrink-0"
 									fill="none"
 									viewBox="0 0 24 24"
 									stroke="currentColor"
@@ -437,10 +470,13 @@ export default function EditorPage() {
 										d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
 									/>
 								</svg>
-								{mdb.email}
+								<span className="truncate">{mdb.email}</span>
 							</p>
-							<p className="text-sm text-muted-foreground mt-1">
-								Absender: <span className="font-medium">{senderName}</span>
+							<p className="text-xs md:text-sm text-muted-foreground mt-1">
+								{t("editor", "senderLabel")}:{" "}
+								<span className="font-medium wrap-break-word">
+									{senderName}
+								</span>
 							</p>
 						</div>
 					</div>
@@ -449,7 +485,7 @@ export default function EditorPage() {
 				{/* Betreff Editor */}
 				<div className="mb-6 space-y-2">
 					<Label htmlFor="subject" className="text-sm font-medium">
-						Betreff
+						{t("editor", "subjectLabel")}
 					</Label>
 					<Input
 						id="subject"
@@ -464,7 +500,7 @@ export default function EditorPage() {
 				<div className="mb-6 space-y-2">
 					<div className="flex items-center justify-between">
 						<Label htmlFor="content" className="text-sm font-medium">
-							Dein Brief
+							{t("editor", "contentLabel")}
 						</Label>
 						<div className="flex items-center gap-2">
 							{isGenerating ? (
@@ -489,7 +525,7 @@ export default function EditorPage() {
 											d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 										/>
 									</svg>
-									Wird geschrieben...
+									{t("editor", "writing")}
 								</span>
 							) : (
 								<>
@@ -499,7 +535,7 @@ export default function EditorPage() {
 										{wordStatus.message}
 									</span>
 									<span className="text-xs text-muted-foreground font-mono">
-										{wordCount} Wörter
+										{wordCount} {t("common", "words")}
 									</span>
 								</>
 							)}
@@ -538,7 +574,9 @@ export default function EditorPage() {
 				{isModified && !isGenerating && (
 					<div className="mb-6 flex items-center gap-2 text-sm">
 						<span className="flex h-2 w-2 rounded-full bg-amber-500" />
-						<span className="text-muted-foreground">Bearbeitet</span>
+						<span className="text-muted-foreground">
+							{t("editor", "modified")}
+						</span>
 					</div>
 				)}
 
@@ -564,7 +602,7 @@ export default function EditorPage() {
 								d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
 							/>
 						</svg>
-						E-Mail-Programm öffnen
+						{t("editor", "sendButton")}
 					</Button>
 
 					<Button
@@ -589,7 +627,7 @@ export default function EditorPage() {
 										d="M5 13l4 4L19 7"
 									/>
 								</svg>
-								Kopiert!
+								{t("common", "copied")}
 							</>
 						) : (
 							<>
@@ -607,7 +645,7 @@ export default function EditorPage() {
 										d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
 									/>
 								</svg>
-								Brief kopieren
+								{t("editor", "copyButton")}
 							</>
 						)}
 					</Button>
@@ -616,8 +654,7 @@ export default function EditorPage() {
 				{/* Hinweis */}
 				<div className="mt-8 p-4 rounded-lg bg-muted/50 border border-border/50">
 					<p className="text-sm text-muted-foreground text-center">
-						Der Brief wird in deinem E-Mail-Programm geöffnet. Dort kannst du
-						ihn vor dem Senden nochmal prüfen.
+						{t("editor", "hint")}
 					</p>
 				</div>
 			</main>

@@ -11,21 +11,24 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CampaignGoal } from "@/components/campaign-goal";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/i18n/context";
+import { type Language, tArray, t as translate } from "@/lib/i18n/translations";
+
+function getShareMessage(lang: Language, url: string): string {
+	const message = translate("shareMessage", "", lang);
+	return `${message}\n\n${url}`;
+}
 
 export default function SuccessPage() {
 	const router = useRouter();
+	const { t, language } = useLanguage();
 	const [copiedMessage, setCopiedMessage] = useState(false);
 	const [mdbName, setMdbName] = useState<string | null>(null);
 
 	const shareUrl = typeof window !== "undefined" ? window.location.origin : "";
-	const shareMessage = `Ich habe gerade einen Brief an meine:n Bundestagsabgeordnete:n geschrieben, um mich für Menschenrechte im Iran einzusetzen.
-
-In 5 Minuten kannst du auch deinen eigenen Brief schreiben - direkt an den/die Abgeordnete:n in deinem Wahlkreis.
-
-Je mehr Briefe, desto mehr Druck auf die Politik.
-
-${shareUrl}`;
+	const shareMessage = getShareMessage(language, shareUrl);
 
 	useEffect(() => {
 		const letterData = sessionStorage.getItem("letterData");
@@ -61,7 +64,10 @@ ${shareUrl}`;
 	};
 
 	const handleEmailShare = () => {
-		const subject = "Schreib auch einen Brief für den Iran";
+		const subject =
+			language === "de"
+				? "Schreib auch einen Brief für den Iran"
+				: "Write a letter for Iran too";
 		window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(shareMessage)}`;
 	};
 
@@ -69,7 +75,7 @@ ${shareUrl}`;
 		if (navigator.share) {
 			try {
 				await navigator.share({
-					title: "Stimme für Iran",
+					title: language === "de" ? "Stimme für Iran" : "Voice for Iran",
 					text: shareMessage,
 					url: shareUrl,
 				});
@@ -79,8 +85,16 @@ ${shareUrl}`;
 		}
 	};
 
+	// Get the "what happens next" steps based on language
+	const whatsNextSteps = tArray("success", "whatsNextSteps", language);
+
 	return (
 		<div className="min-h-screen bg-background">
+			{/* Language Switcher */}
+			<div className="fixed top-4 right-4 z-50">
+				<LanguageSwitcher />
+			</div>
+
 			{/* Header */}
 			<div className="bg-linear-to-b from-primary/10 to-transparent">
 				<div className="container max-w-2xl mx-auto px-4 pt-8 pb-12">
@@ -90,7 +104,7 @@ ${shareUrl}`;
 						className="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
 					>
 						<ArrowLeft className="h-4 w-4" />
-						Neuen Brief schreiben
+						{t("success", "newLetter")}
 					</button>
 
 					<div className="text-center space-y-6">
@@ -104,20 +118,35 @@ ${shareUrl}`;
 
 						<div className="space-y-2">
 							<h1 className="text-3xl font-bold text-foreground">
-								Danke für deine Stimme!
+								{t("success", "title")}
 							</h1>
 							{mdbName && (
 								<p className="text-lg text-muted-foreground">
-									Dein Brief an{" "}
-									<span className="font-medium text-foreground">{mdbName}</span>{" "}
-									wurde vorbereitet.
+									{language === "de" ? (
+										<>
+											Dein Brief an{" "}
+											<span className="font-medium text-foreground">
+												{mdbName}
+											</span>{" "}
+											wurde vorbereitet.
+										</>
+									) : (
+										<>
+											Your letter to{" "}
+											<span className="font-medium text-foreground">
+												{mdbName}
+											</span>{" "}
+											has been prepared.
+										</>
+									)}
 								</p>
 							)}
 						</div>
 
 						<p className="text-muted-foreground max-w-md mx-auto">
-							Jede Stimme zählt. Gemeinsam können wir den Druck auf die Politik
-							erhöhen.
+							{language === "de"
+								? "Jede Stimme zählt. Gemeinsam können wir den Druck auf die Politik erhöhen."
+								: "Every voice counts. Together we can increase pressure on politics."}
 						</p>
 					</div>
 				</div>
@@ -136,10 +165,14 @@ ${shareUrl}`;
 						</div>
 						<div>
 							<h2 className="font-semibold text-lg">
-								Multipliziere deine Wirkung
+								{language === "de"
+									? "Multipliziere deine Wirkung"
+									: "Multiply Your Impact"}
 							</h2>
 							<p className="text-sm text-muted-foreground">
-								Lade Freund:innen ein, auch ihre Stimme zu erheben
+								{language === "de"
+									? "Lade Freund:innen ein, auch ihre Stimme zu erheben"
+									: "Invite friends to raise their voice too"}
 							</p>
 						</div>
 					</div>
@@ -147,13 +180,17 @@ ${shareUrl}`;
 					{/* Copyable message */}
 					<div className="mb-6">
 						<p className="block text-sm font-medium mb-2">
-							Nachricht zum Teilen
+							{language === "de" ? "Nachricht zum Teilen" : "Message to share"}
 						</p>
 						<div className="relative">
 							<textarea
 								readOnly
 								value={shareMessage}
-								aria-label="Nachricht zum Teilen"
+								aria-label={
+									language === "de"
+										? "Nachricht zum Teilen"
+										: "Message to share"
+								}
 								className="w-full h-32 p-3 pr-24 text-sm bg-muted/50 border border-border rounded-lg resize-none focus:outline-none"
 							/>
 							<Button
@@ -165,12 +202,12 @@ ${shareUrl}`;
 								{copiedMessage ? (
 									<>
 										<Check className="h-4 w-4 mr-1" />
-										Kopiert
+										{t("common", "copied")}
 									</>
 								) : (
 									<>
 										<Copy className="h-4 w-4 mr-1" />
-										Kopieren
+										{t("common", "copy")}
 									</>
 								)}
 							</Button>
@@ -205,35 +242,24 @@ ${shareUrl}`;
 							onClick={handleNativeShare}
 						>
 							<Share2 className="h-4 w-4 mr-2" />
-							Weitere Optionen...
+							{language === "de" ? "Weitere Optionen..." : "More options..."}
 						</Button>
 					)}
 				</div>
 
 				{/* What happens next */}
 				<div className="rounded-xl border border-border bg-card p-6 shadow-sm">
-					<h3 className="font-semibold mb-4">Was passiert jetzt?</h3>
+					<h3 className="font-semibold mb-4">{t("success", "whatsNext")}</h3>
 					<ul className="space-y-3 text-sm text-muted-foreground">
-						<li className="flex items-start gap-3">
-							<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-medium shrink-0">
-								1
-							</span>
-							<span>Dein Brief wird an das Büro des Abgeordneten gesendet</span>
-						</li>
-						<li className="flex items-start gap-3">
-							<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-medium shrink-0">
-								2
-							</span>
-							<span>Das Büro liest und kategorisiert eingehende Post</span>
-						</li>
-						<li className="flex items-start gap-3">
-							<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-medium shrink-0">
-								3
-							</span>
-							<span>
-								Bei vielen Briefen zum gleichen Thema wird der MdB aufmerksam
-							</span>
-						</li>
+						{Array.isArray(whatsNextSteps) &&
+							whatsNextSteps.map((step, index) => (
+								<li key={index} className="flex items-start gap-3">
+									<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-medium shrink-0">
+										{index + 1}
+									</span>
+									<span>{step}</span>
+								</li>
+							))}
 					</ul>
 				</div>
 
@@ -245,14 +271,18 @@ ${shareUrl}`;
 						onClick={() => router.push("/")}
 						className="h-12"
 					>
-						Noch einen Brief schreiben
+						{t("success", "newLetter")}
 					</Button>
 				</div>
 			</div>
 
 			{/* Footer */}
 			<footer className="container max-w-2xl mx-auto px-4 py-8 text-center text-sm text-muted-foreground">
-				<p>Gemeinsam für Freiheit, Würde und Menschenrechte.</p>
+				<p>
+					{language === "de"
+						? "Gemeinsam für Freiheit, Würde und Menschenrechte."
+						: "Together for freedom, dignity and human rights."}
+				</p>
 			</footer>
 		</div>
 	);

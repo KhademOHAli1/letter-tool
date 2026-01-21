@@ -163,3 +163,106 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ===== Mobile Optimizations ===== */
+
+/* Prevent text overflow on all elements */
+* {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+/* Fix for iOS Safari text rendering */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Safe area insets for iOS notch and home indicator */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  /* Bottom padding for fixed elements */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Top padding for fixed elements */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Prevent horizontal overflow */
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Better touch targets for mobile (minimum 44x44px as per Apple HIG) */
+@media (max-width: 768px) {
+  button, 
+  [role="button"],
+  input[type="checkbox"],
+  input[type="radio"],
+  a {
+    min-height: 44px;
+  }
+  
+  /* Ensure inputs are readable without zoom on iOS */
+  input, 
+  textarea, 
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Prevent long words from breaking layout */
+h1, h2, h3, h4, h5, h6, p, span, a, li, label {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Fix for email addresses and URLs */
+.break-all {
+  word-break: break-all;
+}
+
+/* Smooth scrolling on iOS */
+.scroll-smooth {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent selection issues on touch devices */
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Better focus states for accessibility */
+@media (max-width: 768px) {
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+/* Container mobile padding adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Fix for long German words (compound nouns) */
+.hyphenate {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  hyphenate-limit-chars: 10 4 4;
+}
+
