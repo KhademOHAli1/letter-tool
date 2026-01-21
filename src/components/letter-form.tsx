@@ -1,5 +1,6 @@
 "use client";
 
+import { Check, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
@@ -7,12 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { FORDERUNGEN } from "@/lib/data/forderungen";
 import {
@@ -50,6 +45,8 @@ export function LetterForm() {
 	const [selectedMdB, setSelectedMdB] = useState<MdB | null>(null);
 	const [selectedForderungen, setSelectedForderungen] = useState<string[]>([]);
 	const [personalNote, setPersonalNote] = useState("");
+	const [consentGiven, setConsentGiven] = useState(false);
+	const [mdbSelectorOpen, setMdbSelectorOpen] = useState(false);
 
 	// PLZ eingeben → Wahlkreis finden
 	const handlePlzChange = (value: string) => {
@@ -137,7 +134,7 @@ export function LetterForm() {
 					senderName: name,
 				}),
 			);
-			router.push("/editor");
+			router.push("/share");
 		} catch (err) {
 			setError(
 				err instanceof Error ? err.message : "Ein Fehler ist aufgetreten",
@@ -147,7 +144,11 @@ export function LetterForm() {
 		}
 	}
 
-	const isValid = name.trim() && selectedMdB && selectedForderungen.length > 0;
+	const isValid =
+		name.trim() &&
+		selectedMdB &&
+		selectedForderungen.length > 0 &&
+		consentGiven;
 
 	return (
 		<form onSubmit={handleSubmit} className="space-y-8">
@@ -248,52 +249,66 @@ export function LetterForm() {
 							<Label className="text-sm font-medium">
 								Wähle deine:n Abgeordnete:n
 							</Label>
-							<Select
-								value={selectedMdB?.id || ""}
-								onValueChange={(id) =>
-									setSelectedMdB(mdbs.find((m) => m.id === id) || null)
-								}
-							>
-								<SelectTrigger className="w-full h-auto min-h-[60px] py-2 px-3 bg-background hover:bg-muted/30 transition-colors border hover:border-primary/40 focus:border-primary [&>span]:flex [&>span]:items-center [&>span]:w-full">
-									{selectedMdB ? (
-										<div className="flex items-center gap-3 w-full">
-											<div className="h-10 w-10 overflow-hidden rounded-full bg-muted flex-shrink-0 border-2 border-primary/20">
-												<Image
-													src={selectedMdB.imageUrl}
-													alt={selectedMdB.name}
-													width={40}
-													height={40}
-													className="object-cover object-top w-full h-full"
-													unoptimized
-												/>
+							{/* Inline expandable MdB selector */}
+							<div className="rounded-lg border border-border overflow-hidden transition-all duration-200">
+								{/* Show selected MdB or placeholder when collapsed */}
+								{!mdbSelectorOpen && (
+									<button
+										type="button"
+										onClick={() => setMdbSelectorOpen(true)}
+										className="w-full flex items-center justify-between gap-3 p-3 bg-background hover:bg-muted/30 transition-colors text-left"
+									>
+										{selectedMdB ? (
+											<div className="flex items-center gap-3 flex-1 min-w-0">
+												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted flex-shrink-0 border-2 border-primary/20">
+													<Image
+														src={selectedMdB.imageUrl}
+														alt={selectedMdB.name}
+														width={40}
+														height={40}
+														className="object-cover object-top w-full h-full"
+														unoptimized
+													/>
+												</div>
+												<div className="flex-1 min-w-0">
+													<p className="font-medium text-foreground truncate">
+														{selectedMdB.name}
+													</p>
+													<span
+														className={`inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${
+															PARTY_COLORS[selectedMdB.party] || "bg-gray-200"
+														}`}
+													>
+														{selectedMdB.party}
+													</span>
+												</div>
 											</div>
-											<div className="flex-1 text-left min-w-0">
-												<p className="font-medium text-foreground truncate">
-													{selectedMdB.name}
-												</p>
-												<span
-													className={`inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${
-														PARTY_COLORS[selectedMdB.party] || "bg-gray-200"
-													}`}
-												>
-													{selectedMdB.party}
-												</span>
-											</div>
-										</div>
-									) : (
-										<span className="text-muted-foreground">
-											Abgeordnete:n auswählen...
-										</span>
-									)}
-								</SelectTrigger>
-								<SelectContent className="max-h-[320px]">
-									{mdbs.map((mdb) => (
-										<SelectItem
-											key={mdb.id}
-											value={mdb.id}
-											className="cursor-pointer py-2 px-2 rounded-md hover:bg-muted/60 focus:bg-muted data-[state=checked]:bg-primary/10"
-										>
-											<div className="flex items-center gap-3">
+										) : (
+											<span className="text-muted-foreground">
+												Abgeordnete:n auswählen...
+											</span>
+										)}
+										<ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+									</button>
+								)}
+
+								{/* Expanded list of MdBs */}
+								{mdbSelectorOpen && (
+									<div className="divide-y divide-border">
+										{mdbs.map((mdb) => (
+											<button
+												key={mdb.id}
+												type="button"
+												onClick={() => {
+													setSelectedMdB(mdb);
+													setMdbSelectorOpen(false);
+												}}
+												className={`w-full flex items-center gap-3 p-3 text-left transition-colors ${
+													selectedMdB?.id === mdb.id
+														? "bg-primary/10"
+														: "bg-background hover:bg-muted/50"
+												}`}
+											>
 												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted flex-shrink-0 border border-border">
 													<Image
 														src={mdb.imageUrl}
@@ -316,11 +331,14 @@ export function LetterForm() {
 														{mdb.party}
 													</span>
 												</div>
-											</div>
-										</SelectItem>
-									))}
-								</SelectContent>
-							</Select>
+												{selectedMdB?.id === mdb.id && (
+													<Check className="h-5 w-5 text-primary flex-shrink-0" />
+												)}
+											</button>
+										))}
+									</div>
+								)}
+							</div>
 						</div>
 					)}
 				</div>
@@ -393,6 +411,41 @@ export function LetterForm() {
 						))}
 					</div>
 				</div>
+			</div>
+
+			{/* Consent Checkbox (DSGVO-required) */}
+			<div className="space-y-4 p-5 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40">
+				<label
+					htmlFor="consent"
+					className="flex items-start gap-3 cursor-pointer"
+				>
+					<Checkbox
+						id="consent"
+						checked={consentGiven}
+						onCheckedChange={(checked) => setConsentGiven(checked === true)}
+						className="mt-0.5"
+						required
+					/>
+					<div className="space-y-1">
+						<span className="text-sm font-medium text-foreground">
+							Einwilligung zur Datenverarbeitung *
+						</span>
+						<p className="text-xs text-muted-foreground leading-relaxed">
+							Ich willige ein, dass meine Eingaben (Name, Wahlkreis, persönliche
+							Notiz) zur Generierung des Briefes an OpenAI (USA) übermittelt
+							werden. Ich habe die{" "}
+							<a
+								href="/datenschutz"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-primary underline hover:no-underline"
+							>
+								Datenschutzerklärung
+							</a>{" "}
+							gelesen und verstanden.
+						</p>
+					</div>
+				</label>
 			</div>
 
 			{/* Error */}

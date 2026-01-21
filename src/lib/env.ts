@@ -9,6 +9,10 @@ export const serverEnv = {
 	OPENAI_API_KEY: process.env.OPENAI_API_KEY,
 	LLM_MODEL: process.env.LLM_MODEL || "gpt-5.2", // Flaggschiff-Modell für beste kreative Qualität
 
+	// Supabase configuration
+	SUPABASE_URL: process.env.SUPABASE_URL,
+	SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+
 	// Security: Rate limiting (configurable without redeploy)
 	RATE_LIMIT_MAX: Number.parseInt(process.env.RATE_LIMIT_MAX || "10", 10),
 	RATE_LIMIT_WINDOW_SECONDS: Number.parseInt(

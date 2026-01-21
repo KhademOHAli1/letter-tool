@@ -18,6 +18,7 @@ import {
 	generateFingerprint,
 	validateOrigin,
 } from "@/lib/security";
+import { trackLetterGeneration } from "@/lib/supabase";
 
 // Request size limit (50KB should be more than enough)
 const MAX_BODY_SIZE = 50 * 1024;
@@ -269,6 +270,20 @@ Bitte erstelle nun den Brief.`;
 
 		// Generate subject line
 		const subject = "Bitte um Unterstützung: Menschenrechte im Iran";
+
+		// Track letter generation in Supabase (non-blocking)
+		trackLetterGeneration({
+			mdb_id: mdb.id,
+			mdb_name: mdb.name,
+			mdb_party: mdb.party || null,
+			wahlkreis_id: null, // Could add if available
+			wahlkreis_name: wahlkreis || null,
+			forderung_ids: forderungen,
+			user_hash: fingerprint,
+		}).catch((err) => {
+			// Don't fail the request if tracking fails
+			console.error("[TRACKING] Failed to track letter:", err);
+		});
 
 		return NextResponse.json(
 			{

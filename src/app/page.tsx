@@ -1,3 +1,6 @@
+import { Vote } from "lucide-react";
+import { CampaignGoal } from "@/components/campaign-goal";
+import { ImpactStats } from "@/components/impact-stats";
 import { LetterForm } from "@/components/letter-form";
 
 export default function Home() {
@@ -9,10 +12,7 @@ export default function Home() {
 					<div className="text-center space-y-4">
 						{/* Badge */}
 						<div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-							<span className="relative flex h-2 w-2">
-								<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-								<span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-							</span>
+							<Vote className="h-4 w-4" />
 							Deine Stimme zählt
 						</div>
 
@@ -91,24 +91,48 @@ export default function Home() {
 				</div>
 			</section>
 
+			{/* Campaign Goal */}
+			<section className="container mx-auto max-w-2xl px-4 pt-8">
+				<CampaignGoal goal={1000} />
+			</section>
+
 			{/* Main Form */}
 			<main className="container mx-auto max-w-2xl px-4 py-10 md:py-12">
 				<LetterForm />
 			</main>
 
+			{/* Impact Stats - shows after first letter is sent */}
+			<ImpactStats />
+
 			{/* Footer */}
 			<footer className="border-t border-border/50 bg-muted/20">
 				<div className="container mx-auto max-w-4xl px-4 py-8">
-					<div className="text-center space-y-3">
+					<div className="text-center space-y-4">
 						<p className="text-sm text-muted-foreground">
 							Ein Projekt der iranischen Diaspora in Deutschland.
 							<br />
 							Für Freiheit, Würde und Menschenrechte.
 						</p>
 						<p className="text-xs text-muted-foreground/70">
-							Deine Daten werden nicht gespeichert. Der Brief wird lokal in
-							deinem Browser erstellt.
+							Der generierte Brief wird nicht auf unseren Servern gespeichert.
+							Zur Generierung werden deine Eingaben an OpenAI übermittelt.
 						</p>
+						{/* Legal Links */}
+						<div className="flex items-center justify-center gap-4 text-xs text-muted-foreground pt-2">
+							<a
+								href="/impressum"
+								className="hover:text-primary transition-colors"
+							>
+								Impressum
+							</a>
+							<span className="text-border">·</span>
+							<a
+								href="/datenschutz"
+								className="hover:text-primary transition-colors"
+							>
+								Datenschutz
+							</a>
+						</div>
 					</div>
 				</div>
 			</footer>

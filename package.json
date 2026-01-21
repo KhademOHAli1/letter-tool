@@ -17,6 +17,7 @@
 		"@radix-ui/react-label": "latest",
 		"@radix-ui/react-select": "^2.2.6",
 		"@radix-ui/react-slot": "latest",
+		"@supabase/supabase-js": "^2.91.0",
 		"@turf/turf": "^7.3.2",
 		"@types/xml2js": "^0.4.14",
 		"@vercel/analytics": "^1.6.1",
