@@ -58,10 +58,17 @@ export function createServerSupabaseClient(): SupabaseClient {
 /**
  * Track a letter generation in the database.
  * Called after successful LLM generation.
+ * Skipped in development mode to avoid polluting production data.
  */
 export async function trackLetterGeneration(
 	data: Omit<LetterGeneration, "id" | "created_at">,
 ): Promise<{ success: boolean; error?: string }> {
+	// Skip tracking in development mode
+	if (process.env.NODE_ENV === "development") {
+		console.log("[SUPABASE] Skipping tracking in dev mode");
+		return { success: true };
+	}
+
 	try {
 		const supabase = createServerSupabaseClient();
 

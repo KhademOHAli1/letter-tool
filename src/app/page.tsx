@@ -2,12 +2,18 @@ import { Vote } from "lucide-react";
 import { CampaignGoal } from "@/components/campaign-goal";
 import { ImpactStats } from "@/components/impact-stats";
 import { LetterForm } from "@/components/letter-form";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
 	return (
 		<div className="min-h-screen bg-background">
+			{/* Theme Toggle - fixed position */}
+			<div className="fixed top-4 right-4 z-50">
+				<ThemeToggle />
+			</div>
+
 			{/* Hero Section */}
-			<header className="border-b border-border/50 bg-gradient-to-b from-accent/20 to-background">
+			<header className="border-b border-border/50 bg-linear-to-b from-accent/20 to-background">
 				<div className="container mx-auto max-w-4xl px-4 py-12 md:py-16">
 					<div className="text-center space-y-4">
 						{/* Badge */}

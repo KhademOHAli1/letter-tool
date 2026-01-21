@@ -33,6 +33,14 @@ export const metadata: Metadata = {
 			"Setze dich für Menschenrechte im Iran ein. Schreibe einen persönlichen Brief an deinen Bundestagsabgeordneten.",
 		type: "website",
 		locale: "de_DE",
+		images: [
+			{
+				url: "/api/og",
+				width: 1200,
+				height: 630,
+				alt: "Stimme für Iran - Schreib deinem Bundestagsabgeordneten",
+			},
+		],
 	},
 	twitter: {
 		card: "summary_large_image",
@@ -47,7 +55,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="de">
+		<html lang="de" suppressHydrationWarning>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>

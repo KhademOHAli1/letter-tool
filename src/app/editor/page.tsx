@@ -107,7 +107,12 @@ export default function EditorPage() {
 		}
 
 		const mailtoUrl = `mailto:${data?.mdb.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
-		window.location.href = mailtoUrl;
+
+		// Open mailto in a new context and redirect to success page
+		window.open(mailtoUrl, "_self");
+		setTimeout(() => {
+			router.push("/success");
+		}, 500);
 	};
 
 	const handleCopy = async () => {
@@ -164,7 +169,7 @@ export default function EditorPage() {
 	return (
 		<div className="min-h-screen bg-background">
 			{/* Header */}
-			<header className="border-b border-border/50 bg-gradient-to-b from-accent/10 to-background">
+			<header className="border-b border-border/50 bg-linear-to-b from-accent/10 to-background">
 				<div className="container mx-auto max-w-3xl px-4 py-6">
 					<button
 						type="button"
@@ -188,7 +193,7 @@ export default function EditorPage() {
 						Zurück
 					</button>
 					<h1 className="text-2xl font-bold tracking-tight text-foreground">
-						Dein Brief ist fertig ✨
+						Dein Brief ist fertig
 					</h1>
 					<p className="mt-1 text-muted-foreground">
 						Prüfe und bearbeite deinen Brief, bevor du ihn sendest.
@@ -201,7 +206,7 @@ export default function EditorPage() {
 				<div className="mb-8 p-5 rounded-xl bg-card border border-border/60 shadow-sm">
 					<div className="flex items-start gap-4">
 						{data.mdb.imageUrl && (
-							<div className="h-16 w-16 overflow-hidden rounded-full bg-muted flex-shrink-0 ring-2 ring-border">
+							<div className="h-16 w-16 overflow-hidden rounded-full bg-muted shrink-0 ring-2 ring-border">
 								<Image
 									src={data.mdb.imageUrl}
 									alt={data.mdb.name}
@@ -282,7 +287,7 @@ export default function EditorPage() {
 							id="content"
 							value={content}
 							onChange={(e) => handleContentChange(e.target.value)}
-							className="min-h-[450px] text-base leading-relaxed resize-y p-4 rounded-xl"
+							className="min-h-112.5 text-base leading-relaxed resize-y p-4 rounded-xl"
 							placeholder="Dein Brief..."
 						/>
 					</div>

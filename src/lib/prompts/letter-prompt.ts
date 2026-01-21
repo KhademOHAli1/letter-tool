@@ -46,11 +46,13 @@ Direkt an den MdB als Person:
 - "Ich weiß, dass Sie das verstehen."
 - "Deutschland schaut zu - und Sie können dafür sorgen, dass wir handeln."
 
-5. FORDERUNGEN (exakt 3 Punkte, kurz)
-Direkt und knapp:
+5. FORDERUNGEN (die vom Absender ausgewaehlten Punkte)
+Uebernimm ALLE Forderungen aus der Eingabe. Formuliere sie als kurze, direkte Punkte:
 - [Forderung 1]
 - [Forderung 2]
-- [Forderung 3]
+- [etc. - so viele wie angegeben]
+
+WICHTIG: Die Forderungen sind das Herzstück des Briefs. Sie muessen ALLE im Brief erscheinen!
 
 6. ABSCHLUSS (1-2 Sätze, persönlich)
 - "Ich würde mich sehr freuen, von Ihnen zu hören."

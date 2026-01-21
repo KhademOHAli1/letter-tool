@@ -159,10 +159,37 @@ export async function POST(request: NextRequest) {
 		}
 		const mdb = rawBody.mdb;
 
-		// 10. Check required fields
+		// 10. Check required fields - personalNote is now REQUIRED
 		if (!senderName || forderungen.length === 0) {
 			return NextResponse.json(
 				{ error: "Bitte fülle alle Pflichtfelder aus" },
+				{ status: 400 },
+			);
+		}
+
+		// 10b. Personal note is required (3 sentences, each with 4+ words)
+		const sentences = (personalNote || "")
+			.trim()
+			.split(/[.!?]+/)
+			.map((s) => s.trim())
+			.filter((s) => s.length > 0);
+
+		if (sentences.length < 3) {
+			return NextResponse.json(
+				{
+					error:
+						"Bitte schreibe mindestens 3 Sätze in deiner persönlichen Geschichte.",
+				},
+				{ status: 400 },
+			);
+		}
+
+		const shortSentence = sentences.find(
+			(s) => s.split(/\s+/).filter((w) => w.length > 0).length < 4,
+		);
+		if (shortSentence) {
+			return NextResponse.json(
+				{ error: "Jeder Satz sollte mindestens 4 Wörter haben." },
 				{ status: 400 },
 			);
 		}
@@ -229,7 +256,10 @@ Mitglied des Deutschen Bundestages
 FORDERUNGEN DIE ICH UNTERSTÜTZE (nutze die Formulierungen als Basis, aber passe sie an den Briefstil an):
 ${forderungenTexte}
 
-${personalNote ? `PERSÖNLICHE ERGÄNZUNG (dies ist die emotionale Geschichte des Absenders - nutze sie für den SELF-Teil):\n${personalNote}` : "HINWEIS: Keine persönliche Ergänzung angegeben. Erfinde eine passende, authentisch wirkende persönliche Verbindung zum Thema Iran."}
+PERSÖNLICHE GESCHICHTE DES ABSENDERS (dies ist der wichtigste Teil - die echte emotionale Verbindung zum Thema):
+${personalNote}
+
+WICHTIG: Die persönliche Geschichte ist der Kern des Briefes. Sie macht den Brief authentisch und berührend. Baue den Brief um diese Geschichte herum auf.
 
 Bitte erstelle nun den Brief.`;
 

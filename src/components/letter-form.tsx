@@ -27,9 +27,44 @@ const PARTY_COLORS: Record<string, string> = {
 	Fraktionslos: "bg-gray-500 text-white",
 };
 
+// Validate personal story: at least 3 sentences, each with 4+ words
+function validatePersonalNote(text: string): {
+	valid: boolean;
+	message: string;
+} {
+	const trimmed = text.trim();
+	if (!trimmed)
+		return { valid: false, message: "Bitte erzähle deine Geschichte" };
+
+	// Split by sentence-ending punctuation
+	const sentences = trimmed
+		.split(/[.!?]+/)
+		.map((s) => s.trim())
+		.filter((s) => s.length > 0);
+
+	if (sentences.length < 3) {
+		return {
+			valid: false,
+			message: `Bitte schreibe mindestens 3 Sätze (aktuell: ${sentences.length})`,
+		};
+	}
+
+	// Check each sentence has at least 4 words
+	for (let i = 0; i < sentences.length; i++) {
+		const words = sentences[i].split(/\s+/).filter((w) => w.length > 0);
+		if (words.length < 4) {
+			return {
+				valid: false,
+				message: `Satz ${i + 1} ist zu kurz (mindestens 4 Wörter pro Satz)`,
+			};
+		}
+	}
+
+	return { valid: true, message: "" };
+}
+
 export function LetterForm() {
 	const router = useRouter();
-	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
 	// Honeypot field (hidden, bots will fill it)
@@ -99,61 +134,41 @@ export function LetterForm() {
 			return;
 		}
 
-		setIsLoading(true);
-		setError(null);
-
-		try {
-			const response = await fetch("/api/generate-letter", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					senderName: name,
-					senderPlz: plz,
-					wahlkreis: wahlkreis?.name,
-					mdb: selectedMdB,
-					forderungen: selectedForderungen,
-					personalNote,
-					// Include timing info for server-side validation
-					_timing: timeSinceRender,
-				}),
-			});
-
-			if (!response.ok) {
-				const errorData = await response.json();
-				throw new Error(errorData.error || "Fehler beim Generieren");
-			}
-
-			const result = await response.json();
-
-			// Speichere Ergebnis in sessionStorage und navigiere zum Editor
-			sessionStorage.setItem(
-				"letterData",
-				JSON.stringify({
-					...result,
-					mdb: selectedMdB,
-					senderName: name,
-				}),
-			);
-			router.push("/share");
-		} catch (err) {
-			setError(
-				err instanceof Error ? err.message : "Ein Fehler ist aufgetreten",
-			);
-		} finally {
-			setIsLoading(false);
+		const noteValidation = validatePersonalNote(personalNote);
+		if (!noteValidation.valid) {
+			setError(noteValidation.message);
+			return;
 		}
+
+		// Speichere Formulardaten und leite sofort zur Share-Seite weiter
+		// Der Brief wird dort im Hintergrund generiert
+		sessionStorage.setItem(
+			"formData",
+			JSON.stringify({
+				senderName: name,
+				senderPlz: plz,
+				wahlkreis: wahlkreis?.name,
+				mdb: selectedMdB,
+				forderungen: selectedForderungen,
+				personalNote,
+				_timing: timeSinceRender,
+			}),
+		);
+
+		router.push("/share");
 	}
 
 	const isValid =
 		name.trim() &&
 		selectedMdB &&
 		selectedForderungen.length > 0 &&
+		validatePersonalNote(personalNote).valid &&
 		consentGiven;
 
 	return (
 		<form onSubmit={handleSubmit} className="space-y-8">
 			{/* Honeypot field - hidden from users, bots will fill it */}
-			<div className="absolute -left-[9999px] -top-[9999px]" aria-hidden="true">
+			<div className="absolute -left-2499.75 -top-2499.75" aria-hidden="true">
 				<label htmlFor="_website">Website</label>
 				<input
 					type="text"
@@ -221,7 +236,7 @@ export function LetterForm() {
 							onChange={(e) =>
 								handlePlzChange(e.target.value.replace(/\D/g, ""))
 							}
-							className="max-w-[160px]"
+							className="max-w-40"
 						/>
 						{plz.length === 5 && !wahlkreis && (
 							<p className="text-sm text-destructive">
@@ -260,7 +275,7 @@ export function LetterForm() {
 									>
 										{selectedMdB ? (
 											<div className="flex items-center gap-3 flex-1 min-w-0">
-												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted flex-shrink-0 border-2 border-primary/20">
+												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted shrink-0 border-2 border-primary/20">
 													<Image
 														src={selectedMdB.imageUrl}
 														alt={selectedMdB.name}
@@ -288,28 +303,58 @@ export function LetterForm() {
 												Abgeordnete:n auswählen...
 											</span>
 										)}
-										<ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+										<ChevronDown className="h-4 w-4 text-muted-foreground shrink-0" />
 									</button>
 								)}
 
 								{/* Expanded list of MdBs */}
 								{mdbSelectorOpen && (
-									<div className="divide-y divide-border">
+									<div
+										className="divide-y divide-border"
+										role="listbox"
+										aria-label="Wähle deine:n Abgeordnete:n"
+										onKeyDown={(e) => {
+											if (e.key === "Escape") {
+												setMdbSelectorOpen(false);
+											} else if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+												e.preventDefault();
+												const buttons =
+													e.currentTarget.querySelectorAll("button");
+												const current = Array.from(buttons).indexOf(
+													document.activeElement as HTMLButtonElement,
+												);
+												const next =
+													e.key === "ArrowDown"
+														? Math.min(current + 1, buttons.length - 1)
+														: Math.max(current - 1, 0);
+												(buttons[next] as HTMLButtonElement)?.focus();
+											}
+										}}
+									>
 										{mdbs.map((mdb) => (
 											<button
 												key={mdb.id}
 												type="button"
+												role="option"
+												aria-selected={selectedMdB?.id === mdb.id}
 												onClick={() => {
 													setSelectedMdB(mdb);
 													setMdbSelectorOpen(false);
 												}}
-												className={`w-full flex items-center gap-3 p-3 text-left transition-colors ${
+												onKeyDown={(e) => {
+													if (e.key === "Enter" || e.key === " ") {
+														e.preventDefault();
+														setSelectedMdB(mdb);
+														setMdbSelectorOpen(false);
+													}
+												}}
+												className={`w-full flex items-center gap-3 p-3 text-left transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset ${
 													selectedMdB?.id === mdb.id
 														? "bg-primary/10"
 														: "bg-background hover:bg-muted/50"
 												}`}
 											>
-												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted flex-shrink-0 border border-border">
+												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted shrink-0 border border-border">
 													<Image
 														src={mdb.imageUrl}
 														alt={mdb.name}
@@ -332,7 +377,7 @@ export function LetterForm() {
 													</span>
 												</div>
 												{selectedMdB?.id === mdb.id && (
-													<Check className="h-5 w-5 text-primary flex-shrink-0" />
+													<Check className="h-5 w-5 text-primary shrink-0" />
 												)}
 											</button>
 										))}
@@ -350,7 +395,9 @@ export function LetterForm() {
 					<span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
 						3
 					</span>
-					<h3 className="font-medium">Deine Geschichte</h3>
+					<h3 className="font-medium">
+						Deine Geschichte <span className="text-destructive">*</span>
+					</h3>
 				</div>
 
 				<div className="space-y-4 pl-8">
@@ -361,12 +408,20 @@ export function LetterForm() {
 					<Textarea
 						id="story"
 						placeholder="z.B. Meine Großeltern leben noch in Teheran und ich mache mir jeden Tag Sorgen um sie..."
-						className="min-h-[120px] resize-none"
+						className="min-h-30 resize-none"
 						value={personalNote}
 						onChange={(e) => setPersonalNote(e.target.value)}
+						required
 					/>
+					{personalNote.length > 0 &&
+						!validatePersonalNote(personalNote).valid && (
+							<p className="text-xs text-destructive">
+								{validatePersonalNote(personalNote).message}
+							</p>
+						)}
 					<p className="text-xs text-muted-foreground">
-						💡 Persönliche Geschichten berühren mehr als Statistiken.
+						Schreibe mindestens 3 Sätze mit jeweils 4 Wörtern. Persönliche
+						Geschichten berühren mehr als Statistiken.
 					</p>
 				</div>
 			</div>
@@ -460,35 +515,9 @@ export function LetterForm() {
 				type="submit"
 				size="lg"
 				className="w-full h-12 text-base font-medium shadow-md"
-				disabled={isLoading || !isValid}
+				disabled={!isValid}
 			>
-				{isLoading ? (
-					<span className="flex items-center gap-2">
-						<svg
-							className="h-4 w-4 animate-spin"
-							viewBox="0 0 24 24"
-							fill="none"
-							aria-hidden="true"
-						>
-							<circle
-								className="opacity-25"
-								cx="12"
-								cy="12"
-								r="10"
-								stroke="currentColor"
-								strokeWidth="4"
-							/>
-							<path
-								className="opacity-75"
-								fill="currentColor"
-								d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-							/>
-						</svg>
-						Brief wird erstellt...
-					</span>
-				) : (
-					"Brief erstellen ✨"
-				)}
+				Brief erstellen
 			</Button>
 		</form>
 	);

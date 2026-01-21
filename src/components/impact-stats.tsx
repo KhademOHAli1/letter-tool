@@ -29,9 +29,32 @@ export function ImpactStats() {
 		fetchStats();
 	}, []);
 
-	// Don't show anything if loading or no stats
-	if (loading || !stats || stats.total_letters === 0) {
+	// Don't show anything if no stats after loading
+	if (!loading && (!stats || stats.total_letters === 0)) {
 		return null;
+	}
+
+	// Skeleton loading state
+	if (loading || !stats) {
+		return (
+			<section className="border-t border-border/30 bg-primary/5">
+				<div className="container mx-auto max-w-4xl px-4 py-8">
+					<div className="text-center space-y-4">
+						<div className="h-6 w-48 bg-muted/60 rounded mx-auto animate-pulse" />
+						<div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+							<div className="text-center space-y-2">
+								<div className="h-10 w-16 bg-muted/60 rounded mx-auto animate-pulse" />
+								<div className="h-4 w-20 bg-muted/40 rounded mx-auto animate-pulse" />
+							</div>
+							<div className="text-center space-y-2">
+								<div className="h-10 w-12 bg-muted/60 rounded mx-auto animate-pulse" />
+								<div className="h-4 w-24 bg-muted/40 rounded mx-auto animate-pulse" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		);
 	}
 
 	return (

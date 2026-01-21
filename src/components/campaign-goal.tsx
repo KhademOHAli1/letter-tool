@@ -38,7 +38,6 @@ export function CampaignGoal({
 	}
 
 	const progress = Math.min((stats.total_letters / goal) * 100, 100);
-	const remaining = Math.max(goal - stats.total_letters, 0);
 
 	if (compact) {
 		return (
