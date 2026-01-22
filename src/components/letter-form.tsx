@@ -583,10 +583,10 @@ export function LetterForm() {
 						id="consent"
 						checked={consentGiven}
 						onCheckedChange={(checked) => setConsentGiven(checked === true)}
-						className="mt-0.5"
+						className="mt-0.5 shrink-0"
 						required
 					/>
-					<div className="space-y-1">
+					<div className="space-y-1 min-w-0">
 						<span className="text-sm font-medium text-foreground">
 							{language === "de"
 								? "Einwilligung zur Datenverarbeitung *"
