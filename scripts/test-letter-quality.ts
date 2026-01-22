@@ -178,14 +178,14 @@ async function generateLetter(testCase: (typeof TEST_CASES)[0]) {
 
 async function main() {
 	console.log("🔬 Quality Control Test: Generating 10 sample letters\n");
-	console.log("Model: gpt-4o-mini\n");
+	console.log("Model: gpt-5.2\n");
 	console.log("=".repeat(80) + "\n");
 
 	const results: { name: string; letter: string; error?: string }[] = [];
 
 	for (let i = 0; i < TEST_CASES.length; i++) {
 		const testCase = TEST_CASES[i];
-		console.log(`[${i + 1}/10] Generating letter for ${testCase.name}...`);
+		console.log(`[${i + 1}/10] Generating letter for ${testCase.senderName}...`);
 
 		try {
 			const start = Date.now();
@@ -193,11 +193,11 @@ async function main() {
 			const duration = ((Date.now() - start) / 1000).toFixed(1);
 
 			console.log(`   ✅ Done in ${duration}s\n`);
-			results.push({ name: testCase.name, letter: result.letter });
+			results.push({ name: testCase.senderName, letter: result.letter });
 		} catch (error) {
 			console.log(`   ❌ Error: ${error}\n`);
 			results.push({
-				name: testCase.name,
+				name: testCase.senderName,
 				letter: "",
 				error: String(error),
 			});
@@ -219,7 +219,8 @@ async function main() {
 		.join("\n");
 
 	const outputPath = "./scripts/quality-test-results.txt";
-	await Bun.write(outputPath, output);
+	const fs = await import("node:fs");
+	fs.writeFileSync(outputPath, output);
 
 	console.log("\n" + "=".repeat(80));
 	console.log(`\n✅ Results saved to: ${outputPath}`);
