@@ -167,8 +167,8 @@ export const translations = {
 			wayTooLong: { de: "Zu lang", en: "Too long" },
 		},
 		sendButton: {
-			de: "E-Mail-Programm öffnen",
-			en: "Open Email Client",
+			de: "Weiter zum Senden",
+			en: "Ready to Send",
 		},
 		copyButton: { de: "Brief kopieren", en: "Copy Letter" },
 		hint: {

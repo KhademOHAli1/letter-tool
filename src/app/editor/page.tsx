@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowRight, Mail } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -16,6 +17,7 @@ interface MdBData {
 	name: string;
 	email: string;
 	party: string;
+	wahlkreisId?: string;
 	imageUrl?: string;
 }
 
@@ -37,6 +39,11 @@ interface LetterData {
 	senderName: string;
 	isAdapted?: boolean;
 	originalMdbName?: string;
+	// Form data preserved for success page
+	senderPlz?: string;
+	wahlkreis?: string;
+	forderungen?: string[];
+	personalNote?: string;
 }
 
 // Wortzählung
@@ -125,7 +132,10 @@ export default function EditorPage() {
 			try {
 				const response = await fetch("/api/generate-letter", {
 					method: "POST",
-					headers: { "Content-Type": "application/json" },
+					headers: {
+						"Content-Type": "application/json",
+						Accept: "text/event-stream",
+					},
 					body: JSON.stringify({
 						senderName: formData.senderName,
 						senderPlz: formData.senderPlz,
@@ -150,6 +160,7 @@ export default function EditorPage() {
 					const reader = response.body?.getReader();
 					const decoder = new TextDecoder();
 					let accumulatedContent = "";
+					let finalSubject = "Bitte um Unterstützung: Menschenrechte im Iran";
 
 					if (reader) {
 						while (true) {
@@ -169,6 +180,10 @@ export default function EditorPage() {
 											accumulatedContent += parsed.content;
 											setContent(accumulatedContent);
 										}
+										if (parsed.done && parsed.subject) {
+											finalSubject = parsed.subject;
+											setSubject(finalSubject);
+										}
 									} catch {
 										// Ignore parse errors
 									}
@@ -177,15 +192,19 @@ export default function EditorPage() {
 						}
 					}
 
-					// Save to sessionStorage
+					// Save to sessionStorage (include form data for success page)
 					sessionStorage.setItem(
 						"letterData",
 						JSON.stringify({
 							content: accumulatedContent,
-							subject: "Bitte um Unterstützung: Menschenrechte im Iran",
+							subject: finalSubject,
 							wordCount: countWords(accumulatedContent),
 							mdb: formData.mdb,
 							senderName: formData.senderName,
+							senderPlz: formData.senderPlz,
+							wahlkreis: formData.wahlkreis,
+							forderungen: formData.forderungen,
+							personalNote: formData.personalNote,
 						}),
 					);
 				} else {
@@ -196,7 +215,7 @@ export default function EditorPage() {
 						result.subject || "Bitte um Unterstützung: Menschenrechte im Iran",
 					);
 
-					// Save to sessionStorage
+					// Save to sessionStorage (include form data for success page)
 					sessionStorage.setItem(
 						"letterData",
 						JSON.stringify({
@@ -207,11 +226,15 @@ export default function EditorPage() {
 							wordCount: countWords(result.content),
 							mdb: formData.mdb,
 							senderName: formData.senderName,
+							senderPlz: formData.senderPlz,
+							wahlkreis: formData.wahlkreis,
+							forderungen: formData.forderungen,
+							personalNote: formData.personalNote,
 						}),
 					);
 				}
 
-				// Clean up form data
+				// Clean up form data (now included in letterData)
 				sessionStorage.removeItem("formData");
 				setIsComplete(true);
 			} catch (err) {
@@ -292,13 +315,9 @@ export default function EditorPage() {
 	const handleSendEmail = () => {
 		if (!mdb) return;
 
-		const mailtoUrl = `mailto:${mdb.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
-
 		// Mark this MdB as emailed for the multi-MP feature
 		markMdBAsEmailed({ id: mdb.id, name: mdb.name, party: mdb.party });
 
-		// Open mailto in a new tab so user can return to this page
-		window.open(mailtoUrl, "_blank");
 		// Navigate to success page
 		router.push("/success");
 	};
@@ -614,28 +633,18 @@ export default function EditorPage() {
 
 				{/* Aktionen */}
 				<div className="space-y-4">
-					<Button
-						onClick={handleSendEmail}
-						size="lg"
-						className="w-full h-14 text-base font-medium shadow-md gap-2"
-						disabled={isGenerating || !content}
-					>
-						<svg
-							className="h-5 w-5"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							aria-hidden="true"
+					{mdb && (
+						<Button
+							size="lg"
+							className="w-full h-14 text-base font-medium shadow-md gap-2"
+							disabled={isGenerating || !content}
+							onClick={handleSendEmail}
 						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-							/>
-						</svg>
-						{t("editor", "sendButton")}
-					</Button>
+							<Mail className="h-5 w-5" />
+							{t("editor", "sendButton")}
+							<ArrowRight className="h-4 w-4 opacity-60" />
+						</Button>
+					)}
 
 					<Button
 						onClick={handleCopy}

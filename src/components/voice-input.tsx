@@ -190,7 +190,10 @@ export function VoiceInput({
 		};
 
 		recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
-			console.error("Speech recognition error:", event.error);
+			// Only log non-routine errors
+			if (event.error !== "aborted" && event.error !== "no-speech") {
+				console.error("Speech recognition error:", event.error);
+			}
 			setIsListening(false);
 
 			if (event.error === "not-allowed") {
@@ -199,8 +202,21 @@ export function VoiceInput({
 						? "Mikrofon-Zugriff verweigert. Bitte erlaube den Zugriff in deinen Browser-Einstellungen."
 						: "Microphone access denied. Please allow access in your browser settings.",
 				);
-			} else if (event.error === "no-speech") {
-				// Silently ignore no-speech errors
+				setPermissionState("denied");
+			} else if (event.error === "no-speech" || event.error === "aborted") {
+				// Silently ignore - these are normal when user stops or no speech detected
+			} else if (event.error === "network") {
+				setError(
+					language === "de"
+						? "Netzwerkfehler bei der Spracherkennung"
+						: "Network error during speech recognition",
+				);
+			} else if (event.error === "audio-capture") {
+				setError(
+					language === "de"
+						? "Mikrofon konnte nicht verwendet werden. Ist es angeschlossen?"
+						: "Could not use microphone. Is it connected?",
+				);
 			} else {
 				setError(
 					language === "de"

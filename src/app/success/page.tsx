@@ -66,15 +66,20 @@ export default function SuccessPage() {
 	const [remainingMdBs, setRemainingMdBs] = useState<MdB[]>([]);
 	const [adaptingFor, setAdaptingFor] = useState<string | null>(null);
 	const [emailSent, setEmailSent] = useState(false);
+	const [emailedCount, setEmailedCount] = useState(0);
 
-	const shareUrl = typeof window !== "undefined" ? window.location.origin : "";
+	// Use empty string during SSR, actual value after hydration
+	const [shareUrl, setShareUrl] = useState("");
+	useEffect(() => {
+		setShareUrl(window.location.origin);
+		setEmailedCount(getEmailedMdBs().length);
+	}, []);
 	const shareMessage = getShareMessage(language, shareUrl);
 
 	// Load data on mount
 	useEffect(() => {
 		// Get letter data from sessionStorage
 		const letterDataRaw = sessionStorage.getItem("letterData");
-		const formDataRaw = sessionStorage.getItem("formData");
 
 		if (letterDataRaw) {
 			try {
@@ -91,57 +96,54 @@ export default function SuccessPage() {
 				const newTrackingId = generateTrackingId();
 				setTrackingId(newTrackingId);
 
-				// Get form data for wahlkreis
-				if (formDataRaw) {
-					const formData = JSON.parse(formDataRaw);
-					const wkId = formData.mdb?.wahlkreisId;
-					setWahlkreisId(wkId);
+				// Get wahlkreis from letterData (form data is now included in letterData)
+				const wkId = letterData.mdb?.wahlkreisId;
+				setWahlkreisId(wkId);
 
-					// Cache the letter for reuse
-					if (letterData.content && letterData.mdb) {
-						cacheGeneratedLetter({
-							content: letterData.content,
-							subject:
-								letterData.subject ||
-								"Bitte um Unterstützung: Menschenrechte im Iran",
-							wordCount: letterData.wordCount || 0,
-							senderName: formData.senderName || "",
-							senderPlz: formData.senderPlz || "",
-							wahlkreisId: wkId || "",
-							wahlkreisName: formData.wahlkreis || "",
-							forderungen: formData.forderungen || [],
-							personalNote: formData.personalNote || "",
-							mdb: letterData.mdb,
-						});
+				// Cache the letter for reuse
+				if (letterData.content && letterData.mdb) {
+					cacheGeneratedLetter({
+						content: letterData.content,
+						subject:
+							letterData.subject ||
+							"Bitte um Unterstützung: Menschenrechte im Iran",
+						wordCount: letterData.wordCount || 0,
+						senderName: letterData.senderName || "",
+						senderPlz: letterData.senderPlz || "",
+						wahlkreisId: wkId || "",
+						wahlkreisName: letterData.wahlkreis || "",
+						forderungen: letterData.forderungen || [],
+						personalNote: letterData.personalNote || "",
+						mdb: letterData.mdb,
+					});
 
-						// Add to letter history for local viewing
-						const hId = addToLetterHistory({
-							content: letterData.content,
-							subject:
-								letterData.subject ||
-								"Bitte um Unterstützung: Menschenrechte im Iran",
-							wordCount: letterData.wordCount || 0,
-							mdbName: letterData.mdb.name,
-							mdbParty: letterData.mdb.party,
-							mdbEmail: letterData.mdb.email,
-							wahlkreisName: formData.wahlkreis || "",
-							emailSent: false,
-							trackingId: newTrackingId,
-						});
-						setHistoryId(hId);
-					}
+					// Add to letter history for local viewing
+					const hId = addToLetterHistory({
+						content: letterData.content,
+						subject:
+							letterData.subject ||
+							"Bitte um Unterstützung: Menschenrechte im Iran",
+						wordCount: letterData.wordCount || 0,
+						mdbName: letterData.mdb.name,
+						mdbParty: letterData.mdb.party,
+						mdbEmail: letterData.mdb.email,
+						wahlkreisName: letterData.wahlkreis || "",
+						emailSent: false,
+						trackingId: newTrackingId,
+					});
+					setHistoryId(hId);
+				}
 
-					// Mark current MdB as emailed
-					if (letterData.mdb) {
-						markMdBAsEmailed(letterData.mdb);
-					}
+				// Mark current MdB as emailed
+				if (letterData.mdb) {
+					markMdBAsEmailed(letterData.mdb);
+				}
 
-					// Find remaining MdBs in same Wahlkreis
-					if (wkId) {
-						const allMdBs = findMdBsByWahlkreis(wkId);
-						const remaining = getRemainingMdBs(allMdBs);
-						setRemainingMdBs(remaining);
-					}
+				// Find remaining MdBs in same Wahlkreis
+				if (wkId) {
+					const allMdBs = findMdBsByWahlkreis(wkId);
+					const remaining = getRemainingMdBs(allMdBs);
+					setRemainingMdBs(remaining);
 				}
 			} catch {
 				// Invalid JSON
@@ -241,6 +243,7 @@ export default function SuccessPage() {
 		);
 
 		// Store adapted letter in sessionStorage for editor
+		// Note: Only set letterData, NOT formData - we don't want to regenerate
 		const adaptedLetterData = {
 			content: adaptedContent,
 			subject: cachedLetter.subject,
@@ -248,22 +251,12 @@ export default function SuccessPage() {
 			mdb: newMdb,
 			senderName: cachedLetter.senderName,
 			isAdapted: true,
+			originalMdbName: cachedLetter.mdb.name,
 		};
 
+		// Clear any old formData to prevent regeneration
+		sessionStorage.removeItem("formData");
 		sessionStorage.setItem("letterData", JSON.stringify(adaptedLetterData));
-
-		// Also store form data for potential regeneration
-		sessionStorage.setItem(
-			"formData",
-			JSON.stringify({
-				senderName: cachedLetter.senderName,
-				senderPlz: cachedLetter.senderPlz,
-				wahlkreis: cachedLetter.wahlkreisName,
-				mdb: newMdb,
-				forderungen: cachedLetter.forderungen,
-				personalNote: cachedLetter.personalNote,
-			}),
-		);
 
 		// Navigate to editor
 		router.push("/editor");
@@ -288,7 +281,6 @@ export default function SuccessPage() {
 
 	// Get the "what happens next" steps based on language
 	const whatsNextSteps = tArray("success", "whatsNextSteps", language);
-	const emailedCount = getEmailedMdBs().length;
 
 	return (
 		<div className="min-h-screen bg-background">

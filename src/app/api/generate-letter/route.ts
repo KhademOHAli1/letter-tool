@@ -227,6 +227,11 @@ WICHTIG: Die persönliche Geschichte ist der Kern des Briefes. Sie macht den Bri
 
 Bitte erstelle nun den Brief.`;
 
+		// Check if client wants streaming
+		const wantsStream = request.headers
+			.get("accept")
+			?.includes("text/event-stream");
+
 		// 9. Call LLM API
 		const response = await fetch("https://api.openai.com/v1/chat/completions", {
 			method: "POST",
@@ -242,6 +247,7 @@ Bitte erstelle nun den Brief.`;
 				],
 				temperature: 0.7,
 				max_completion_tokens: 2000,
+				stream: wantsStream,
 			}),
 		});
 
@@ -254,6 +260,101 @@ Bitte erstelle nun den Brief.`;
 			);
 		}
 
+		// Handle streaming response
+		if (wantsStream && response.body) {
+			const reader = response.body.getReader();
+			const decoder = new TextDecoder();
+			let fullContent = "";
+
+			const stream = new ReadableStream({
+				async start(controller) {
+					const encoder = new TextEncoder();
+
+					try {
+						while (true) {
+							const { done, value } = await reader.read();
+							if (done) break;
+
+							const chunk = decoder.decode(value, { stream: true });
+							const lines = chunk
+								.split("\n")
+								.filter((line) => line.trim() !== "");
+
+							for (const line of lines) {
+								if (line.startsWith("data: ")) {
+									const data = line.slice(6);
+									if (data === "[DONE]") {
+										// Send final message with subject and word count
+										const wordCount = fullContent
+											.split(/\s+/)
+											.filter(Boolean).length;
+										controller.enqueue(
+											encoder.encode(
+												`data: ${JSON.stringify({
+													done: true,
+													subject:
+														"Bitte um Unterstützung: Menschenrechte im Iran",
+													wordCount,
+												})}\n\n`,
+											),
+										);
+
+										// Track letter generation
+										try {
+											await trackLetterGeneration({
+												mdb_id: mdb.id,
+												mdb_name: mdb.name,
+												mdb_party: mdb.party || null,
+												wahlkreis_id: null,
+												wahlkreis_name: wahlkreis || null,
+												forderung_ids: forderungen,
+												user_hash: fingerprint,
+											});
+										} catch (err) {
+											console.error("[TRACKING] Failed to track letter:", err);
+										}
+
+										controller.close();
+										return;
+									}
+
+									try {
+										const parsed = JSON.parse(data);
+										const delta = parsed.choices?.[0]?.delta?.content;
+										if (delta) {
+											// Replace en-dashes with hyphens
+											const cleanDelta = delta.replace(/–/g, "-");
+											fullContent += cleanDelta;
+											controller.enqueue(
+												encoder.encode(
+													`data: ${JSON.stringify({ content: cleanDelta })}\n\n`,
+												),
+											);
+										}
+									} catch {
+										// Ignore parse errors
+									}
+								}
+							}
+						}
+					} catch (err) {
+						console.error("Streaming error:", err);
+						controller.error(err);
+					}
+				},
+			});
+
+			return new Response(stream, {
+				headers: {
+					"Content-Type": "text/event-stream",
+					"Cache-Control": "no-cache",
+					Connection: "keep-alive",
+					"X-RateLimit-Remaining": rateLimit.remaining.toString(),
+				},
+			});
+		}
+
+		// Handle non-streaming response
 		const data = await response.json();
 		const rawContent = data.choices[0]?.message?.content || "";
 

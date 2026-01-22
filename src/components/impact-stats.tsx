@@ -7,6 +7,8 @@ interface LetterStats {
 	total_letters: number;
 	unique_mdbs: number;
 	letters_by_party: { party: string; count: number }[];
+	top_mdbs: { name: string; party: string | null; count: number }[];
+	top_wahlkreise: { name: string; count: number }[];
 }
 
 export function ImpactStats() {
@@ -102,6 +104,8 @@ export function ImpactStats() {
 								))}
 						</div>
 					)}
+
+
 				</div>
 			</div>
 		</section>

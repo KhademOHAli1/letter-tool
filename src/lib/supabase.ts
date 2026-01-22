@@ -23,6 +23,8 @@ export interface LetterStats {
 	unique_mdbs: number;
 	top_forderungen: { id: string; count: number }[];
 	letters_by_party: { party: string; count: number }[];
+	top_mdbs: { name: string; party: string | null; count: number }[];
+	top_wahlkreise: { name: string; count: number }[];
 }
 
 // Singleton client instance
@@ -121,7 +123,7 @@ export async function getLetterStats(): Promise<LetterStats | null> {
 		const mdbIds = (uniqueMdbs as { mdb_id: string }[] | null) || [];
 		const uniqueMdbCount = new Set(mdbIds.map((r) => r.mdb_id)).size;
 
-		// Letters by party
+		// Letters by party (normalize case to handle legacy data inconsistencies)
 		const { data: partyData } = await supabase
 			.from("letter_generations")
 			.select("mdb_party")
@@ -130,11 +132,72 @@ export async function getLetterStats(): Promise<LetterStats | null> {
 		const partyRows =
 			(partyData as { mdb_party: string | null }[] | null) || [];
 		const partyCount: Record<string, number> = {};
+
+		// Canonical party name mapping for normalization
+		const normalizeParty = (party: string): string => {
+			const upper = party.toUpperCase();
+			// Map common variations to canonical names
+			if (upper === "GRÜNE" || upper === "BÜNDNIS 90/DIE GRÜNEN")
+				return "GRÜNE";
+			if (upper === "DIE LINKE" || upper === "LINKE") return "DIE LINKE";
+			return party; // Keep original for others (SPD, CDU/CSU, FDP, AfD, BSW)
+		};
+
 		for (const row of partyRows) {
 			if (row.mdb_party) {
-				partyCount[row.mdb_party] = (partyCount[row.mdb_party] || 0) + 1;
+				const normalized = normalizeParty(row.mdb_party);
+				partyCount[normalized] = (partyCount[normalized] || 0) + 1;
 			}
 		}
+
+		// Top MdBs contacted
+		const { data: mdbData } = await supabase
+			.from("letter_generations")
+			.select("mdb_name, mdb_party")
+			.limit(10000);
+
+		const mdbRows =
+			(mdbData as { mdb_name: string; mdb_party: string | null }[] | null) ||
+			[];
+		const mdbCount: Record<string, { party: string | null; count: number }> =
+			{};
+		for (const row of mdbRows) {
+			if (row.mdb_name) {
+				if (!mdbCount[row.mdb_name]) {
+					mdbCount[row.mdb_name] = {
+						party: row.mdb_party ? normalizeParty(row.mdb_party) : null,
+						count: 0,
+					};
+				}
+				mdbCount[row.mdb_name].count++;
+			}
+		}
+
+		const topMdbs = Object.entries(mdbCount)
+			.map(([name, { party, count }]) => ({ name, party, count }))
+			.sort((a, b) => b.count - a.count)
+			.slice(0, 10);
+
+		// Top Wahlkreise
+		const { data: wahlkreisData } = await supabase
+			.from("letter_generations")
+			.select("wahlkreis_name")
+			.limit(10000);
+
+		const wahlkreisRows =
+			(wahlkreisData as { wahlkreis_name: string | null }[] | null) || [];
+		const wahlkreisCount: Record<string, number> = {};
+		for (const row of wahlkreisRows) {
+			if (row.wahlkreis_name) {
+				wahlkreisCount[row.wahlkreis_name] =
+					(wahlkreisCount[row.wahlkreis_name] || 0) + 1;
+			}
+		}
+
+		const topWahlkreise = Object.entries(wahlkreisCount)
+			.map(([name, count]) => ({ name, count }))
+			.sort((a, b) => b.count - a.count)
+			.slice(0, 10);
 
 		return {
 			total_letters: totalLetters || 0,
@@ -144,6 +207,8 @@ export async function getLetterStats(): Promise<LetterStats | null> {
 				party,
 				count,
 			})),
+			top_mdbs: topMdbs,
+			top_wahlkreise: topWahlkreise,
 		};
 	} catch (err) {
 		console.error("[SUPABASE] Stats error:", err);
