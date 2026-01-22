@@ -225,21 +225,12 @@ export async function POST(request: NextRequest) {
 		// 13. Build safe user prompt with detailed Forderungen
 		const selectedForderungen = forderungen
 			.map((id: string) => FORDERUNGEN.find((f) => f.id === id))
-			.filter(
-				(
-					f,
-				): f is {
-					id: string;
-					title: string;
-					description: string;
-					briefText: string;
-					zustaendigkeit: string;
-				} => f !== undefined,
-			);
+			.filter((f): f is (typeof FORDERUNGEN)[number] => f !== undefined);
 
 		const forderungenTexte = selectedForderungen
 			.map(
-				(f) => `- ${f.title}\n  Formulierung für den Brief: "${f.briefText}"`,
+				(f) =>
+					`- ${f.title.de}\n  Formulierung für den Brief: "${f.briefText.de}"`,
 			)
 			.join("\n\n");
 
