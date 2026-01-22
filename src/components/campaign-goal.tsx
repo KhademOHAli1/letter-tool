@@ -161,14 +161,14 @@ export function CampaignGoal({ compact = false }: CampaignGoalProps) {
 				<div
 					className={`h-full rounded-full transition-all duration-1000 ease-out ${
 						isNearGoal
-							? "bg-gradient-to-r from-primary to-primary/80 animate-pulse"
+							? "bg-linear-to-r from-primary to-primary/80 animate-pulse"
 							: "bg-primary/60"
 					}`}
 					style={{ width: `${progress}%` }}
 				>
 					{/* Shimmer effect when near goal */}
 					{isNearGoal && (
-						<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_infinite]" />
+						<div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_infinite]" />
 					)}
 				</div>
 			</div>

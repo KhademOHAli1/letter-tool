@@ -384,7 +384,7 @@ export default function SuccessPage() {
 			<div className="container max-w-2xl mx-auto px-4 py-6 space-y-6">
 				{/* PRIMARY CTA: Send Email Now */}
 				{mdbEmail && letterContent && !emailSent && (
-					<div className="rounded-xl border-2 border-primary bg-gradient-to-br from-primary/10 to-primary/5 p-5 shadow-lg">
+					<div className="rounded-xl border-2 border-primary bg-linear-to-br from-primary/10 to-primary/5 p-5 shadow-lg">
 						<div className="flex items-center gap-3 mb-4">
 							<div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground">
 								<Send className="h-6 w-6" />

@@ -347,11 +347,159 @@ export default function DatenschutzPage() {
 							3. Sie können diese Daten jederzeit durch Löschen Ihrer
 							Browserdaten entfernen.
 						</p>
+
+						<h3 className="text-lg font-medium mt-4 mb-2">
+							Entwurf-Speicherung (Auto-Save)
+						</h3>
+						<p className="text-muted-foreground">
+							Ihre Formulareingaben werden automatisch im LocalStorage Ihres
+							Browsers zwischengespeichert, damit Sie Ihre Arbeit fortsetzen
+							können, falls Sie die Seite verlassen oder der Browser abstürzt.
+						</p>
+						<ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+							<li>
+								<strong>Speicherort:</strong> Nur in Ihrem Browser
+								(LocalStorage)
+							</li>
+							<li>
+								<strong>Speicherdauer:</strong> 24 Stunden, danach automatische
+								Löschung
+							</li>
+							<li>
+								<strong>Inhalt:</strong> Alle Formularfelder außer sensiblen
+								Daten
+							</li>
+							<li>
+								<strong>Löschung:</strong> Automatisch nach erfolgreicher
+								Briefgenerierung oder manuell durch Klick auf "Verwerfen"
+							</li>
+						</ul>
+
+						<h3 className="text-lg font-medium mt-4 mb-2">
+							Brief-Verlauf (Letter History)
+						</h3>
+						<p className="text-muted-foreground">
+							Generierte Briefe werden lokal in Ihrem Browser gespeichert, damit
+							Sie diese später erneut senden oder nachverfolgen können.
+						</p>
+						<ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+							<li>
+								<strong>Speicherort:</strong> Nur in Ihrem Browser
+								(LocalStorage)
+							</li>
+							<li>
+								<strong>Speicherdauer:</strong> Bis Sie die Briefe manuell
+								löschen oder Ihre Browserdaten leeren
+							</li>
+							<li>
+								<strong>Inhalt:</strong> Brieftext, MdB-Name, E-Mail, Datum,
+								Versandstatus
+							</li>
+							<li>
+								Diese Daten verlassen Ihren Computer nicht und werden nicht an
+								uns übermittelt.
+							</li>
+						</ul>
 					</section>
 
 					<section>
 						<h2 className="text-xl font-semibold mb-3">
-							9. Keine dauerhafte Speicherung Ihrer Briefe
+							9. Spracheingabe (Voice Input)
+						</h2>
+						<p className="text-muted-foreground">
+							Optional können Sie Ihre persönliche Geschichte per Spracheingabe
+							diktieren. Diese Funktion nutzt die Web Speech API Ihres Browsers.
+						</p>
+						<ul className="list-disc list-inside text-muted-foreground mt-3 space-y-1">
+							<li>
+								<strong>Anbieter:</strong> Google (in Chrome/Edge) oder Apple
+								(in Safari) - je nach Browser
+							</li>
+							<li>
+								<strong>Verarbeitung:</strong> Audio wird zur Spracherkennung an
+								die Server des Browser-Anbieters gesendet
+							</li>
+							<li>
+								<strong>Speicherung:</strong> Wir speichern keine Audiodaten -
+								nur der erkannte Text wird im Formular verwendet
+							</li>
+							<li>
+								<strong>Einwilligung:</strong> Die Nutzung erfolgt nur nach
+								Ihrer aktiven Aktivierung (Klick auf Mikrofon-Symbol)
+							</li>
+						</ul>
+						<p className="text-muted-foreground mt-3">
+							<strong>Rechtsgrundlage:</strong> Ihre ausdrückliche Einwilligung
+							durch Aktivierung der Funktion (Art. 6 Abs. 1 lit. a DSGVO).
+						</p>
+						<p className="text-muted-foreground mt-2">
+							<strong>Hinweis:</strong> Weitere Informationen zur
+							Datenverarbeitung finden Sie in den Datenschutzerklärungen von{" "}
+							<a
+								href="https://policies.google.com/privacy"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-primary hover:underline"
+							>
+								Google
+							</a>{" "}
+							bzw.{" "}
+							<a
+								href="https://www.apple.com/legal/privacy/"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-primary hover:underline"
+							>
+								Apple
+							</a>
+							.
+						</p>
+					</section>
+
+					<section>
+						<h2 className="text-xl font-semibold mb-3">
+							10. E-Mail-Öffnungs-Tracking (Optional)
+						</h2>
+						<p className="text-muted-foreground">
+							Wenn Sie einen Brief über die E-Mail-Funktion versenden, kann
+							optional ein unsichtbares Tracking-Pixel eingebettet werden, um zu
+							erkennen, ob die E-Mail geöffnet wurde.
+						</p>
+
+						<h3 className="text-lg font-medium mt-4 mb-2">Was wird erfasst?</h3>
+						<ul className="list-disc list-inside text-muted-foreground space-y-1">
+							<li>Ob und wann die E-Mail geöffnet wurde (Zeitstempel)</li>
+							<li>Anonymisierte Tracking-ID (keine personenbezogenen Daten)</li>
+						</ul>
+
+						<h3 className="text-lg font-medium mt-4 mb-2">
+							Was wird NICHT erfasst?
+						</h3>
+						<ul className="list-disc list-inside text-muted-foreground space-y-1">
+							<li>Ihr Name oder Ihre E-Mail-Adresse</li>
+							<li>Der Inhalt Ihres Briefes</li>
+							<li>Die E-Mail-Adresse des Empfängers</li>
+							<li>Ihre IP-Adresse</li>
+						</ul>
+
+						<p className="text-muted-foreground mt-3">
+							<strong>Zweck:</strong> Aggregierte Statistiken zur Wirksamkeit
+							der Kampagne (z.B. "X% der Briefe wurden geöffnet").
+						</p>
+						<p className="text-muted-foreground mt-2">
+							<strong>Rechtsgrundlage:</strong> Berechtigtes Interesse an der
+							Wirksamkeitsmessung (Art. 6 Abs. 1 lit. f DSGVO).
+						</p>
+						<p className="text-muted-foreground mt-2">
+							<strong>Hinweis:</strong> Viele E-Mail-Programme blockieren
+							Tracking-Pixel standardmäßig. Die Statistik ist daher nicht
+							vollständig.
+						</p>
+					</section>
+
+					<section>
+						<h2 className="text-xl font-semibold mb-3">
+							11. Keine dauerhafte Speicherung Ihrer Briefe
 						</h2>
 						<p className="text-muted-foreground">
 							<strong className="text-foreground">
@@ -370,7 +518,7 @@ export default function DatenschutzPage() {
 
 					<section>
 						<h2 className="text-xl font-semibold mb-3">
-							10. Datenquellen für MdB-Informationen
+							12. Datenquellen für MdB-Informationen
 						</h2>
 						<p className="text-muted-foreground">
 							Die Kontaktdaten der Bundestagsabgeordneten (MdBs) stammen aus
@@ -406,7 +554,7 @@ export default function DatenschutzPage() {
 					</section>
 
 					<section>
-						<h2 className="text-xl font-semibold mb-3">11. Ihre Rechte</h2>
+						<h2 className="text-xl font-semibold mb-3">13. Ihre Rechte</h2>
 						<p className="text-muted-foreground">
 							Sie haben gemäß DSGVO folgende Rechte:
 						</p>
@@ -447,7 +595,7 @@ export default function DatenschutzPage() {
 
 					<section>
 						<h2 className="text-xl font-semibold mb-3">
-							12. Beschwerderecht bei der Aufsichtsbehörde
+							14. Beschwerderecht bei der Aufsichtsbehörde
 						</h2>
 						<p className="text-muted-foreground">
 							Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde
@@ -469,7 +617,7 @@ export default function DatenschutzPage() {
 
 					<section>
 						<h2 className="text-xl font-semibold mb-3">
-							13. Technische Sicherheitsmaßnahmen
+							15. Technische Sicherheitsmaßnahmen
 						</h2>
 						<p className="text-muted-foreground">
 							Zum Schutz Ihrer Daten setzen wir folgende technische Maßnahmen
@@ -506,7 +654,7 @@ export default function DatenschutzPage() {
 
 					<section>
 						<h2 className="text-xl font-semibold mb-3">
-							14. Aktualität dieser Datenschutzerklärung
+							16. Aktualität dieser Datenschutzerklärung
 						</h2>
 						<p className="text-muted-foreground">Stand: Januar 2026</p>
 						<p className="text-muted-foreground mt-2">

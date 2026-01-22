@@ -172,6 +172,66 @@ export default function ImpressumPage() {
 
 					<section>
 						<h2 className="text-xl font-semibold mb-3">
+							Spracheingabe (Voice Input)
+						</h2>
+						<p className="text-muted-foreground">
+							Die optionale Spracheingabe-Funktion nutzt die Web Speech API
+							Ihres Browsers. Audiodaten werden zur Spracherkennung an die
+							Server Ihres Browser-Anbieters (Google bei Chrome, Apple bei
+							Safari) gesendet. Wir haben keinen Zugriff auf diese Audiodaten.
+							Nur der transkribierte Text wird im Formular verwendet.
+						</p>
+						<p className="text-muted-foreground mt-2">
+							<strong>Hinweis:</strong> Sie sind verantwortlich für die
+							Richtigkeit der transkribierten Inhalte. Prüfen Sie den Text vor
+							dem Absenden.
+						</p>
+					</section>
+
+					<section>
+						<h2 className="text-xl font-semibold mb-3">
+							Lokale Datenspeicherung
+						</h2>
+						<p className="text-muted-foreground">
+							Folgende Daten werden lokal in Ihrem Browser gespeichert:
+						</p>
+						<ul className="text-muted-foreground space-y-1 list-disc list-inside mt-2">
+							<li>
+								<strong>Entwürfe (Auto-Save):</strong> Ihre Formulareingaben
+								werden automatisch zwischengespeichert und nach 24 Stunden oder
+								erfolgreicher Generierung gelöscht.
+							</li>
+							<li>
+								<strong>Brief-Verlauf:</strong> Generierte Briefe werden lokal
+								gespeichert, bis Sie sie manuell löschen.
+							</li>
+							<li>
+								<strong>Einstellungen:</strong> Theme, Sprache und andere
+								Präferenzen.
+							</li>
+						</ul>
+						<p className="text-muted-foreground mt-2">
+							Diese Daten verlassen Ihren Computer nicht. Sie können sie
+							jederzeit durch Löschen Ihrer Browserdaten entfernen.
+						</p>
+					</section>
+
+					<section>
+						<h2 className="text-xl font-semibold mb-3">E-Mail-Tracking</h2>
+						<p className="text-muted-foreground">
+							E-Mails, die über diesen Dienst initiiert werden, können ein
+							unsichtbares Tracking-Pixel enthalten, das erkennt, ob die E-Mail
+							geöffnet wurde. Dies dient ausschließlich der aggregierten
+							Statistik zur Kampagnenwirksamkeit.
+						</p>
+						<p className="text-muted-foreground mt-2">
+							<strong>Keine persönlichen Daten:</strong> Weder Ihr Name, Ihre
+							E-Mail-Adresse noch der Briefinhalt werden dabei erfasst.
+						</p>
+					</section>
+
+					<section>
+						<h2 className="text-xl font-semibold mb-3">
 							Haftungsausschluss für kostenlose Dienste
 						</h2>
 						<p className="text-muted-foreground">
