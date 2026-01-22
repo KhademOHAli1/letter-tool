@@ -167,33 +167,6 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		// 10b. Personal note is required (3 sentences, each with 4+ words)
-		const sentences = (personalNote || "")
-			.trim()
-			.split(/[.!?]+/)
-			.map((s) => s.trim())
-			.filter((s) => s.length > 0);
-
-		if (sentences.length < 3) {
-			return NextResponse.json(
-				{
-					error:
-						"Bitte schreibe mindestens 3 Sätze in deiner persönlichen Geschichte.",
-				},
-				{ status: 400 },
-			);
-		}
-
-		const shortSentence = sentences.find(
-			(s) => s.split(/\s+/).filter((w) => w.length > 0).length < 4,
-		);
-		if (shortSentence) {
-			return NextResponse.json(
-				{ error: "Jeder Satz sollte mindestens 4 Wörter haben." },
-				{ status: 400 },
-			);
-		}
-
 		// 11. Check for suspicious content (prompt injection attempts)
 		if (
 			detectSuspiciousContent(personalNote) ||

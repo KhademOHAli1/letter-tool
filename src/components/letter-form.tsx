@@ -40,7 +40,7 @@ const PARTY_COLORS: Record<string, string> = {
 	Fraktionslos: "bg-gray-500 text-white",
 };
 
-// Validate personal story: at least 3 sentences, each with 4+ words
+// Validate personal story: just check it's not empty
 function validatePersonalNote(
 	text: string,
 	t: (
@@ -55,32 +55,6 @@ function validatePersonalNote(
 	const trimmed = text.trim();
 	if (!trimmed)
 		return { valid: false, message: t("form", "step3.validation.empty") };
-
-	// Split by sentence-ending punctuation
-	const sentences = trimmed
-		.split(/[.!?]+/)
-		.map((s) => s.trim())
-		.filter((s) => s.length > 0);
-
-	if (sentences.length < 3) {
-		return {
-			valid: false,
-			message: t("form", "step3.validation.tooFewSentences", {
-				count: sentences.length,
-			}),
-		};
-	}
-
-	// Check each sentence has at least 4 words
-	for (let i = 0; i < sentences.length; i++) {
-		const words = sentences[i].split(/\s+/).filter((w) => w.length > 0);
-		if (words.length < 4) {
-			return {
-				valid: false,
-				message: t("form", "step3.validation.sentenceTooShort", { num: i + 1 }),
-			};
-		}
-	}
 
 	return { valid: true, message: "" };
 }

@@ -97,8 +97,8 @@ export const translations = {
 				en: "e.g. As a German-Iranian, I follow the news from Iran every day. I have friends and family there who are suffering under the situation. The human rights situation deeply concerns me and I want Germany to take a stronger stance.",
 			},
 			hint: {
-				de: "Mindestens 3 Sätze. Details machen deinen Brief authentisch: Konkrete Erlebnisse, Namen, Orte, Gefühle.",
-				en: "At least 3 sentences. Details make your letter authentic: specific experiences, names, places, feelings.",
+				de: "Details machen deinen Brief authentisch: Konkrete Erlebnisse, Namen, Orte, Gefühle.",
+				en: "Details make your letter authentic: specific experiences, names, places, feelings.",
 			},
 			languageHint: {
 				de: "Du kannst auf Deutsch, Englisch oder Farsi schreiben - wir übersetzen es für den Brief.",
@@ -108,14 +108,6 @@ export const translations = {
 				empty: {
 					de: "Bitte erzähle deine Geschichte",
 					en: "Please tell your story",
-				},
-				tooFewSentences: {
-					de: "Bitte schreibe mindestens 3 Sätze (aktuell: {count})",
-					en: "Please write at least 3 sentences (currently: {count})",
-				},
-				sentenceTooShort: {
-					de: "Satz {num} ist zu kurz (mindestens 4 Wörter pro Satz)",
-					en: "Sentence {num} is too short (at least 4 words per sentence)",
 				},
 			},
 		},
