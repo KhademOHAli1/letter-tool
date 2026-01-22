@@ -58,18 +58,16 @@ export function createServerSupabaseClient(): SupabaseClient {
 /**
  * Track a letter generation in the database.
  * Called after successful LLM generation.
- * Skipped in development mode to avoid polluting production data.
  */
 export async function trackLetterGeneration(
 	data: Omit<LetterGeneration, "id" | "created_at">,
 ): Promise<{ success: boolean; error?: string }> {
-	// Skip tracking in development mode
-	if (process.env.NODE_ENV === "development") {
-		console.log("[SUPABASE] Skipping tracking in dev mode");
-		return { success: true };
-	}
-
 	try {
+		// Check if Supabase is configured
+		if (!serverEnv.SUPABASE_URL || !serverEnv.SUPABASE_SERVICE_ROLE_KEY) {
+			console.warn("[SUPABASE] Skipping tracking - not configured");
+			return { success: true };
+		}
 		const supabase = createServerSupabaseClient();
 
 		const { error } = await supabase.from("letter_generations").insert({
@@ -83,10 +81,11 @@ export async function trackLetterGeneration(
 		});
 
 		if (error) {
-			console.error("[SUPABASE] Failed to track letter:", error.message);
+			console.error("[SUPABASE] Failed to track letter:", error.message, error);
 			return { success: false, error: error.message };
 		}
 
+		console.log("[SUPABASE] Letter tracked successfully for MdB:", data.mdb_name);
 		return { success: true };
 	} catch (err) {
 		console.error("[SUPABASE] Tracking error:", err);
