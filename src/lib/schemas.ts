@@ -18,29 +18,26 @@ export const letterInputSchema = z.object({
 
 	personalConnection: z
 		.string()
-		.min(
-			20,
-			"Bitte beschreibe deine persönliche Verbindung ausführlicher (mind. 20 Zeichen)",
-		)
-		.max(500, "Bitte kürze deine Beschreibung (max. 500 Zeichen)"),
+		.min(1, "Bitte teile deine persönliche Verbindung")
+		.max(2000, "Bitte kürze deine Beschreibung (max. 2000 Zeichen)"),
 
 	concreteDetail: z
 		.string()
-		.min(10, "Bitte nenne ein konkretes Detail (mind. 10 Zeichen)")
-		.max(300, "Bitte kürze das Detail (max. 300 Zeichen)"),
+		.max(500, "Bitte kürze das Detail (max. 500 Zeichen)")
+		.optional()
+		.or(z.literal("")),
 
 	communityConnection: z
 		.string()
-		.min(10, "Bitte beschreibe den Bezug zu 'uns' (mind. 10 Zeichen)")
-		.max(300, "Bitte kürze die Beschreibung (max. 300 Zeichen)"),
+		.max(500, "Bitte kürze die Beschreibung (max. 500 Zeichen)")
+		.optional()
+		.or(z.literal("")),
 
 	urgencyReason: z
 		.string()
-		.min(
-			10,
-			"Bitte beschreibe, warum jetzt Handeln nötig ist (mind. 10 Zeichen)",
-		)
-		.max(200, "Bitte kürze die Begründung (max. 200 Zeichen)"),
+		.max(300, "Bitte kürze die Begründung (max. 300 Zeichen)")
+		.optional()
+		.or(z.literal("")),
 
 	targetAudience: z.enum(
 		["friends", "colleagues", "community", "general-public"],

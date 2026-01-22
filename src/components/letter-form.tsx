@@ -1,14 +1,21 @@
 "use client";
 
-import { Check, ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
+import {
+	Check,
+	ChevronDown,
+	ChevronUp,
+	HelpCircle,
+	RotateCcw,
+} from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { VoiceInput } from "@/components/voice-input";
 import { FORDERUNGEN } from "@/lib/data/forderungen";
 import {
 	findMdBsByWahlkreis,
@@ -17,6 +24,11 @@ import {
 	type Wahlkreis,
 } from "@/lib/data/wahlkreise";
 import { useLanguage } from "@/lib/i18n/context";
+import {
+	clearFormDraft,
+	getFormDraft,
+	saveFormDraft,
+} from "@/lib/letter-cache";
 
 // Partei-Farben für Badge
 const PARTY_COLORS: Record<string, string> = {
@@ -130,6 +142,92 @@ export function LetterForm() {
 	const [consentGiven, setConsentGiven] = useState(false);
 	const [mdbSelectorOpen, setMdbSelectorOpen] = useState(false);
 	const [isReusingTemplate, setIsReusingTemplate] = useState(false);
+	const [hasDraft, setHasDraft] = useState(false);
+	const [draftRestored, setDraftRestored] = useState(false);
+
+	// Auto-save draft debounced
+	const saveTimeout = useRef<NodeJS.Timeout | null>(null);
+
+	// Auto-save form state (debounced)
+	const autoSaveDraft = useCallback(() => {
+		if (saveTimeout.current) {
+			clearTimeout(saveTimeout.current);
+		}
+		saveTimeout.current = setTimeout(() => {
+			// Only save if there's meaningful content
+			if (
+				name.trim() ||
+				plz.trim() ||
+				personalNote.trim() ||
+				selectedForderungen.length > 0
+			) {
+				saveFormDraft({
+					name,
+					plz,
+					personalNote,
+					selectedForderungen,
+					selectedMdBId: selectedMdB?.id,
+				});
+			}
+		}, 1000); // Save after 1 second of inactivity
+	}, [name, plz, personalNote, selectedForderungen, selectedMdB]);
+
+	// Trigger auto-save on form changes
+	useEffect(() => {
+		autoSaveDraft();
+		return () => {
+			if (saveTimeout.current) {
+				clearTimeout(saveTimeout.current);
+			}
+		};
+	}, [autoSaveDraft]);
+
+	// Check for saved draft on mount
+	useEffect(() => {
+		const draft = getFormDraft();
+		if (draft && !isReusingTemplate) {
+			setHasDraft(true);
+		}
+	}, [isReusingTemplate]);
+
+	// Restore draft handler
+	const restoreDraft = useCallback(() => {
+		const draft = getFormDraft();
+		if (!draft) return;
+
+		setName(draft.name);
+		setPlz(draft.plz);
+		setPersonalNote(draft.personalNote);
+		setSelectedForderungen(draft.selectedForderungen);
+
+		// Trigger PLZ lookup
+		if (draft.plz.length === 5) {
+			const found = findWahlkreisByPlz(draft.plz);
+			if (found) {
+				setWahlkreis(found);
+				const foundMdbs = findMdBsByWahlkreis(found.id);
+				setMdbs(foundMdbs);
+
+				// Restore selected MdB if possible
+				if (draft.selectedMdBId) {
+					const mdb = foundMdbs.find((m) => m.id === draft.selectedMdBId);
+					if (mdb) {
+						setSelectedMdB(mdb);
+					}
+				}
+			}
+		}
+
+		setHasDraft(false);
+		setDraftRestored(true);
+		setTimeout(() => setDraftRestored(false), 3000);
+	}, []);
+
+	// Dismiss draft handler
+	const dismissDraft = useCallback(() => {
+		clearFormDraft();
+		setHasDraft(false);
+	}, []);
 
 	// Check for reuse template on mount
 	useEffect(() => {
@@ -245,6 +343,9 @@ export function LetterForm() {
 			}),
 		);
 
+		// Clear draft on successful submission
+		clearFormDraft();
+
 		router.push("/editor");
 	}
 
@@ -277,6 +378,52 @@ export function LetterForm() {
 				</h2>
 				<p className="text-sm text-muted-foreground">{t("home", "subtitle")}</p>
 			</div>
+
+			{/* Draft recovery banner */}
+			{hasDraft && !isReusingTemplate && (
+				<div className="px-4 py-3 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 flex items-center justify-between gap-3">
+					<div className="flex items-center gap-2 text-sm text-amber-800 dark:text-amber-200">
+						<RotateCcw className="h-4 w-4 shrink-0" />
+						<span>
+							{language === "de"
+								? "Du hast einen unvollständigen Entwurf"
+								: "You have an unfinished draft"}
+						</span>
+					</div>
+					<div className="flex items-center gap-2">
+						<Button
+							type="button"
+							variant="ghost"
+							size="sm"
+							onClick={dismissDraft}
+							className="text-amber-700 dark:text-amber-300 hover:text-amber-900 dark:hover:text-amber-100"
+						>
+							{language === "de" ? "Verwerfen" : "Dismiss"}
+						</Button>
+						<Button
+							type="button"
+							variant="secondary"
+							size="sm"
+							onClick={restoreDraft}
+							className="bg-amber-200 dark:bg-amber-800 hover:bg-amber-300 dark:hover:bg-amber-700"
+						>
+							{language === "de" ? "Wiederherstellen" : "Restore"}
+						</Button>
+					</div>
+				</div>
+			)}
+
+			{/* Draft restored confirmation */}
+			{draftRestored && (
+				<div className="px-3 py-2.5 rounded-lg bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 text-sm text-green-700 dark:text-green-300 flex items-center gap-2">
+					<Check className="h-4 w-4 shrink-0" />
+					<span>
+						{language === "de"
+							? "Entwurf wiederhergestellt!"
+							: "Draft restored!"}
+					</span>
+				</div>
+			)}
 
 			{/* Template reuse notice */}
 			{isReusingTemplate && (
@@ -539,14 +686,26 @@ export function LetterForm() {
 					<p className="text-sm text-muted-foreground">
 						{t("form", "step3.languageHint")}
 					</p>
-					<Textarea
-						id="story"
-						placeholder={t("form", "step3.placeholder")}
-						className="min-h-30 resize-none"
-						value={personalNote}
-						onChange={(e) => setPersonalNote(e.target.value)}
-						required
-					/>
+
+					{/* Textarea with subtle voice input icon */}
+					<div className="relative">
+						<Textarea
+							id="story"
+							placeholder={t("form", "step3.placeholder")}
+							className="min-h-30 resize-none pr-10"
+							value={personalNote}
+							onChange={(e) => setPersonalNote(e.target.value)}
+							required
+						/>
+						{/* Voice input - subtle icon in corner */}
+						<div className="absolute top-2 right-2 flex items-center gap-1">
+							<VoiceInput
+								onTranscript={setPersonalNote}
+								appendMode={true}
+								currentValue={personalNote}
+							/>
+						</div>
+					</div>
 					{personalNote.length > 0 &&
 						!validatePersonalNote(personalNote, t).valid && (
 							<p className="text-xs text-destructive">

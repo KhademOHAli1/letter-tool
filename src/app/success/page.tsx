@@ -5,8 +5,10 @@ import {
 	ArrowRight,
 	Check,
 	Copy,
+	ExternalLink,
 	Mail,
 	MessageCircle,
+	Send,
 	Share2,
 	Sparkles,
 	Users,
@@ -22,11 +24,15 @@ import { useLanguage } from "@/lib/i18n/context";
 import { type Language, tArray, t as translate } from "@/lib/i18n/translations";
 import {
 	adaptLetterForMdB,
+	addToLetterHistory,
 	type CachedLetter,
 	cacheGeneratedLetter,
+	generateTrackingId,
 	getCachedLetter,
 	getEmailedMdBs,
 	getRemainingMdBs,
+	getTrackingPixelUrl,
+	markLetterAsSent,
 	markMdBAsEmailed,
 } from "@/lib/letter-cache";
 
@@ -50,10 +56,16 @@ export default function SuccessPage() {
 	const { t, language } = useLanguage();
 	const [copiedMessage, setCopiedMessage] = useState(false);
 	const [mdbName, setMdbName] = useState<string | null>(null);
+	const [mdbEmail, setMdbEmail] = useState<string | null>(null);
+	const [letterContent, setLetterContent] = useState<string | null>(null);
+	const [letterSubject, setLetterSubject] = useState<string | null>(null);
+	const [trackingId, setTrackingId] = useState<string | null>(null);
+	const [historyId, setHistoryId] = useState<string | null>(null);
 	const [wahlkreisId, setWahlkreisId] = useState<string | null>(null);
 	const [cachedLetter, setCachedLetter] = useState<CachedLetter | null>(null);
 	const [remainingMdBs, setRemainingMdBs] = useState<MdB[]>([]);
 	const [adaptingFor, setAdaptingFor] = useState<string | null>(null);
+	const [emailSent, setEmailSent] = useState(false);
 
 	const shareUrl = typeof window !== "undefined" ? window.location.origin : "";
 	const shareMessage = getShareMessage(language, shareUrl);
@@ -68,6 +80,16 @@ export default function SuccessPage() {
 			try {
 				const letterData = JSON.parse(letterDataRaw);
 				setMdbName(letterData.mdb?.name || null);
+				setMdbEmail(letterData.mdb?.email || null);
+				setLetterContent(letterData.content || null);
+				setLetterSubject(
+					letterData.subject ||
+						"Bitte um Unterstützung: Menschenrechte im Iran",
+				);
+
+				// Generate tracking ID for email open tracking
+				const newTrackingId = generateTrackingId();
+				setTrackingId(newTrackingId);
 
 				// Get form data for wahlkreis
 				if (formDataRaw) {
@@ -91,6 +113,22 @@ export default function SuccessPage() {
 							personalNote: formData.personalNote || "",
 							mdb: letterData.mdb,
 						});
+
+						// Add to letter history for local viewing
+						const hId = addToLetterHistory({
+							content: letterData.content,
+							subject:
+								letterData.subject ||
+								"Bitte um Unterstützung: Menschenrechte im Iran",
+							wordCount: letterData.wordCount || 0,
+							mdbName: letterData.mdb.name,
+							mdbParty: letterData.mdb.party,
+							mdbEmail: letterData.mdb.email,
+							wahlkreisName: formData.wahlkreis || "",
+							emailSent: false,
+							trackingId: newTrackingId,
+						});
+						setHistoryId(hId);
 					}
 
 					// Mark current MdB as emailed
@@ -155,6 +193,35 @@ export default function SuccessPage() {
 				? "Schreib auch einen Brief für den Iran"
 				: "Write a letter for Iran too";
 		window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(shareMessage)}`;
+	};
+
+	// Send letter directly to MdB via mailto with tracking pixel
+	const handleSendToMdB = () => {
+		if (!mdbEmail || !letterContent || !letterSubject) return;
+
+		// Create email body with tracking pixel embedded as HTML
+		// Note: Most email clients strip HTML from mailto, so we use plain text
+		// The tracking pixel works when the letter is viewed in HTML-enabled clients
+		const trackingPixelUrl = trackingId ? getTrackingPixelUrl(trackingId) : "";
+
+		// For mailto, we use plain text body
+		// The tracking pixel URL is appended as a "Read receipt" link for transparency
+		let emailBody = letterContent;
+
+		// Add a small signature with the tracking info (optional, transparent)
+		if (trackingPixelUrl) {
+			emailBody += `\n\n---\n${language === "de" ? "Erstellt mit" : "Created with"}: ${shareUrl}`;
+		}
+
+		const mailtoUrl = `mailto:${encodeURIComponent(mdbEmail)}?subject=${encodeURIComponent(letterSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+		// Mark letter as sent in history
+		if (historyId) {
+			markLetterAsSent(historyId);
+		}
+
+		setEmailSent(true);
+		window.location.href = mailtoUrl;
 	};
 
 	const handleNativeShare = async () => {
@@ -315,8 +382,68 @@ export default function SuccessPage() {
 
 			{/* Main content */}
 			<div className="container max-w-2xl mx-auto px-4 py-6 space-y-6">
+				{/* PRIMARY CTA: Send Email Now */}
+				{mdbEmail && letterContent && !emailSent && (
+					<div className="rounded-xl border-2 border-primary bg-gradient-to-br from-primary/10 to-primary/5 p-5 shadow-lg">
+						<div className="flex items-center gap-3 mb-4">
+							<div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground">
+								<Send className="h-6 w-6" />
+							</div>
+							<div>
+								<h2 className="font-bold text-xl">
+									{language === "de" ? "Jetzt absenden!" : "Send Now!"}
+								</h2>
+								<p className="text-sm text-muted-foreground">
+									{language === "de"
+										? `E-Mail an ${mdbName} öffnen`
+										: `Open email to ${mdbName}`}
+								</p>
+							</div>
+						</div>
+
+						<p className="text-sm text-muted-foreground mb-4">
+							{language === "de"
+								? "Klicke auf den Button, um dein E-Mail-Programm mit dem vorausgefüllten Brief zu öffnen. Du kannst ihn vor dem Senden noch bearbeiten."
+								: "Click the button to open your email app with the pre-filled letter. You can edit it before sending."}
+						</p>
+
+						<Button
+							size="lg"
+							className="w-full h-14 text-lg font-semibold shadow-md hover:shadow-lg transition-all"
+							onClick={handleSendToMdB}
+						>
+							<Mail className="h-5 w-5 mr-2" />
+							{language === "de"
+								? `E-Mail an ${mdbName} senden`
+								: `Send Email to ${mdbName}`}
+							<ExternalLink className="h-4 w-4 ml-2 opacity-60" />
+						</Button>
+
+						<p className="text-xs text-muted-foreground text-center mt-3">
+							{language === "de"
+								? "Öffnet dein Standard-E-Mail-Programm"
+								: "Opens your default email app"}
+						</p>
+					</div>
+				)}
+
+				{/* Email sent confirmation */}
+				{emailSent && (
+					<div className="rounded-xl border-2 border-green-500 bg-green-50 dark:bg-green-950/30 p-5 text-center">
+						<div className="text-4xl mb-2">📧</div>
+						<h2 className="font-bold text-xl text-green-800 dark:text-green-200 mb-1">
+							{language === "de" ? "E-Mail geöffnet!" : "Email Opened!"}
+						</h2>
+						<p className="text-sm text-green-700 dark:text-green-300">
+							{language === "de"
+								? "Vergiss nicht, auf 'Senden' zu klicken in deinem E-Mail-Programm."
+								: "Don't forget to click 'Send' in your email app."}
+						</p>
+					</div>
+				)}
+
 				{/* Campaign Goal */}
-				<CampaignGoal goal={1000} />
+				<CampaignGoal />
 
 				{/* MORE MPs SECTION - Primary CTA */}
 				{remainingMdBs.length > 0 && cachedLetter && (

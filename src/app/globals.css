@@ -283,29 +283,22 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, label {
  * deeply meaningful to those who notice
  */
 
-/* Ultra-subtle tri-color header gradient */
+/* Clean Premium Gradient - Elegant simplicity */
 .heritage-gradient {
   position: relative;
-  overflow: hidden;
-}
-
-.heritage-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.04;
   background: linear-gradient(
     180deg,
-    oklch(0.55 0.16 152) 0%,      /* Green - top */
-    transparent 20%,
-    transparent 80%,
-    oklch(0.55 0.22 27) 100%      /* Red - bottom */
+    oklch(0.99 0.005 90) 0%,
+    oklch(0.98 0.008 90) 100%
   );
-  pointer-events: none;
 }
 
-.dark .heritage-gradient::before {
-  opacity: 0.06;
+.dark .heritage-gradient {
+  background: linear-gradient(
+    180deg,
+    oklch(0.16 0.015 250) 0%,
+    oklch(0.14 0.012 250) 100%
+  );
 }
 
 /* Subtle gold shimmer for primary buttons on hover */

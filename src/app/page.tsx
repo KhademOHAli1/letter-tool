@@ -5,6 +5,7 @@ import { CampaignGoal } from "@/components/campaign-goal";
 import { FooterSettings } from "@/components/footer-settings";
 import { ImpactStats } from "@/components/impact-stats";
 import { LetterForm } from "@/components/letter-form";
+import { LetterHistory } from "@/components/letter-history";
 import { useLanguage } from "@/lib/i18n/context";
 
 export default function Home() {
@@ -57,7 +58,12 @@ export default function Home() {
 
 			{/* Campaign Goal */}
 			<section className="container mx-auto max-w-2xl px-4 pt-8">
-				<CampaignGoal goal={1000} />
+				<CampaignGoal />
+			</section>
+
+			{/* Letter History - show if user has previous letters */}
+			<section className="container mx-auto max-w-2xl px-4 pt-6">
+				<LetterHistory />
 			</section>
 
 			{/* Main Form */}

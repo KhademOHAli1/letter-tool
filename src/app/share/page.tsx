@@ -334,7 +334,7 @@ ${shareUrl}`;
 			{/* Main content */}
 			<div className="container max-w-2xl mx-auto px-4 py-8 space-y-8">
 				{/* Campaign Goal */}
-				<CampaignGoal goal={1000} />
+				<CampaignGoal />
 
 				{/* Share section */}
 				<div className="rounded-xl border border-border bg-card p-6 shadow-sm">
