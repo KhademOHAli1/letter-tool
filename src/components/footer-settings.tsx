@@ -1,6 +1,6 @@
 "use client";
 
-import { Globe, Moon, Sun } from "lucide-react";
+import { Globe, Moon, Sun, Github, Instagram } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/i18n/context";
 
@@ -118,6 +118,29 @@ export function FooterSettings() {
 							: "Dark"}
 				</span>
 			</button>
+
+			{/* Social Links - subtle */}
+			<span className="text-border/50">·</span>
+			<div className="flex items-center gap-3">
+				<a
+					href="https://github.com/KhademOHAli1/letter-tool"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors"
+					aria-label="GitHub"
+				>
+					<Github className="h-3.5 w-3.5" />
+				</a>
+				<a
+					href="https://instagram.com/khademohali"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors"
+					aria-label="Instagram"
+				>
+					<Instagram className="h-3.5 w-3.5" />
+				</a>
+			</div>
 		</div>
 	);
 }
