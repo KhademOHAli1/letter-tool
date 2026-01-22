@@ -1,5 +1,8 @@
 # Letter-Tools
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/KhademOHAli1/letter-tool)
+
 A letter-writing tool that uses LLM APIs to generate personal advocacy letters for Iran solidarity, using the Public Narrative framework (Self, Us, Now).
 
 ## Tech Stack
@@ -82,3 +85,21 @@ Configured for `fra1` (Frankfurt) for lowest latency to German users.
 - **Wahlkreise**: Bundeswahlleiter (299 districts)
 - **PLZ Mapping**: OpenStreetMap + ArcGIS geodata (8,362 PLZs)
 - **MdBs**: Bundestag Open Data API (477 MdBs, without AfD)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+Ali Khademolhosseini - hi@khademohali.me

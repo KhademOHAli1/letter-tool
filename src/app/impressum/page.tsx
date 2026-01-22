@@ -26,58 +26,28 @@ export default function ImpressumPage() {
 
 			<main className="container mx-auto max-w-3xl px-4 py-10">
 				<div className="prose prose-neutral dark:prose-invert max-w-none space-y-8">
-					{/* WICHTIG: Ersetze die Platzhalter mit deinen echten Daten! */}
 					<section>
-						<h2 className="text-xl font-semibold mb-3">Anbieter</h2>
-						<address className="not-italic text-muted-foreground leading-relaxed">
-							{/* TODO: Echte Daten eintragen */}
-							<p className="font-medium text-foreground">
-								[Vorname Nachname / Vereinsname]
-							</p>
-							<p>[Straße und Hausnummer]</p>
-							<p>[PLZ Ort]</p>
-							<p>Deutschland</p>
-						</address>
-					</section>
-
-					<section>
-						<h2 className="text-xl font-semibold mb-3">Kontakt</h2>
-						<div className="text-muted-foreground space-y-1">
-							{/* TODO: Echte Kontaktdaten eintragen */}
+						<h2 className="text-xl font-semibold mb-3">Anbieter & Kontakt</h2>
+						<div className="text-muted-foreground space-y-2">
+							<p className="font-medium text-foreground">Ali Khademolhosseini</p>
 							<p>
 								E-Mail:{" "}
 								<a
-									href="mailto:kontakt@example.com"
+									href="mailto:hi@khademohali.me"
 									className="text-primary hover:underline"
 								>
-									[deine-email@example.com]
+									hi@khademohali.me
 								</a>
 							</p>
-							{/* Optional: Telefon - nur wenn gewünscht */}
-							{/* <p>Telefon: [Telefonnummer]</p> */}
 						</div>
 					</section>
-
-					{/* Falls Verein oder GmbH: */}
-					{/*
-					<section>
-						<h2 className="text-xl font-semibold mb-3">Registereintrag</h2>
-						<div className="text-muted-foreground space-y-1">
-							<p>Eingetragen im Vereinsregister / Handelsregister</p>
-							<p>Registergericht: Amtsgericht [Stadt]</p>
-							<p>Registernummer: VR [Nummer] / HRB [Nummer]</p>
-						</div>
-					</section>
-					*/}
 
 					<section>
 						<h2 className="text-xl font-semibold mb-3">
 							Verantwortlich für den Inhalt gemäß § 18 Abs. 2 MStV
 						</h2>
 						<div className="text-muted-foreground">
-							{/* TODO: Echte Daten eintragen - kann dieselbe Person wie oben sein */}
-							<p className="font-medium text-foreground">[Vorname Nachname]</p>
-							<p>[Adresse wie oben]</p>
+							<p className="font-medium text-foreground">Ali Khademolhosseini</p>
 						</div>
 					</section>
 

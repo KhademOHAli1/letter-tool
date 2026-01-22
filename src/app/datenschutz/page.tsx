@@ -34,16 +34,14 @@ export default function DatenschutzPage() {
 							ist:
 						</p>
 						<address className="not-italic text-muted-foreground mt-2">
-							{/* TODO: Echte Daten aus Impressum übernehmen */}
-							<p>[Vorname Nachname / Vereinsname]</p>
-							<p>[Adresse]</p>
+							<p className="font-medium text-foreground">Ali Khademolhosseini</p>
 							<p>
 								E-Mail:{" "}
 								<a
-									href="mailto:kontakt@example.com"
+									href="mailto:hi@khademohali.me"
 									className="text-primary hover:underline"
 								>
-									[deine-email@example.com]
+									hi@khademohali.me
 								</a>
 							</p>
 						</address>
