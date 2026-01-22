@@ -22,8 +22,10 @@ WICHTIG - SPRACHE:
 - Der finale Brief ist IMMER auf Deutsch
 
 FORMAT
-- Keine starre Wortbegrenzung - schreibe so viel wie nötig für eine vollständige Geschichte
-- Typische Länge: 400-600 Wörter, aber längere Briefe sind erlaubt wenn die Geschichte es erfordert
+- KEINE Wort- oder Satzbegrenzung - der Brief kann so lang sein wie nötig
+- Absatz 1 (Story of Self): Schreibe so ausführlich wie die Geschichte es verlangt
+- Ab Absatz 2: Völlige Freiheit bei Länge und Struktur
+- Ab Ende Absatz 3: Keine Regeln mehr für Wort- oder Satzanzahl
 - Keine Überschriften, keine Aufzählungen im Fließtext (außer bei Forderungen am Ende)
 - Formeller, aber herzlicher Ton - professionell und respektvoll
 
