@@ -8,6 +8,7 @@ import {
 	useEffect,
 	useState,
 } from "react";
+import { COOKIE_LANGUAGE, getCookie, setCookie } from "@/lib/cookies";
 import {
 	type Language,
 	t as translate,
@@ -32,12 +33,21 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 	const [language, setLanguageState] = useState<Language>("de");
 	const [mounted, setMounted] = useState(false);
 
-	// Load language preference on mount
+	// Load language preference on mount (check cookie first, then localStorage)
 	useEffect(() => {
 		setMounted(true);
+		// Check cookie first
+		const cookieLang = getCookie(COOKIE_LANGUAGE) as Language | null;
+		if (cookieLang && (cookieLang === "de" || cookieLang === "en")) {
+			setLanguageState(cookieLang);
+			return;
+		}
+		// Fall back to localStorage
 		const stored = localStorage.getItem(STORAGE_KEY) as Language | null;
 		if (stored && (stored === "de" || stored === "en")) {
 			setLanguageState(stored);
+			// Migrate to cookie
+			void setCookie(COOKIE_LANGUAGE, stored);
 		} else {
 			// Detect system/browser language: German if system is German, else English
 			const browserLang = navigator.language.toLowerCase();
@@ -53,6 +63,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 	const setLanguage = useCallback((lang: Language) => {
 		setLanguageState(lang);
 		localStorage.setItem(STORAGE_KEY, lang);
+		void setCookie(COOKIE_LANGUAGE, lang);
 	}, []);
 
 	// Translation helper bound to current language

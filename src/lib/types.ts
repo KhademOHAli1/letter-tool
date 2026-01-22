@@ -44,7 +44,7 @@ export type LetterTone = "calm-factual" | "emotional-serious";
 
 export const TARGET_AUDIENCE_LABELS: Record<TargetAudience, string> = {
 	friends: "Freunde",
-	colleagues: "Kolleg:innen",
+	colleagues: "Kolleg*innen",
 	community: "Community",
 	"general-public": "Breite Öffentlichkeit",
 };

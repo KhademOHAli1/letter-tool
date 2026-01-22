@@ -34,7 +34,9 @@ export default function DatenschutzPage() {
 							ist:
 						</p>
 						<address className="not-italic text-muted-foreground mt-2">
-							<p className="font-medium text-foreground">Ali Khademolhosseini</p>
+							<p className="font-medium text-foreground">
+								Ali Khademolhosseini
+							</p>
 							<p>
 								E-Mail:{" "}
 								<a
@@ -56,18 +58,65 @@ export default function DatenschutzPage() {
 							Ihren Bundestagsabgeordneten zu verfassen. Dabei werden folgende
 							Daten verarbeitet:
 						</p>
-						<ul className="list-disc list-inside text-muted-foreground mt-3 space-y-2">
+
+						<h3 className="text-lg font-medium mt-4 mb-2">
+							Daten, die Sie eingeben (Formulardaten)
+						</h3>
+						<ul className="list-disc list-inside text-muted-foreground space-y-1">
 							<li>
-								<strong>Eingabedaten:</strong> Name, Postleitzahl, persönliche
-								Notizen
+								<strong>Ihr Name</strong> - für die Briefanrede
 							</li>
 							<li>
-								<strong>Technische Daten:</strong> IP-Adresse, Browser-Typ,
-								Zugriffszeit
+								<strong>Ihre Postleitzahl</strong> - zur Ermittlung Ihres
+								Wahlkreises und Abgeordneten
 							</li>
 							<li>
-								<strong>Nutzungsdaten:</strong> Anonymisierte Analysedaten
-								(Vercel Analytics)
+								<strong>Ihre persönliche Geschichte</strong> - der emotionale
+								Kern Ihres Briefes
+							</li>
+							<li>
+								<strong>Ausgewählte Forderungen</strong> - welche Themen Sie
+								ansprechen möchten
+							</li>
+						</ul>
+
+						<h3 className="text-lg font-medium mt-4 mb-2">
+							Technische Daten (automatisch erfasst)
+						</h3>
+						<ul className="list-disc list-inside text-muted-foreground space-y-1">
+							<li>
+								<strong>IP-Adresse</strong> - für Rate-Limiting und
+								Missbrauchsschutz (gehasht)
+							</li>
+							<li>
+								<strong>Browser-Fingerprint</strong> - zur Bot-Erkennung
+								(gehasht, anonymisiert)
+							</li>
+							<li>
+								<strong>User-Agent</strong> - zur Bot-Erkennung
+							</li>
+							<li>
+								<strong>Zeitstempel</strong> - wann Anfragen gestellt wurden
+							</li>
+							<li>
+								<strong>Formular-Timing</strong> - wie schnell das Formular
+								ausgefüllt wurde (Bot-Schutz)
+							</li>
+						</ul>
+
+						<h3 className="text-lg font-medium mt-4 mb-2">
+							Daten, die NICHT gespeichert werden
+						</h3>
+						<ul className="list-disc list-inside text-muted-foreground space-y-1">
+							<li>Ihr Name wird nicht dauerhaft gespeichert</li>
+							<li>Ihre persönliche Geschichte wird nicht gespeichert</li>
+							<li>
+								Der generierte Brieftext wird nicht auf unseren Servern
+								gespeichert
+							</li>
+							<li>
+								Ihre PLZ wird nicht gespeichert (nur der daraus ermittelte
+								Wahlkreis-Name)
 							</li>
 						</ul>
 					</section>
@@ -250,7 +299,59 @@ export default function DatenschutzPage() {
 
 					<section>
 						<h2 className="text-xl font-semibold mb-3">
-							8. Keine dauerhafte Speicherung Ihrer Briefe
+							8. Lokale Speicherung und Cookies
+						</h2>
+						<p className="text-muted-foreground">
+							Diese Website nutzt lokale Speichertechnologien in Ihrem Browser:
+						</p>
+
+						<h3 className="text-lg font-medium mt-4 mb-2">
+							Funktionale Cookies
+						</h3>
+						<p className="text-muted-foreground">
+							Wir setzen ausschließlich technisch notwendige Cookies, die keine
+							Einwilligung erfordern (ePrivacy-Richtlinie Art. 5 Abs. 3):
+						</p>
+						<ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+							<li>
+								<strong>theme:</strong> Speichert Ihre Präferenz für
+								Hell-/Dunkelmodus (Gültigkeit: 1 Jahr)
+							</li>
+							<li>
+								<strong>lang:</strong> Speichert Ihre Spracheinstellung DE/EN
+								(Gültigkeit: 1 Jahr)
+							</li>
+						</ul>
+						<p className="text-muted-foreground mt-2">
+							Diese Cookies enthalten keine persönlichen Daten und dienen
+							ausschließlich der Verbesserung Ihrer Nutzererfahrung.
+						</p>
+
+						<h3 className="text-lg font-medium mt-4 mb-2">LocalStorage</h3>
+						<ul className="list-disc list-inside text-muted-foreground space-y-2">
+							<li>
+								<strong>Generierter Brief:</strong> Wird temporär in Ihrem
+								Browser gespeichert, damit Sie ihn kopieren oder per E-Mail
+								versenden können. Diese Daten verlassen Ihren Computer nicht.
+							</li>
+							<li>
+								<strong>Präferenzen:</strong> Theme und Sprache werden
+								zusätzlich im LocalStorage als Fallback gespeichert.
+							</li>
+						</ul>
+
+						<p className="text-muted-foreground mt-3">
+							<strong>Rechtsgrundlage:</strong> Diese Speicherung ist technisch
+							notwendig für die Funktionalität (Art. 6 Abs. 1 lit. f DSGVO) und
+							erfordert keine Einwilligung gemäß ePrivacy-Richtlinie Art. 5 Abs.
+							3. Sie können diese Daten jederzeit durch Löschen Ihrer
+							Browserdaten entfernen.
+						</p>
+					</section>
+
+					<section>
+						<h2 className="text-xl font-semibold mb-3">
+							9. Keine dauerhafte Speicherung Ihrer Briefe
 						</h2>
 						<p className="text-muted-foreground">
 							<strong className="text-foreground">
@@ -268,7 +369,44 @@ export default function DatenschutzPage() {
 					</section>
 
 					<section>
-						<h2 className="text-xl font-semibold mb-3">9. Ihre Rechte</h2>
+						<h2 className="text-xl font-semibold mb-3">
+							10. Datenquellen für MdB-Informationen
+						</h2>
+						<p className="text-muted-foreground">
+							Die Kontaktdaten der Bundestagsabgeordneten (MdBs) stammen aus
+							öffentlich zugänglichen Quellen:
+						</p>
+						<ul className="list-disc list-inside text-muted-foreground mt-3 space-y-1">
+							<li>
+								<strong>Bundestag Open Data:</strong> Namen,
+								Parteizugehörigkeit, E-Mail-Adressen der MdBs (
+								<a
+									href="https://www.bundestag.de/services/opendata"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-primary hover:underline"
+								>
+									bundestag.de/opendata
+								</a>
+								)
+							</li>
+							<li>
+								<strong>Bundeswahlleiter:</strong> Wahlkreise und deren
+								geografische Zuordnung
+							</li>
+							<li>
+								<strong>OpenStreetMap/ArcGIS:</strong> PLZ-zu-Wahlkreis-Mapping
+							</li>
+						</ul>
+						<p className="text-muted-foreground mt-3">
+							Diese Daten sind öffentlich und unterliegen keiner besonderen
+							Vertraulichkeit. Die Verarbeitung erfolgt zur Bereitstellung des
+							Dienstes (Art. 6 Abs. 1 lit. f DSGVO).
+						</p>
+					</section>
+
+					<section>
+						<h2 className="text-xl font-semibold mb-3">11. Ihre Rechte</h2>
 						<p className="text-muted-foreground">
 							Sie haben gemäß DSGVO folgende Rechte:
 						</p>
@@ -309,7 +447,7 @@ export default function DatenschutzPage() {
 
 					<section>
 						<h2 className="text-xl font-semibold mb-3">
-							10. Beschwerderecht bei der Aufsichtsbehörde
+							12. Beschwerderecht bei der Aufsichtsbehörde
 						</h2>
 						<p className="text-muted-foreground">
 							Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde
@@ -331,7 +469,44 @@ export default function DatenschutzPage() {
 
 					<section>
 						<h2 className="text-xl font-semibold mb-3">
-							11. Aktualität dieser Datenschutzerklärung
+							13. Technische Sicherheitsmaßnahmen
+						</h2>
+						<p className="text-muted-foreground">
+							Zum Schutz Ihrer Daten setzen wir folgende technische Maßnahmen
+							ein (Art. 32 DSGVO):
+						</p>
+						<ul className="list-disc list-inside text-muted-foreground mt-3 space-y-1">
+							<li>
+								<strong>HTTPS/TLS:</strong> Alle Datenübertragungen sind
+								verschlüsselt
+							</li>
+							<li>
+								<strong>HSTS:</strong> Erzwingt sichere Verbindungen
+							</li>
+							<li>
+								<strong>CSP:</strong> Content Security Policy zum Schutz vor XSS
+							</li>
+							<li>
+								<strong>Input-Sanitization:</strong> Alle Eingaben werden
+								bereinigt
+							</li>
+							<li>
+								<strong>Rate-Limiting:</strong> Schutz vor Überlastungsangriffen
+							</li>
+							<li>
+								<strong>Bot-Detection:</strong> Schutz vor automatisierten
+								Angriffen
+							</li>
+							<li>
+								<strong>IP-Hashing:</strong> IP-Adressen werden nur gehasht
+								verarbeitet
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2 className="text-xl font-semibold mb-3">
+							14. Aktualität dieser Datenschutzerklärung
 						</h2>
 						<p className="text-muted-foreground">Stand: Januar 2026</p>
 						<p className="text-muted-foreground mt-2">

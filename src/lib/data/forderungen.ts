@@ -149,7 +149,7 @@ export const FORDERUNGEN: Forderung[] = [
 			en: "The German government must fund Starlink terminals and VPN infrastructure for the Iranian population. Communication is the lifeline of the resistance.",
 		},
 		briefText: {
-			de: "Setzen Sie sich dafür ein, dass Deutschland Starlink-Terminals und sichere Kommunikationskanäle für Iraner:innen finanziert. Das Regime kämpft mit Blackouts - wir müssen dem Volk Augen und Stimme geben.",
+			de: "Setzen Sie sich dafür ein, dass Deutschland Starlink-Terminals und sichere Kommunikationskanäle für Iraner*innen finanziert. Das Regime kämpft mit Blackouts - wir müssen dem Volk Augen und Stimme geben.",
 			en: "Advocate for Germany to fund Starlink terminals and secure communication channels for Iranians. The regime fights with blackouts - we must give the people eyes and a voice.",
 		},
 		zustaendigkeit: "AA/BMZ",

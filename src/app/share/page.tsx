@@ -52,7 +52,7 @@ export default function SharePage() {
 	const [isOffline, setIsOffline] = useState(false);
 
 	const shareUrl = typeof window !== "undefined" ? window.location.origin : "";
-	const shareMessage = `Ich habe gerade einen Brief an meine:n Bundestagsabgeordnete:n geschrieben - für Menschenrechte im Iran.
+	const shareMessage = `Ich habe gerade einen Brief an meine*n Bundestagsabgeordnete*n geschrieben - für Menschenrechte im Iran.
 
 Warum das wichtig ist: Abgeordnete zählen Briefe aus ihrem Wahlkreis. Persönliche Nachrichten haben echten Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird unsere Stimme.
 
@@ -302,7 +302,7 @@ ${shareUrl}`;
 						</h1>
 						<p className="text-lg text-muted-foreground max-w-md mx-auto">
 							{letterReady
-								? "Lade deine Freund:innen ein, auch ihre Stimme zu erheben."
+								? "Lade deine Freund*innen ein, auch ihre Stimme zu erheben."
 								: error
 									? error
 									: PROGRESS_STEPS[progressStep]}

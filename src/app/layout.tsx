@@ -28,6 +28,10 @@ export const metadata: Metadata = {
 		"Solidarität",
 		"Diaspora",
 	],
+	icons: {
+		icon: "/favicon.svg",
+		apple: "/favicon.svg",
+	},
 	openGraph: {
 		title: "Stimme für Iran | Schreib deinem MdB",
 		description:

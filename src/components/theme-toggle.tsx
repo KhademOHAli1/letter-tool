@@ -3,6 +3,7 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { COOKIE_THEME, getCookie, setCookie } from "@/lib/cookies";
 
 type Theme = "light" | "dark" | "system";
 
@@ -12,9 +13,18 @@ export function ThemeToggle() {
 
 	useEffect(() => {
 		setMounted(true);
+		// Check cookie first
+		const cookieTheme = getCookie(COOKIE_THEME) as Theme | null;
+		if (cookieTheme && ["light", "dark", "system"].includes(cookieTheme)) {
+			setTheme(cookieTheme);
+			return;
+		}
+		// Fall back to localStorage
 		const stored = localStorage.getItem("theme") as Theme | null;
 		if (stored) {
 			setTheme(stored);
+			// Migrate to cookie
+			void setCookie(COOKIE_THEME, stored);
 		}
 	}, []);
 
@@ -33,6 +43,7 @@ export function ThemeToggle() {
 		}
 
 		localStorage.setItem("theme", theme);
+		void setCookie(COOKIE_THEME, theme);
 	}, [theme, mounted]);
 
 	// Listen for system theme changes

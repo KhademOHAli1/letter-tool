@@ -85,7 +85,10 @@ export async function trackLetterGeneration(
 			return { success: false, error: error.message };
 		}
 
-		console.log("[SUPABASE] Letter tracked successfully for MdB:", data.mdb_name);
+		console.log(
+			"[SUPABASE] Letter tracked successfully for MdB:",
+			data.mdb_name,
+		);
 		return { success: true };
 	} catch (err) {
 		console.error("[SUPABASE] Tracking error:", err);

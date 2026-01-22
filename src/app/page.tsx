@@ -12,8 +12,8 @@ export default function Home() {
 
 	return (
 		<div className="min-h-screen bg-background">
-			{/* Hero Section */}
-			<header className="bg-linear-to-b from-accent/30 via-accent/10 to-background safe-area-top">
+			{/* Hero Section - with subtle heritage gradient */}
+			<header className="relative heritage-gradient heritage-sun safe-area-top">
 				<div className="container mx-auto max-w-3xl px-6 pt-12 pb-10 md:pt-16 md:pb-14">
 					<div className="text-center space-y-4 md:space-y-6">
 						{/* Badge */}

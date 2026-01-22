@@ -23,7 +23,7 @@ export const translations = {
 	// ===== Home Page =====
 	home: {
 		title: {
-			de: "Brief an deine:n Abgeordnete:n",
+			de: "Brief an deine*n Abgeordnete*n",
 			en: "Letter to Your MP",
 		},
 		subtitle: {
@@ -47,7 +47,7 @@ export const translations = {
 			title: { de: "Deine Angaben", en: "Your Information" },
 			whyTitle: { de: "Warum brauchen wir das?", en: "Why do we need this?" },
 			whyText: {
-				de: "Abgeordnete antworten nur auf Briefe von Menschen aus ihrem Wahlkreis. Mit deiner PLZ finden wir deine:n zuständige:n Abgeordnete:n. Dein Name macht den Brief persönlich und glaubwürdig.",
+				de: "Abgeordnete antworten nur auf Briefe von Menschen aus ihrem Wahlkreis. Mit deiner PLZ finden wir deine*n zuständige*n Abgeordnete*n. Dein Name macht den Brief persönlich und glaubwürdig.",
 				en: "MPs only respond to letters from people in their constituency. With your postal code, we find your responsible MP. Your name makes the letter personal and credible.",
 			},
 			nameLabel: { de: "Dein Name", en: "Your Name" },
@@ -66,15 +66,15 @@ export const translations = {
 
 		// Step 2: Select MP
 		step2: {
-			title: { de: "Dein:e Abgeordnete:r", en: "Your MP" },
+			title: { de: "Dein*e Abgeordnete*r", en: "Your MP" },
 			whyTitle: { de: "Warum wichtig?", en: "Why is this important?" },
 			whyText: {
-				de: "Jeder Wahlkreis hat eine:n direkt gewählte:n Abgeordnete:n. Diese Person vertritt die Menschen in deinem Wahlkreis im Bundestag. Ein Brief aus dem Wahlkreis hat besonderes Gewicht.",
+				de: "Jeder Wahlkreis hat eine*n direkt gewählte*n Abgeordnete*n. Diese Person vertritt die Menschen in deinem Wahlkreis im Bundestag. Ein Brief aus dem Wahlkreis hat besonderes Gewicht.",
 				en: "Each constituency has a directly elected MP. This person represents the people in your constituency in Parliament. A letter from the constituency carries special weight.",
 			},
-			selectLabel: { de: "Wähle deine:n Abgeordnete:n", en: "Select your MP" },
+			selectLabel: { de: "Wähle deine*n Abgeordnete*n", en: "Select your MP" },
 			selectPlaceholder: {
-				de: "Abgeordnete:n auswählen...",
+				de: "Abgeordnete*n auswählen...",
 				en: "Select MP...",
 			},
 			enterPlzFirst: {
@@ -128,7 +128,7 @@ export const translations = {
 				en: "Why specific demands?",
 			},
 			whyText: {
-				de: "Politiker:innen können nur handeln, wenn sie wissen, was du von ihnen erwartest. Konkrete Forderungen geben deinem Brief Richtung und machen es dem/der Abgeordneten leicht, aktiv zu werden.",
+				de: "Politiker*innen können nur handeln, wenn sie wissen, was du von ihnen erwartest. Konkrete Forderungen geben deinem Brief Richtung und machen es dem*der Abgeordneten leicht, aktiv zu werden.",
 				en: "Politicians can only act when they know what you expect from them. Specific demands give your letter direction and make it easy for the MP to take action.",
 			},
 			hint: {
@@ -208,24 +208,74 @@ export const translations = {
 		whatsNext: { de: "Was passiert jetzt?", en: "What happens next?" },
 		whatsNextSteps: {
 			de: [
-				"Dein Brief landet im Posteingang des/der Abgeordneten",
-				"Mitarbeiter:innen lesen und kategorisieren eingehende Post",
+				"Dein Brief landet im Posteingang des*der Abgeordneten",
+				"Mitarbeiter*innen lesen und kategorisieren eingehende Post",
 				"Bei vielen Briefen zum gleichen Thema wird es zur Priorität",
-				"Der/die Abgeordnete kann im Plenum oder in Ausschüssen handeln",
+				"Der*die Abgeordnete kann im Plenum oder in Ausschüssen handeln",
+				"Teile dieses Tool mit Freund*innen – jede Stimme zählt!",
 			],
 			en: [
 				"Your letter arrives in the MP's inbox",
 				"Staff read and categorize incoming mail",
 				"With many letters on the same topic, it becomes a priority",
 				"The MP can act in plenary sessions or committees",
+				"Share this tool with friends – every voice counts!",
 			],
 		},
 		newLetter: { de: "Neuen Brief schreiben", en: "Write Another Letter" },
+
+		// Multi-MP feature
+		moreMps: {
+			title: {
+				de: "Noch mehr Wirkung?",
+				en: "Want more impact?",
+			},
+			subtitle: {
+				de: "Weitere Abgeordnete in deinem Wahlkreis",
+				en: "More MPs in your constituency",
+			},
+			description: {
+				de: "Dein Wahlkreis hat mehrere Abgeordnete. Mit einem Klick kannst du deinen Brief anpassen und an weitere senden.",
+				en: "Your constituency has multiple MPs. With one click you can adapt your letter and send it to more.",
+			},
+			reuseButton: {
+				de: "Brief anpassen für",
+				en: "Adapt letter for",
+			},
+			allDone: {
+				de: "Du hast alle Abgeordneten in deinem Wahlkreis erreicht! 🎉",
+				en: "You've reached all MPs in your constituency! 🎉",
+			},
+			newLetterHint: {
+				de: "Möchtest du einen neuen Brief schreiben? Dein bisheriger Text wird als Vorlage verwendet.",
+				en: "Want to write a new letter? Your previous text will be used as a template.",
+			},
+			reuseExisting: {
+				de: "Vorlage verwenden",
+				en: "Use template",
+			},
+			startFresh: {
+				de: "Neu beginnen",
+				en: "Start fresh",
+			},
+			adapting: {
+				de: "Brief wird angepasst...",
+				en: "Adapting letter...",
+			},
+			adapted: {
+				de: "Brief angepasst für {name}",
+				en: "Letter adapted for {name}",
+			},
+			emailed: {
+				de: "✓ Bereits kontaktiert",
+				en: "✓ Already contacted",
+			},
+		},
 	},
 
 	// ===== Share Message =====
 	shareMessage: {
-		de: `Ich habe gerade einen Brief an meine:n Bundestagsabgeordnete:n geschrieben - für Menschenrechte im Iran.
+		de: `Ich habe gerade einen Brief an meine*n Bundestagsabgeordnete*n geschrieben - für Menschenrechte im Iran.
 
 Warum das wichtig ist: Abgeordnete zählen Briefe aus ihrem Wahlkreis. Persönliche Nachrichten haben echten Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird unsere Stimme.
 

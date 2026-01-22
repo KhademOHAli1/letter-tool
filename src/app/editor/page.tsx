@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/lib/i18n/context";
+import { markMdBAsEmailed } from "@/lib/letter-cache";
 
 interface MdBData {
 	id: string;
@@ -34,6 +35,8 @@ interface LetterData {
 	wordCount: number;
 	mdb: MdBData;
 	senderName: string;
+	isAdapted?: boolean;
+	originalMdbName?: string;
 }
 
 // Wortzählung
@@ -102,6 +105,8 @@ export default function EditorPage() {
 	);
 	const [isModified, setIsModified] = useState(false);
 	const [copied, setCopied] = useState(false);
+	const [isAdapted, setIsAdapted] = useState(false);
+	const [originalMdbName, setOriginalMdbName] = useState<string | null>(null);
 
 	// Streaming state
 	const [isGenerating, setIsGenerating] = useState(false);
@@ -246,6 +251,11 @@ export default function EditorPage() {
 			setContent(letterData.content);
 			setSubject(letterData.subject);
 			setIsComplete(true);
+			// Check if this is an adapted letter
+			if (letterData.isAdapted) {
+				setIsAdapted(true);
+				setOriginalMdbName(letterData.originalMdbName || null);
+			}
 			return;
 		}
 
@@ -280,7 +290,12 @@ export default function EditorPage() {
 	}, []);
 
 	const handleSendEmail = () => {
-		const mailtoUrl = `mailto:${mdb?.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+		if (!mdb) return;
+
+		const mailtoUrl = `mailto:${mdb.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+
+		// Mark this MdB as emailed for the multi-MP feature
+		markMdBAsEmailed({ id: mdb.id, name: mdb.name, party: mdb.party });
 
 		// Open mailto in a new tab so user can return to this page
 		window.open(mailtoUrl, "_blank");
@@ -473,6 +488,31 @@ export default function EditorPage() {
 						</div>
 					</div>
 				</div>
+
+				{/* Adapted letter notice */}
+				{isAdapted && (
+					<div className="mb-4 px-3 py-2 rounded-lg bg-primary/10 border border-primary/20 text-sm text-primary flex items-center gap-2">
+						<svg
+							className="h-4 w-4 shrink-0"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							aria-hidden="true"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M13 10V3L4 14h7v7l9-11h-7z"
+							/>
+						</svg>
+						<span>
+							{language === "de"
+								? `Brief angepasst${originalMdbName ? ` (basierend auf Brief an ${originalMdbName})` : ""}`
+								: `Letter adapted${originalMdbName ? ` (based on letter to ${originalMdbName})` : ""}`}
+						</span>
+					</div>
+				)}
 
 				{/* Betreff Editor */}
 				<div className="mb-6 space-y-2">

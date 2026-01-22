@@ -1,6 +1,6 @@
 "use client";
 
-import { Globe, Moon, Sun, Github, Instagram } from "lucide-react";
+import { Github, Globe, Instagram, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/i18n/context";
 
@@ -103,11 +103,7 @@ export function FooterSettings() {
 				className="inline-flex items-center gap-1.5 py-2 hover:text-foreground transition-colors"
 				aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
 			>
-				{isDark ? (
-					<Sun className="h-4 w-4" />
-				) : (
-					<Moon className="h-4 w-4" />
-				)}
+				{isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
 				<span>
 					{isDark
 						? language === "de"
