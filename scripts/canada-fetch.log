@@ -1,0 +1,56 @@
+🇨🇦 Fetching Canadian Parliamentary Data
+=========================================
+Mode: Full
+Source: https://represent.opennorth.ca
+Output: /Users/ali/letter-tools/src/lib/data/ca
+
+📥 Fetching MPs from Represent API...
+  Fetching page 1...
+
+📥 Fetching ridings from Represent API...
+  Fetching page 1...
+  Fetching page 2...
+  Fetching page 2...
+  Fetching page 3...
+  Fetching page 4...
+  Found 338 ridings
+  Fetching page 3...
+  Fetching page 4...
+  Found 343 MPs
+  Fetching page 1...
+  Fetching page 2...
+  Fetching page 3...
+  Fetching page 4...
+
+📥 Building FULL FSA to riding mapping...
+   Estimated time: ~60 minutes
+   FSAs to check: 3600
+
+   Checked 100/3600 FSAs | Found: 24 | Errors: 0 | Elapsed: 1.9m | ETA: 66.2m
+   Checked 200/3600 FSAs | Found: 26 | Errors: 0 | Elapsed: 3.8m | ETA: 64.2m
+   Checked 300/3600 FSAs | Found: 95 | Errors: 0 | Elapsed: 5.7m | ETA: 62.8m
+   Checked 400/3600 FSAs | Found: 98 | Errors: 0 | Elapsed: 7.6m | ETA: 60.8m
+   Checked 500/3600 FSAs | Found: 104 | Errors: 0 | Elapsed: 9.5m | ETA: 58.8m
+   Checked 600/3600 FSAs | Found: 104 | Errors: 0 | Elapsed: 11.4m | ETA: 56.8m
+   Checked 700/3600 FSAs | Found: 156 | Errors: 0 | Elapsed: 13.3m | ETA: 55.1m
+   Checked 800/3600 FSAs | Found: 213 | Errors: 0 | Elapsed: 15.2m | ETA: 53.3m
+   Checked 900/3600 FSAs | Found: 268 | Errors: 0 | Elapsed: 17.2m | ETA: 51.5m
+   Checked 1000/3600 FSAs | Found: 338 | Errors: 0 | Elapsed: 19.1m | ETA: 49.8m
+   Checked 1100/3600 FSAs | Found: 418 | Errors: 0 | Elapsed: 21.1m | ETA: 48.0m
+   Checked 1200/3600 FSAs | Found: 458 | Errors: 0 | Elapsed: 23.1m | ETA: 46.1m
+   Checked 1300/3600 FSAs | Found: 530 | Errors: 0 | Elapsed: 25.0m | ETA: 44.3m
+   Checked 1400/3600 FSAs | Found: 605 | Errors: 0 | Elapsed: 27.0m | ETA: 42.4m
+   Checked 1500/3600 FSAs | Found: 651 | Errors: 0 | Elapsed: 28.9m | ETA: 40.5m
+   Checked 1600/3600 FSAs | Found: 681 | Errors: 0 | Elapsed: 30.8m | ETA: 38.5m
+   Checked 1700/3600 FSAs | Found: 751 | Errors: 0 | Elapsed: 32.8m | ETA: 36.6m
+   Checked 1800/3600 FSAs | Found: 837 | Errors: 0 | Elapsed: 34.7m | ETA: 34.7m
+   Checked 1900/3600 FSAs | Found: 896 | Errors: 0 | Elapsed: 36.7m | ETA: 32.8m
+   Checked 2000/3600 FSAs | Found: 951 | Errors: 0 | Elapsed: 38.6m | ETA: 30.9m
+   Checked 2100/3600 FSAs | Found: 1005 | Errors: 0 | Elapsed: 40.6m | ETA: 29.0m
+   Checked 2200/3600 FSAs | Found: 1058 | Errors: 0 | Elapsed: 42.5m | ETA: 27.0m
+   Checked 2300/3600 FSAs | Found: 1083 | Errors: 0 | Elapsed: 44.4m | ETA: 25.1m
+   Checked 2400/3600 FSAs | Found: 1100 | Errors: 0 | Elapsed: 46.3m | ETA: 23.1m
+   Checked 2500/3600 FSAs | Found: 1143 | Errors: 0 | Elapsed: 48.2m | ETA: 21.2m
+   Checked 2600/3600 FSAs | Found: 1157 | Errors: 0 | Elapsed: 50.1m | ETA: 19.3m
+   Checked 2700/3600 FSAs | Found: 1172 | Errors: 0 | Elapsed: 52.0m | ETA: 17.3m
+   Checked 2800/3600 FSAs | Found: 1194 | Errors: 0 | Elapsed: 53.9m | ETA: 15.4m

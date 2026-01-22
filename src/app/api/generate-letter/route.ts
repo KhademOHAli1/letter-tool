@@ -202,8 +202,8 @@ export async function POST(request: NextRequest) {
 
 		const forderungenTexte = selectedForderungen
 			.map(
-				(f) =>
-					`- ${f.title.de}\n  Formulierung für den Brief: "${f.briefText.de}"`,
+				(f, index) =>
+					`${index + 1}. ${f.title.de}\n   Formulierung für den Brief: "${f.briefText.de}"`,
 			)
 			.join("\n\n");
 
@@ -217,13 +217,13 @@ EMPFÄNGER:
 ${mdb.name} (${mdb.party})
 Mitglied des Deutschen Bundestages
 
-FORDERUNGEN DIE ICH UNTERSTÜTZE (nutze die Formulierungen als Basis, aber passe sie an den Briefstil an):
+FORDERUNGEN (ANZAHL: ${selectedForderungen.length} - ALLE MÜSSEN IM BRIEF ERSCHEINEN!):
 ${forderungenTexte}
 
-PERSÖNLICHE GESCHICHTE DES ABSENDERS (dies ist der wichtigste Teil - die echte emotionale Verbindung zum Thema):
+PERSÖNLICHE GESCHICHTE DES ABSENDERS:
 ${personalNote}
 
-WICHTIG: Die persönliche Geschichte ist der Kern des Briefes. Sie macht den Brief authentisch und berührend. Baue den Brief um diese Geschichte herum auf.
+KRITISCH: Der Brief MUSS alle ${selectedForderungen.length} Forderungen als nummerierte Liste enthalten! Nicht nur eine!
 
 Bitte erstelle nun den Brief.`;
 
