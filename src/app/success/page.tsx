@@ -17,6 +17,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CampaignGoal } from "@/components/campaign-goal";
+import { EmailSender } from "@/components/email-sender";
 import { FooterSettings } from "@/components/footer-settings";
 import { Button } from "@/components/ui/button";
 import { findMdBsByWahlkreis, type MdB } from "@/lib/data/wahlkreise";
@@ -31,7 +32,6 @@ import {
 	getCachedLetter,
 	getEmailedMdBs,
 	getRemainingMdBs,
-	getTrackingPixelUrl,
 	markLetterAsSent,
 	markMdBAsEmailed,
 } from "@/lib/letter-cache";
@@ -59,7 +59,7 @@ export default function SuccessPage() {
 	const [mdbEmail, setMdbEmail] = useState<string | null>(null);
 	const [letterContent, setLetterContent] = useState<string | null>(null);
 	const [letterSubject, setLetterSubject] = useState<string | null>(null);
-	const [trackingId, setTrackingId] = useState<string | null>(null);
+	const [_trackingId, setTrackingId] = useState<string | null>(null);
 	const [historyId, setHistoryId] = useState<string | null>(null);
 	const [wahlkreisId, setWahlkreisId] = useState<string | null>(null);
 	const [cachedLetter, setCachedLetter] = useState<CachedLetter | null>(null);
@@ -195,33 +195,19 @@ export default function SuccessPage() {
 		window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(shareMessage)}`;
 	};
 
-	// Send letter directly to MdB via mailto with tracking pixel
-	const handleSendToMdB = () => {
-		if (!mdbEmail || !letterContent || !letterSubject) return;
-
-		// Create email body with tracking pixel embedded as HTML
-		// Note: Most email clients strip HTML from mailto, so we use plain text
-		// The tracking pixel works when the letter is viewed in HTML-enabled clients
-		const trackingPixelUrl = trackingId ? getTrackingPixelUrl(trackingId) : "";
-
-		// For mailto, we use plain text body
-		// The tracking pixel URL is appended as a "Read receipt" link for transparency
-		let emailBody = letterContent;
-
-		// Add a small signature with the tracking info (optional, transparent)
-		if (trackingPixelUrl) {
-			emailBody += `\n\n---\n${language === "de" ? "Erstellt mit" : "Created with"}: ${shareUrl}`;
-		}
-
-		const mailtoUrl = `mailto:${encodeURIComponent(mdbEmail)}?subject=${encodeURIComponent(letterSubject)}&body=${encodeURIComponent(emailBody)}`;
-
+	// Send letter directly to MdB - handles email provider selection
+	const handleEmailSent = () => {
 		// Mark letter as sent in history
 		if (historyId) {
 			markLetterAsSent(historyId);
 		}
-
 		setEmailSent(true);
-		window.location.href = mailtoUrl;
+	};
+
+	// Get email body with signature
+	const getEmailBody = () => {
+		if (!letterContent) return "";
+		return `${letterContent}\n\n---\n${language === "de" ? "Erstellt mit" : "Created with"}: ${shareUrl}`;
 	};
 
 	const handleNativeShare = async () => {
@@ -383,7 +369,7 @@ export default function SuccessPage() {
 			{/* Main content */}
 			<div className="container max-w-2xl mx-auto px-4 py-6 space-y-6">
 				{/* PRIMARY CTA: Send Email Now */}
-				{mdbEmail && letterContent && !emailSent && (
+				{mdbEmail && letterContent && letterSubject && !emailSent && (
 					<div className="rounded-xl border-2 border-primary bg-linear-to-br from-primary/10 to-primary/5 p-5 shadow-lg">
 						<div className="flex items-center gap-3 mb-4">
 							<div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground">
@@ -403,26 +389,33 @@ export default function SuccessPage() {
 
 						<p className="text-sm text-muted-foreground mb-4">
 							{language === "de"
-								? "Klicke auf den Button, um dein E-Mail-Programm mit dem vorausgefüllten Brief zu öffnen. Du kannst ihn vor dem Senden noch bearbeiten."
-								: "Click the button to open your email app with the pre-filled letter. You can edit it before sending."}
+								? "Klicke auf den Button, um dein E-Mail-Programm zu wählen. Du kannst den Brief vor dem Senden noch bearbeiten."
+								: "Click the button to choose your email app. You can edit the letter before sending."}
 						</p>
 
-						<Button
-							size="lg"
-							className="w-full h-14 text-lg font-semibold shadow-md hover:shadow-lg transition-all"
-							onClick={handleSendToMdB}
+						<EmailSender
+							to={mdbEmail}
+							subject={letterSubject}
+							body={getEmailBody()}
+							language={language}
+							onSent={handleEmailSent}
 						>
-							<Mail className="h-5 w-5 mr-2" />
-							{language === "de"
-								? `E-Mail an ${mdbName} senden`
-								: `Send Email to ${mdbName}`}
-							<ExternalLink className="h-4 w-4 ml-2 opacity-60" />
-						</Button>
+							<Button
+								size="lg"
+								className="w-full h-14 text-lg font-semibold shadow-md hover:shadow-lg transition-all"
+							>
+								<Mail className="h-5 w-5 mr-2" />
+								{language === "de"
+									? `E-Mail an ${mdbName} senden`
+									: `Send Email to ${mdbName}`}
+								<ExternalLink className="h-4 w-4 ml-2 opacity-60" />
+							</Button>
+						</EmailSender>
 
 						<p className="text-xs text-muted-foreground text-center mt-3">
 							{language === "de"
-								? "Öffnet dein Standard-E-Mail-Programm"
-								: "Opens your default email app"}
+								? "Gmail, Outlook, Yahoo oder deine Standard-App"
+								: "Gmail, Outlook, Yahoo or your default app"}
 						</p>
 					</div>
 				)}
