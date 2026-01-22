@@ -6,6 +6,7 @@ import {
 	ChevronUp,
 	HelpCircle,
 	RotateCcw,
+	ShieldCheck,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -424,7 +425,17 @@ export function LetterForm() {
 				</div>
 			)}
 
-			{/* Step 1: Name & PLZ */}
+			{/* Privacy Notice Banner */}
+			<div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-muted/30 rounded-lg px-3 py-2">
+				<ShieldCheck className="h-4 w-4 text-emerald-600" />
+				<span>
+					{language === "de"
+						? "Deine Daten werden nicht gespeichert – nur für deinen Brief verwendet."
+						: "Your data is not stored – only used to create your letter."}
+				</span>
+			</div>
+
+			{/* Step 1: Name */}
 			<div className="p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm space-y-4">
 				<div className="flex items-center gap-2">
 					<span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
@@ -446,14 +457,30 @@ export function LetterForm() {
 						/>
 					</div>
 
+					<WhyBox
+						title={t("form", "step1.whyTitle")}
+						text={t("form", "step1.whyText")}
+					/>
+				</div>
+			</div>
+
+			{/* Step 2: Postal Code & MdB Selection */}
+			<div className="p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm space-y-4">
+				<div className="flex items-center gap-2">
+					<span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+						2
+					</span>
+					<h3 className="font-medium">{t("form", "step2.title")}</h3>
+				</div>
+				<div className="space-y-4 px-2">
 					{/* PLZ */}
 					<div className="space-y-2">
 						<Label htmlFor="plz" className="text-sm">
-							{t("form", "step1.plzLabel")}
+							{t("form", "step2.plzLabel")}
 						</Label>
 						<Input
 							id="plz"
-							placeholder={t("form", "step1.plzPlaceholder")}
+							placeholder={t("form", "step2.plzPlaceholder")}
 							maxLength={5}
 							value={plz}
 							onChange={(e) =>
@@ -463,37 +490,15 @@ export function LetterForm() {
 						/>
 						{plz.length === 5 && !wahlkreis && (
 							<p className="text-sm text-destructive">
-								{t("form", "step1.wahlkreisNotFound")}
+								{t("form", "step2.wahlkreisNotFound")}
 							</p>
 						)}
 						{wahlkreis && (
 							<p className="text-sm text-muted-foreground">
-								📍 {t("form", "step1.wahlkreisFound")}: {wahlkreis.name}
+								📍 {t("form", "step2.wahlkreisFound")}: {wahlkreis.name}
 							</p>
 						)}
 					</div>
-
-					<WhyBox
-						title={t("form", "step1.whyTitle")}
-						text={t("form", "step1.whyText")}
-					/>
-				</div>
-			</div>
-
-			{/* Step 2: MdB Selection */}
-			<div className="p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm space-y-4">
-				<div className="flex items-center gap-2">
-					<span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-						2
-					</span>
-					<h3 className="font-medium">{t("form", "step2.title")}</h3>
-				</div>
-				<div className="space-y-4 px-2">
-					{!wahlkreis && (
-						<p className="text-sm text-muted-foreground">
-							{t("form", "step2.enterPlzFirst")}
-						</p>
-					)}
 
 					{wahlkreis && mdbs.length === 0 && (
 						<div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800">
@@ -636,12 +641,10 @@ export function LetterForm() {
 						</div>
 					)}
 
-					{wahlkreis && (
-						<WhyBox
-							title={t("form", "step2.whyTitle")}
-							text={t("form", "step2.whyText")}
-						/>
-					)}
+					<WhyBox
+						title={t("form", "step2.whyTitle")}
+						text={t("form", "step2.whyText")}
+					/>
 				</div>
 			</div>
 
@@ -766,7 +769,7 @@ export function LetterForm() {
 			</div>
 
 			{/* Consent Checkbox (DSGVO-required) */}
-			<div className="p-4 md:p-5 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40">
+			<div className="p-4 md:p-5 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40 space-y-3">
 				<label htmlFor="consent" className="flex gap-3 cursor-pointer">
 					<div className="flex-none w-5 h-5 mt-0.5">
 						<Checkbox
@@ -787,6 +790,15 @@ export function LetterForm() {
 						</p>
 					</div>
 				</label>
+				{/* Extra reassurance */}
+				<div className="flex items-start gap-2 pt-2 border-t border-amber-200/40 dark:border-amber-800/30">
+					<ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+					<p className="text-xs text-muted-foreground">
+						{language === "de"
+							? "Kein Account nötig. Keine Datenbank. Dein Brief wird lokal generiert und direkt an dich übergeben."
+							: "No account needed. No database. Your letter is generated locally and handed directly to you."}
+					</p>
+				</div>
 			</div>
 
 			{/* Error */}

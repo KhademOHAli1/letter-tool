@@ -42,16 +42,26 @@ export const translations = {
 
 	// ===== Form Steps =====
 	form: {
-		// Step 1: Personal Info
+		// Step 1: Name only
 		step1: {
-			title: { de: "Deine Angaben", en: "Your Information" },
+			title: { de: "Dein Name", en: "Your Name" },
 			whyTitle: { de: "Warum brauchen wir das?", en: "Why do we need this?" },
 			whyText: {
-				de: "Abgeordnete antworten nur auf Briefe von Menschen aus ihrem Wahlkreis. Mit deiner PLZ finden wir deine*n zuständige*n Abgeordnete*n. Dein Name macht den Brief persönlich und glaubwürdig.",
-				en: "MPs only respond to letters from people in their constituency. With your postal code, we find your responsible MP. Your name makes the letter personal and credible.",
+				de: "Dein Name macht den Brief persönlich und glaubwürdig. Abgeordnete nehmen Briefe von echten Menschen ernst. Dein Name wird nur für den Brief verwendet und nicht auf unseren Servern gespeichert.",
+				en: "Your name makes the letter personal and credible. MPs take letters from real people seriously. Your name is only used for the letter and is not stored on our servers.",
 			},
 			nameLabel: { de: "Dein Name", en: "Your Name" },
 			namePlaceholder: { de: "Vorname Nachname", en: "First Last Name" },
+		},
+
+		// Step 2: Postal Code & MP Selection
+		step2: {
+			title: { de: "Dein*e Abgeordnete*r", en: "Your MP" },
+			whyTitle: { de: "Warum brauchen wir das?", en: "Why do we need this?" },
+			whyText: {
+				de: "Abgeordnete antworten nur auf Briefe aus ihrem Wahlkreis. Mit deiner PLZ finden wir deine*n zuständige*n Abgeordnete*n. Deine PLZ wird nur lokal im Browser verarbeitet und nicht an unsere Server gesendet.",
+				en: "MPs only respond to letters from their constituency. With your postal code, we find your responsible MP. Your postal code is processed locally in your browser and is not sent to our servers.",
+			},
 			plzLabel: { de: "Deine Postleitzahl", en: "Your Postal Code" },
 			plzPlaceholder: { de: "z.B. 10115", en: "e.g. 10115" },
 			wahlkreisFound: {
@@ -62,34 +72,20 @@ export const translations = {
 				de: "Kein Wahlkreis gefunden",
 				en: "No constituency found",
 			},
-		},
-
-		// Step 2: Select MP
-		step2: {
-			title: { de: "Dein*e Abgeordnete*r", en: "Your MP" },
-			whyTitle: { de: "Warum wichtig?", en: "Why is this important?" },
-			whyText: {
-				de: "Jeder Wahlkreis hat eine*n direkt gewählte*n Abgeordnete*n. Diese Person vertritt die Menschen in deinem Wahlkreis im Bundestag. Ein Brief aus dem Wahlkreis hat besonderes Gewicht.",
-				en: "Each constituency has a directly elected MP. This person represents the people in your constituency in Parliament. A letter from the constituency carries special weight.",
-			},
 			selectLabel: { de: "Wähle deine*n Abgeordnete*n", en: "Select your MP" },
 			selectPlaceholder: {
 				de: "Abgeordnete*n auswählen...",
 				en: "Select MP...",
-			},
-			enterPlzFirst: {
-				de: "Bitte gib zuerst deine PLZ ein",
-				en: "Please enter your postal code first",
 			},
 		},
 
 		// Step 3: Personal Story
 		step3: {
 			title: { de: "Deine Geschichte", en: "Your Story" },
-			whyTitle: { de: "Warum deine Geschichte?", en: "Why your story?" },
+			whyTitle: { de: "Warum brauchen wir das?", en: "Why do we need this?" },
 			whyText: {
-				de: "Persönliche Geschichten bewegen mehr als Statistiken. Abgeordnete erhalten täglich Dutzende E-Mails - aber echte, emotionale Geschichten von echten Menschen bleiben im Gedächtnis. Deine Verbindung zum Iran macht den Brief einzigartig und authentisch.",
-				en: "Personal stories move more than statistics. MPs receive dozens of emails daily - but real, emotional stories from real people stay in memory. Your connection to Iran makes the letter unique and authentic.",
+				de: "Persönliche Geschichten bewegen mehr als Statistiken. Abgeordnete erhalten täglich Dutzende E-Mails - aber echte Geschichten von echten Menschen bleiben im Gedächtnis. Deine Geschichte wird nur für die Briefgenerierung verwendet und nicht gespeichert.",
+				en: "Personal stories move more than statistics. MPs receive dozens of emails daily - but real stories from real people stay in memory. Your story is only used to generate the letter and is not stored.",
 			},
 			label: { de: "Deine Geschichte", en: "Your Story" },
 			placeholder: {
@@ -116,12 +112,12 @@ export const translations = {
 		step4: {
 			title: { de: "Forderungen", en: "Demands" },
 			whyTitle: {
-				de: "Warum konkrete Forderungen?",
-				en: "Why specific demands?",
+				de: "Warum brauchen wir das?",
+				en: "Why do we need this?",
 			},
 			whyText: {
-				de: "Politiker*innen können nur handeln, wenn sie wissen, was du von ihnen erwartest. Konkrete Forderungen geben deinem Brief Richtung und machen es dem*der Abgeordneten leicht, aktiv zu werden.",
-				en: "Politicians can only act when they know what you expect from them. Specific demands give your letter direction and make it easy for the MP to take action.",
+				de: "Konkrete Forderungen geben deinem Brief Richtung und machen es dem*der Abgeordneten leicht, aktiv zu werden. Politiker*innen können nur handeln, wenn sie wissen, was du von ihnen erwartest.",
+				en: "Specific demands give your letter direction and make it easy for the MP to take action. Politicians can only act when they know what you expect from them.",
 			},
 			hint: {
 				de: "Wähle die Forderungen, die dir am wichtigsten sind. Je weniger, desto fokussierter dein Brief.",

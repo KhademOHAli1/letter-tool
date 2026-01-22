@@ -1,6 +1,14 @@
 "use client";
 
-import { PartyPopper, Sparkles, Target, TrendingUp } from "lucide-react";
+import {
+	Github,
+	PartyPopper,
+	Search,
+	Sparkles,
+	Target,
+	TrendingUp,
+} from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/i18n/context";
 
@@ -191,6 +199,29 @@ export function CampaignGoal({ compact = false }: CampaignGoalProps) {
 							: `Only ${(goal - stats.total_letters).toLocaleString(locale)} to go!`}
 					</p>
 				)}
+			</div>
+
+			{/* Trust notice - subtle and unobtrusive */}
+			<div className="mt-3 pt-3 border-t border-border/30">
+				<div className="flex items-center justify-center gap-4 text-[10px] text-muted-foreground/60">
+					<Link
+						href="/daten-transparenz"
+						className="flex items-center gap-1 hover:text-muted-foreground transition-colors"
+					>
+						<Search className="h-3 w-3" />
+						<span>{language === "de" ? "Transparent" : "Transparent"}</span>
+					</Link>
+					<span className="text-border">•</span>
+					<a
+						href="https://github.com/KhademOHAli1/letter-tool"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="flex items-center gap-1 hover:text-muted-foreground transition-colors"
+					>
+						<Github className="h-3 w-3" />
+						<span>Open Source</span>
+					</a>
+				</div>
 			</div>
 		</div>
 	);

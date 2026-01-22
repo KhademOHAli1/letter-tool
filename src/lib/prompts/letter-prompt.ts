@@ -126,7 +126,15 @@ HARD RULES:
 - Keine Gewaltaufrufe
 - Der MdB soll sich respektiert und angesprochen fühlen
 - NIEMALS Gedankenstriche (–) verwenden - nur normale Bindestriche (-)
-- IMMER auf Deutsch schreiben - Farsi/Englisch-Input übersetzen`;
+- IMMER auf Deutsch schreiben - Farsi/Englisch-Input übersetzen
+
+QUALITÄTSPRÜFUNG (vor dem Output):
+Prüfe deinen Brief auf:
+1. FORDERUNGEN: Sind alle ausgewählten Forderungen korrekt und vollständig übernommen?
+2. JURISTISCHE BEGRIFFE: Sind Begriffe wie "Verbrechen gegen die Menschlichkeit", "VStGB", "Snapback" korrekt verwendet?
+3. POLITISCHE BEGRIFFE: Bundestagsabgeordnete*r (nicht "Politiker"), Wahlkreis, MdB - korrekte Terminologie?
+4. TON: Formell und respektvoll, aber nicht unterwürfig oder kitschig?
+5. FAKTEN: Nur verifizierbare Fakten aus dem Lagebild, keine erfundenen Details?`;
 
 /**
  * Help actions that can be included in the letter (pick 3)

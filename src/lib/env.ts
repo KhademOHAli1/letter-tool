@@ -7,7 +7,7 @@
 export const serverEnv = {
 	// LLM API configuration
 	OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-	LLM_MODEL: process.env.LLM_MODEL || "gpt-5.2", // Flaggschiff-Modell für beste kreative Qualität
+	LLM_MODEL: process.env.LLM_MODEL || "gpt-5.2-mini", // Fast & cost-effective
 
 	// Supabase configuration
 	SUPABASE_URL: process.env.SUPABASE_URL,
