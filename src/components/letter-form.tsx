@@ -548,16 +548,16 @@ export function LetterForm() {
 												<span
 													className={`font-medium text-sm block ${isSelected ? "text-primary-foreground" : ""}`}
 												>
-													{forderung.title}
-												</span>
-												<p
-													className={`text-xs leading-relaxed ${
-														isSelected
-															? "text-primary-foreground/80"
-															: "text-muted-foreground"
-													}`}
-												>
-													{forderung.description}
+												{forderung.title[language]}
+											</span>
+											<p
+												className={`text-xs leading-relaxed ${
+													isSelected
+														? "text-primary-foreground/80"
+														: "text-muted-foreground"
+												}`}
+											>
+												{forderung.description[language]}
 												</p>
 											</div>
 										</div>

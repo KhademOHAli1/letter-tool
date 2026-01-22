@@ -55,75 +55,6 @@ export default function Home() {
 				</div>
 			</header>
 
-			{/* Trust Indicators */}
-			<section className="border-b border-border/30 bg-muted/30">
-				<div className="container mx-auto max-w-4xl px-4 py-6">
-					<div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-sm text-muted-foreground">
-						<div className="flex items-center gap-2">
-							<svg
-								className="h-5 w-5 text-primary"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								aria-hidden="true"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-								/>
-							</svg>
-							<span>
-								{language === "de" ? "Datenschutzkonform" : "Privacy Compliant"}
-							</span>
-						</div>
-						<div className="flex items-center gap-2">
-							<svg
-								className="h-5 w-5 text-primary"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								aria-hidden="true"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-								/>
-							</svg>
-							<span>
-								{language === "de"
-									? "In 5 Minuten fertig"
-									: "Done in 5 Minutes"}
-							</span>
-						</div>
-						<div className="flex items-center gap-2">
-							<svg
-								className="h-5 w-5 text-primary"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								aria-hidden="true"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-								/>
-							</svg>
-							<span>
-								{language === "de"
-									? "Direkt an das Wahlkreisbüro"
-									: "Direct to Constituency Office"}
-							</span>
-						</div>
-					</div>
-				</div>
-			</section>
-
 			{/* Campaign Goal */}
 			<section className="container mx-auto max-w-2xl px-4 pt-8">
 				<CampaignGoal goal={1000} />
@@ -162,17 +93,17 @@ export default function Home() {
 								: "The generated letter is not stored on our servers. Your inputs are sent to OpenAI for generation."}
 						</p>
 						{/* Legal Links */}
-						<div className="flex items-center justify-center gap-4 text-xs text-muted-foreground pt-2">
+						<div className="flex items-center justify-center gap-6 text-sm text-muted-foreground pt-2">
 							<a
 								href="/impressum"
-								className="hover:text-primary transition-colors"
+								className="py-2 hover:text-primary transition-colors"
 							>
 								{language === "de" ? "Impressum" : "Legal Notice"}
 							</a>
 							<span className="text-border">·</span>
 							<a
 								href="/datenschutz"
-								className="hover:text-primary transition-colors"
+								className="py-2 hover:text-primary transition-colors"
 							>
 								{language === "de" ? "Datenschutz" : "Privacy Policy"}
 							</a>

@@ -80,17 +80,17 @@ export function FooterSettings() {
 	};
 
 	return (
-		<div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+		<div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
 			{/* Language Toggle */}
 			<button
 				type="button"
 				onClick={toggleLanguage}
-				className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
+				className="inline-flex items-center gap-1.5 py-2 hover:text-foreground transition-colors"
 				aria-label={
 					language === "de" ? "Switch to English" : "Auf Deutsch wechseln"
 				}
 			>
-				<Globe className="h-3.5 w-3.5" />
+				<Globe className="h-4 w-4" />
 				<span>{language === "de" ? "English" : "Deutsch"}</span>
 			</button>
 
@@ -100,13 +100,13 @@ export function FooterSettings() {
 			<button
 				type="button"
 				onClick={toggleTheme}
-				className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
+				className="inline-flex items-center gap-1.5 py-2 hover:text-foreground transition-colors"
 				aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
 			>
 				{isDark ? (
-					<Sun className="h-3.5 w-3.5" />
+					<Sun className="h-4 w-4" />
 				) : (
-					<Moon className="h-3.5 w-3.5" />
+					<Moon className="h-4 w-4" />
 				)}
 				<span>
 					{isDark
