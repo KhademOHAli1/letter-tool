@@ -574,18 +574,20 @@ export function LetterForm() {
 			</div>
 
 			{/* Consent Checkbox (DSGVO-required) */}
-			<div className="space-y-4 p-4 md:p-5 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40">
+			<div className="p-4 md:p-5 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40">
 				<label
 					htmlFor="consent"
-					className="flex items-start gap-3 cursor-pointer"
+					className="flex gap-3 cursor-pointer"
 				>
-					<Checkbox
-						id="consent"
-						checked={consentGiven}
-						onCheckedChange={(checked) => setConsentGiven(checked === true)}
-						className="mt-0.5 shrink-0"
-						required
-					/>
+					<div className="pt-0.5">
+						<Checkbox
+							id="consent"
+							checked={consentGiven}
+							onCheckedChange={(checked) => setConsentGiven(checked === true)}
+							className="h-5 w-5"
+							required
+						/>
+					</div>
 					<div className="space-y-1 min-w-0">
 						<span className="text-sm font-medium text-foreground">
 							{language === "de"
