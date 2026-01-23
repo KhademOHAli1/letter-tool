@@ -554,6 +554,15 @@ export function LetterForm() {
 		return null;
 	};
 
+	// Helper to get circonscription display for French députés
+	const getCirconscriptionDisplay = (rep: Representative): string | null => {
+		if ("constituency" in rep && typeof rep.constituency === "number") {
+			const ordinal = rep.constituency === 1 ? "1ère" : `${rep.constituency}e`;
+			return `${ordinal} circ.`;
+		}
+		return null;
+	};
+
 	const isValid =
 		name.trim() &&
 		selectedRep &&
@@ -797,6 +806,30 @@ export function LetterForm() {
 
 					{representatives.length > 0 && (
 						<div className="space-y-3">
+							{/* Help text for France - explain how to find circonscription */}
+							{isFrance && representatives.length > 1 && (
+								<div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200">
+									<p className="text-sm">
+										{language === "fr"
+											? "Plusieurs député(e)s trouvé(e)s pour votre département. Sélectionnez celui/celle de votre circonscription."
+											: language === "de"
+												? "Mehrere Abgeordnete in Ihrem Département gefunden. Wählen Sie den Ihrer circonscription."
+												: "Multiple deputies found for your département. Select the one for your constituency."}
+									</p>
+									<a
+										href="https://www.nosdeputes.fr/circonscription"
+										target="_blank"
+										rel="noopener noreferrer"
+										className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:underline mt-1"
+									>
+										{language === "fr"
+											? "→ Trouver ma circonscription"
+											: language === "de"
+												? "→ Meine circonscription finden"
+												: "→ Find my constituency"}
+									</a>
+								</div>
+							)}
 							<Label className="text-sm font-medium">
 								{t("form", "step2.selectLabel")}
 							</Label>
@@ -831,11 +864,18 @@ export function LetterForm() {
 													<p className="font-medium text-foreground truncate">
 														{getRepName(selectedRep)}
 													</p>
-													<span
-														className={`inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${getPartyBadge(selectedRep)}`}
-													>
-														{getPartyName(selectedRep)}
-													</span>
+													<div className="flex items-center gap-2 mt-0.5 flex-wrap">
+														<span
+															className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${getPartyBadge(selectedRep)}`}
+														>
+															{getPartyName(selectedRep)}
+														</span>
+														{getCirconscriptionDisplay(selectedRep) && (
+															<span className="text-xs text-muted-foreground">
+																{getCirconscriptionDisplay(selectedRep)}
+															</span>
+														)}
+													</div>
 												</div>
 											</div>
 										) : (
@@ -914,11 +954,18 @@ export function LetterForm() {
 													<p className="font-medium text-foreground truncate">
 														{getRepName(rep)}
 													</p>
-													<span
-														className={`inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${getPartyBadge(rep)}`}
-													>
-														{getPartyName(rep)}
-													</span>
+													<div className="flex items-center gap-2 mt-0.5 flex-wrap">
+														<span
+															className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${getPartyBadge(rep)}`}
+														>
+															{getPartyName(rep)}
+														</span>
+														{getCirconscriptionDisplay(rep) && (
+															<span className="text-xs text-muted-foreground">
+																{getCirconscriptionDisplay(rep)}
+															</span>
+														)}
+													</div>
 												</div>
 												{selectedRep?.id === rep.id && (
 													<Check className="h-5 w-5 text-primary shrink-0" />

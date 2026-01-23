@@ -4,12 +4,16 @@
  * Data sources:
  * - Deputies: Assemblée Nationale Open Data (data.assemblee-nationale.fr)
  * - 17th Legislature (since July 2024)
+ * - Postal code → circonscription mapping: La Poste + data.gouv.fr (bureaux de vote)
  *
  * Lookup Strategy:
- * French postal codes (5 digits) start with département code (2 digits for métropole).
- * Since we don't have a reliable postal code → circonscription mapping,
- * we use département-based lookup: show all deputies in the département,
- * let user select their circonscription.
+ * 1. Try precise postal code → circonscription(s) mapping
+ * 2. Fall back to département-based lookup if postal code not in mapping
+ *
+ * Data notes:
+ * - 85% of postal codes map to exactly 1 circonscription
+ * - 15% map to 2-5 circonscriptions (boundary cases)
+ * - Unmapped postal codes fall back to département-based lookup
  *
  * Special cases:
  * - 75xxx = Paris (75)
@@ -18,6 +22,7 @@
  */
 
 import deputeDataJson from "./depute-data.json";
+import plzToCircMapping from "./plz-circonscription.json";
 
 export interface Depute {
 	id: string;
@@ -219,6 +224,28 @@ const DEPT_TO_DEPUTES: Map<string, Depute[]> = (() => {
 })();
 
 /**
+ * Build circonscription code → depute lookup map
+ * Circonscription codes are like "7501" (département 75, circ 01) or "0104" (département 01, circ 04)
+ */
+const CIRC_CODE_TO_DEPUTE: Map<string, Depute> = (() => {
+	const map = new Map<string, Depute>();
+	for (const dep of DEPUTES) {
+		// Format: département code + constituency number padded to 2 digits
+		const circCode = `${dep.departmentCode}${String(dep.constituency).padStart(2, "0")}`;
+		map.set(circCode, dep);
+	}
+	return map;
+})();
+
+/**
+ * Postal code → circonscription codes mapping
+ * From La Poste + data.gouv.fr bureaux de vote data
+ */
+const PLZ_TO_CIRC: Map<string, string[]> = new Map(
+	Object.entries(plzToCircMapping as Record<string, string[]>),
+);
+
+/**
  * Extract département code from postal code
  *
  * Rules:
@@ -294,14 +321,56 @@ export function findDeputeByCirconscription(
 }
 
 /**
- * Find deputies by postal code (returns all from the département)
+ * Find deputies by postal code
+ *
+ * Uses precise postal code → circonscription mapping when available (85% of cases).
+ * Falls back to département-based lookup for unmapped postal codes.
+ *
+ * @param postalCode - French 5-digit postal code
+ * @param useFallback - Whether to fall back to département-based lookup (default: true)
+ * @returns Array of deputies for this postal code
  */
-export function findDeputesByPostalCode(postalCode: string): Depute[] {
-	const deptCode = getDepartmentFromPostalCode(postalCode);
-	if (!deptCode) {
-		return [];
+export function findDeputesByPostalCode(
+	postalCode: string,
+	useFallback = true,
+): Depute[] {
+	const normalized = postalCode.replace(/\s/g, "").trim();
+
+	// Try precise mapping first
+	const circCodes = PLZ_TO_CIRC.get(normalized);
+	if (circCodes && circCodes.length > 0) {
+		const deputes: Depute[] = [];
+		for (const code of circCodes) {
+			const depute = CIRC_CODE_TO_DEPUTE.get(code);
+			if (depute) {
+				deputes.push(depute);
+			}
+		}
+		// Sort by constituency number
+		deputes.sort((a, b) => a.constituency - b.constituency);
+		if (deputes.length > 0) {
+			return deputes;
+		}
 	}
-	return findDeputesByDepartment(deptCode);
+
+	// Fall back to département-based lookup
+	if (useFallback) {
+		const deptCode = getDepartmentFromPostalCode(postalCode);
+		if (!deptCode) {
+			return [];
+		}
+		return findDeputesByDepartment(deptCode);
+	}
+
+	return [];
+}
+
+/**
+ * Check if a postal code has precise circonscription mapping
+ */
+export function hasCirconscriptionMapping(postalCode: string): boolean {
+	const normalized = postalCode.replace(/\s/g, "").trim();
+	return PLZ_TO_CIRC.has(normalized);
 }
 
 /**
