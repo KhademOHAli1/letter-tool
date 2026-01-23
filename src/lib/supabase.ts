@@ -109,33 +109,58 @@ export async function trackLetterGeneration(
  * @param country - Filter by country (default: "de" for backwards compatibility)
  */
 export async function getLetterStats(
-	country: "de" | "ca" | "uk" = "de",
+	country: "de" | "ca" | "uk" | "fr" = "de",
 ): Promise<LetterStats | null> {
 	try {
 		const supabase = createServerSupabaseClient();
 
-		// Total letters
-		const { count: totalLetters } = await supabase
+		// Check if country column exists by testing the filter
+		// If it fails, we'll fall back to querying all data (pre-migration-004 compatibility)
+		const { count: totalWithCountry, error: countError } = await supabase
 			.from("letter_generations")
 			.select("*", { count: "exact", head: true })
 			.eq("country", country);
 
+		// Determine if we should filter by country
+		const useCountryFilter = !countError;
+
+		// Total letters
+		let finalCount: number;
+		if (useCountryFilter) {
+			finalCount = totalWithCountry || 0;
+		} else {
+			console.warn(
+				"[SUPABASE] Country column not available, counting all letters:",
+				countError?.message,
+			);
+			const { count: totalAll } = await supabase
+				.from("letter_generations")
+				.select("*", { count: "exact", head: true });
+			finalCount = totalAll || 0;
+		}
+
 		// Unique MdBs contacted
-		const { data: uniqueMdbs } = await supabase
+		let uniqueMdbQuery = supabase
 			.from("letter_generations")
 			.select("mdb_id")
-			.eq("country", country)
 			.limit(1000);
+		if (useCountryFilter) {
+			uniqueMdbQuery = uniqueMdbQuery.eq("country", country);
+		}
+		const { data: uniqueMdbs } = await uniqueMdbQuery;
 
 		const mdbIds = (uniqueMdbs as { mdb_id: string }[] | null) || [];
 		const uniqueMdbCount = new Set(mdbIds.map((r) => r.mdb_id)).size;
 
 		// Letters by party (normalize case to handle legacy data inconsistencies)
-		const { data: partyData } = await supabase
+		let partyQuery = supabase
 			.from("letter_generations")
 			.select("mdb_party")
-			.eq("country", country)
 			.limit(10000);
+		if (useCountryFilter) {
+			partyQuery = partyQuery.eq("country", country);
+		}
+		const { data: partyData } = await partyQuery;
 
 		const partyRows =
 			(partyData as { mdb_party: string | null }[] | null) || [];
@@ -159,11 +184,14 @@ export async function getLetterStats(
 		}
 
 		// Top MdBs contacted
-		const { data: mdbData } = await supabase
+		let mdbQuery = supabase
 			.from("letter_generations")
 			.select("mdb_name, mdb_party")
-			.eq("country", country)
 			.limit(10000);
+		if (useCountryFilter) {
+			mdbQuery = mdbQuery.eq("country", country);
+		}
+		const { data: mdbData } = await mdbQuery;
 
 		const mdbRows =
 			(mdbData as { mdb_name: string; mdb_party: string | null }[] | null) ||
@@ -188,11 +216,14 @@ export async function getLetterStats(
 			.slice(0, 10);
 
 		// Top Wahlkreise
-		const { data: wahlkreisData } = await supabase
+		let wahlkreisQuery = supabase
 			.from("letter_generations")
 			.select("wahlkreis_name")
-			.eq("country", country)
 			.limit(10000);
+		if (useCountryFilter) {
+			wahlkreisQuery = wahlkreisQuery.eq("country", country);
+		}
+		const { data: wahlkreisData } = await wahlkreisQuery;
 
 		const wahlkreisRows =
 			(wahlkreisData as { wahlkreis_name: string | null }[] | null) || [];
@@ -210,7 +241,7 @@ export async function getLetterStats(
 			.slice(0, 10);
 
 		return {
-			total_letters: totalLetters || 0,
+			total_letters: finalCount,
 			unique_mdbs: uniqueMdbCount,
 			top_forderungen: [], // TODO: Implement when needed
 			letters_by_party: Object.entries(partyCount).map(([party, count]) => ({

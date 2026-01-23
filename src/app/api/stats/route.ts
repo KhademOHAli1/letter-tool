@@ -11,7 +11,11 @@ import { getLetterStats } from "@/lib/supabase";
 export async function GET(request: NextRequest) {
 	try {
 		const { searchParams } = new URL(request.url);
-		const country = (searchParams.get("country") || "de") as "de" | "ca" | "uk";
+		const country = (searchParams.get("country") || "de") as
+			| "de"
+			| "ca"
+			| "uk"
+			| "fr";
 		const stats = await getLetterStats(country);
 
 		if (!stats) {

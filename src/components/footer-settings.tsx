@@ -1,12 +1,20 @@
 "use client";
 
-import { Github, Globe, Instagram, MapPin, Moon, Sun } from "lucide-react";
+import { ChevronUp, Github, Globe, Instagram, Moon, Sun } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { setCookie } from "@/lib/cookies";
 import { useLanguage } from "@/lib/i18n/context";
 
 type Theme = "light" | "dark" | "system";
+type CountryCode = "de" | "ca" | "uk" | "fr";
+
+const COUNTRIES: { code: CountryCode; flag: string; name: string }[] = [
+	{ code: "de", flag: "🇩🇪", name: "Deutschland" },
+	{ code: "ca", flag: "🇨🇦", name: "Canada" },
+	{ code: "uk", flag: "🇬🇧", name: "United Kingdom" },
+	{ code: "fr", flag: "🇫🇷", name: "France" },
+];
 
 export function FooterSettings() {
 	const { language, setLanguage } = useLanguage();
@@ -14,9 +22,11 @@ export function FooterSettings() {
 	const pathname = usePathname();
 	const [theme, setTheme] = useState<Theme>("system");
 	const [mounted, setMounted] = useState(false);
+	const [countryMenuOpen, setCountryMenuOpen] = useState(false);
+	const countryMenuRef = useRef<HTMLDivElement>(null);
 
 	// Determine current country from pathname
-	const currentCountry = pathname.startsWith("/ca")
+	const currentCountry: CountryCode = pathname.startsWith("/ca")
 		? "ca"
 		: pathname.startsWith("/uk")
 			? "uk"
@@ -25,6 +35,22 @@ export function FooterSettings() {
 				: pathname.startsWith("/de")
 					? "de"
 					: "de";
+
+	const currentCountryData = COUNTRIES.find((c) => c.code === currentCountry);
+
+	// Close menu when clicking outside
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (
+				countryMenuRef.current &&
+				!countryMenuRef.current.contains(event.target as Node)
+			) {
+				setCountryMenuOpen(false);
+			}
+		}
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
 
 	useEffect(() => {
 		setMounted(true);
@@ -104,14 +130,11 @@ export function FooterSettings() {
 		}
 	};
 
-	const toggleCountry = () => {
-		// Cycle through countries: de -> ca -> uk -> fr -> de
-		const countryOrder = ["de", "ca", "uk", "fr"] as const;
-		const currentIndex = countryOrder.indexOf(
-			currentCountry as (typeof countryOrder)[number],
-		);
-		const nextIndex = (currentIndex + 1) % countryOrder.length;
-		const newCountry = countryOrder[nextIndex];
+	const selectCountry = (newCountry: CountryCode) => {
+		if (newCountry === currentCountry) {
+			setCountryMenuOpen(false);
+			return;
+		}
 		// Set cookie to remember preference (30 days)
 		void setCookie("country", newCountry);
 
@@ -128,37 +151,56 @@ export function FooterSettings() {
 		} else {
 			newPath = `/${newCountry}`;
 		}
+		setCountryMenuOpen(false);
 		router.push(newPath);
 	};
 
 	return (
 		<div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
-			{/* Country Toggle */}
-			<button
-				type="button"
-				onClick={toggleCountry}
-				className="inline-flex items-center gap-1.5 py-2 hover:text-foreground transition-colors"
-				aria-label={
-					currentCountry === "de"
-						? "Switch to Canada"
-						: currentCountry === "ca"
-							? "Switch to UK"
-							: currentCountry === "uk"
-								? "Switch to France"
-								: "Zu Deutschland wechseln"
-				}
-			>
-				<MapPin className="h-4 w-4" />
-				<span>
-					{currentCountry === "de"
-						? "Switch to Canada"
-						: currentCountry === "ca"
-							? "Switch to UK"
-							: currentCountry === "uk"
-								? "Switch to France"
-								: "Auf Deutsch wechseln"}
-				</span>
-			</button>
+			{/* Country Selector - Dropup Menu */}
+			<div className="relative" ref={countryMenuRef}>
+				<button
+					type="button"
+					onClick={() => setCountryMenuOpen(!countryMenuOpen)}
+					className="inline-flex items-center gap-1.5 py-2 hover:text-foreground transition-colors"
+					aria-label="Select country"
+					aria-expanded={countryMenuOpen}
+					aria-haspopup="listbox"
+				>
+					<span className="text-base">{currentCountryData?.flag}</span>
+					<span>{currentCountryData?.name}</span>
+					<ChevronUp
+						className={`h-3.5 w-3.5 transition-transform ${countryMenuOpen ? "" : "rotate-180"}`}
+					/>
+				</button>
+
+				{/* Dropup menu */}
+				{countryMenuOpen && (
+					<div
+						className="absolute bottom-full left-0 mb-1 min-w-40 rounded-md border border-border bg-popover shadow-lg py-1 z-50"
+						role="listbox"
+						aria-label="Select country"
+					>
+						{COUNTRIES.map((country) => (
+							<button
+								key={country.code}
+								type="button"
+								role="option"
+								aria-selected={country.code === currentCountry}
+								onClick={() => selectCountry(country.code)}
+								className={`w-full flex items-center gap-2 px-3 py-2 text-left text-sm transition-colors ${
+									country.code === currentCountry
+										? "bg-primary/10 text-foreground"
+										: "text-muted-foreground hover:bg-muted hover:text-foreground"
+								}`}
+							>
+								<span className="text-base">{country.flag}</span>
+								<span>{country.name}</span>
+							</button>
+						))}
+					</div>
+				)}
+			</div>
 
 			<span className="text-border">·</span>
 
