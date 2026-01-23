@@ -563,12 +563,121 @@ export function LetterForm() {
 		return null;
 	};
 
-	const isValid =
-		name.trim() &&
-		selectedRep &&
-		selectedDemands.length > 0 &&
-		validatePersonalNote(personalNote, t).valid &&
-		consentGiven;
+	// Validation state for each field
+	const validationErrors = useMemo(() => {
+		const errors: {
+			name?: string;
+			postalCode?: string;
+			representative?: string;
+			personalNote?: string;
+			demands?: string;
+			consent?: string;
+		} = {};
+
+		if (!name.trim()) {
+			errors.name =
+				language === "de"
+					? "Bitte gib deinen Namen ein"
+					: language === "fr"
+						? "Veuillez entrer votre nom"
+						: "Please enter your name";
+		}
+
+		if (!postalCode.trim()) {
+			errors.postalCode =
+				language === "de"
+					? "Bitte gib deine Postleitzahl ein"
+					: language === "fr"
+						? "Veuillez entrer votre code postal"
+						: "Please enter your postal code";
+		} else if (!district) {
+			errors.postalCode =
+				language === "de"
+					? "Kein Wahlkreis für diese PLZ gefunden"
+					: language === "fr"
+						? "Aucune circonscription trouvée pour ce code postal"
+						: "No constituency found for this postal code";
+		}
+
+		if (!selectedRep) {
+			errors.representative =
+				language === "de"
+					? "Bitte wähle eine*n Abgeordnete*n aus"
+					: language === "fr"
+						? "Veuillez sélectionner un(e) député(e)"
+						: "Please select an MP";
+		}
+
+		const noteValidation = validatePersonalNote(personalNote, t);
+		if (!noteValidation.valid) {
+			errors.personalNote = noteValidation.message;
+		}
+
+		if (selectedDemands.length === 0) {
+			errors.demands =
+				language === "de"
+					? "Bitte wähle mindestens eine Forderung"
+					: language === "fr"
+						? "Veuillez sélectionner au moins une demande"
+						: "Please select at least one demand";
+		}
+
+		if (!consentGiven) {
+			errors.consent =
+				language === "de"
+					? "Bitte stimme der Datenverarbeitung zu"
+					: language === "fr"
+						? "Veuillez accepter le traitement des données"
+						: "Please agree to data processing";
+		}
+
+		return errors;
+	}, [
+		name,
+		postalCode,
+		district,
+		selectedRep,
+		personalNote,
+		selectedDemands,
+		consentGiven,
+		language,
+		t,
+	]);
+
+	const isValid = Object.keys(validationErrors).length === 0;
+
+	// Track if user has attempted to submit (to show errors)
+	const [showValidationErrors, setShowValidationErrors] = useState(false);
+
+	// Handle click on disabled submit button - show errors
+	const handleSubmitClick = useCallback(() => {
+		if (!isValid) {
+			setShowValidationErrors(true);
+
+			// Build a comprehensive error message
+			const errorList = Object.values(validationErrors);
+			const errorMessage =
+				language === "de"
+					? `Bitte korrigiere folgende Fehler:\n• ${errorList.join("\n• ")}`
+					: language === "fr"
+						? `Veuillez corriger les erreurs suivantes :\n• ${errorList.join("\n• ")}`
+						: `Please fix the following issues:\n• ${errorList.join("\n• ")}`;
+			setError(errorMessage);
+
+			// Scroll to first error
+			setTimeout(() => {
+				const firstErrorField = document.querySelector(
+					'[data-has-error="true"]',
+				);
+				if (firstErrorField) {
+					firstErrorField.scrollIntoView({
+						behavior: "smooth",
+						block: "center",
+					});
+				}
+			}, 100);
+		}
+	}, [isValid, validationErrors, language]);
 
 	return (
 		<form onSubmit={handleSubmit} className="space-y-8">
@@ -673,25 +782,75 @@ export function LetterForm() {
 			</div>
 
 			{/* Step 1: Name */}
-			<div className="p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm space-y-4">
+			<div
+				className={`p-4 md:p-5 rounded-xl bg-card border shadow-sm space-y-4 transition-colors ${
+					showValidationErrors && validationErrors.name
+						? "border-destructive/60 bg-destructive/5"
+						: "border-border/60"
+				}`}
+				data-has-error={
+					showValidationErrors && validationErrors.name ? "true" : undefined
+				}
+			>
 				<div className="flex items-center gap-2">
-					<span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+					<span
+						className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
+							showValidationErrors && validationErrors.name
+								? "bg-destructive text-destructive-foreground"
+								: "bg-primary text-primary-foreground"
+						}`}
+					>
 						1
 					</span>
 					<h3 className="font-medium">{t("form", "step1.title")}</h3>
+					{showValidationErrors && validationErrors.name && (
+						<span className="text-xs text-destructive ml-auto">
+							⚠️{" "}
+							{language === "de"
+								? "Pflichtfeld"
+								: language === "fr"
+									? "Requis"
+									: "Required"}
+						</span>
+					)}
 				</div>
 				<div className="space-y-4 px-2">
 					{/* Name */}
 					<div className="space-y-2">
 						<Label htmlFor="name" className="text-sm">
-							{t("form", "step1.nameLabel")}
+							{t("form", "step1.nameLabel")}{" "}
+							<span className="text-destructive">*</span>
 						</Label>
 						<Input
 							id="name"
 							placeholder={t("form", "step1.namePlaceholder")}
 							value={name}
-							onChange={(e) => setName(e.target.value)}
+							onChange={(e) => {
+								setName(e.target.value);
+								if (showValidationErrors && e.target.value.trim()) {
+									setError(null);
+								}
+							}}
+							className={
+								showValidationErrors && validationErrors.name
+									? "border-destructive focus-visible:ring-destructive"
+									: ""
+							}
+							aria-invalid={showValidationErrors && !!validationErrors.name}
+							aria-describedby={
+								showValidationErrors && validationErrors.name
+									? "name-error"
+									: undefined
+							}
 						/>
+						{showValidationErrors && validationErrors.name && (
+							<p
+								id="name-error"
+								className="text-xs text-destructive flex items-center gap-1"
+							>
+								<span>⚠️</span> {validationErrors.name}
+							</p>
+						)}
 					</div>
 
 					<WhyBox
@@ -702,12 +861,44 @@ export function LetterForm() {
 			</div>
 
 			{/* Step 2: Postal Code & Representative Selection */}
-			<div className="p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm space-y-4">
+			<div
+				className={`p-4 md:p-5 rounded-xl bg-card border shadow-sm space-y-4 transition-colors ${
+					showValidationErrors &&
+					(validationErrors.postalCode || validationErrors.representative)
+						? "border-destructive/60 bg-destructive/5"
+						: "border-border/60"
+				}`}
+				data-has-error={
+					showValidationErrors &&
+					(validationErrors.postalCode || validationErrors.representative)
+						? "true"
+						: undefined
+				}
+			>
 				<div className="flex items-center gap-2">
-					<span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+					<span
+						className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
+							showValidationErrors &&
+							(validationErrors.postalCode || validationErrors.representative)
+								? "bg-destructive text-destructive-foreground"
+								: "bg-primary text-primary-foreground"
+						}`}
+					>
 						2
 					</span>
 					<h3 className="font-medium">{t("form", "step2.title")}</h3>
+					{showValidationErrors &&
+						(validationErrors.postalCode ||
+							validationErrors.representative) && (
+							<span className="text-xs text-destructive ml-auto">
+								⚠️{" "}
+								{language === "de"
+									? "Pflichtfeld"
+									: language === "fr"
+										? "Requis"
+										: "Required"}
+							</span>
+						)}
 				</div>
 				<div className="space-y-4 px-2">
 					{/* Postal Code */}
@@ -745,8 +936,18 @@ export function LetterForm() {
 										: e.target.value.replace(/\D/g, ""),
 								)
 							}
-							className="max-w-40"
+							className={`max-w-40 ${showValidationErrors && validationErrors.postalCode ? "border-destructive focus-visible:ring-destructive" : ""}`}
+							aria-invalid={
+								showValidationErrors && !!validationErrors.postalCode
+							}
 						/>
+						{showValidationErrors &&
+							validationErrors.postalCode &&
+							!district && (
+								<p className="text-xs text-destructive flex items-center gap-1">
+									<span>⚠️</span> {validationErrors.postalCode}
+								</p>
+							)}
 						{isLookingUpPostcode && (
 							<p className="text-sm text-muted-foreground">
 								🔍 Looking up your constituency...
@@ -831,10 +1032,28 @@ export function LetterForm() {
 								</div>
 							)}
 							<Label className="text-sm font-medium">
-								{t("form", "step2.selectLabel")}
+								{t("form", "step2.selectLabel")}{" "}
+								<span className="text-destructive">*</span>
 							</Label>
 							{/* Inline expandable representative selector */}
-							<div className="rounded-lg border border-border overflow-hidden transition-all duration-200">
+							<div
+								className={`rounded-lg border overflow-hidden transition-all duration-200 ${
+									showValidationErrors &&
+									validationErrors.representative &&
+									!selectedRep
+										? "border-destructive"
+										: "border-border"
+								}`}
+							>
+								{showValidationErrors &&
+									validationErrors.representative &&
+									!selectedRep && (
+										<div className="px-3 py-2 bg-destructive/10 border-b border-destructive/20">
+											<p className="text-xs text-destructive flex items-center gap-1">
+												<span>⚠️</span> {validationErrors.representative}
+											</p>
+										</div>
+									)}
 								{/* Show selected representative or placeholder when collapsed */}
 								{!repSelectorOpen && (
 									<button
@@ -986,15 +1205,42 @@ export function LetterForm() {
 			</div>
 
 			{/* Step 3: Personal Story */}
-			<div className="p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm space-y-4">
+			<div
+				className={`p-4 md:p-5 rounded-xl bg-card border shadow-sm space-y-4 transition-colors ${
+					showValidationErrors && validationErrors.personalNote
+						? "border-destructive/60 bg-destructive/5"
+						: "border-border/60"
+				}`}
+				data-has-error={
+					showValidationErrors && validationErrors.personalNote
+						? "true"
+						: undefined
+				}
+			>
 				<div className="flex items-center gap-2">
-					<span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+					<span
+						className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
+							showValidationErrors && validationErrors.personalNote
+								? "bg-destructive text-destructive-foreground"
+								: "bg-primary text-primary-foreground"
+						}`}
+					>
 						3
 					</span>
 					<h3 className="font-medium">
 						{t("form", "step3.title")}{" "}
 						<span className="text-destructive">*</span>
 					</h3>
+					{showValidationErrors && validationErrors.personalNote && (
+						<span className="text-xs text-destructive ml-auto">
+							⚠️{" "}
+							{language === "de"
+								? "Pflichtfeld"
+								: language === "fr"
+									? "Requis"
+									: "Required"}
+						</span>
+					)}
 				</div>
 				<div className="space-y-4 px-2">
 					<p className="text-sm text-muted-foreground">
@@ -1015,10 +1261,27 @@ export function LetterForm() {
 											? "step3.placeholderFR"
 											: "step3.placeholderDE",
 							)}
-							className="min-h-30 resize-none pr-10"
+							className={`min-h-30 resize-none pr-10 ${
+								showValidationErrors && validationErrors.personalNote
+									? "border-destructive focus-visible:ring-destructive"
+									: ""
+							}`}
 							value={personalNote}
-							onChange={(e) => setPersonalNote(e.target.value)}
+							onChange={(e) => {
+								setPersonalNote(e.target.value);
+								if (showValidationErrors && e.target.value.trim()) {
+									setError(null);
+								}
+							}}
 							required
+							aria-invalid={
+								showValidationErrors && !!validationErrors.personalNote
+							}
+							aria-describedby={
+								showValidationErrors && validationErrors.personalNote
+									? "story-error"
+									: undefined
+							}
 						/>
 						{/* Voice input - subtle icon in corner */}
 						<div className="absolute top-2 right-2 flex items-center gap-1">
@@ -1029,12 +1292,14 @@ export function LetterForm() {
 							/>
 						</div>
 					</div>
-					{personalNote.length > 0 &&
-						!validatePersonalNote(personalNote, t).valid && (
-							<p className="text-xs text-destructive">
-								{validatePersonalNote(personalNote, t).message}
-							</p>
-						)}
+					{showValidationErrors && validationErrors.personalNote && (
+						<p
+							id="story-error"
+							className="text-xs text-destructive flex items-center gap-1"
+						>
+							<span>⚠️</span> {validationErrors.personalNote}
+						</p>
+					)}
 					<p className="text-xs text-muted-foreground">
 						{t("form", "step3.hint")}
 					</p>
@@ -1048,17 +1313,50 @@ export function LetterForm() {
 			</div>
 
 			{/* Step 4: Demands */}
-			<div className="p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm space-y-4">
+			<div
+				className={`p-4 md:p-5 rounded-xl bg-card border shadow-sm space-y-4 transition-colors ${
+					showValidationErrors && validationErrors.demands
+						? "border-destructive/60 bg-destructive/5"
+						: "border-border/60"
+				}`}
+				data-has-error={
+					showValidationErrors && validationErrors.demands ? "true" : undefined
+				}
+			>
 				<div className="flex items-center gap-2">
-					<span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+					<span
+						className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
+							showValidationErrors && validationErrors.demands
+								? "bg-destructive text-destructive-foreground"
+								: "bg-primary text-primary-foreground"
+						}`}
+					>
 						4
 					</span>
-					<h3 className="font-medium">{t("form", "step4.title")}</h3>
+					<h3 className="font-medium">
+						{t("form", "step4.title")}{" "}
+						<span className="text-destructive">*</span>
+					</h3>
+					{showValidationErrors && validationErrors.demands && (
+						<span className="text-xs text-destructive ml-auto">
+							⚠️{" "}
+							{language === "de"
+								? "Pflichtfeld"
+								: language === "fr"
+									? "Requis"
+									: "Required"}
+						</span>
+					)}
 				</div>
 				<div className="space-y-3 px-2">
 					<p className="text-sm text-muted-foreground">
 						{t("form", "step4.hint")}
 					</p>
+					{showValidationErrors && validationErrors.demands && (
+						<p className="text-xs text-destructive flex items-center gap-1">
+							<span>⚠️</span> {validationErrors.demands}
+						</p>
+					)}
 					<div className="grid gap-2">
 						{demands.map((demand) => {
 							const isSelected = selectedDemands.includes(demand.id);
@@ -1124,7 +1422,16 @@ export function LetterForm() {
 			</div>
 
 			{/* Consent Checkbox (DSGVO-required) */}
-			<div className="p-4 md:p-5 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40 space-y-3">
+			<div
+				className={`p-4 md:p-5 rounded-xl space-y-3 transition-colors ${
+					showValidationErrors && validationErrors.consent
+						? "bg-destructive/10 border border-destructive/60"
+						: "bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40"
+				}`}
+				data-has-error={
+					showValidationErrors && validationErrors.consent ? "true" : undefined
+				}
+			>
 				<label htmlFor="consent" className="flex gap-3 cursor-pointer">
 					<div className="flex-none w-5 h-5 mt-0.5">
 						<Checkbox
@@ -1143,6 +1450,11 @@ export function LetterForm() {
 						<p className="text-xs text-muted-foreground leading-relaxed">
 							{t("form", "consent.label")}
 						</p>
+						{showValidationErrors && validationErrors.consent && (
+							<p className="text-xs text-destructive flex items-center gap-1 mt-1">
+								<span>⚠️</span> {validationErrors.consent}
+							</p>
+						)}
 					</div>
 				</label>
 				{/* Extra reassurance */}
@@ -1164,14 +1476,50 @@ export function LetterForm() {
 			)}
 
 			{/* Submit */}
-			<Button
-				type="submit"
-				size="lg"
-				className="w-full h-14 text-base font-medium shadow-md"
-				disabled={!isValid}
-			>
-				{t("form", "submit.default")}
-			</Button>
+			<div className="relative">
+				<Button
+					type="submit"
+					size="lg"
+					className="w-full h-14 text-base font-medium shadow-md"
+					disabled={!isValid}
+				>
+					{t("form", "submit.default")}
+				</Button>
+				{/* Invisible overlay to capture clicks when button is disabled */}
+				{!isValid && (
+					<button
+						type="button"
+						className="absolute inset-0 cursor-pointer"
+						onClick={handleSubmitClick}
+						aria-label={
+							language === "de"
+								? "Formular überprüfen"
+								: language === "fr"
+									? "Vérifier le formulaire"
+									: "Check form"
+						}
+					/>
+				)}
+			</div>
+
+			{/* Validation summary when there are errors */}
+			{showValidationErrors && !isValid && (
+				<div className="rounded-lg bg-destructive/5 border border-destructive/30 p-4 space-y-2">
+					<p className="text-sm font-medium text-destructive flex items-center gap-2">
+						<span>⚠️</span>
+						{language === "de"
+							? "Bitte fülle alle Pflichtfelder aus:"
+							: language === "fr"
+								? "Veuillez remplir tous les champs obligatoires :"
+								: "Please complete all required fields:"}
+					</p>
+					<ul className="text-sm text-destructive space-y-1 ml-6 list-disc">
+						{Object.entries(validationErrors).map(([key, message]) => (
+							<li key={key}>{message}</li>
+						))}
+					</ul>
+				</div>
+			)}
 		</form>
 	);
 }
