@@ -81,9 +81,9 @@ export default function CountryHome() {
 	};
 
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-background overflow-x-hidden">
 			{/* Hero Section - with subtle heritage gradient */}
-			<header className="relative heritage-gradient heritage-sun safe-area-top">
+			<header className="relative heritage-gradient heritage-sun safe-area-top overflow-hidden">
 				{/* Desktop Settings - top right corner */}
 				<div className="absolute top-4 right-4 z-10">
 					<HeaderSettings />

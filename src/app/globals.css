@@ -169,8 +169,15 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    overflow-x: hidden;
+  }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
   }
 }
 
@@ -329,13 +336,14 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, label {
 /* Lion & Sun decorative element (ultra-subtle) */
 .heritage-sun {
   position: relative;
+  overflow: hidden;
 }
 
 .heritage-sun::after {
   content: "";
   position: absolute;
   top: -30%;
-  right: -10%;
+  right: 0;
   width: 200px;
   height: 200px;
   opacity: 0.02;
