@@ -6,6 +6,70 @@
 export type Language = "de" | "en" | "fr";
 
 export const translations = {
+	// ===== SEO / Metadata =====
+	seo: {
+		titleDE: {
+			de: "Stimme für Iran | Schreib deinem MdB",
+			en: "Voice for Iran | Write to Your MP",
+			fr: "Voix pour l'Iran | Écrivez à votre député",
+		},
+		titleCA: {
+			de: "Stimme für Iran | Kanada",
+			en: "Voice for Iran | Write to Your MP",
+			fr: "Voix pour l'Iran | Écrivez à votre député(e)",
+		},
+		titleUK: {
+			de: "Stimme für Iran | Großbritannien",
+			en: "Voice for Iran | Write to Your MP",
+			fr: "Voix pour l'Iran | Royaume-Uni",
+		},
+		titleFR: {
+			de: "Stimme für Iran | Frankreich",
+			en: "Voice for Iran | France",
+			fr: "Voix pour l'Iran | Écrivez à votre député(e)",
+		},
+		descriptionDE: {
+			de: "Setze dich für Menschenrechte im Iran ein. Schreibe einen persönlichen Brief an deinen Bundestagsabgeordneten – schnell, einfach und wirkungsvoll.",
+			en: "Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
+			fr: "Défendez les droits humains en Iran. Écrivez une lettre personnelle à votre député – rapide, simple et efficace.",
+		},
+		descriptionCA: {
+			de: "Setze dich für Menschenrechte im Iran ein. Schreibe deinem kanadischen Abgeordneten.",
+			en: "Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
+			fr: "Défendez les droits humains en Iran. Écrivez une lettre personnelle à votre député(e) – rapide, simple et efficace.",
+		},
+		descriptionUK: {
+			de: "Setze dich für Menschenrechte im Iran ein. Schreibe deinem britischen Abgeordneten.",
+			en: "Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
+			fr: "Défendez les droits humains en Iran. Écrivez à votre député britannique.",
+		},
+		descriptionFR: {
+			de: "Setze dich für Menschenrechte im Iran ein. Schreibe deinem französischen Abgeordneten.",
+			en: "Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
+			fr: "Défendez les droits humains en Iran. Écrivez une lettre personnelle à votre député(e) – rapide, simple et efficace.",
+		},
+		ogAltDE: {
+			de: "Stimme für Iran - Schreib deinem Bundestagsabgeordneten",
+			en: "Voice for Iran - Write to Your MP",
+			fr: "Voix pour l'Iran - Écrivez à votre député",
+		},
+		ogAltCA: {
+			de: "Stimme für Iran - Kanada",
+			en: "Voice for Iran - Write to Your Canadian MP",
+			fr: "Voix pour l'Iran - Écrivez à votre député(e) canadien(ne)",
+		},
+		ogAltUK: {
+			de: "Stimme für Iran - Großbritannien",
+			en: "Voice for Iran - Write to Your UK MP",
+			fr: "Voix pour l'Iran - Royaume-Uni",
+		},
+		ogAltFR: {
+			de: "Stimme für Iran - Frankreich",
+			en: "Voice for Iran - France",
+			fr: "Voix pour l'Iran - Écrivez à votre député(e)",
+		},
+	},
+
 	// ===== Common =====
 	common: {
 		back: { de: "Zurück", en: "Back", fr: "Retour" },

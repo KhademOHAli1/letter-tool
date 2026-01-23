@@ -3,37 +3,124 @@ import type { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-// Localized content for OG image
+// Localized content for OG image - per country and language
 const OG_CONTENT = {
 	de: {
-		badge: "Deine Stimme zählt",
-		title: "Stimme für Iran",
-		subtitle:
-			"Schreib deinem Bundestagsabgeordneten für Menschenrechte im Iran",
-		cta: "In 5 Minuten deinen Brief schreiben →",
-		domain: "stimme-fuer-iran.de",
+		de: {
+			badge: "Deine Stimme zählt",
+			title: "Stimme für Iran",
+			subtitle:
+				"Schreib deinem Bundestagsabgeordneten für Menschenrechte im Iran",
+			cta: "In 5 Minuten deinen Brief schreiben →",
+			domain: "stimme-fuer-iran.de",
+		},
+		en: {
+			badge: "Your Voice Matters",
+			title: "Voice for Iran",
+			subtitle: "Write to your German MP for human rights in Iran",
+			cta: "Write your letter in 5 minutes →",
+			domain: "stimme-fuer-iran.de",
+		},
+		fr: {
+			badge: "Votre voix compte",
+			title: "Voix pour l'Iran",
+			subtitle:
+				"Écrivez à votre député allemand pour les droits humains en Iran",
+			cta: "Écrivez votre lettre en 5 minutes →",
+			domain: "stimme-fuer-iran.de",
+		},
 	},
 	ca: {
-		badge: "Your Voice Matters",
-		title: "Voice for Iran",
-		subtitle: "Write to your Member of Parliament for human rights in Iran",
-		cta: "Write your letter in 5 minutes →",
-		domain: "voiceforiran.ca",
+		de: {
+			badge: "Deine Stimme zählt",
+			title: "Stimme für Iran",
+			subtitle: "Schreib deinem kanadischen Abgeordneten",
+			cta: "In 5 Minuten deinen Brief schreiben →",
+			domain: "voiceforiran.ca",
+		},
+		en: {
+			badge: "Your Voice Matters",
+			title: "Voice for Iran",
+			subtitle: "Write to your Member of Parliament for human rights in Iran",
+			cta: "Write your letter in 5 minutes →",
+			domain: "voiceforiran.ca",
+		},
+		fr: {
+			badge: "Votre voix compte",
+			title: "Voix pour l'Iran",
+			subtitle: "Écrivez à votre député(e) pour les droits humains en Iran",
+			cta: "Écrivez votre lettre en 5 minutes →",
+			domain: "voiceforiran.ca",
+		},
 	},
 	uk: {
-		badge: "Your Voice Matters",
-		title: "Voice for Iran",
-		subtitle: "Write to your Member of Parliament for human rights in Iran",
-		cta: "Write your letter in 5 minutes →",
-		domain: "voiceforiran.uk",
+		de: {
+			badge: "Deine Stimme zählt",
+			title: "Stimme für Iran",
+			subtitle: "Schreib deinem britischen Abgeordneten",
+			cta: "In 5 Minuten deinen Brief schreiben →",
+			domain: "voiceforiran.uk",
+		},
+		en: {
+			badge: "Your Voice Matters",
+			title: "Voice for Iran",
+			subtitle: "Write to your Member of Parliament for human rights in Iran",
+			cta: "Write your letter in 5 minutes →",
+			domain: "voiceforiran.uk",
+		},
+		fr: {
+			badge: "Votre voix compte",
+			title: "Voix pour l'Iran",
+			subtitle: "Écrivez à votre député britannique",
+			cta: "Écrivez votre lettre en 5 minutes →",
+			domain: "voiceforiran.uk",
+		},
+	},
+	fr: {
+		de: {
+			badge: "Deine Stimme zählt",
+			title: "Stimme für Iran",
+			subtitle: "Schreib deinem französischen Abgeordneten",
+			cta: "In 5 Minuten deinen Brief schreiben →",
+			domain: "voixpourliran.fr",
+		},
+		en: {
+			badge: "Your Voice Matters",
+			title: "Voice for Iran",
+			subtitle: "Write to your French Deputy for human rights in Iran",
+			cta: "Write your letter in 5 minutes →",
+			domain: "voixpourliran.fr",
+		},
+		fr: {
+			badge: "Votre voix compte",
+			title: "Voix pour l'Iran",
+			subtitle: "Écrivez à votre député(e) pour les droits humains en Iran",
+			cta: "Écrivez votre lettre en 5 minutes →",
+			domain: "voixpourliran.fr",
+		},
 	},
 } as const;
 
+// Default language per country
+const DEFAULT_LANG: Record<string, "de" | "en" | "fr"> = {
+	de: "de",
+	ca: "en",
+	uk: "en",
+	fr: "fr",
+};
+
 export async function GET(request: NextRequest) {
 	const { searchParams } = new URL(request.url);
-	const country = searchParams.get("country") || "de";
-	const content =
-		OG_CONTENT[country as keyof typeof OG_CONTENT] || OG_CONTENT.de;
+	const country = (searchParams.get("country") ||
+		"de") as keyof typeof OG_CONTENT;
+	const langParam = searchParams.get("lang") as "de" | "en" | "fr" | null;
+
+	// Get content for country and language
+	const countryContent = OG_CONTENT[country] || OG_CONTENT.de;
+	const defaultLang = DEFAULT_LANG[country] || "en";
+	const lang =
+		langParam && langParam in countryContent ? langParam : defaultLang;
+	const content = countryContent[lang as keyof typeof countryContent];
 
 	return new ImageResponse(
 		<div

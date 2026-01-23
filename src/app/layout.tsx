@@ -17,26 +17,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Stimme für Iran | Schreib deinem MdB",
+	title: {
+		default: "Stimme für Iran | Voice for Iran",
+		template: "%s",
+	},
 	description:
-		"Setze dich für Menschenrechte im Iran ein. Schreibe einen persönlichen Brief an deinen Bundestagsabgeordneten – schnell, einfach und wirkungsvoll.",
+		"Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
 	keywords: [
 		"Iran",
+		"human rights",
 		"Menschenrechte",
+		"droits humains",
+		"Member of Parliament",
 		"Bundestag",
-		"MdB",
-		"Brief schreiben",
-		"Solidarität",
-		"Diaspora",
+		"letter",
+		"advocacy",
 	],
 	icons: {
 		icon: "/favicon.svg",
 		apple: "/favicon.svg",
 	},
 	openGraph: {
-		title: "Stimme für Iran | Schreib deinem MdB",
+		title: "Stimme für Iran | Voice for Iran",
 		description:
-			"Setze dich für Menschenrechte im Iran ein. Schreibe einen persönlichen Brief an deinen Bundestagsabgeordneten.",
+			"Advocate for human rights in Iran. Write a personal letter to your Member of Parliament.",
 		type: "website",
 		locale: "de_DE",
 		images: [
@@ -44,14 +48,14 @@ export const metadata: Metadata = {
 				url: "/api/og",
 				width: 1200,
 				height: 630,
-				alt: "Stimme für Iran - Schreib deinem Bundestagsabgeordneten",
+				alt: "Voice for Iran - Write to Your Representative",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Stimme für Iran",
-		description: "Schreibe deinem MdB für Menschenrechte im Iran",
+		title: "Stimme für Iran | Voice for Iran",
+		description: "Write to your representative for human rights in Iran",
 	},
 };
 
