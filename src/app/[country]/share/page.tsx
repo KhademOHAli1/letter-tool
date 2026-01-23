@@ -16,13 +16,22 @@ import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { CampaignGoal } from "@/components/campaign-goal";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/i18n/context";
 
 // Progress steps for letter generation
-const PROGRESS_STEPS = [
-	"Verbindung wird hergestellt...",
-	"Brief wird geschrieben...",
-	"Fast fertig...",
-];
+const PROGRESS_STEPS = {
+	de: [
+		"Verbindung wird hergestellt...",
+		"Brief wird geschrieben...",
+		"Fast fertig...",
+	],
+	en: ["Connecting...", "Writing your letter...", "Almost done..."],
+	fr: [
+		"Connexion en cours...",
+		"Rédaction de votre lettre...",
+		"Presque terminé...",
+	],
+};
 
 interface FormData {
 	senderName: string;
@@ -43,6 +52,7 @@ interface FormData {
 export default function SharePage() {
 	const router = useRouter();
 	const params = useParams<{ country: string }>();
+	const { language } = useLanguage();
 	const country = params.country || "de";
 	const [copiedMessage, setCopiedMessage] = useState(false);
 	const [copiedLink, setCopiedLink] = useState(false);
@@ -54,22 +64,34 @@ export default function SharePage() {
 	const [isOffline, setIsOffline] = useState(false);
 
 	const shareUrl = typeof window !== "undefined" ? window.location.origin : "";
-	const shareMessage =
-		country === "de"
-			? `Ich habe gerade einen Brief an meine*n Bundestagsabgeordnete*n geschrieben - für Menschenrechte im Iran.
+
+	// Language-aware share messages
+	const SHARE_MESSAGES = {
+		de: `Ich habe gerade einen Brief an meine*n Bundestagsabgeordnete*n geschrieben - für Menschenrechte im Iran.
 
 Warum das wichtig ist: Abgeordnete zählen Briefe aus ihrem Wahlkreis. Persönliche Nachrichten haben echten Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird unsere Stimme.
 
 Du kannst in 5 Minuten auch einen Brief schreiben - das Tool hilft dir dabei:
 
-${shareUrl}`
-			: `I just wrote a letter to my Member of Parliament - for human rights in Iran.
+${shareUrl}`,
+		en: `I just wrote a letter to my Member of Parliament - for human rights in Iran.
 
 Why it matters: Representatives count messages from constituents. Personal letters have real influence on political decisions. The more people write, the louder our voice becomes.
 
 You can write a letter in 5 minutes too - this tool helps:
 
-${shareUrl}`;
+${shareUrl}`,
+		fr: `Je viens d'écrire une lettre à mon/ma député(e) - pour les droits humains en Iran.
+
+Pourquoi c'est important : Les député(e)s comptent les messages de leurs électeurs. Les lettres personnelles ont une réelle influence sur les décisions politiques. Plus nous écrivons, plus notre voix se fait entendre.
+
+Vous pouvez aussi écrire une lettre en 5 minutes - cet outil vous aide :
+
+${shareUrl}`,
+	};
+
+	const shareMessage = SHARE_MESSAGES[language] || SHARE_MESSAGES.en;
+	const progressSteps = PROGRESS_STEPS[language] || PROGRESS_STEPS.en;
 
 	// Generate letter in background
 	const generateLetter = useCallback(async (data: FormData) => {
@@ -83,9 +105,9 @@ ${shareUrl}`;
 		setError(null);
 		setProgressStep(0);
 
-		// Simulate progress steps
+		// Simulate progress steps (use 3 as constant length)
 		const progressInterval = setInterval(() => {
-			setProgressStep((prev) => Math.min(prev + 1, PROGRESS_STEPS.length - 1));
+			setProgressStep((prev) => Math.min(prev + 1, 2));
 		}, 2500);
 
 		try {
@@ -214,15 +236,25 @@ ${shareUrl}`;
 	};
 
 	const handleEmailShare = () => {
-		const subject = "Schreib auch einen Brief für den Iran";
+		const subjects = {
+			de: "Schreib auch einen Brief für den Iran",
+			en: "Write a letter for Iran too",
+			fr: "Écrivez aussi une lettre pour l'Iran",
+		};
+		const subject = subjects[language] || subjects.en;
 		window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(shareMessage)}`;
 	};
 
 	const handleNativeShare = async () => {
 		if (navigator.share) {
+			const titles = {
+				de: "Stimme für Iran",
+				en: "Voice for Iran",
+				fr: "Voix pour l'Iran",
+			};
 			try {
 				await navigator.share({
-					title: "Stimme für Iran",
+					title: titles[language] || titles.en,
 					text: shareMessage,
 					url: shareUrl,
 				});
@@ -316,12 +348,12 @@ ${shareUrl}`;
 								? "Lade deine Freund*innen ein, auch ihre Stimme zu erheben."
 								: error
 									? error
-									: PROGRESS_STEPS[progressStep]}
+									: progressSteps[progressStep]}
 						</p>
 						{/* Progress indicator */}
 						{isGenerating && (
 							<div className="flex items-center justify-center gap-2 pt-2">
-								{PROGRESS_STEPS.map((_, idx) => (
+								{progressSteps.map((_, idx) => (
 									<div
 										key={idx}
 										className={`h-1.5 w-8 rounded-full transition-colors ${
@@ -466,7 +498,7 @@ ${shareUrl}`;
 						{isGenerating ? (
 							<>
 								<Loader2 className="h-5 w-5 mr-2 animate-spin" />
-								{PROGRESS_STEPS[progressStep]}
+								{progressSteps[progressStep]}
 							</>
 						) : error ? (
 							<>
