@@ -3,17 +3,18 @@
 import { ChevronUp, Github, Globe, Instagram, Moon, Sun } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Flag } from "@/components/flags";
 import { setCookie } from "@/lib/cookies";
 import { useLanguage } from "@/lib/i18n/context";
 
 type Theme = "light" | "dark" | "system";
 type CountryCode = "de" | "ca" | "uk" | "fr";
 
-const COUNTRIES: { code: CountryCode; flag: string; name: string }[] = [
-	{ code: "de", flag: "🇩🇪", name: "Deutschland" },
-	{ code: "ca", flag: "🇨🇦", name: "Canada" },
-	{ code: "uk", flag: "🇬🇧", name: "United Kingdom" },
-	{ code: "fr", flag: "🇫🇷", name: "France" },
+const COUNTRIES: { code: CountryCode; name: string }[] = [
+	{ code: "de", name: "Deutschland" },
+	{ code: "ca", name: "Canada" },
+	{ code: "uk", name: "United Kingdom" },
+	{ code: "fr", name: "France" },
 ];
 
 export function FooterSettings() {
@@ -167,7 +168,7 @@ export function FooterSettings() {
 					aria-expanded={countryMenuOpen}
 					aria-haspopup="listbox"
 				>
-					<span className="text-base">{currentCountryData?.flag}</span>
+					<Flag country={currentCountry} className="h-4 w-5" />
 					<span>{currentCountryData?.name}</span>
 					<ChevronUp
 						className={`h-3.5 w-3.5 transition-transform ${countryMenuOpen ? "" : "rotate-180"}`}
@@ -194,7 +195,7 @@ export function FooterSettings() {
 										: "text-muted-foreground hover:bg-muted hover:text-foreground"
 								}`}
 							>
-								<span className="text-base">{country.flag}</span>
+								<Flag country={country.code} className="h-4 w-5" />
 								<span>{country.name}</span>
 							</button>
 						))}
