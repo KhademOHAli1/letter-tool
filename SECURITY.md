@@ -49,7 +49,7 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 default-src 'self';
 script-src 'self' 'unsafe-inline' 'unsafe-eval';
 style-src 'self' 'unsafe-inline';
-img-src 'self' https://www.bundestag.de data: blob:;
+img-src 'self' https://www.bundestag.de https://www.ourcommons.ca data: blob:;
 font-src 'self';
 connect-src 'self' https://api.openai.com;
 frame-ancestors 'none';

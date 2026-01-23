@@ -1,14 +1,18 @@
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { getLetterStats } from "@/lib/supabase";
 
 /**
- * GET /api/stats
+ * GET /api/stats?country=de|ca|uk
  * Returns aggregated statistics about letter generations.
  * Public endpoint - no authentication required.
+ * @param country - Filter by country (default: "de" for backwards compatibility)
  */
-export async function GET() {
+export async function GET(request: NextRequest) {
 	try {
-		const stats = await getLetterStats();
+		const { searchParams } = new URL(request.url);
+		const country = (searchParams.get("country") || "de") as "de" | "ca" | "uk";
+		const stats = await getLetterStats(country);
 
 		if (!stats) {
 			return NextResponse.json(

@@ -1,15 +1,30 @@
 "use client";
 
-import { Github, Globe, Instagram, Moon, Sun } from "lucide-react";
+import { Github, Globe, Instagram, MapPin, Moon, Sun } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { setCookie } from "@/lib/cookies";
 import { useLanguage } from "@/lib/i18n/context";
 
 type Theme = "light" | "dark" | "system";
 
 export function FooterSettings() {
 	const { language, setLanguage } = useLanguage();
+	const router = useRouter();
+	const pathname = usePathname();
 	const [theme, setTheme] = useState<Theme>("system");
 	const [mounted, setMounted] = useState(false);
+
+	// Determine current country from pathname
+	const currentCountry = pathname.startsWith("/ca")
+		? "ca"
+		: pathname.startsWith("/uk")
+			? "uk"
+			: pathname.startsWith("/fr")
+				? "fr"
+				: pathname.startsWith("/de")
+					? "de"
+					: "de";
 
 	useEffect(() => {
 		setMounted(true);
@@ -76,22 +91,112 @@ export function FooterSettings() {
 	};
 
 	const toggleLanguage = () => {
-		setLanguage(language === "de" ? "en" : "de");
+		// Country-specific language toggle
+		// Germany: de <-> en
+		// Canada: en <-> fr
+		// France: fr <-> en
+		if (currentCountry === "ca") {
+			setLanguage(language === "en" ? "fr" : "en");
+		} else if (currentCountry === "fr") {
+			setLanguage(language === "fr" ? "en" : "fr");
+		} else {
+			setLanguage(language === "de" ? "en" : "de");
+		}
+	};
+
+	const toggleCountry = () => {
+		// Cycle through countries: de -> ca -> uk -> fr -> de
+		const countryOrder = ["de", "ca", "uk", "fr"] as const;
+		const currentIndex = countryOrder.indexOf(
+			currentCountry as (typeof countryOrder)[number],
+		);
+		const nextIndex = (currentIndex + 1) % countryOrder.length;
+		const newCountry = countryOrder[nextIndex];
+		// Set cookie to remember preference (30 days)
+		void setCookie("country", newCountry);
+
+		// Navigate to the new country route
+		let newPath: string;
+		if (pathname.startsWith("/de")) {
+			newPath = `/${newCountry}${pathname.slice(3) || ""}`;
+		} else if (pathname.startsWith("/ca")) {
+			newPath = `/${newCountry}${pathname.slice(3) || ""}`;
+		} else if (pathname.startsWith("/uk")) {
+			newPath = `/${newCountry}${pathname.slice(3) || ""}`;
+		} else if (pathname.startsWith("/fr")) {
+			newPath = `/${newCountry}${pathname.slice(3) || ""}`;
+		} else {
+			newPath = `/${newCountry}`;
+		}
+		router.push(newPath);
 	};
 
 	return (
 		<div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
+			{/* Country Toggle */}
+			<button
+				type="button"
+				onClick={toggleCountry}
+				className="inline-flex items-center gap-1.5 py-2 hover:text-foreground transition-colors"
+				aria-label={
+					currentCountry === "de"
+						? "Switch to Canada"
+						: currentCountry === "ca"
+							? "Switch to UK"
+							: currentCountry === "uk"
+								? "Switch to France"
+								: "Zu Deutschland wechseln"
+				}
+			>
+				<MapPin className="h-4 w-4" />
+				<span>
+					{currentCountry === "de"
+						? "Switch to Canada"
+						: currentCountry === "ca"
+							? "Switch to UK"
+							: currentCountry === "uk"
+								? "Switch to France"
+								: "Auf Deutsch wechseln"}
+				</span>
+			</button>
+
+			<span className="text-border">·</span>
+
 			{/* Language Toggle */}
 			<button
 				type="button"
 				onClick={toggleLanguage}
 				className="inline-flex items-center gap-1.5 py-2 hover:text-foreground transition-colors"
 				aria-label={
-					language === "de" ? "Switch to English" : "Auf Deutsch wechseln"
+					currentCountry === "ca"
+						? language === "en"
+							? "Passer au français"
+							: "Switch to English"
+						: currentCountry === "uk"
+							? "English only"
+							: currentCountry === "fr"
+								? language === "fr"
+									? "Switch to English"
+									: "Passer au français"
+								: language === "de"
+									? "Switch to English"
+									: "Auf Deutsch wechseln"
 				}
 			>
 				<Globe className="h-4 w-4" />
-				<span>{language === "de" ? "English" : "Deutsch"}</span>
+				<span>
+					{currentCountry === "ca"
+						? language === "en"
+							? "Français"
+							: "English"
+						: currentCountry === "fr"
+							? language === "fr"
+								? "English"
+								: "Français"
+							: language === "de"
+								? "English"
+								: "Deutsch"}
+				</span>
 			</button>
 
 			<span className="text-border">·</span>

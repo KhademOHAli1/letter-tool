@@ -1,7 +1,13 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { FORDERUNGEN } from "@/lib/data/forderungen";
+import { DEMANDS_CA, type DemandCA } from "@/lib/data/ca/forderungen-ca";
+import { FORDERUNGEN, type Forderung } from "@/lib/data/forderungen";
+import { DEMANDS_FR, type DemandFR } from "@/lib/data/fr/forderungen-fr";
+import { DEMANDS_UK, type DemandUK } from "@/lib/data/uk/forderungen-uk";
 import { serverEnv, validateServerEnv } from "@/lib/env";
 import { LETTER_SYSTEM_PROMPT } from "@/lib/prompts/letter-prompt";
+import { LETTER_SYSTEM_PROMPT_CA } from "@/lib/prompts/letter-prompt-ca";
+import { LETTER_SYSTEM_PROMPT_FR } from "@/lib/prompts/letter-prompt-fr";
+import { LETTER_SYSTEM_PROMPT_UK } from "@/lib/prompts/letter-prompt-uk";
 import { checkRateLimit, getClientIP } from "@/lib/rate-limit";
 import {
 	detectSuspiciousContent,
@@ -19,6 +25,31 @@ import {
 	validateOrigin,
 } from "@/lib/security";
 import { trackLetterGeneration } from "@/lib/supabase";
+
+// Country-specific configuration
+type CountryCode = "de" | "ca" | "uk" | "fr";
+
+// Helper to get demand title/brief text
+function getDemandInfo(
+	demand: Forderung | DemandCA | DemandUK | DemandFR,
+	country: CountryCode,
+): { title: string; briefText: string } {
+	if (country === "ca") {
+		const d = demand as DemandCA;
+		return { title: d.title.en, briefText: d.briefText.en };
+	}
+	if (country === "uk") {
+		const d = demand as DemandUK;
+		return { title: d.title.en, briefText: d.briefText.en };
+	}
+	if (country === "fr") {
+		const d = demand as DemandFR;
+		// Use French for letter content
+		return { title: d.title.fr, briefText: d.briefText.fr };
+	}
+	const d = demand as Forderung;
+	return { title: d.title.de, briefText: d.briefText.de };
+}
 
 // Request size limit (50KB should be more than enough)
 const MAX_BODY_SIZE = 50 * 1024;
@@ -118,6 +149,32 @@ export async function POST(request: NextRequest) {
 
 		const rawBody = body as Record<string, unknown>;
 
+		// 5.5 Determine country and get country-specific data
+		const country: CountryCode =
+			rawBody.country === "ca"
+				? "ca"
+				: rawBody.country === "uk"
+					? "uk"
+					: rawBody.country === "fr"
+						? "fr"
+						: "de";
+		const demands =
+			country === "ca"
+				? DEMANDS_CA
+				: country === "uk"
+					? DEMANDS_UK
+					: country === "fr"
+						? DEMANDS_FR
+						: FORDERUNGEN;
+		const systemPrompt =
+			country === "ca"
+				? LETTER_SYSTEM_PROMPT_CA
+				: country === "uk"
+					? LETTER_SYSTEM_PROMPT_UK
+					: country === "fr"
+						? LETTER_SYSTEM_PROMPT_FR
+						: LETTER_SYSTEM_PROMPT;
+
 		// 6. Timing-based bot detection (form must be open for at least 2 seconds)
 		const timing = rawBody._timing;
 		if (typeof timing === "number" && timing < 2000) {
@@ -144,13 +201,15 @@ export async function POST(request: NextRequest) {
 		const senderPlz = sanitizePLZ(rawBody.senderPlz);
 		const wahlkreis = sanitizeName(rawBody.wahlkreis);
 		const personalNote = sanitizePersonalNote(rawBody.personalNote);
-		const validForderungIds = FORDERUNGEN.map((f) => f.id);
+
+		// Use country-specific demands for validation
+		const validDemandIds = demands.map((f) => f.id);
 		const forderungen = sanitizeForderungen(
 			rawBody.forderungen,
-			validForderungIds,
+			validDemandIds,
 		);
 
-		// 9. Validate MdB
+		// 9. Validate MdB/MP
 		if (!validateMdB(rawBody.mdb)) {
 			return NextResponse.json(
 				{ error: "Ungültige MdB-Daten" },
@@ -195,19 +254,104 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		// 13. Build safe user prompt with detailed Forderungen
-		const selectedForderungen = forderungen
-			.map((id: string) => FORDERUNGEN.find((f) => f.id === id))
-			.filter((f): f is (typeof FORDERUNGEN)[number] => f !== undefined);
+		// 13. Build safe user prompt with detailed demands
+		const selectedDemands = forderungen
+			.map((id: string) => demands.find((f) => f.id === id))
+			.filter((f): f is (typeof demands)[number] => f !== undefined);
 
-		const forderungenTexte = selectedForderungen
-			.map(
-				(f, index) =>
-					`${index + 1}. ${f.title.de}\n   Formulierung für den Brief: "${f.briefText.de}"`,
-			)
-			.join("\n\n");
+		// Build prompt based on country
+		let userPrompt: string;
 
-		const userPrompt = `Schreibe einen Brief mit folgenden Angaben:
+		if (country === "uk") {
+			const demandsText = selectedDemands
+				.map((d, index) => {
+					const info = getDemandInfo(d, country);
+					return `${index + 1}. ${info.title}\n   Phrasing for letter: "${info.briefText}"`;
+				})
+				.join("\n\n");
+
+			userPrompt = `Write a letter with the following details:
+
+SENDER:
+Name: ${senderName}
+Postcode/Constituency: ${senderPlz} (${wahlkreis})
+
+RECIPIENT:
+${mdb.name} (${mdb.party})
+Member of the UK Parliament
+
+DEMANDS (COUNT: ${selectedDemands.length} - ALL MUST APPEAR IN THE LETTER!):
+${demandsText}
+
+PERSONAL STORY OF THE SENDER:
+${personalNote}
+
+CRITICAL: The letter MUST include all ${selectedDemands.length} demands as a numbered list! Not just one!
+
+Please write the letter now.`;
+		} else if (country === "ca") {
+			const demandsText = selectedDemands
+				.map((d, index) => {
+					const info = getDemandInfo(d, country);
+					return `${index + 1}. ${info.title}\n   Phrasing for letter: "${info.briefText}"`;
+				})
+				.join("\n\n");
+
+			userPrompt = `Write a letter with the following details:
+
+SENDER:
+Name: ${senderName}
+Postal Code/Riding: ${senderPlz} (${wahlkreis})
+
+RECIPIENT:
+${mdb.name} (${mdb.party})
+Member of the Canadian Parliament
+
+DEMANDS (COUNT: ${selectedDemands.length} - ALL MUST APPEAR IN THE LETTER!):
+${demandsText}
+
+PERSONAL STORY OF THE SENDER:
+${personalNote}
+
+CRITICAL: The letter MUST include all ${selectedDemands.length} demands as a numbered list! Not just one!
+
+Please write the letter now.`;
+		} else if (country === "fr") {
+			const demandsText = selectedDemands
+				.map((d, index) => {
+					const info = getDemandInfo(d, country);
+					return `${index + 1}. ${info.title}\n   Formulation pour la lettre : "${info.briefText}"`;
+				})
+				.join("\n\n");
+
+			userPrompt = `Rédigez une lettre avec les informations suivantes :
+
+EXPÉDITEUR :
+Nom : ${senderName}
+Code postal / Circonscription : ${senderPlz} (${wahlkreis})
+
+DESTINATAIRE :
+${mdb.name} (${mdb.party})
+Député(e) à l'Assemblée nationale
+
+DEMANDES (NOMBRE : ${selectedDemands.length} - TOUTES DOIVENT APPARAÎTRE DANS LA LETTRE !) :
+${demandsText}
+
+HISTOIRE PERSONNELLE DE L'EXPÉDITEUR :
+${personalNote}
+
+CRITIQUE : La lettre DOIT inclure les ${selectedDemands.length} demandes en liste numérotée ! Pas seulement une !
+
+Veuillez rédiger la lettre maintenant.`;
+		} else {
+			const forderungenTexte = selectedDemands
+				.map((f, index) => {
+					const info = getDemandInfo(f, country);
+					return `${index + 1}. ${info.title}\n   Formulierung für den Brief: "${info.briefText}"`;
+				})
+				.join("\n\n");
+
+			userPrompt = `Schreibe einen Brief mit folgenden Angaben:
 
 ABSENDER:
 Name: ${senderName}
@@ -217,22 +361,23 @@ EMPFÄNGER:
 ${mdb.name} (${mdb.party})
 Mitglied des Deutschen Bundestages
 
-FORDERUNGEN (ANZAHL: ${selectedForderungen.length} - ALLE MÜSSEN IM BRIEF ERSCHEINEN!):
+FORDERUNGEN (ANZAHL: ${selectedDemands.length} - ALLE MÜSSEN IM BRIEF ERSCHEINEN!):
 ${forderungenTexte}
 
 PERSÖNLICHE GESCHICHTE DES ABSENDERS:
 ${personalNote}
 
-KRITISCH: Der Brief MUSS alle ${selectedForderungen.length} Forderungen als nummerierte Liste enthalten! Nicht nur eine!
+KRITISCH: Der Brief MUSS alle ${selectedDemands.length} Forderungen als nummerierte Liste enthalten! Nicht nur eine!
 
 Bitte erstelle nun den Brief.`;
+		}
 
 		// Check if client wants streaming
 		const wantsStream = request.headers
 			.get("accept")
 			?.includes("text/event-stream");
 
-		// 9. Call LLM API
+		// 14. Call LLM API
 		const response = await fetch("https://api.openai.com/v1/chat/completions", {
 			method: "POST",
 			headers: {
@@ -242,7 +387,7 @@ Bitte erstelle nun den Brief.`;
 			body: JSON.stringify({
 				model: serverEnv.LLM_MODEL,
 				messages: [
-					{ role: "system", content: LETTER_SYSTEM_PROMPT },
+					{ role: "system", content: systemPrompt },
 					{ role: "user", content: userPrompt },
 				],
 				temperature: 0.7,
@@ -288,12 +433,17 @@ Bitte erstelle nun den Brief.`;
 										const wordCount = fullContent
 											.split(/\s+/)
 											.filter(Boolean).length;
+										const emailSubject =
+											country === "ca" || country === "uk"
+												? "Request for Support: Human Rights in Iran"
+												: country === "fr"
+													? "Demande de soutien : Droits de l'Homme en Iran"
+													: "Bitte um Unterstützung: Menschenrechte im Iran";
 										controller.enqueue(
 											encoder.encode(
 												`data: ${JSON.stringify({
 													done: true,
-													subject:
-														"Bitte um Unterstützung: Menschenrechte im Iran",
+													subject: emailSubject,
 													wordCount,
 												})}\n\n`,
 											),
@@ -302,6 +452,7 @@ Bitte erstelle nun den Brief.`;
 										// Track letter generation
 										try {
 											await trackLetterGeneration({
+												country,
 												mdb_id: mdb.id,
 												mdb_name: mdb.name,
 												mdb_party: mdb.party || null,
@@ -364,11 +515,17 @@ Bitte erstelle nun den Brief.`;
 		const wordCount = content.split(/\s+/).filter(Boolean).length;
 
 		// Generate subject line
-		const subject = "Bitte um Unterstützung: Menschenrechte im Iran";
+		const subject =
+			country === "ca" || country === "uk"
+				? "Request for Support: Human Rights in Iran"
+				: country === "fr"
+					? "Demande de soutien : Droits de l'Homme en Iran"
+					: "Bitte um Unterstützung: Menschenrechte im Iran";
 
 		// Track letter generation in Supabase (await to ensure it completes before function exits)
 		try {
 			await trackLetterGeneration({
+				country,
 				mdb_id: mdb.id,
 				mdb_name: mdb.name,
 				mdb_party: mdb.party || null,

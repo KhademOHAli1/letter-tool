@@ -12,7 +12,7 @@ import {
 	Share2,
 	WifiOff,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { CampaignGoal } from "@/components/campaign-goal";
 import { Button } from "@/components/ui/button";
@@ -42,6 +42,8 @@ interface FormData {
 
 export default function SharePage() {
 	const router = useRouter();
+	const params = useParams<{ country: string }>();
+	const country = params.country || "de";
 	const [copiedMessage, setCopiedMessage] = useState(false);
 	const [copiedLink, setCopiedLink] = useState(false);
 	const [formData, setFormData] = useState<FormData | null>(null);
@@ -52,11 +54,20 @@ export default function SharePage() {
 	const [isOffline, setIsOffline] = useState(false);
 
 	const shareUrl = typeof window !== "undefined" ? window.location.origin : "";
-	const shareMessage = `Ich habe gerade einen Brief an meine*n Bundestagsabgeordnete*n geschrieben - für Menschenrechte im Iran.
+	const shareMessage =
+		country === "de"
+			? `Ich habe gerade einen Brief an meine*n Bundestagsabgeordnete*n geschrieben - für Menschenrechte im Iran.
 
 Warum das wichtig ist: Abgeordnete zählen Briefe aus ihrem Wahlkreis. Persönliche Nachrichten haben echten Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird unsere Stimme.
 
 Du kannst in 5 Minuten auch einen Brief schreiben - das Tool hilft dir dabei:
+
+${shareUrl}`
+			: `I just wrote a letter to my Member of Parliament - for human rights in Iran.
+
+Why it matters: Representatives count messages from constituents. Personal letters have real influence on political decisions. The more people write, the louder our voice becomes.
+
+You can write a letter in 5 minutes too - this tool helps:
 
 ${shareUrl}`;
 
@@ -157,9 +168,9 @@ ${shareUrl}`;
 			setLetterReady(true);
 		} else {
 			// No data at all, redirect to home
-			router.push("/");
+			router.push(`/${country}`);
 		}
-	}, [router, generateLetter]);
+	}, [router, generateLetter, country]);
 
 	const handleCopyMessage = async () => {
 		try {
@@ -223,7 +234,7 @@ ${shareUrl}`;
 
 	const handleContinue = () => {
 		if (letterReady) {
-			router.push("/editor");
+			router.push(`/${country}/editor`);
 		}
 	};
 
@@ -234,7 +245,7 @@ ${shareUrl}`;
 	};
 
 	const handleBack = () => {
-		router.push("/");
+		router.push(`/${country}`);
 	};
 
 	// Show loading state while we check for data
@@ -334,7 +345,7 @@ ${shareUrl}`;
 			{/* Main content */}
 			<div className="container max-w-2xl mx-auto px-4 py-8 space-y-8">
 				{/* Campaign Goal */}
-				<CampaignGoal />
+				<CampaignGoal country={country as "de" | "ca" | "uk"} />
 
 				{/* Share section */}
 				<div className="rounded-xl border border-border bg-card p-6 shadow-sm">

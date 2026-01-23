@@ -6,7 +6,7 @@
 		"province": "Prince Edward Island",
 		"provinceCode": "11",
 		"postalCodes": [
-			"C0A"
+			"C1B"
 		]
 	},
 	{
@@ -16,7 +16,9 @@
 		"province": "Prince Edward Island",
 		"provinceCode": "11",
 		"postalCodes": [
-			"C1A"
+			"C1A",
+			"C1C",
+			"C1E"
 		]
 	},
 	{
@@ -25,7 +27,14 @@
 		"nameFr": "Pierrefonds—Dollard",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H8Y",
+			"H9A",
+			"H9B",
+			"H9C",
+			"H9E",
+			"H9G"
+		]
 	},
 	{
 		"id": "24057",
@@ -33,7 +42,9 @@
 		"nameFr": "Pontiac",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J9E"
+		]
 	},
 	{
 		"id": "24058",
@@ -41,7 +52,13 @@
 		"nameFr": "Portneuf—Jacques-Cartier",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G2A",
+			"G3A",
+			"G3C",
+			"G3H",
+			"G3L"
+		]
 	},
 	{
 		"id": "24004",
@@ -49,7 +66,14 @@
 		"nameFr": "Alfred-Pellan",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H7A",
+			"H7B",
+			"H7C",
+			"H7E",
+			"H7J",
+			"H7N"
+		]
 	},
 	{
 		"id": "24005",
@@ -57,7 +81,12 @@
 		"nameFr": "Argenteuil—La Petite-Nation",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J8G",
+			"J8L",
+			"J8M",
+			"J8N"
+		]
 	},
 	{
 		"id": "24006",
@@ -65,7 +94,13 @@
 		"nameFr": "Avignon—La Mitis—Matane—Matapédia",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G5X",
+			"G5Y",
+			"G5Z",
+			"G6A",
+			"G6E"
+		]
 	},
 	{
 		"id": "24007",
@@ -73,7 +108,12 @@
 		"nameFr": "Beauce",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J0P",
+			"J6T",
+			"J7T",
+			"J7X"
+		]
 	},
 	{
 		"id": "24009",
@@ -81,7 +121,13 @@
 		"nameFr": "Bécancour—Nicolet—Saurel",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G9H",
+			"J3J",
+			"J3P",
+			"J3R",
+			"J3T"
+		]
 	},
 	{
 		"id": "24010",
@@ -89,7 +135,11 @@
 		"nameFr": "Bellechasse—Les Etchemins—Lévis",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G6C",
+			"G6V",
+			"G6W"
+		]
 	},
 	{
 		"id": "24011",
@@ -97,7 +147,12 @@
 		"nameFr": "Beloeil—Chambly",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J3G",
+			"J3H",
+			"J3L",
+			"J3M"
+		]
 	},
 	{
 		"id": "24012",
@@ -105,7 +160,10 @@
 		"nameFr": "Berthier—Maskinongé",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J5T",
+			"J5V"
+		]
 	},
 	{
 		"id": "24013",
@@ -113,7 +171,11 @@
 		"nameFr": "Thérèse-De Blainville",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H1G",
+			"H1P",
+			"H2B"
+		]
 	},
 	{
 		"id": "24014",
@@ -121,7 +183,13 @@
 		"nameFr": "Pierre-Boucher—Les Patriotes—Verchères",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J0E",
+			"J1X",
+			"J2K",
+			"J2L",
+			"J2N"
+		]
 	},
 	{
 		"id": "24024",
@@ -129,7 +197,12 @@
 		"nameFr": "Dorval—Lachine—LaSalle",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G4T",
+			"G4V",
+			"G4W",
+			"G4X"
+		]
 	},
 	{
 		"id": "24028",
@@ -137,7 +210,12 @@
 		"nameFr": "Hochelaga",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J8X",
+			"J8Y",
+			"J9B",
+			"J9J"
+		]
 	},
 	{
 		"id": "24015",
@@ -145,7 +223,14 @@
 		"nameFr": "Bourassa",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J4P",
+			"J4R",
+			"J4S",
+			"J4X",
+			"J4Y",
+			"J4Z"
+		]
 	},
 	{
 		"id": "24008",
@@ -153,7 +238,11 @@
 		"nameFr": "Beauport—Limoilou",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G1E",
+			"G1J",
+			"G1L"
+		]
 	},
 	{
 		"id": "24016",
@@ -161,7 +250,15 @@
 		"nameFr": "Brome—Missisquoi",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G1H",
+			"G2J",
+			"G2L",
+			"G2M",
+			"G2N",
+			"G3E",
+			"G3G"
+		]
 	},
 	{
 		"id": "24018",
@@ -169,7 +266,11 @@
 		"nameFr": "Rimouski-Neigette—Témiscouata—Les Basques",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G0V",
+			"G7H",
+			"G7J"
+		]
 	},
 	{
 		"id": "24019",
@@ -177,7 +278,13 @@
 		"nameFr": "Charlesbourg—Haute-Saint-Charles",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J0B",
+			"J1A",
+			"J1C",
+			"J1M",
+			"J1N"
+		]
 	},
 	{
 		"id": "24020",
@@ -185,7 +292,11 @@
 		"nameFr": "Beauport—Côte-de-Beaupré—Île d'Orléans—Charlevoix",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G0R",
+			"G5R",
+			"G5V"
+		]
 	},
 	{
 		"id": "24021",
@@ -193,7 +304,13 @@
 		"nameFr": "Châteauguay—Lacolle",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G4R",
+			"G4S",
+			"G4Z",
+			"G5B",
+			"G5C"
+		]
 	},
 	{
 		"id": "24022",
@@ -201,7 +318,14 @@
 		"nameFr": "Chicoutimi—Le Fjord",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H8N",
+			"H8R",
+			"H8S",
+			"H8T",
+			"H9P",
+			"H9S"
+		]
 	},
 	{
 		"id": "24023",
@@ -209,7 +333,12 @@
 		"nameFr": "Compton—Stanstead",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J1Z",
+			"J2A",
+			"J2B",
+			"J2C"
+		]
 	},
 	{
 		"id": "24025",
@@ -217,7 +346,10 @@
 		"nameFr": "Drummond",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J8P",
+			"J8R"
+		]
 	},
 	{
 		"id": "24026",
@@ -225,7 +357,11 @@
 		"nameFr": "Gaspésie—Les Îles-de-la-Madeleine",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H1N",
+			"H1V",
+			"H1W"
+		]
 	},
 	{
 		"id": "24027",
@@ -234,7 +370,11 @@
 		"province": "Quebec",
 		"provinceCode": "24",
 		"postalCodes": [
-			"H1A"
+			"H1A",
+			"H1C",
+			"H1E",
+			"H1J",
+			"H1K"
 		]
 	},
 	{
@@ -244,7 +384,10 @@
 		"province": "Newfoundland and Labrador",
 		"provinceCode": "10",
 		"postalCodes": [
-			"A0A"
+			"A1H",
+			"A1S",
+			"A1W",
+			"A1Y"
 		]
 	},
 	{
@@ -254,7 +397,10 @@
 		"province": "Newfoundland and Labrador",
 		"provinceCode": "10",
 		"postalCodes": [
-			"A1C"
+			"A0A",
+			"A1C",
+			"A1G",
+			"A1N"
 		]
 	},
 	{
@@ -263,7 +409,10 @@
 		"nameFr": "Coast of Bays—Central—Notre Dame",
 		"province": "Newfoundland and Labrador",
 		"provinceCode": "10",
-		"postalCodes": []
+		"postalCodes": [
+			"A1V",
+			"A2B"
+		]
 	},
 	{
 		"id": "10004",
@@ -271,7 +420,10 @@
 		"nameFr": "Labrador",
 		"province": "Newfoundland and Labrador",
 		"provinceCode": "10",
-		"postalCodes": []
+		"postalCodes": [
+			"A0R",
+			"A2V"
+		]
 	},
 	{
 		"id": "10005",
@@ -279,7 +431,12 @@
 		"nameFr": "Long Range Mountains",
 		"province": "Newfoundland and Labrador",
 		"provinceCode": "10",
-		"postalCodes": []
+		"postalCodes": [
+			"A0L",
+			"A2H",
+			"A2N",
+			"A8A"
+		]
 	},
 	{
 		"id": "10006",
@@ -288,7 +445,11 @@
 		"province": "Newfoundland and Labrador",
 		"provinceCode": "10",
 		"postalCodes": [
-			"A1E"
+			"A1A",
+			"A1B",
+			"A1E",
+			"A1K",
+			"A1M"
 		]
 	},
 	{
@@ -297,7 +458,11 @@
 		"nameFr": "St. John's South—Mount Pearl",
 		"province": "Newfoundland and Labrador",
 		"provinceCode": "10",
-		"postalCodes": []
+		"postalCodes": [
+			"A0B",
+			"A0E",
+			"A5A"
+		]
 	},
 	{
 		"id": "11003",
@@ -321,7 +486,10 @@
 		"nameFr": "Cape Breton—Canso",
 		"province": "Nova Scotia",
 		"provinceCode": "12",
-		"postalCodes": []
+		"postalCodes": [
+			"B0S",
+			"B5A"
+		]
 	},
 	{
 		"id": "12002",
@@ -329,7 +497,21 @@
 		"nameFr": "Central Nova",
 		"province": "Nova Scotia",
 		"provinceCode": "12",
-		"postalCodes": []
+		"postalCodes": [
+			"B0C",
+			"B0E",
+			"B1C",
+			"B1J",
+			"B1K",
+			"B1T",
+			"B1W",
+			"B1X",
+			"B2C",
+			"B2E",
+			"B2G",
+			"B2J",
+			"B9A"
+		]
 	},
 	{
 		"id": "12003",
@@ -338,7 +520,10 @@
 		"province": "Nova Scotia",
 		"provinceCode": "12",
 		"postalCodes": [
-			"B0J"
+			"B0K",
+			"B2H",
+			"B2T",
+			"B3E"
 		]
 	},
 	{
@@ -347,7 +532,11 @@
 		"nameFr": "Dartmouth—Cole Harbour",
 		"province": "Nova Scotia",
 		"provinceCode": "12",
-		"postalCodes": []
+		"postalCodes": [
+			"B0M",
+			"B2N",
+			"B6L"
+		]
 	},
 	{
 		"id": "12005",
@@ -355,7 +544,11 @@
 		"nameFr": "Halifax",
 		"province": "Nova Scotia",
 		"provinceCode": "12",
-		"postalCodes": []
+		"postalCodes": [
+			"B2W",
+			"B3A",
+			"B3G"
+		]
 	},
 	{
 		"id": "12006",
@@ -365,7 +558,9 @@
 		"provinceCode": "12",
 		"postalCodes": [
 			"B3H",
-			"B3K"
+			"B3K",
+			"B3N",
+			"B3P"
 		]
 	},
 	{
@@ -374,7 +569,14 @@
 		"nameFr": "Kings—Hants",
 		"province": "Nova Scotia",
 		"provinceCode": "12",
-		"postalCodes": []
+		"postalCodes": [
+			"B3M",
+			"B3R",
+			"B3S",
+			"B3T",
+			"B3Z",
+			"B4B"
+		]
 	},
 	{
 		"id": "12008",
@@ -382,7 +584,13 @@
 		"nameFr": "Sackville—Preston—Chezzetcook",
 		"province": "Nova Scotia",
 		"provinceCode": "12",
-		"postalCodes": []
+		"postalCodes": [
+			"B0P",
+			"B2S",
+			"B4N",
+			"B4P",
+			"B4R"
+		]
 	},
 	{
 		"id": "12009",
@@ -390,7 +598,14 @@
 		"nameFr": "South Shore—St. Margarets",
 		"province": "Nova Scotia",
 		"provinceCode": "12",
-		"postalCodes": []
+		"postalCodes": [
+			"B2R",
+			"B2Y",
+			"B3B",
+			"B4A",
+			"B4C",
+			"B4E"
+		]
 	},
 	{
 		"id": "12010",
@@ -398,7 +613,9 @@
 		"nameFr": "Sydney—Victoria",
 		"province": "Nova Scotia",
 		"provinceCode": "12",
-		"postalCodes": []
+		"postalCodes": [
+			"B4V"
+		]
 	},
 	{
 		"id": "12011",
@@ -406,7 +623,20 @@
 		"nameFr": "West Nova",
 		"province": "Nova Scotia",
 		"provinceCode": "12",
-		"postalCodes": []
+		"postalCodes": [
+			"B1A",
+			"B1B",
+			"B1E",
+			"B1G",
+			"B1L",
+			"B1N",
+			"B1P",
+			"B1R",
+			"B1S",
+			"B1Y",
+			"B1Z",
+			"B2A"
+		]
 	},
 	{
 		"id": "13001",
@@ -414,7 +644,19 @@
 		"nameFr": "Acadie—Bathurst",
 		"province": "New Brunswick",
 		"provinceCode": "13",
-		"postalCodes": []
+		"postalCodes": [
+			"E1W",
+			"E1X",
+			"E2A",
+			"E8J",
+			"E8K",
+			"E8L",
+			"E8N",
+			"E8P",
+			"E8R",
+			"E8S",
+			"E8T"
+		]
 	},
 	{
 		"id": "13002",
@@ -423,7 +665,17 @@
 		"province": "New Brunswick",
 		"provinceCode": "13",
 		"postalCodes": [
-			"E1A"
+			"E1H",
+			"E4K",
+			"E4L",
+			"E4M",
+			"E4N",
+			"E4P",
+			"E4R",
+			"E4S",
+			"E4V",
+			"E4W",
+			"E4X"
 		]
 	},
 	{
@@ -433,7 +685,10 @@
 		"province": "New Brunswick",
 		"provinceCode": "13",
 		"postalCodes": [
-			"E3B"
+			"E2B",
+			"E2V",
+			"E3B",
+			"E3C"
 		]
 	},
 	{
@@ -442,7 +697,18 @@
 		"nameFr": "Fundy Royal",
 		"province": "New Brunswick",
 		"provinceCode": "13",
-		"postalCodes": []
+		"postalCodes": [
+			"E1B",
+			"E1J",
+			"E4E",
+			"E4H",
+			"E4J",
+			"E4Z",
+			"E5N",
+			"E5R",
+			"E5S",
+			"E5T"
+		]
 	},
 	{
 		"id": "13005",
@@ -450,7 +716,21 @@
 		"nameFr": "Madawaska—Restigouche",
 		"province": "New Brunswick",
 		"provinceCode": "13",
-		"postalCodes": []
+		"postalCodes": [
+			"E3N",
+			"E3V",
+			"E3Y",
+			"E3Z",
+			"E7A",
+			"E7B",
+			"E7C",
+			"E7E",
+			"E8A",
+			"E8B",
+			"E8C",
+			"E8E",
+			"E8G"
+		]
 	},
 	{
 		"id": "13006",
@@ -458,7 +738,20 @@
 		"nameFr": "Miramichi—Grand Lake",
 		"province": "New Brunswick",
 		"provinceCode": "13",
-		"postalCodes": []
+		"postalCodes": [
+			"E1N",
+			"E4A",
+			"E4B",
+			"E4T",
+			"E4Y",
+			"E6A",
+			"E9A",
+			"E9B",
+			"E9C",
+			"E9E",
+			"E9G",
+			"E9H"
+		]
 	},
 	{
 		"id": "13007",
@@ -467,7 +760,8 @@
 		"province": "New Brunswick",
 		"provinceCode": "13",
 		"postalCodes": [
-			"E1C"
+			"E1C",
+			"E1G"
 		]
 	},
 	{
@@ -476,7 +770,17 @@
 		"nameFr": "New Brunswick Southwest",
 		"province": "New Brunswick",
 		"provinceCode": "13",
-		"postalCodes": []
+		"postalCodes": [
+			"E2E",
+			"E2G",
+			"E2H",
+			"E2J",
+			"E2L",
+			"E2M",
+			"E2N",
+			"E2P",
+			"E2S"
+		]
 	},
 	{
 		"id": "13009",
@@ -484,7 +788,22 @@
 		"nameFr": "Saint John—Rothesay",
 		"province": "New Brunswick",
 		"provinceCode": "13",
-		"postalCodes": []
+		"postalCodes": [
+			"E3L",
+			"E4C",
+			"E4G",
+			"E5A",
+			"E5B",
+			"E5C",
+			"E5E",
+			"E5G",
+			"E5H",
+			"E5K",
+			"E5L",
+			"E5M",
+			"E5P",
+			"E6J"
+		]
 	},
 	{
 		"id": "13010",
@@ -492,7 +811,24 @@
 		"nameFr": "Tobique—Mactaquac",
 		"province": "New Brunswick",
 		"provinceCode": "13",
-		"postalCodes": []
+		"postalCodes": [
+			"E3E",
+			"E6B",
+			"E6C",
+			"E6E",
+			"E6G",
+			"E6H",
+			"E6K",
+			"E6L",
+			"E7G",
+			"E7H",
+			"E7J",
+			"E7K",
+			"E7L",
+			"E7M",
+			"E7N",
+			"E7P"
+		]
 	},
 	{
 		"id": "24001",
@@ -500,7 +836,10 @@
 		"nameFr": "Abitibi—Baie-James—Nunavik—Eeyou",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G8P",
+			"J9P"
+		]
 	},
 	{
 		"id": "24002",
@@ -508,7 +847,10 @@
 		"nameFr": "Abitibi—Témiscamingue",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J9V",
+			"J9Y"
+		]
 	},
 	{
 		"id": "24003",
@@ -516,7 +858,16 @@
 		"nameFr": "Ahuntsic-Cartierville",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H1H",
+			"H2C",
+			"H2N",
+			"H3L",
+			"H3M",
+			"H3N",
+			"H4J",
+			"H4K"
+		]
 	},
 	{
 		"id": "24017",
@@ -524,7 +875,11 @@
 		"nameFr": "Brossard—Saint-Lambert",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J6K",
+			"J6N",
+			"J6R"
+		]
 	},
 	{
 		"id": "24049",
@@ -532,7 +887,14 @@
 		"nameFr": "Montarville",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J0L",
+			"J3E",
+			"J3N",
+			"J3V",
+			"J3Y",
+			"J3Z"
+		]
 	},
 	{
 		"id": "24052",
@@ -540,7 +902,11 @@
 		"nameFr": "Mount Royal",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H3W",
+			"H3Y",
+			"H4B"
+		]
 	},
 	{
 		"id": "24053",
@@ -548,7 +914,11 @@
 		"nameFr": "Notre-Dame-de-Grâce—Westmount",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H2T",
+			"H3T",
+			"H3V"
+		]
 	},
 	{
 		"id": "24054",
@@ -556,7 +926,13 @@
 		"nameFr": "Outremont",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H1T",
+			"H2A",
+			"H2E",
+			"H2P",
+			"H2R"
+		]
 	},
 	{
 		"id": "24055",
@@ -565,6 +941,7 @@
 		"province": "Quebec",
 		"provinceCode": "24",
 		"postalCodes": [
+			"J3X",
 			"J4B"
 		]
 	},
@@ -575,7 +952,13 @@
 		"province": "Quebec",
 		"provinceCode": "24",
 		"postalCodes": [
-			"G1R"
+			"G1A",
+			"G1K",
+			"G1M",
+			"G1N",
+			"G1S",
+			"G2H",
+			"G2K"
 		]
 	},
 	{
@@ -584,7 +967,13 @@
 		"nameFr": "Repentigny",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J5W",
+			"J5X",
+			"J5Y",
+			"J5Z",
+			"J6A"
+		]
 	},
 	{
 		"id": "24061",
@@ -592,7 +981,15 @@
 		"nameFr": "Richmond—Arthabaska",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G0P",
+			"G6P",
+			"G6R",
+			"G6S",
+			"G6T",
+			"J1S",
+			"J1T"
+		]
 	},
 	{
 		"id": "24062",
@@ -600,7 +997,12 @@
 		"nameFr": "Rivière-des-Mille-Îles",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G5H",
+			"G5J",
+			"G5L",
+			"G5M"
+		]
 	},
 	{
 		"id": "24065",
@@ -608,7 +1010,13 @@
 		"nameFr": "Marc-Aurèle-Fortin",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H1X",
+			"H1Y",
+			"H2G",
+			"H2H",
+			"H2S"
+		]
 	},
 	{
 		"id": "24066",
@@ -616,7 +1024,11 @@
 		"nameFr": "Saint-Hyacinthe—Bagot",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J0H",
+			"J2R",
+			"J2T"
+		]
 	},
 	{
 		"id": "24067",
@@ -624,7 +1036,13 @@
 		"nameFr": "Saint-Jean",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J2W",
+			"J2X",
+			"J2Y",
+			"J3A",
+			"J3B"
+		]
 	},
 	{
 		"id": "24068",
@@ -632,7 +1050,15 @@
 		"nameFr": "Saint-Laurent",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H4L",
+			"H4M",
+			"H4N",
+			"H4R",
+			"H4S",
+			"H4T",
+			"H4Y"
+		]
 	},
 	{
 		"id": "24063",
@@ -640,7 +1066,12 @@
 		"nameFr": "Rivière-du-Nord",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J7A",
+			"J7B",
+			"J7P",
+			"J7R"
+		]
 	},
 	{
 		"id": "24064",
@@ -648,7 +1079,12 @@
 		"nameFr": "Rosemont—La Petite-Patrie",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J5J",
+			"J5N",
+			"J7Y",
+			"J7Z"
+		]
 	},
 	{
 		"id": "24069",
@@ -656,7 +1092,10 @@
 		"nameFr": "Saint-Léonard—Saint-Michel",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H1R",
+			"H1S"
+		]
 	},
 	{
 		"id": "24070",
@@ -664,7 +1103,15 @@
 		"nameFr": "Saint-Maurice—Champlain",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G8T",
+			"G8V",
+			"G8W",
+			"G9N",
+			"G9P",
+			"G9T",
+			"G9X"
+		]
 	},
 	{
 		"id": "24071",
@@ -672,7 +1119,11 @@
 		"nameFr": "Salaberry—Suroît",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J2G",
+			"J2H",
+			"J2J"
+		]
 	},
 	{
 		"id": "24072",
@@ -681,7 +1132,13 @@
 		"province": "Quebec",
 		"provinceCode": "24",
 		"postalCodes": [
-			"J1H"
+			"J1E",
+			"J1G",
+			"J1H",
+			"J1J",
+			"J1K",
+			"J1L",
+			"J1R"
 		]
 	},
 	{
@@ -690,7 +1147,9 @@
 		"nameFr": "Honoré-Mercier",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J6E"
+		]
 	},
 	{
 		"id": "24030",
@@ -698,7 +1157,15 @@
 		"nameFr": "Hull—Aylmer",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G7K",
+			"G7N",
+			"G7P",
+			"G7T",
+			"G7X",
+			"G8A",
+			"G8N"
+		]
 	},
 	{
 		"id": "24031",
@@ -706,7 +1173,10 @@
 		"nameFr": "Joliette",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H1B",
+			"H1L"
+		]
 	},
 	{
 		"id": "24032",
@@ -714,7 +1184,12 @@
 		"nameFr": "Jonquière",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J5A",
+			"J5B",
+			"J5C",
+			"J5R"
+		]
 	},
 	{
 		"id": "24033",
@@ -722,7 +1197,16 @@
 		"nameFr": "La Pointe-de-l'Île",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G8B",
+			"G8C",
+			"G8E",
+			"G8G",
+			"G8H",
+			"G8J",
+			"G8K",
+			"G8L"
+		]
 	},
 	{
 		"id": "24034",
@@ -730,7 +1214,13 @@
 		"nameFr": "La Prairie",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H9H",
+			"H9J",
+			"H9R",
+			"H9W",
+			"H9X"
+		]
 	},
 	{
 		"id": "24035",
@@ -738,7 +1228,12 @@
 		"nameFr": "Lac-Saint-Jean",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H4E",
+			"H4G",
+			"H4H",
+			"H8P"
+		]
 	},
 	{
 		"id": "24036",
@@ -746,7 +1241,11 @@
 		"nameFr": "Lac-Saint-Louis",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J8C",
+			"J8E",
+			"J9L"
+		]
 	},
 	{
 		"id": "24037",
@@ -755,7 +1254,16 @@
 		"province": "Quebec",
 		"provinceCode": "24",
 		"postalCodes": [
-			"H2X"
+			"H2K",
+			"H2W",
+			"H2X",
+			"H2Y",
+			"H2Z",
+			"H3C",
+			"H3J",
+			"H3Z",
+			"H4C",
+			"H5B"
 		]
 	},
 	{
@@ -764,7 +1272,11 @@
 		"nameFr": "Laurentides—Labelle",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H7W",
+			"H7X",
+			"H7Y"
+		]
 	},
 	{
 		"id": "24039",
@@ -772,7 +1284,11 @@
 		"nameFr": "Laurier—Sainte-Marie",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J0R",
+			"J5K",
+			"J8B"
+		]
 	},
 	{
 		"id": "24040",
@@ -780,7 +1296,13 @@
 		"nameFr": "Laval—Les Îles",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G6J",
+			"G6K",
+			"G6X",
+			"G6Z",
+			"G7A"
+		]
 	},
 	{
 		"id": "24041",
@@ -788,7 +1310,11 @@
 		"nameFr": "Longueuil—Charles-LeMoyne",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J4J",
+			"J4K",
+			"J4T"
+		]
 	},
 	{
 		"id": "24042",
@@ -796,7 +1322,12 @@
 		"nameFr": "Lévis—Lotbinière",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J4H",
+			"J4M",
+			"J4N",
+			"J4V"
+		]
 	},
 	{
 		"id": "24043",
@@ -805,7 +1336,9 @@
 		"province": "Quebec",
 		"provinceCode": "24",
 		"postalCodes": [
-			"G1V"
+			"G1W",
+			"G1X",
+			"G2G"
 		]
 	},
 	{
@@ -814,7 +1347,15 @@
 		"nameFr": "Louis-Hébert",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G1P",
+			"G2B",
+			"G2C",
+			"G2E",
+			"G3J",
+			"G3K",
+			"G3S"
+		]
 	},
 	{
 		"id": "24045",
@@ -822,7 +1363,12 @@
 		"nameFr": "Louis-Saint-Laurent",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H7H",
+			"H7K",
+			"H7L",
+			"H7P"
+		]
 	},
 	{
 		"id": "24046",
@@ -830,7 +1376,12 @@
 		"nameFr": "Manicouagan",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G6B",
+			"G6G",
+			"G6H",
+			"G6L"
+		]
 	},
 	{
 		"id": "24047",
@@ -838,7 +1389,10 @@
 		"nameFr": "Mégantic—L'Érable",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J7J",
+			"J7N"
+		]
 	},
 	{
 		"id": "24048",
@@ -846,7 +1400,18 @@
 		"nameFr": "Mirabel",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H2V",
+			"H3P",
+			"H3R",
+			"H3S",
+			"H3X",
+			"H4P",
+			"H4V",
+			"H4W",
+			"H4X",
+			"H4Z"
+		]
 	},
 	{
 		"id": "24050",
@@ -854,7 +1419,11 @@
 		"nameFr": "Montcalm",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J5M",
+			"J7K",
+			"J7L"
+		]
 	},
 	{
 		"id": "24051",
@@ -862,7 +1431,16 @@
 		"nameFr": "Montmagny—L'Islet—Kamouraska—Rivière-du-Loup",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G0A",
+			"G1B",
+			"G1C",
+			"G1Y",
+			"G3B",
+			"G3Z",
+			"G4A",
+			"G5A"
+		]
 	},
 	{
 		"id": "24077",
@@ -871,7 +1449,14 @@
 		"province": "Quebec",
 		"provinceCode": "24",
 		"postalCodes": [
-			"H3A"
+			"H2L",
+			"H3A",
+			"H3B",
+			"H3E",
+			"H3G",
+			"H3H",
+			"H3K",
+			"H5A"
 		]
 	},
 	{
@@ -880,7 +1465,11 @@
 		"nameFr": "Ajax",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L1S",
+			"L1T",
+			"L1Z"
+		]
 	},
 	{
 		"id": "35003",
@@ -889,6 +1478,8 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
+			"L4E",
+			"L4G",
 			"L4S"
 		]
 	},
@@ -898,7 +1489,9 @@
 		"nameFr": "Barrie—Innisfil",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L9S"
+		]
 	},
 	{
 		"id": "35010",
@@ -906,7 +1499,11 @@
 		"nameFr": "Brampton North",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L6R",
+			"L6S",
+			"L6T"
+		]
 	},
 	{
 		"id": "35005",
@@ -914,7 +1511,13 @@
 		"nameFr": "Barrie—Springwater—Oro-Medonte",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L0K",
+			"L0L",
+			"L4M",
+			"L4N",
+			"L9X"
+		]
 	},
 	{
 		"id": "35006",
@@ -922,7 +1525,12 @@
 		"nameFr": "Bay of Quinte",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K8N",
+			"K8P",
+			"K8R",
+			"K8V"
+		]
 	},
 	{
 		"id": "35007",
@@ -930,7 +1538,12 @@
 		"nameFr": "Beaches—East York",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M4A",
+			"M4B",
+			"M4C",
+			"M4E"
+		]
 	},
 	{
 		"id": "35008",
@@ -938,7 +1551,12 @@
 		"nameFr": "Brampton Centre",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L1B",
+			"L1C",
+			"L1K",
+			"L1L"
+		]
 	},
 	{
 		"id": "35009",
@@ -946,7 +1564,11 @@
 		"nameFr": "Brampton East",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L6W",
+			"L6X",
+			"L6Y"
+		]
 	},
 	{
 		"id": "35011",
@@ -954,7 +1576,9 @@
 		"nameFr": "Brampton South",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L6P"
+		]
 	},
 	{
 		"id": "35020",
@@ -962,7 +1586,11 @@
 		"nameFr": "Don Valley North",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K0A",
+			"K2S",
+			"K4P"
+		]
 	},
 	{
 		"id": "35024",
@@ -970,7 +1598,17 @@
 		"nameFr": "Eglinton—Lawrence",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M2P",
+			"M3B",
+			"M3C",
+			"M3G",
+			"M3P",
+			"M3V",
+			"M4G",
+			"M4H",
+			"M4N"
+		]
 	},
 	{
 		"id": "35046",
@@ -978,7 +1616,10 @@
 		"nameFr": "Kitchener—Conestoga",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K7M",
+			"K7P"
+		]
 	},
 	{
 		"id": "35028",
@@ -986,7 +1627,14 @@
 		"nameFr": "Etobicoke—Lakeshore",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N0R",
+			"N8M",
+			"N9H",
+			"N9J",
+			"N9V",
+			"N9Y"
+		]
 	},
 	{
 		"id": "35029",
@@ -994,7 +1642,11 @@
 		"nameFr": "Etobicoke North",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M9B",
+			"M9P",
+			"M9R"
+		]
 	},
 	{
 		"id": "35030",
@@ -1002,7 +1654,16 @@
 		"nameFr": "Flamborough—Glanbrook",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M1A",
+			"M8R",
+			"M8V",
+			"M8W",
+			"M8X",
+			"M8Y",
+			"M9A",
+			"M9C"
+		]
 	},
 	{
 		"id": "35031",
@@ -1011,6 +1672,7 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
+			"M9V",
 			"M9W"
 		]
 	},
@@ -1020,7 +1682,11 @@
 		"nameFr": "Haldimand—Norfolk",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N1E",
+			"N1G",
+			"N1H"
+		]
 	},
 	{
 		"id": "35034",
@@ -1028,7 +1694,11 @@
 		"nameFr": "Haliburton—Kawartha Lakes—Brock",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N1A",
+			"N3W",
+			"N4B"
+		]
 	},
 	{
 		"id": "35035",
@@ -1036,7 +1706,11 @@
 		"nameFr": "Hamilton Centre",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K0L",
+			"K0M",
+			"L0A"
+		]
 	},
 	{
 		"id": "35036",
@@ -1045,7 +1719,12 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
-			"L8P"
+			"L8K",
+			"L8L",
+			"L8M",
+			"L8N",
+			"L8P",
+			"L8R"
 		]
 	},
 	{
@@ -1054,7 +1733,11 @@
 		"nameFr": "Hamilton Mountain",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L8E",
+			"L8G",
+			"L8J"
+		]
 	},
 	{
 		"id": "35038",
@@ -1062,7 +1745,13 @@
 		"nameFr": "Hamilton West—Ancaster—Dundas",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L8T",
+			"L8V",
+			"L9A",
+			"L9B",
+			"L9C"
+		]
 	},
 	{
 		"id": "35039",
@@ -1070,7 +1759,12 @@
 		"nameFr": "Hastings—Lennox and Addington",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L8S",
+			"L9G",
+			"L9H",
+			"L9K"
+		]
 	},
 	{
 		"id": "35040",
@@ -1078,7 +1772,11 @@
 		"nameFr": "Huron—Bruce",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K0K",
+			"K7N",
+			"K7R"
+		]
 	},
 	{
 		"id": "35041",
@@ -1086,7 +1784,12 @@
 		"nameFr": "Kanata—Carleton",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M3J",
+			"M3L",
+			"M9L",
+			"M9M"
+		]
 	},
 	{
 		"id": "35042",
@@ -1094,7 +1797,10 @@
 		"nameFr": "Kenora",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N2Z",
+			"N7A"
+		]
 	},
 	{
 		"id": "35043",
@@ -1102,7 +1808,16 @@
 		"nameFr": "King—Vaughan",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K1C",
+			"K2H",
+			"K2K",
+			"K2L",
+			"K2M",
+			"K2T",
+			"K2V",
+			"K2W"
+		]
 	},
 	{
 		"id": "35012",
@@ -1110,7 +1825,10 @@
 		"nameFr": "Brampton West",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L6Z",
+			"L7C"
+		]
 	},
 	{
 		"id": "35013",
@@ -1126,7 +1844,10 @@
 		"nameFr": "Bruce—Grey—Owen Sound",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L6V",
+			"L7A"
+		]
 	},
 	{
 		"id": "35015",
@@ -1134,7 +1855,10 @@
 		"nameFr": "Burlington",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N3P",
+			"N3T"
+		]
 	},
 	{
 		"id": "35016",
@@ -1142,7 +1866,11 @@
 		"nameFr": "Cambridge",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N0H",
+			"N4K",
+			"N4N"
+		]
 	},
 	{
 		"id": "35017",
@@ -1150,7 +1878,15 @@
 		"nameFr": "Chatham-Kent—Leamington",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L7L",
+			"L7M",
+			"L7N",
+			"L7R",
+			"L7S",
+			"L7T",
+			"L7V"
+		]
 	},
 	{
 		"id": "35018",
@@ -1158,7 +1894,9 @@
 		"nameFr": "Davenport",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L9T"
+		]
 	},
 	{
 		"id": "35019",
@@ -1166,7 +1904,12 @@
 		"nameFr": "Don Valley East",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N1P",
+			"N1R",
+			"N1S",
+			"N3H"
+		]
 	},
 	{
 		"id": "35021",
@@ -1174,7 +1917,11 @@
 		"nameFr": "Don Valley West",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N7L",
+			"N8A",
+			"N8H"
+		]
 	},
 	{
 		"id": "35022",
@@ -1182,7 +1929,12 @@
 		"nameFr": "Dufferin—Caledon",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M6E",
+			"M6H",
+			"M6M",
+			"M6N"
+		]
 	},
 	{
 		"id": "35023",
@@ -1190,7 +1942,12 @@
 		"nameFr": "Durham",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M2H",
+			"M2J",
+			"M2K",
+			"M3R"
+		]
 	},
 	{
 		"id": "35025",
@@ -1198,7 +1955,13 @@
 		"nameFr": "Elgin—Middlesex—London",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L0N",
+			"L7E",
+			"L7K",
+			"L9V",
+			"L9W"
+		]
 	},
 	{
 		"id": "35027",
@@ -1206,7 +1969,15 @@
 		"nameFr": "Etobicoke Centre",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N4R",
+			"N5H",
+			"N5P",
+			"N5R",
+			"N6L",
+			"N6N",
+			"N6P"
+		]
 	},
 	{
 		"id": "35026",
@@ -1214,7 +1985,12 @@
 		"nameFr": "Essex",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M4R",
+			"M5M",
+			"M6A",
+			"M6B"
+		]
 	},
 	{
 		"id": "35045",
@@ -1222,7 +1998,11 @@
 		"nameFr": "Kitchener Centre",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"P8N",
+			"P8T",
+			"P9N"
+		]
 	},
 	{
 		"id": "24073",
@@ -1230,7 +2010,12 @@
 		"nameFr": "Sherbrooke",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J6V",
+			"J6W",
+			"J6X",
+			"J6Y"
+		]
 	},
 	{
 		"id": "24074",
@@ -1238,7 +2023,12 @@
 		"nameFr": "Vaudreuil—Soulanges",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J6Z",
+			"J7C",
+			"J7E",
+			"J7G"
+		]
 	},
 	{
 		"id": "24075",
@@ -1246,7 +2036,12 @@
 		"nameFr": "Terrebonne",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"G8Y",
+			"G9A",
+			"G9B",
+			"G9C"
+		]
 	},
 	{
 		"id": "24078",
@@ -1254,7 +2049,12 @@
 		"nameFr": "Vimy",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"H7G",
+			"H7M",
+			"H7S",
+			"H7V"
+		]
 	},
 	{
 		"id": "35002",
@@ -1262,7 +2062,12 @@
 		"nameFr": "Algoma—Manitoulin—Kapuskasing",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K7S",
+			"K7V",
+			"K8A",
+			"K8H"
+		]
 	},
 	{
 		"id": "35032",
@@ -1270,7 +2075,10 @@
 		"nameFr": "Guelph",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L8B",
+			"L9J"
+		]
 	},
 	{
 		"id": "35044",
@@ -1278,7 +2086,13 @@
 		"nameFr": "Kingston and the Islands",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"P2N",
+			"P4N",
+			"P4P",
+			"P4R",
+			"P5N"
+		]
 	},
 	{
 		"id": "24076",
@@ -1286,7 +2100,10 @@
 		"nameFr": "Trois-Rivières",
 		"province": "Quebec",
 		"provinceCode": "24",
-		"postalCodes": []
+		"postalCodes": [
+			"J7V",
+			"J7W"
+		]
 	},
 	{
 		"id": "35073",
@@ -1294,7 +2111,11 @@
 		"nameFr": "Oakville North—Burlington",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"P1A",
+			"P1B",
+			"P1C"
+		]
 	},
 	{
 		"id": "35074",
@@ -1302,7 +2123,10 @@
 		"nameFr": "Oshawa",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K9A",
+			"L1A"
+		]
 	},
 	{
 		"id": "35078",
@@ -1310,7 +2134,11 @@
 		"nameFr": "Ottawa—Vanier",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L1G",
+			"L1H",
+			"L1J"
+		]
 	},
 	{
 		"id": "35080",
@@ -1318,7 +2146,12 @@
 		"nameFr": "Oxford",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K1G",
+			"K1H",
+			"K1T",
+			"K1V"
+		]
 	},
 	{
 		"id": "35081",
@@ -1326,7 +2159,11 @@
 		"nameFr": "Parkdale—High Park",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K1J",
+			"K1M",
+			"K1N"
+		]
 	},
 	{
 		"id": "35082",
@@ -1334,7 +2171,10 @@
 		"nameFr": "Parry Sound—Muskoka",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K2A",
+			"K2B"
+		]
 	},
 	{
 		"id": "35083",
@@ -1342,7 +2182,13 @@
 		"nameFr": "Perth—Wellington",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N0J",
+			"N4G",
+			"N4S",
+			"N4T",
+			"N5C"
+		]
 	},
 	{
 		"id": "35084",
@@ -1350,7 +2196,13 @@
 		"nameFr": "Peterborough—Kawartha",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"P0A",
+			"P0B",
+			"P0C",
+			"P1P",
+			"P2A"
+		]
 	},
 	{
 		"id": "35085",
@@ -1358,7 +2210,13 @@
 		"nameFr": "Pickering—Uxbridge",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N0K",
+			"N4W",
+			"N4X",
+			"N4Z",
+			"N5A"
+		]
 	},
 	{
 		"id": "35086",
@@ -1366,7 +2224,10 @@
 		"nameFr": "Renfrew—Nipissing—Pembroke",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K9H",
+			"K9J"
+		]
 	},
 	{
 		"id": "35088",
@@ -1374,7 +2235,12 @@
 		"nameFr": "Carleton",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K4B",
+			"K4K",
+			"K4R",
+			"K6A"
+		]
 	},
 	{
 		"id": "35092",
@@ -1382,7 +2248,11 @@
 		"nameFr": "Sault Ste. Marie",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M1S",
+			"M1T",
+			"M1W"
+		]
 	},
 	{
 		"id": "35097",
@@ -1390,7 +2260,12 @@
 		"nameFr": "Scarborough—Rouge Park",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M1G",
+			"M1H",
+			"M7Y",
+			"M7Z"
+		]
 	},
 	{
 		"id": "59028",
@@ -1398,7 +2273,11 @@
 		"nameFr": "Skeena—Bulkley Valley",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V6V",
+			"V6W",
+			"V6Y"
+		]
 	},
 	{
 		"id": "59029",
@@ -1406,7 +2285,15 @@
 		"nameFr": "South Okanagan—West Kootenay",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V8K",
+			"V8L",
+			"V8M",
+			"V8N",
+			"V8P",
+			"V8X",
+			"V8Y"
+		]
 	},
 	{
 		"id": "59013",
@@ -1414,7 +2301,9 @@
 		"nameFr": "Kamloops—Thompson—Cariboo",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V4N"
+		]
 	},
 	{
 		"id": "59014",
@@ -1422,7 +2311,10 @@
 		"nameFr": "Kelowna—Lake Country",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V0A",
+			"V1E"
+		]
 	},
 	{
 		"id": "59015",
@@ -1430,7 +2322,14 @@
 		"nameFr": "Kootenay—Columbia",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V1K",
+			"V1S",
+			"V2B",
+			"V2C",
+			"V2E",
+			"V2H"
+		]
 	},
 	{
 		"id": "35047",
@@ -1438,7 +2337,11 @@
 		"nameFr": "Kitchener South—Hespeler",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L0G",
+			"L6A",
+			"L7B"
+		]
 	},
 	{
 		"id": "35048",
@@ -1446,7 +2349,13 @@
 		"nameFr": "Lambton—Kent—Middlesex",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N2A",
+			"N2B",
+			"N2G",
+			"N2H",
+			"N2M"
+		]
 	},
 	{
 		"id": "35049",
@@ -1454,7 +2363,11 @@
 		"nameFr": "Lanark—Frontenac—Kingston",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N2N",
+			"N3A",
+			"N3B"
+		]
 	},
 	{
 		"id": "35050",
@@ -1462,7 +2375,15 @@
 		"nameFr": "Leeds—Grenville—Thousand Islands and Rideau Lakes",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N2C",
+			"N2E",
+			"N2P",
+			"N2R",
+			"N2S",
+			"N3C",
+			"N3E"
+		]
 	},
 	{
 		"id": "35051",
@@ -1470,7 +2391,11 @@
 		"nameFr": "London—Fanshawe",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K7A",
+			"K7C",
+			"K7H"
+		]
 	},
 	{
 		"id": "35052",
@@ -1478,7 +2403,12 @@
 		"nameFr": "London North Centre",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K0E",
+			"K6T",
+			"K6V",
+			"K7G"
+		]
 	},
 	{
 		"id": "35053",
@@ -1486,7 +2416,14 @@
 		"nameFr": "London West",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N5W",
+			"N6A",
+			"N6C",
+			"N6G",
+			"N6H",
+			"N6J"
+		]
 	},
 	{
 		"id": "35054",
@@ -1494,7 +2431,13 @@
 		"nameFr": "Markham—Stouffville",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N5V",
+			"N5Z",
+			"N6B",
+			"N6E",
+			"N6M"
+		]
 	},
 	{
 		"id": "35055",
@@ -1502,7 +2445,9 @@
 		"nameFr": "Markham—Thornhill",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N6K"
+		]
 	},
 	{
 		"id": "35056",
@@ -1510,7 +2455,12 @@
 		"nameFr": "Markham—Unionville",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L3P",
+			"L4A",
+			"L6B",
+			"L6E"
+		]
 	},
 	{
 		"id": "35057",
@@ -1519,7 +2469,9 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
-			"L3R"
+			"L3S",
+			"L3T",
+			"L6G"
 		]
 	},
 	{
@@ -1528,7 +2480,10 @@
 		"nameFr": "Mississauga East—Cooksville",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N5X",
+			"N7G"
+		]
 	},
 	{
 		"id": "35062",
@@ -1536,7 +2491,11 @@
 		"nameFr": "Mississauga—Malton",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L4W",
+			"L4Z",
+			"M7R"
+		]
 	},
 	{
 		"id": "35066",
@@ -1544,7 +2503,10 @@
 		"nameFr": "Niagara Centre",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L5M",
+			"L5N"
+		]
 	},
 	{
 		"id": "35068",
@@ -1552,7 +2514,10 @@
 		"nameFr": "Niagara West",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L3X",
+			"L3Y"
+		]
 	},
 	{
 		"id": "35069",
@@ -1560,7 +2525,9 @@
 		"nameFr": "Nickel Belt",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L9N"
+		]
 	},
 	{
 		"id": "35070",
@@ -1568,7 +2535,12 @@
 		"nameFr": "Nipissing—Timiskaming",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L2E",
+			"L2G",
+			"L2H",
+			"L2J"
+		]
 	},
 	{
 		"id": "35058",
@@ -1576,7 +2548,10 @@
 		"nameFr": "Mississauga Centre",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L3R",
+			"L6C"
+		]
 	},
 	{
 		"id": "35060",
@@ -1584,7 +2559,10 @@
 		"nameFr": "Mississauga—Erin Mills",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L7G",
+			"L9E"
+		]
 	},
 	{
 		"id": "35061",
@@ -1593,7 +2571,7 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
-			"L5B"
+			"L5R"
 		]
 	},
 	{
@@ -1602,7 +2580,9 @@
 		"nameFr": "Mississauga—Streetsville",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L5L"
+		]
 	},
 	{
 		"id": "35064",
@@ -1610,7 +2590,18 @@
 		"nameFr": "Nepean",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L4X",
+			"L4Y",
+			"L5A",
+			"L5B",
+			"L5C",
+			"L5E",
+			"L5G",
+			"L5H",
+			"L5J",
+			"L5K"
+		]
 	},
 	{
 		"id": "35065",
@@ -1618,7 +2609,13 @@
 		"nameFr": "Newmarket—Aurora",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L4T",
+			"L4V",
+			"L5P",
+			"L5S",
+			"L5V"
+		]
 	},
 	{
 		"id": "35071",
@@ -1626,7 +2623,13 @@
 		"nameFr": "Northumberland—Peterborough South",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L2A",
+			"L2V",
+			"L3B",
+			"L3C",
+			"L3K"
+		]
 	},
 	{
 		"id": "35075",
@@ -1634,7 +2637,10 @@
 		"nameFr": "Ottawa Centre",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L6H",
+			"L6J"
+		]
 	},
 	{
 		"id": "35076",
@@ -1642,7 +2648,11 @@
 		"nameFr": "Orléans",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L6K",
+			"L6L",
+			"L6M"
+		]
 	},
 	{
 		"id": "35077",
@@ -1650,7 +2660,11 @@
 		"nameFr": "Ottawa South",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K1E",
+			"K1W",
+			"K4A"
+		]
 	},
 	{
 		"id": "35079",
@@ -1660,6 +2674,10 @@
 		"provinceCode": "35",
 		"postalCodes": [
 			"K1A",
+			"K1P",
+			"K1R",
+			"K1S",
+			"K1Y",
 			"K2P"
 		]
 	},
@@ -1669,7 +2687,12 @@
 		"nameFr": "Niagara Falls",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K2E",
+			"K2G",
+			"K2J",
+			"K2R"
+		]
 	},
 	{
 		"id": "35072",
@@ -1677,7 +2700,12 @@
 		"nameFr": "Oakville",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L0R",
+			"L2S",
+			"L3J",
+			"L3M"
+		]
 	},
 	{
 		"id": "35087",
@@ -1685,7 +2713,12 @@
 		"nameFr": "Richmond Hill",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L1M",
+			"L1V",
+			"L1W",
+			"L1X"
+		]
 	},
 	{
 		"id": "35089",
@@ -1693,7 +2726,10 @@
 		"nameFr": "St. Catharines",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L4B",
+			"L4C"
+		]
 	},
 	{
 		"id": "35090",
@@ -1701,7 +2737,11 @@
 		"nameFr": "Toronto—St. Paul's",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N7S",
+			"N7T",
+			"N7W"
+		]
 	},
 	{
 		"id": "35091",
@@ -1709,7 +2749,12 @@
 		"nameFr": "Sarnia—Lambton",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"P5A",
+			"P6A",
+			"P6B",
+			"P6C"
+		]
 	},
 	{
 		"id": "35093",
@@ -1717,7 +2762,11 @@
 		"nameFr": "Scarborough—Agincourt",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M1P",
+			"M1R",
+			"M3A"
+		]
 	},
 	{
 		"id": "35094",
@@ -1726,7 +2775,8 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
-			"M1C"
+			"M1C",
+			"M1E"
 		]
 	},
 	{
@@ -1735,7 +2785,12 @@
 		"nameFr": "Scarborough Southwest",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L9M",
+			"L9R",
+			"L9Y",
+			"L9Z"
+		]
 	},
 	{
 		"id": "35108",
@@ -1743,7 +2798,10 @@
 		"nameFr": "Toronto Centre",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"P7A",
+			"P7B"
+		]
 	},
 	{
 		"id": "35109",
@@ -1751,7 +2809,13 @@
 		"nameFr": "Toronto—Danforth",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M4X",
+			"M4Y",
+			"M5B",
+			"M5C",
+			"M5E"
+		]
 	},
 	{
 		"id": "35095",
@@ -1759,7 +2823,11 @@
 		"nameFr": "Scarborough—Guildwood",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M1B",
+			"M1V",
+			"M1X"
+		]
 	},
 	{
 		"id": "35096",
@@ -1767,7 +2835,13 @@
 		"nameFr": "Scarborough North",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M1J",
+			"M1K",
+			"M1L",
+			"M1M",
+			"M1N"
+		]
 	},
 	{
 		"id": "35111",
@@ -1775,7 +2849,14 @@
 		"nameFr": "Vaughan—Woodbridge",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M4P",
+			"M4S",
+			"M4T",
+			"M4V",
+			"M5P",
+			"M6C"
+		]
 	},
 	{
 		"id": "35112",
@@ -1784,7 +2865,12 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
-			"M4W"
+			"M4W",
+			"M5R",
+			"M5S",
+			"M5T",
+			"M6G",
+			"M7A"
 		]
 	},
 	{
@@ -1793,7 +2879,10 @@
 		"nameFr": "Calgary Midnapore",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T2W",
+			"T2Y"
+		]
 	},
 	{
 		"id": "48009",
@@ -1801,7 +2890,11 @@
 		"nameFr": "Calgary Nose Hill",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T1Y",
+			"T3J",
+			"T3N"
+		]
 	},
 	{
 		"id": "48010",
@@ -1809,7 +2902,10 @@
 		"nameFr": "Calgary Rocky Ridge",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T2J",
+			"T2X"
+		]
 	},
 	{
 		"id": "48011",
@@ -1817,7 +2913,9 @@
 		"nameFr": "Calgary Shepard",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T3K"
+		]
 	},
 	{
 		"id": "48012",
@@ -1825,7 +2923,9 @@
 		"nameFr": "Calgary Signal Hill",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T3S"
+		]
 	},
 	{
 		"id": "48013",
@@ -1833,7 +2933,10 @@
 		"nameFr": "Calgary Skyview",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T3B",
+			"T3H"
+		]
 	},
 	{
 		"id": "48018",
@@ -1841,7 +2944,11 @@
 		"nameFr": "Edmonton Riverbend",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T5A",
+			"T5Y",
+			"T6S"
+		]
 	},
 	{
 		"id": "48019",
@@ -1849,7 +2956,11 @@
 		"nameFr": "Edmonton Strathcona",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T5S",
+			"T5X",
+			"T6V"
+		]
 	},
 	{
 		"id": "48020",
@@ -1857,7 +2968,10 @@
 		"nameFr": "Edmonton West",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T6R",
+			"T6W"
+		]
 	},
 	{
 		"id": "48021",
@@ -1865,7 +2979,10 @@
 		"nameFr": "Edmonton—Wetaskiwin",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T6L",
+			"T6T"
+		]
 	},
 	{
 		"id": "48022",
@@ -1874,7 +2991,14 @@
 		"province": "Alberta",
 		"provinceCode": "48",
 		"postalCodes": [
-			"T6G"
+			"T6A",
+			"T6B",
+			"T6C",
+			"T6E",
+			"T6G",
+			"T6H",
+			"T6J",
+			"T6P"
 		]
 	},
 	{
@@ -1883,7 +3007,10 @@
 		"nameFr": "Fort McMurray—Cold Lake",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T5R",
+			"T5T"
+		]
 	},
 	{
 		"id": "35099",
@@ -1891,7 +3018,10 @@
 		"nameFr": "Simcoe—Grey",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L3V",
+			"L4R"
+		]
 	},
 	{
 		"id": "35100",
@@ -1900,7 +3030,12 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
+			"M5H",
+			"M5L",
 			"M5V",
+			"M5W",
+			"M5X",
+			"M6J",
 			"M6K"
 		]
 	},
@@ -1910,7 +3045,14 @@
 		"nameFr": "Spadina—Fort York",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L2M",
+			"L2N",
+			"L2P",
+			"L2R",
+			"L2T",
+			"L2W"
+		]
 	},
 	{
 		"id": "35102",
@@ -1918,7 +3060,9 @@
 		"nameFr": "Stormont—Dundas—South Glengarry",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"K6J"
+		]
 	},
 	{
 		"id": "35103",
@@ -1927,7 +3071,12 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
-			"P3E"
+			"P3A",
+			"P3B",
+			"P3C",
+			"P3E",
+			"P3G",
+			"P3L"
 		]
 	},
 	{
@@ -1936,7 +3085,12 @@
 		"nameFr": "Thornhill",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"P2B",
+			"P3N",
+			"P3P",
+			"P5E"
+		]
 	},
 	{
 		"id": "35105",
@@ -1944,7 +3098,11 @@
 		"nameFr": "Thunder Bay—Rainy River",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M6P",
+			"M6R",
+			"M6S"
+		]
 	},
 	{
 		"id": "35106",
@@ -1952,7 +3110,10 @@
 		"nameFr": "Thunder Bay—Superior North",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L3Z",
+			"L4J"
+		]
 	},
 	{
 		"id": "35107",
@@ -1960,7 +3121,14 @@
 		"nameFr": "Timmins—James Bay",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"P0W",
+			"P7C",
+			"P7E",
+			"P7J",
+			"P7K",
+			"P9A"
+		]
 	},
 	{
 		"id": "35110",
@@ -1968,7 +3136,13 @@
 		"nameFr": "University—Rosedale",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M4J",
+			"M4K",
+			"M4L",
+			"M4M",
+			"M5A"
+		]
 	},
 	{
 		"id": "35113",
@@ -1976,7 +3150,10 @@
 		"nameFr": "Wellington—Halton Hills",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L4H",
+			"L4L"
+		]
 	},
 	{
 		"id": "48024",
@@ -1984,7 +3161,10 @@
 		"nameFr": "Grande Prairie—Mackenzie",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T1S",
+			"T1V"
+		]
 	},
 	{
 		"id": "48025",
@@ -1992,7 +3172,11 @@
 		"nameFr": "Lakeland",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T9H",
+			"T9K",
+			"T9M"
+		]
 	},
 	{
 		"id": "48026",
@@ -2000,7 +3184,10 @@
 		"nameFr": "Lethbridge",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T8V",
+			"T8X"
+		]
 	},
 	{
 		"id": "48027",
@@ -2008,7 +3195,13 @@
 		"nameFr": "Medicine Hat—Cardston—Warner",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T9C",
+			"T9N",
+			"T9S",
+			"T9V",
+			"T9X"
+		]
 	},
 	{
 		"id": "48028",
@@ -2016,7 +3209,12 @@
 		"nameFr": "Peace River—Westlock",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T4X",
+			"T9A",
+			"T9E",
+			"T9G"
+		]
 	},
 	{
 		"id": "48029",
@@ -2024,7 +3222,11 @@
 		"nameFr": "Red Deer—Mountain View",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T1H",
+			"T1J",
+			"T1K"
+		]
 	},
 	{
 		"id": "48006",
@@ -2032,7 +3234,10 @@
 		"nameFr": "Calgary Forest Lawn",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T3G",
+			"T3L"
+		]
 	},
 	{
 		"id": "59007",
@@ -2040,7 +3245,12 @@
 		"nameFr": "Cloverdale—Langley City",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V0B",
+			"V1A",
+			"V1C",
+			"V1R"
+		]
 	},
 	{
 		"id": "35114",
@@ -2049,7 +3259,11 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
-			"N2L"
+			"N2J",
+			"N2K",
+			"N2L",
+			"N2T",
+			"N2V"
 		]
 	},
 	{
@@ -2058,7 +3272,10 @@
 		"nameFr": "Willowdale",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L7J",
+			"N1C"
+		]
 	},
 	{
 		"id": "35116",
@@ -2066,7 +3283,11 @@
 		"nameFr": "Windsor—Tecumseh",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L1N",
+			"L1P",
+			"L1R"
+		]
 	},
 	{
 		"id": "35117",
@@ -2074,7 +3295,10 @@
 		"nameFr": "Windsor West",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"M2N",
+			"M2R"
+		]
 	},
 	{
 		"id": "35118",
@@ -2082,7 +3306,15 @@
 		"nameFr": "York Centre",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"N8N",
+			"N8P",
+			"N8S",
+			"N8T",
+			"N8W",
+			"N8Y",
+			"N9K"
+		]
 	},
 	{
 		"id": "35119",
@@ -2091,7 +3323,12 @@
 		"province": "Ontario",
 		"provinceCode": "35",
 		"postalCodes": [
-			"N9A"
+			"N8X",
+			"N9A",
+			"N9B",
+			"N9C",
+			"N9E",
+			"N9G"
 		]
 	},
 	{
@@ -2100,7 +3337,11 @@
 		"nameFr": "Humber River—Black Creek",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L4P",
+			"L9L",
+			"L9P"
+		]
 	},
 	{
 		"id": "46001",
@@ -2108,7 +3349,12 @@
 		"nameFr": "Brandon—Souris",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R7A",
+			"R7B",
+			"R7C",
+			"R7R"
+		]
 	},
 	{
 		"id": "46003",
@@ -2117,7 +3363,8 @@
 		"province": "Manitoba",
 		"provinceCode": "46",
 		"postalCodes": [
-			"R2C"
+			"R2C",
+			"R3W"
 		]
 	},
 	{
@@ -2126,7 +3373,12 @@
 		"nameFr": "Dauphin—Swan River—Neepawa",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R2E",
+			"R2G",
+			"R2V",
+			"R4A"
+		]
 	},
 	{
 		"id": "46007",
@@ -2134,7 +3386,9 @@
 		"nameFr": "Portage—Lisgar",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R7N"
+		]
 	},
 	{
 		"id": "46008",
@@ -2142,7 +3396,13 @@
 		"nameFr": "Provencher",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R2H",
+			"R2J",
+			"R2M",
+			"R3X",
+			"R5T"
+		]
 	},
 	{
 		"id": "46010",
@@ -2151,7 +3411,11 @@
 		"province": "Manitoba",
 		"provinceCode": "46",
 		"postalCodes": [
-			"R3C"
+			"R3A",
+			"R3B",
+			"R3C",
+			"R3E",
+			"R3M"
 		]
 	},
 	{
@@ -2160,7 +3424,12 @@
 		"nameFr": "Battlefords—Lloydminster",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"S0J",
+			"S9A",
+			"S9V",
+			"S9X"
+		]
 	},
 	{
 		"id": "47002",
@@ -2168,7 +3437,9 @@
 		"nameFr": "Cypress Hills—Grasslands",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"S7P"
+		]
 	},
 	{
 		"id": "35120",
@@ -2176,7 +3447,11 @@
 		"nameFr": "York South—Weston",
 		"province": "Ontario",
 		"provinceCode": "35",
-		"postalCodes": []
+		"postalCodes": [
+			"L4K",
+			"M3H",
+			"M3M"
+		]
 	},
 	{
 		"id": "46002",
@@ -2184,7 +3459,10 @@
 		"nameFr": "Charleswood—St. James—Assiniboia—Headingley",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R8N",
+			"R9A"
+		]
 	},
 	{
 		"id": "46005",
@@ -2192,7 +3470,11 @@
 		"nameFr": "Elmwood—Transcona",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R1N",
+			"R4K",
+			"R6W"
+		]
 	},
 	{
 		"id": "46006",
@@ -2201,7 +3483,10 @@
 		"province": "Manitoba",
 		"provinceCode": "46",
 		"postalCodes": [
-			"R0A"
+			"R5A",
+			"R5G",
+			"R5K",
+			"R5L"
 		]
 	},
 	{
@@ -2210,7 +3495,12 @@
 		"nameFr": "Saint Boniface—Saint Vital",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R0C",
+			"R0E",
+			"R1A",
+			"R1B"
+		]
 	},
 	{
 		"id": "46011",
@@ -2218,7 +3508,11 @@
 		"nameFr": "Winnipeg Centre",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R2P",
+			"R2R",
+			"R2W"
+		]
 	},
 	{
 		"id": "46012",
@@ -2226,7 +3520,10 @@
 		"nameFr": "Winnipeg North",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R2N",
+			"R3V"
+		]
 	},
 	{
 		"id": "46013",
@@ -2234,7 +3531,13 @@
 		"nameFr": "Winnipeg South",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R3L",
+			"R3N",
+			"R3P",
+			"R3T",
+			"R3Y"
+		]
 	},
 	{
 		"id": "46014",
@@ -2242,7 +3545,14 @@
 		"nameFr": "Winnipeg South Centre",
 		"province": "Manitoba",
 		"provinceCode": "46",
-		"postalCodes": []
+		"postalCodes": [
+			"R2Y",
+			"R3J",
+			"R3K",
+			"R3R",
+			"R3S",
+			"R4H"
+		]
 	},
 	{
 		"id": "47003",
@@ -2250,7 +3560,9 @@
 		"nameFr": "Desnethé—Missinippi—Churchill River",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"R8A"
+		]
 	},
 	{
 		"id": "47004",
@@ -2258,7 +3570,10 @@
 		"nameFr": "Carlton Trail—Eagle Creek",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"S2V",
+			"S6J"
+		]
 	},
 	{
 		"id": "47005",
@@ -2266,7 +3581,10 @@
 		"nameFr": "Moose Jaw—Lake Centre—Lanigan",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"S6V",
+			"S6X"
+		]
 	},
 	{
 		"id": "47006",
@@ -2274,7 +3592,13 @@
 		"nameFr": "Prince Albert",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"S4S",
+			"S4T",
+			"S4W",
+			"S4X",
+			"S4Y"
+		]
 	},
 	{
 		"id": "47007",
@@ -2283,7 +3607,7 @@
 		"province": "Saskatchewan",
 		"provinceCode": "47",
 		"postalCodes": [
-			"S0A"
+			"S4R"
 		]
 	},
 	{
@@ -2293,7 +3617,10 @@
 		"province": "Saskatchewan",
 		"provinceCode": "47",
 		"postalCodes": [
-			"S4P"
+			"S4N",
+			"S4P",
+			"S4V",
+			"S4Z"
 		]
 	},
 	{
@@ -2302,7 +3629,10 @@
 		"nameFr": "Regina—Wascana",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"S7H",
+			"S7J"
+		]
 	},
 	{
 		"id": "47010",
@@ -2310,7 +3640,10 @@
 		"nameFr": "Saskatoon—Grasswood",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"S7N",
+			"S7S"
+		]
 	},
 	{
 		"id": "47013",
@@ -2318,7 +3651,9 @@
 		"nameFr": "Souris—Moose Mountain",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"S9H"
+		]
 	},
 	{
 		"id": "47014",
@@ -2326,7 +3661,9 @@
 		"nameFr": "Yorkton—Melville",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"S3N"
+		]
 	},
 	{
 		"id": "48001",
@@ -2334,7 +3671,13 @@
 		"nameFr": "Banff—Airdrie",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T3P",
+			"T3R",
+			"T4A",
+			"T4B",
+			"T4C"
+		]
 	},
 	{
 		"id": "48002",
@@ -2342,7 +3685,10 @@
 		"nameFr": "Battle River—Crowfoot",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T0B",
+			"T4V"
+		]
 	},
 	{
 		"id": "47011",
@@ -2351,7 +3697,9 @@
 		"province": "Saskatchewan",
 		"provinceCode": "47",
 		"postalCodes": [
-			"S7K"
+			"S7M",
+			"S7R",
+			"S7W"
 		]
 	},
 	{
@@ -2360,7 +3708,10 @@
 		"nameFr": "Saskatoon West",
 		"province": "Saskatchewan",
 		"provinceCode": "47",
-		"postalCodes": []
+		"postalCodes": [
+			"S4A",
+			"S4H"
+		]
 	},
 	{
 		"id": "48003",
@@ -2368,7 +3719,9 @@
 		"nameFr": "Bow River",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T1P"
+		]
 	},
 	{
 		"id": "48004",
@@ -2377,8 +3730,15 @@
 		"province": "Alberta",
 		"provinceCode": "48",
 		"postalCodes": [
+			"T2G",
+			"T2H",
 			"T2P",
-			"T3C"
+			"T2R",
+			"T2S",
+			"T2T",
+			"T2V",
+			"T3C",
+			"T3E"
 		]
 	},
 	{
@@ -2387,7 +3747,13 @@
 		"nameFr": "Calgary Confederation",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T2E",
+			"T2L",
+			"T2M",
+			"T2N",
+			"T3A"
+		]
 	},
 	{
 		"id": "59016",
@@ -2396,7 +3762,9 @@
 		"province": "British Columbia",
 		"provinceCode": "59",
 		"postalCodes": [
-			"V1V"
+			"V1P",
+			"V1V",
+			"V1X"
 		]
 	},
 	{
@@ -2405,7 +3773,11 @@
 		"nameFr": "Mission—Matsqui—Fraser Canyon",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V1M",
+			"V2Y",
+			"V4W"
+		]
 	},
 	{
 		"id": "59018",
@@ -2413,7 +3785,12 @@
 		"nameFr": "Nanaimo—Ladysmith",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V2S",
+			"V3G",
+			"V4S",
+			"V4X"
+		]
 	},
 	{
 		"id": "59020",
@@ -2421,7 +3798,11 @@
 		"nameFr": "North Okanagan—Shuswap",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V3K",
+			"V3L",
+			"V3M"
+		]
 	},
 	{
 		"id": "59021",
@@ -2429,7 +3810,14 @@
 		"nameFr": "North Vancouver",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V0N",
+			"V0P",
+			"V8A",
+			"V9J",
+			"V9M",
+			"V9W"
+		]
 	},
 	{
 		"id": "48014",
@@ -2446,7 +3834,13 @@
 		"province": "Alberta",
 		"provinceCode": "48",
 		"postalCodes": [
-			"T5J"
+			"T5E",
+			"T5H",
+			"T5K",
+			"T5L",
+			"T5M",
+			"T5N",
+			"T5P"
 		]
 	},
 	{
@@ -2455,7 +3849,9 @@
 		"nameFr": "Edmonton Manning",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T6K"
+		]
 	},
 	{
 		"id": "48017",
@@ -2463,7 +3859,13 @@
 		"nameFr": "Edmonton Mill Woods",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T5B",
+			"T5C",
+			"T5G",
+			"T5W",
+			"T5Z"
+		]
 	},
 	{
 		"id": "59004",
@@ -2471,7 +3873,12 @@
 		"nameFr": "Cariboo—Prince George",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V2G",
+			"V2J",
+			"V2M",
+			"V2N"
+		]
 	},
 	{
 		"id": "59005",
@@ -2479,7 +3886,11 @@
 		"nameFr": "Central Okanagan—Similkameen—Nicola",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V2P",
+			"V2R",
+			"V4Z"
+		]
 	},
 	{
 		"id": "59006",
@@ -2495,7 +3906,10 @@
 		"nameFr": "Coquitlam—Port Coquitlam",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V3C",
+			"V3P"
+		]
 	},
 	{
 		"id": "59009",
@@ -2503,7 +3917,11 @@
 		"nameFr": "Courtenay—Alberni",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V9N",
+			"V9P",
+			"V9Y"
+		]
 	},
 	{
 		"id": "59010",
@@ -2511,7 +3929,10 @@
 		"nameFr": "Cowichan—Malahat—Langford",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V8E",
+			"V9L"
+		]
 	},
 	{
 		"id": "59003",
@@ -2519,7 +3940,15 @@
 		"nameFr": "Burnaby South",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V3J",
+			"V5A",
+			"V5B",
+			"V5C",
+			"V7G",
+			"V7H",
+			"V7J"
+		]
 	},
 	{
 		"id": "59031",
@@ -2527,7 +3956,11 @@
 		"nameFr": "Steveston—Richmond East",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V8C",
+			"V8G",
+			"V8J"
+		]
 	},
 	{
 		"id": "59011",
@@ -2535,7 +3968,13 @@
 		"nameFr": "Delta",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V4C",
+			"V4E",
+			"V4K",
+			"V4M",
+			"V7X"
+		]
 	},
 	{
 		"id": "59023",
@@ -2543,7 +3982,11 @@
 		"nameFr": "Port Moody—Coquitlam",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V1W",
+			"V1Z",
+			"V4T"
+		]
 	},
 	{
 		"id": "59025",
@@ -2551,7 +3994,11 @@
 		"nameFr": "Richmond Centre",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V3B",
+			"V3E",
+			"V3H"
+		]
 	},
 	{
 		"id": "59027",
@@ -2559,7 +4006,13 @@
 		"nameFr": "Saanich—Gulf Islands",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V6X",
+			"V7A",
+			"V7B",
+			"V7C",
+			"V7E"
+		]
 	},
 	{
 		"id": "59030",
@@ -2567,7 +4020,10 @@
 		"nameFr": "South Surrey—White Rock",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V1N",
+			"V2A"
+		]
 	},
 	{
 		"id": "59012",
@@ -2576,7 +4032,12 @@
 		"province": "British Columbia",
 		"provinceCode": "59",
 		"postalCodes": [
-			"V9A"
+			"V8Z",
+			"V9A",
+			"V9B",
+			"V9C",
+			"V9E",
+			"V9Z"
 		]
 	},
 	{
@@ -2585,7 +4046,16 @@
 		"nameFr": "Pitt Meadows—Maple Ridge",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V7K",
+			"V7L",
+			"V7M",
+			"V7N",
+			"V7P",
+			"V7R",
+			"V7T",
+			"V7V"
+		]
 	},
 	{
 		"id": "59024",
@@ -2593,7 +4063,13 @@
 		"nameFr": "Prince George—Peace River—Northern Rockies",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V2V",
+			"V2W",
+			"V2X",
+			"V3Z",
+			"V4R"
+		]
 	},
 	{
 		"id": "59026",
@@ -2601,7 +4077,12 @@
 		"nameFr": "Esquimalt—Saanich—Sooke",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V1G",
+			"V1J",
+			"V2K",
+			"V2L"
+		]
 	},
 	{
 		"id": "48030",
@@ -2609,7 +4090,11 @@
 		"nameFr": "Red Deer—Lacombe",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T1A",
+			"T1B",
+			"T1C"
+		]
 	},
 	{
 		"id": "48031",
@@ -2617,7 +4102,12 @@
 		"nameFr": "St. Albert—Edmonton",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T7A",
+			"T7X",
+			"T7Y",
+			"T7Z"
+		]
 	},
 	{
 		"id": "48032",
@@ -2625,7 +4115,12 @@
 		"nameFr": "Sherwood Park—Fort Saskatchewan",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T7N",
+			"T7P",
+			"T7S",
+			"T8S"
+		]
 	},
 	{
 		"id": "48033",
@@ -2633,7 +4128,11 @@
 		"nameFr": "Sturgeon River—Parkland",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T4E",
+			"T4H",
+			"T4S"
+		]
 	},
 	{
 		"id": "48034",
@@ -2642,7 +4141,9 @@
 		"province": "Alberta",
 		"provinceCode": "48",
 		"postalCodes": [
-			"T4N"
+			"T4N",
+			"T4P",
+			"T4R"
 		]
 	},
 	{
@@ -2651,7 +4152,10 @@
 		"nameFr": "Abbotsford",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V2T",
+			"V2Z"
+		]
 	},
 	{
 		"id": "59002",
@@ -2660,7 +4164,8 @@
 		"province": "British Columbia",
 		"provinceCode": "59",
 		"postalCodes": [
-			"V3N"
+			"V5G",
+			"V5H"
 		]
 	},
 	{
@@ -2669,7 +4174,14 @@
 		"nameFr": "New Westminster—Burnaby",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V9G",
+			"V9R",
+			"V9S",
+			"V9T",
+			"V9V",
+			"V9X"
+		]
 	},
 	{
 		"id": "48007",
@@ -2677,7 +4189,12 @@
 		"nameFr": "Calgary Heritage",
 		"province": "Alberta",
 		"provinceCode": "48",
-		"postalCodes": []
+		"postalCodes": [
+			"T2A",
+			"T2B",
+			"T2C",
+			"T2Z"
+		]
 	},
 	{
 		"id": "59032",
@@ -2685,7 +4202,14 @@
 		"nameFr": "Surrey Centre",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V3A",
+			"V3S",
+			"V3W",
+			"V4A",
+			"V4B",
+			"V4P"
+		]
 	},
 	{
 		"id": "59033",
@@ -2693,7 +4217,10 @@
 		"nameFr": "Surrey—Newton",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V3R",
+			"V3T"
+		]
 	},
 	{
 		"id": "59034",
@@ -2709,7 +4236,14 @@
 		"nameFr": "Vancouver East",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V6B",
+			"V6C",
+			"V6E",
+			"V6G",
+			"V6Z",
+			"V7Y"
+		]
 	},
 	{
 		"id": "59036",
@@ -2718,8 +4252,11 @@
 		"province": "British Columbia",
 		"provinceCode": "59",
 		"postalCodes": [
-			"V6B",
-			"V5K"
+			"V5K",
+			"V5L",
+			"V5N",
+			"V5T",
+			"V6A"
 		]
 	},
 	{
@@ -2728,7 +4265,12 @@
 		"nameFr": "North Island—Powell River",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V3N",
+			"V5E",
+			"V5J",
+			"V5S"
+		]
 	},
 	{
 		"id": "59038",
@@ -2736,7 +4278,14 @@
 		"nameFr": "Vancouver Kingsway",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V5X",
+			"V5Y",
+			"V5Z",
+			"V6H",
+			"V6J",
+			"V6P"
+		]
 	},
 	{
 		"id": "59039",
@@ -2744,7 +4293,12 @@
 		"nameFr": "Vancouver Quadra",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V5P",
+			"V5R",
+			"V5V",
+			"V5W"
+		]
 	},
 	{
 		"id": "59040",
@@ -2752,7 +4306,15 @@
 		"nameFr": "Vancouver South",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V6K",
+			"V6L",
+			"V6M",
+			"V6N",
+			"V6R",
+			"V6S",
+			"V6T"
+		]
 	},
 	{
 		"id": "59041",
@@ -2760,7 +4322,13 @@
 		"nameFr": "Victoria",
 		"province": "British Columbia",
 		"provinceCode": "59",
-		"postalCodes": []
+		"postalCodes": [
+			"V0G",
+			"V1B",
+			"V1H",
+			"V1T",
+			"V4V"
+		]
 	},
 	{
 		"id": "59042",
@@ -2769,6 +4337,10 @@
 		"province": "British Columbia",
 		"provinceCode": "59",
 		"postalCodes": [
+			"V8R",
+			"V8S",
+			"V8T",
+			"V8V",
 			"V8W"
 		]
 	},
@@ -2779,6 +4351,7 @@
 		"province": "Yukon",
 		"provinceCode": "60",
 		"postalCodes": [
+			"Y0B",
 			"Y1A"
 		]
 	},
@@ -2789,6 +4362,7 @@
 		"province": "Northwest Territories",
 		"provinceCode": "61",
 		"postalCodes": [
+			"X0E",
 			"X1A"
 		]
 	},
@@ -2798,8 +4372,6 @@
 		"nameFr": "Nunavut",
 		"province": "Nunavut",
 		"provinceCode": "62",
-		"postalCodes": [
-			"X0A"
-		]
+		"postalCodes": []
 	}
 ]

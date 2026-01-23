@@ -8,6 +8,7 @@ import { serverEnv } from "./env";
 // Types for our database tables
 export interface LetterGeneration {
 	id?: string;
+	country: "de" | "ca" | "uk" | "fr"; // Campaign country
 	mdb_id: string;
 	mdb_name: string;
 	mdb_party: string | null;
@@ -73,6 +74,7 @@ export async function trackLetterGeneration(
 		const supabase = createServerSupabaseClient();
 
 		const { error } = await supabase.from("letter_generations").insert({
+			country: data.country,
 			mdb_id: data.mdb_id,
 			mdb_name: data.mdb_name,
 			mdb_party: data.mdb_party,
@@ -104,20 +106,25 @@ export async function trackLetterGeneration(
 /**
  * Get aggregated statistics about letter generations.
  * Useful for public dashboard / impact metrics.
+ * @param country - Filter by country (default: "de" for backwards compatibility)
  */
-export async function getLetterStats(): Promise<LetterStats | null> {
+export async function getLetterStats(
+	country: "de" | "ca" | "uk" = "de",
+): Promise<LetterStats | null> {
 	try {
 		const supabase = createServerSupabaseClient();
 
 		// Total letters
 		const { count: totalLetters } = await supabase
 			.from("letter_generations")
-			.select("*", { count: "exact", head: true });
+			.select("*", { count: "exact", head: true })
+			.eq("country", country);
 
 		// Unique MdBs contacted
 		const { data: uniqueMdbs } = await supabase
 			.from("letter_generations")
 			.select("mdb_id")
+			.eq("country", country)
 			.limit(1000);
 
 		const mdbIds = (uniqueMdbs as { mdb_id: string }[] | null) || [];
@@ -127,6 +134,7 @@ export async function getLetterStats(): Promise<LetterStats | null> {
 		const { data: partyData } = await supabase
 			.from("letter_generations")
 			.select("mdb_party")
+			.eq("country", country)
 			.limit(10000);
 
 		const partyRows =
@@ -154,6 +162,7 @@ export async function getLetterStats(): Promise<LetterStats | null> {
 		const { data: mdbData } = await supabase
 			.from("letter_generations")
 			.select("mdb_name, mdb_party")
+			.eq("country", country)
 			.limit(10000);
 
 		const mdbRows =
@@ -182,6 +191,7 @@ export async function getLetterStats(): Promise<LetterStats | null> {
 		const { data: wahlkreisData } = await supabase
 			.from("letter_generations")
 			.select("wahlkreis_name")
+			.eq("country", country)
 			.limit(10000);
 
 		const wahlkreisRows =

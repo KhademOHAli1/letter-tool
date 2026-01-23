@@ -14,7 +14,7 @@ import {
 	Users,
 } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CampaignGoal } from "@/components/campaign-goal";
 import { EmailSender } from "@/components/email-sender";
@@ -51,8 +51,18 @@ function getShareMessage(lang: Language, url: string): string {
 	return `${message}\n\n${url}`;
 }
 
+// Country-specific default email subject
+function getDefaultSubject(country: string): string {
+	if (country === "ca" || country === "uk") {
+		return "Request for Support: Human Rights in Iran";
+	}
+	return "Bitte um Unterstützung: Menschenrechte im Iran";
+}
+
 export default function SuccessPage() {
 	const router = useRouter();
+	const params = useParams<{ country: string }>();
+	const country = params.country || "de";
 	const { t, language } = useLanguage();
 	const [copiedMessage, setCopiedMessage] = useState(false);
 	const [mdbName, setMdbName] = useState<string | null>(null);
@@ -87,10 +97,7 @@ export default function SuccessPage() {
 				setMdbName(letterData.mdb?.name || null);
 				setMdbEmail(letterData.mdb?.email || null);
 				setLetterContent(letterData.content || null);
-				setLetterSubject(
-					letterData.subject ||
-						"Bitte um Unterstützung: Menschenrechte im Iran",
-				);
+				setLetterSubject(letterData.subject || getDefaultSubject(country));
 
 				// Generate tracking ID for email open tracking
 				const newTrackingId = generateTrackingId();
@@ -104,9 +111,7 @@ export default function SuccessPage() {
 				if (letterData.content && letterData.mdb) {
 					cacheGeneratedLetter({
 						content: letterData.content,
-						subject:
-							letterData.subject ||
-							"Bitte um Unterstützung: Menschenrechte im Iran",
+						subject: letterData.subject || getDefaultSubject(country),
 						wordCount: letterData.wordCount || 0,
 						senderName: letterData.senderName || "",
 						senderPlz: letterData.senderPlz || "",
@@ -120,9 +125,7 @@ export default function SuccessPage() {
 					// Add to letter history for local viewing
 					const hId = addToLetterHistory({
 						content: letterData.content,
-						subject:
-							letterData.subject ||
-							"Bitte um Unterstützung: Menschenrechte im Iran",
+						subject: letterData.subject || getDefaultSubject(country),
 						wordCount: letterData.wordCount || 0,
 						mdbName: letterData.mdb.name,
 						mdbParty: letterData.mdb.party,
@@ -165,7 +168,7 @@ export default function SuccessPage() {
 		// Clear session data (but keep in localStorage cache)
 		sessionStorage.removeItem("letterData");
 		sessionStorage.removeItem("formData");
-	}, [wahlkreisId]);
+	}, [wahlkreisId, country]);
 
 	const handleCopyMessage = async () => {
 		try {
@@ -190,10 +193,7 @@ export default function SuccessPage() {
 	};
 
 	const handleEmailShare = () => {
-		const subject =
-			language === "de"
-				? "Schreib auch einen Brief für den Iran"
-				: "Write a letter for Iran too";
+		const subject = t("success", "shareEmailSubject");
 		window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(shareMessage)}`;
 	};
 
@@ -209,7 +209,7 @@ export default function SuccessPage() {
 	// Get email body with signature
 	const getEmailBody = () => {
 		if (!letterContent) return "";
-		return `${letterContent}\n\n---\n${language === "de" ? "Erstellt mit" : "Created with"}: ${shareUrl}`;
+		return `${letterContent}\n\n---\n${t("success", "createdWith")}: ${shareUrl}`;
 	};
 
 	const handleNativeShare = async () => {
@@ -259,7 +259,7 @@ export default function SuccessPage() {
 		sessionStorage.setItem("letterData", JSON.stringify(adaptedLetterData));
 
 		// Navigate to editor
-		router.push("/editor");
+		router.push(`/${country}/editor`);
 	};
 
 	// Handle starting fresh or reusing template
@@ -276,7 +276,7 @@ export default function SuccessPage() {
 				}),
 			);
 		}
-		router.push("/");
+		router.push(`/${country}`);
 	};
 
 	// Get the "what happens next" steps based on language
@@ -289,7 +289,7 @@ export default function SuccessPage() {
 				<div className="container max-w-2xl mx-auto px-4 pt-8 pb-12">
 					<button
 						type="button"
-						onClick={() => router.push("/")}
+						onClick={() => router.push(`/${country}`)}
 						className="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
 					>
 						<ArrowLeft className="h-4 w-4" />
@@ -428,7 +428,7 @@ export default function SuccessPage() {
 				)}
 
 				{/* Campaign Goal */}
-				<CampaignGoal />
+				<CampaignGoal country={country as "de" | "ca" | "uk"} />
 
 				{/* MORE MPs SECTION - Primary CTA */}
 				{remainingMdBs.length > 0 && cachedLetter && (
@@ -661,7 +661,7 @@ export default function SuccessPage() {
 							<Button
 								size="lg"
 								variant="outline"
-								onClick={() => router.push("/")}
+								onClick={() => router.push(`/${country}`)}
 								className="h-12"
 							>
 								{t("success", "newLetter")}

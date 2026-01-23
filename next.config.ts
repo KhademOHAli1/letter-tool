@@ -5,9 +5,9 @@ const cspHeader = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval';
   style-src 'self' 'unsafe-inline';
-  img-src 'self' https://www.bundestag.de data: blob:;
+  img-src 'self' https://www.bundestag.de https://www.ourcommons.ca https://members-api.parliament.uk data: blob:;
   font-src 'self';
-  connect-src 'self' https://api.openai.com;
+  connect-src 'self' https://api.openai.com https://api.postcodes.io;
   frame-ancestors 'none';
   form-action 'self';
   base-uri 'self';
@@ -21,6 +21,16 @@ const nextConfig: NextConfig = {
 				protocol: "https",
 				hostname: "www.bundestag.de",
 				pathname: "/resource/image/**",
+			},
+			{
+				protocol: "https",
+				hostname: "www.ourcommons.ca",
+				pathname: "/Content/Parliamentarians/Images/**",
+			},
+			{
+				protocol: "https",
+				hostname: "members-api.parliament.uk",
+				pathname: "/api/Members/*/Thumbnail",
 			},
 		],
 	},

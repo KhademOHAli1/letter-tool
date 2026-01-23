@@ -88,7 +88,8 @@ export function sanitizeForderungen(
 }
 
 /**
- * Validate MdB object structure
+ * Validate MdB/MP object structure
+ * Supports both German Bundestag and Canadian Parliament emails
  */
 export function validateMdB(input: unknown): input is {
 	id: string;
@@ -107,8 +108,8 @@ export function validateMdB(input: unknown): input is {
 		typeof mdb.party === "string" &&
 		// Basic email validation
 		/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mdb.email) &&
-		// Must be bundestag email
-		mdb.email.endsWith("@bundestag.de")
+		// Must be bundestag.de (Germany) or parl.gc.ca (Canada)
+		(mdb.email.endsWith("@bundestag.de") || mdb.email.endsWith("@parl.gc.ca"))
 	);
 }
 

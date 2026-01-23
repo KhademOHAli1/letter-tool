@@ -2,7 +2,7 @@
 
 import { ArrowRight, Mail } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FooterSettings } from "@/components/footer-settings";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,7 @@ interface FormData {
 	mdb: MdBData;
 	forderungen: string[];
 	personalNote: string;
+	country?: string;
 	_timing: number;
 }
 
@@ -57,31 +58,33 @@ function countWords(text: string): number {
 // Wort-Status bestimmen
 function getWordCountStatus(
 	count: number,
-	language: "de" | "en",
+	language: "de" | "en" | "fr",
 ): {
 	color: string;
 	bg: string;
 	message: string;
 } {
+	// French falls back to English
+	const isGerman = language === "de";
 	if (count < 250) {
 		return {
 			color: "text-amber-700",
 			bg: "bg-amber-50",
-			message: language === "de" ? "Etwas kurz" : "A bit short",
+			message: isGerman ? "Etwas kurz" : "A bit short",
 		};
 	}
 	if (count <= 700) {
 		return {
 			color: "text-green-700",
 			bg: "bg-green-50",
-			message: language === "de" ? "Optimal" : "Optimal",
+			message: "Optimal",
 		};
 	}
 	if (count <= 900) {
 		return {
 			color: "text-amber-700",
 			bg: "bg-amber-50",
-			message: language === "de" ? "Etwas lang" : "A bit long",
+			message: isGerman ? "Etwas lang" : "A bit long",
 		};
 	}
 	return {
@@ -91,8 +94,8 @@ function getWordCountStatus(
 	};
 }
 
-// Partei-Farben für Badge
-const PARTY_COLORS: Record<string, string> = {
+// Party colors for badges (German)
+const DE_PARTY_COLORS: Record<string, string> = {
 	"CDU/CSU": "bg-black text-white",
 	SPD: "bg-red-600 text-white",
 	GRÜNE: "bg-green-600 text-white",
@@ -101,15 +104,33 @@ const PARTY_COLORS: Record<string, string> = {
 	Fraktionslos: "bg-gray-500 text-white",
 };
 
+// Party colors for badges (Canadian)
+const CA_PARTY_COLORS: Record<string, string> = {
+	Liberal: "bg-red-600 text-white",
+	Conservative: "bg-blue-800 text-white",
+	NDP: "bg-orange-500 text-white",
+	"Bloc Québécois": "bg-sky-500 text-white",
+	Green: "bg-green-600 text-white",
+	Independent: "bg-gray-500 text-white",
+};
+
+// Country-specific default email subject
+function getDefaultSubject(country: string): string {
+	if (country === "ca" || country === "uk") {
+		return "Request for Support: Human Rights in Iran";
+	}
+	return "Bitte um Unterstützung: Menschenrechte im Iran";
+}
+
 export default function EditorPage() {
 	const router = useRouter();
+	const params = useParams<{ country: string }>();
+	const country = params.country || "de";
 	const { t, language } = useLanguage();
 	const [mdb, setMdb] = useState<MdBData | null>(null);
 	const [senderName, setSenderName] = useState("");
 	const [content, setContent] = useState("");
-	const [subject, setSubject] = useState(
-		"Bitte um Unterstützung: Menschenrechte im Iran",
-	);
+	const [subject, setSubject] = useState(() => getDefaultSubject(country));
 	const [isModified, setIsModified] = useState(false);
 	const [copied, setCopied] = useState(false);
 	const [isAdapted, setIsAdapted] = useState(false);
@@ -143,6 +164,7 @@ export default function EditorPage() {
 						mdb: formData.mdb,
 						forderungen: formData.forderungen,
 						personalNote: formData.personalNote,
+						country: formData.country || country,
 						_timing: formData._timing,
 					}),
 				});
@@ -160,7 +182,7 @@ export default function EditorPage() {
 					const reader = response.body?.getReader();
 					const decoder = new TextDecoder();
 					let accumulatedContent = "";
-					let finalSubject = "Bitte um Unterstützung: Menschenrechte im Iran";
+					let finalSubject = getDefaultSubject(country);
 
 					if (reader) {
 						while (true) {
@@ -211,18 +233,14 @@ export default function EditorPage() {
 					// Handle regular JSON response
 					const result = await response.json();
 					setContent(result.content);
-					setSubject(
-						result.subject || "Bitte um Unterstützung: Menschenrechte im Iran",
-					);
+					setSubject(result.subject || getDefaultSubject(country));
 
 					// Save to sessionStorage (include form data for success page)
 					sessionStorage.setItem(
 						"letterData",
 						JSON.stringify({
 							content: result.content,
-							subject:
-								result.subject ||
-								"Bitte um Unterstützung: Menschenrechte im Iran",
+							subject: result.subject || getDefaultSubject(country),
 							wordCount: countWords(result.content),
 							mdb: formData.mdb,
 							senderName: formData.senderName,
@@ -249,7 +267,7 @@ export default function EditorPage() {
 				setIsGenerating(false);
 			}
 		},
-		[language],
+		[language, country],
 	);
 
 	useEffect(() => {
@@ -283,8 +301,8 @@ export default function EditorPage() {
 		}
 
 		// No data found, redirect to home
-		router.push("/");
-	}, [router, generateLetter]);
+		router.push(`/${country}`);
+	}, [router, generateLetter, country]);
 
 	// Update sessionStorage when content/subject changes
 	useEffect(() => {
@@ -319,7 +337,7 @@ export default function EditorPage() {
 		markMdBAsEmailed({ id: mdb.id, name: mdb.name, party: mdb.party });
 
 		// Navigate to success page
-		router.push("/success");
+		router.push(`/${country}/success`);
 	};
 
 	const handleCopy = async () => {
@@ -329,7 +347,7 @@ export default function EditorPage() {
 	};
 
 	const handleBack = () => {
-		router.push("/");
+		router.push(`/${country}`);
 	};
 
 	const handleRetry = () => {
@@ -341,7 +359,7 @@ export default function EditorPage() {
 			const formData = JSON.parse(storedFormData) as FormData;
 			generateLetter(formData);
 		} else {
-			router.push("/");
+			router.push(`/${country}`);
 		}
 	};
 
@@ -475,7 +493,9 @@ export default function EditorPage() {
 								</h2>
 								<span
 									className={`inline-block px-2 py-0.5 rounded text-xs ${
-										PARTY_COLORS[mdb.party] || "bg-gray-200"
+										(country === "ca" ? CA_PARTY_COLORS : DE_PARTY_COLORS)[
+											mdb.party
+										] || "bg-gray-200 text-gray-800"
 									}`}
 								>
 									{mdb.party}

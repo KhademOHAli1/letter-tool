@@ -1,23 +1,23 @@
 /**
- * Translation strings for German and English.
+ * Translation strings for German, English, and French.
  * All UI text should come from here to support internationalization.
  */
 
-export type Language = "de" | "en";
+export type Language = "de" | "en" | "fr";
 
 export const translations = {
 	// ===== Common =====
 	common: {
-		back: { de: "Zurück", en: "Back" },
-		next: { de: "Weiter", en: "Next" },
-		loading: { de: "Laden...", en: "Loading..." },
-		error: { de: "Fehler", en: "Error" },
-		retry: { de: "Erneut versuchen", en: "Try again" },
-		copy: { de: "Kopieren", en: "Copy" },
-		copied: { de: "Kopiert!", en: "Copied!" },
-		share: { de: "Teilen", en: "Share" },
-		send: { de: "Senden", en: "Send" },
-		words: { de: "Wörter", en: "words" },
+		back: { de: "Zurück", en: "Back", fr: "Retour" },
+		next: { de: "Weiter", en: "Next", fr: "Suivant" },
+		loading: { de: "Laden...", en: "Loading...", fr: "Chargement..." },
+		error: { de: "Fehler", en: "Error", fr: "Erreur" },
+		retry: { de: "Erneut versuchen", en: "Try again", fr: "Réessayer" },
+		copy: { de: "Kopieren", en: "Copy", fr: "Copier" },
+		copied: { de: "Kopiert!", en: "Copied!", fr: "Copié !" },
+		share: { de: "Teilen", en: "Share", fr: "Partager" },
+		send: { de: "Senden", en: "Send", fr: "Envoyer" },
+		words: { de: "Wörter", en: "words", fr: "mots" },
 	},
 
 	// ===== Home Page =====
@@ -25,18 +25,22 @@ export const translations = {
 		title: {
 			de: "Brief an deine*n Abgeordnete*n",
 			en: "Letter to Your MP",
+			fr: "Lettre à votre député(e)",
 		},
 		subtitle: {
 			de: "In 5 Minuten einen persönlichen Brief schreiben - für Menschenrechte im Iran",
 			en: "Write a personal letter in 5 minutes - for human rights in Iran",
+			fr: "Écrivez une lettre personnelle en 5 minutes - pour les droits humains en Iran",
 		},
 		whyTitle: {
 			de: "Warum Briefe an Abgeordnete?",
 			en: "Why Write to MPs?",
+			fr: "Pourquoi écrire aux député(e)s ?",
 		},
 		whyText: {
 			de: "Bundestagsabgeordnete zählen Nachrichten aus ihrem Wahlkreis. Persönliche Briefe haben nachweislich Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird die Stimme für Menschenrechte.",
 			en: "Members of Parliament count messages from their constituency. Personal letters have proven influence on political decisions. The more people write, the louder the voice for human rights becomes.",
+			fr: "Les député(e)s comptent les messages de leur circonscription. Les lettres personnelles ont une influence prouvée sur les décisions politiques. Plus les gens écrivent, plus la voix pour les droits humains se fait entendre.",
 		},
 	},
 
@@ -44,84 +48,146 @@ export const translations = {
 	form: {
 		// Step 1: Name only
 		step1: {
-			title: { de: "Dein Name", en: "Your Name" },
-			whyTitle: { de: "Warum brauchen wir das?", en: "Why do we need this?" },
+			title: { de: "Dein Name", en: "Your Name", fr: "Votre nom" },
+			whyTitle: {
+				de: "Warum brauchen wir das?",
+				en: "Why do we need this?",
+				fr: "Pourquoi avons-nous besoin de cela ?",
+			},
 			whyText: {
 				de: "Dein Name macht den Brief persönlich und glaubwürdig. Abgeordnete nehmen Briefe von echten Menschen ernst. Dein Name wird nur für den Brief verwendet und nicht auf unseren Servern gespeichert.",
 				en: "Your name makes the letter personal and credible. MPs take letters from real people seriously. Your name is only used for the letter and is not stored on our servers.",
+				fr: "Votre nom rend la lettre personnelle et crédible. Les député(e)s prennent au sérieux les lettres de vraies personnes. Votre nom n'est utilisé que pour la lettre et n'est pas stocké sur nos serveurs.",
 			},
-			nameLabel: { de: "Dein Name", en: "Your Name" },
-			namePlaceholder: { de: "Vorname Nachname", en: "First Last Name" },
+			nameLabel: { de: "Dein Name", en: "Your Name", fr: "Votre nom" },
+			namePlaceholder: {
+				de: "Vorname Nachname",
+				en: "First Last Name",
+				fr: "Prénom Nom",
+			},
 		},
 
 		// Step 2: Postal Code & MP Selection
 		step2: {
-			title: { de: "Dein*e Abgeordnete*r", en: "Your MP" },
-			whyTitle: { de: "Warum brauchen wir das?", en: "Why do we need this?" },
+			title: {
+				de: "Dein*e Abgeordnete*r",
+				en: "Your MP",
+				fr: "Votre député(e)",
+			},
+			whyTitle: {
+				de: "Warum brauchen wir das?",
+				en: "Why do we need this?",
+				fr: "Pourquoi avons-nous besoin de cela ?",
+			},
 			whyText: {
 				de: "Abgeordnete antworten nur auf Briefe aus ihrem Wahlkreis. Mit deiner PLZ finden wir deine*n zuständige*n Abgeordnete*n. Deine PLZ wird nur lokal im Browser verarbeitet und nicht an unsere Server gesendet.",
 				en: "MPs only respond to letters from their constituency. With your postal code, we find your responsible MP. Your postal code is processed locally in your browser and is not sent to our servers.",
+				fr: "Les député(e)s ne répondent qu'aux lettres de leur circonscription. Avec votre code postal, nous trouvons votre député(e) responsable. Votre code postal est traité localement dans votre navigateur et n'est pas envoyé à nos serveurs.",
 			},
-			plzLabel: { de: "Deine Postleitzahl", en: "Your Postal Code" },
-			plzPlaceholder: { de: "z.B. 10115", en: "e.g. 10115" },
+			plzLabel: {
+				de: "Deine Postleitzahl",
+				en: "Your Postal Code",
+				fr: "Votre code postal",
+			},
+			plzPlaceholder: { de: "z.B. 10115", en: "e.g. 10115", fr: "ex. H2X 1Y4" },
 			wahlkreisFound: {
 				de: "Wahlkreis gefunden",
 				en: "Constituency found",
+				fr: "Circonscription trouvée",
 			},
 			wahlkreisNotFound: {
 				de: "Kein Wahlkreis gefunden",
 				en: "No constituency found",
+				fr: "Aucune circonscription trouvée",
 			},
-			selectLabel: { de: "Wähle deine*n Abgeordnete*n", en: "Select your MP" },
+			selectLabel: {
+				de: "Wähle deine*n Abgeordnete*n",
+				en: "Select your MP",
+				fr: "Sélectionnez votre député(e)",
+			},
 			selectPlaceholder: {
 				de: "Abgeordnete*n auswählen...",
 				en: "Select MP...",
+				fr: "Sélectionner un(e) député(e)...",
 			},
 		},
 
 		// Step 3: Personal Story
 		step3: {
-			title: { de: "Deine Geschichte", en: "Your Story" },
-			whyTitle: { de: "Warum brauchen wir das?", en: "Why do we need this?" },
+			title: { de: "Deine Geschichte", en: "Your Story", fr: "Votre histoire" },
+			whyTitle: {
+				de: "Warum brauchen wir das?",
+				en: "Why do we need this?",
+				fr: "Pourquoi avons-nous besoin de cela ?",
+			},
 			whyText: {
 				de: "Persönliche Geschichten bewegen mehr als Statistiken. Abgeordnete erhalten täglich Dutzende E-Mails - aber echte Geschichten von echten Menschen bleiben im Gedächtnis. Deine Geschichte wird nur für die Briefgenerierung verwendet und nicht gespeichert.",
 				en: "Personal stories move more than statistics. MPs receive dozens of emails daily - but real stories from real people stay in memory. Your story is only used to generate the letter and is not stored.",
+				fr: "Les histoires personnelles touchent plus que les statistiques. Les député(e)s reçoivent des dizaines de courriels chaque jour - mais les vraies histoires de vraies personnes restent en mémoire. Votre histoire n'est utilisée que pour générer la lettre et n'est pas stockée.",
 			},
-			label: { de: "Deine Geschichte", en: "Your Story" },
+			label: { de: "Deine Geschichte", en: "Your Story", fr: "Votre histoire" },
 			placeholder: {
 				de: "z.B. Als Deutsch-Iranerin verfolge ich die Nachrichten aus dem Iran jeden Tag. Ich habe Freunde und Familie dort, die unter der Situation leiden. Die Menschenrechtslage macht mir große Sorgen und ich möchte, dass Deutschland sich stärker einsetzt.",
 				en: "e.g. As a German-Iranian, I follow the news from Iran every day. I have friends and family there who are suffering under the situation. The human rights situation deeply concerns me and I want Germany to take a stronger stance.",
+				fr: "ex. En tant qu'Irano-Canadien(ne), je suis les nouvelles de l'Iran chaque jour. J'ai des amis et de la famille là-bas qui souffrent de la situation. La situation des droits humains me préoccupe profondément et je veux que le Canada prenne une position plus forte.",
+			},
+			// Country-specific placeholders
+			placeholderDE: {
+				de: "z.B. Als Deutsch-Iranerin verfolge ich die Nachrichten aus dem Iran jeden Tag. Ich habe Freunde und Familie dort, die unter der Situation leiden. Die Menschenrechtslage macht mir große Sorgen und ich möchte, dass Deutschland sich stärker einsetzt.",
+				en: "e.g. As a German-Iranian, I follow the news from Iran every day. I have friends and family there who are suffering under the situation. The human rights situation deeply concerns me and I want Germany to take a stronger stance.",
+				fr: "ex. En tant qu'Irano-Allemand(e), je suis les nouvelles de l'Iran chaque jour. J'ai des amis et de la famille là-bas qui souffrent de la situation. La situation des droits humains me préoccupe profondément.",
+			},
+			placeholderCA: {
+				de: "z.B. Als Kanadisch-Iranerin verfolge ich die Nachrichten aus dem Iran jeden Tag. Ich habe Freunde und Familie dort, die unter der Situation leiden. Ich möchte, dass Kanada sich stärker für Menschenrechte einsetzt.",
+				en: "e.g. As a Canadian-Iranian, I follow the news from Iran every day. I have friends and family there who are suffering under the situation. The human rights situation deeply concerns me and I want Canada to take a stronger stance.",
+				fr: "ex. En tant qu'Irano-Canadien(ne), je suis les nouvelles de l'Iran chaque jour. J'ai des amis et de la famille là-bas qui souffrent de la situation. La situation des droits humains me préoccupe profondément et je veux que le Canada prenne une position plus forte.",
+			},
+			placeholderUK: {
+				de: "z.B. Als Britisch-Iranerin verfolge ich die Nachrichten aus dem Iran jeden Tag. Ich habe Freunde und Familie dort, die unter der Situation leiden.",
+				en: "e.g. As a British-Iranian, I follow the news from Iran every day. I have friends and family there who are suffering under the situation. The human rights situation deeply concerns me and I want the UK to take a stronger stance.",
+				fr: "ex. En tant qu'Irano-Britannique, je suis les nouvelles de l'Iran chaque jour. J'ai des amis et de la famille là-bas qui souffrent de la situation.",
+			},
+			placeholderFR: {
+				de: "z.B. Als Französisch-Iranerin verfolge ich die Nachrichten aus dem Iran jeden Tag. Ich habe Freunde und Familie dort, die unter der Situation leiden.",
+				en: "e.g. As a French-Iranian, I follow the news from Iran every day. I have friends and family there who are suffering under the situation. The human rights situation deeply concerns me and I want France to take a stronger stance.",
+				fr: "ex. En tant qu'Irano-Français(e), je suis les nouvelles de l'Iran chaque jour. J'ai des amis et de la famille là-bas qui souffrent de la situation. La situation des droits humains me préoccupe profondément et je veux que la France prenne une position plus forte.",
 			},
 			hint: {
 				de: "Details machen deinen Brief authentisch: Konkrete Erlebnisse, Namen, Orte, Gefühle.",
 				en: "Details make your letter authentic: specific experiences, names, places, feelings.",
+				fr: "Les détails rendent votre lettre authentique : expériences concrètes, noms, lieux, sentiments.",
 			},
 			languageHint: {
 				de: "Du kannst auf Deutsch, Englisch oder Farsi schreiben - wir übersetzen es für den Brief.",
 				en: "You can write in German, English or Farsi - we'll translate it for the letter.",
+				fr: "Vous pouvez écrire en français, anglais ou farsi - nous traduirons pour la lettre.",
 			},
 			validation: {
 				empty: {
 					de: "Bitte erzähle deine Geschichte",
 					en: "Please tell your story",
+					fr: "Veuillez raconter votre histoire",
 				},
 			},
 		},
 
 		// Step 4: Demands
 		step4: {
-			title: { de: "Forderungen", en: "Demands" },
+			title: { de: "Forderungen", en: "Demands", fr: "Demandes" },
 			whyTitle: {
 				de: "Warum brauchen wir das?",
 				en: "Why do we need this?",
+				fr: "Pourquoi avons-nous besoin de cela ?",
 			},
 			whyText: {
 				de: "Konkrete Forderungen geben deinem Brief Richtung und machen es dem*der Abgeordneten leicht, aktiv zu werden. Politiker*innen können nur handeln, wenn sie wissen, was du von ihnen erwartest.",
 				en: "Specific demands give your letter direction and make it easy for the MP to take action. Politicians can only act when they know what you expect from them.",
+				fr: "Des demandes spécifiques donnent une direction à votre lettre et permettent au/à la député(e) d'agir facilement. Les politicien(ne)s ne peuvent agir que lorsqu'ils/elles savent ce que vous attendez d'eux/elles.",
 			},
 			hint: {
 				de: "Wähle die Forderungen, die dir am wichtigsten sind. Je weniger, desto fokussierter dein Brief.",
 				en: "Choose the demands that matter most to you. The fewer, the more focused your letter.",
+				fr: "Choisissez les demandes qui comptent le plus pour vous. Moins il y en a, plus votre lettre sera ciblée.",
 			},
 		},
 
@@ -130,14 +196,108 @@ export const translations = {
 			label: {
 				de: "Ich habe die Datenschutzhinweise gelesen und stimme zu, dass meine Daten zur Erstellung des Briefs verarbeitet werden.",
 				en: "I have read the privacy notice and agree that my data will be processed to create the letter.",
+				fr: "J'ai lu l'avis de confidentialité et j'accepte que mes données soient traitées pour créer la lettre.",
 			},
 		},
 
 		// Submit button
 		submit: {
-			generating: { de: "Brief wird erstellt...", en: "Creating letter..." },
-			default: { de: "Brief erstellen", en: "Create Letter" },
+			generating: {
+				de: "Brief wird erstellt...",
+				en: "Creating letter...",
+				fr: "Création de la lettre...",
+			},
+			default: {
+				de: "Brief erstellen",
+				en: "Create Letter",
+				fr: "Créer la lettre",
+			},
 		},
+
+		// Privacy/data notice
+		dataNotice: {
+			de: "Deine Daten werden nicht gespeichert – nur für deinen Brief verwendet.",
+			en: "Your data is not stored – only used to create your letter.",
+			fr: "Vos données ne sont pas stockées – elles sont uniquement utilisées pour créer votre lettre.",
+		},
+
+		// Draft restoration
+		draft: {
+			found: {
+				de: "Du hast einen unvollständigen Entwurf",
+				en: "You have an unfinished draft",
+				fr: "Vous avez un brouillon inachevé",
+			},
+			dismiss: { de: "Verwerfen", en: "Dismiss", fr: "Ignorer" },
+			restore: { de: "Wiederherstellen", en: "Restore", fr: "Restaurer" },
+		},
+
+		// Consent title
+		consentTitle: {
+			de: "Einwilligung zur Datenverarbeitung",
+			en: "Consent to Data Processing",
+			fr: "Consentement au traitement des données",
+		},
+
+		// No account hint
+		noAccount: {
+			de: "Kein Account nötig. Keine Datenbank. Dein Brief wird lokal generiert und direkt an dich übergeben.",
+			en: "No account needed. No database. Your letter is generated locally and handed directly to you.",
+			fr: "Aucun compte requis. Pas de base de données. Votre lettre est générée localement et vous est remise directement.",
+		},
+	},
+
+	// ===== Header/Banner =====
+	header: {
+		badge: {
+			de: "Deine Stimme zählt",
+			en: "Your Voice Matters",
+			fr: "Votre voix compte",
+		},
+		writeToPrefix: {
+			de: "Schreib deinem",
+			en: "Write to Your",
+			fr: "Écrivez à votre",
+		},
+		subheading: {
+			de: "Ein persönlicher Brief kann mehr bewirken als tausend Tweets. Fordere deine Abgeordneten auf, sich für Menschenrechte im Iran einzusetzen.",
+			en: "A personal letter can achieve more than a thousand tweets. Ask your representative to stand up for human rights in Iran.",
+			fr: "Une lettre personnelle peut accomplir plus que mille tweets. Demandez à votre représentant(e) de défendre les droits humains en Iran.",
+		},
+	},
+
+	// ===== Footer =====
+	footer: {
+		openaiNotice: {
+			de: "Der generierte Brief wird nicht auf unseren Servern gespeichert. Zur Generierung werden deine Eingaben an OpenAI übermittelt.",
+			en: "The generated letter is not stored on our servers. Your inputs are sent to OpenAI for generation.",
+			fr: "La lettre générée n'est pas stockée sur nos serveurs. Vos données sont envoyées à OpenAI pour la génération.",
+		},
+		impressum: {
+			de: "Impressum",
+			en: "Legal Notice",
+			fr: "Mentions légales",
+		},
+		privacy: {
+			de: "Datenschutz",
+			en: "Privacy Policy",
+			fr: "Politique de confidentialité",
+		},
+	},
+
+	// ===== Letter History =====
+	letterHistory: {
+		title: { de: "Deine Briefe", en: "Your Letters", fr: "Vos lettres" },
+		sent: { de: "gesendet", en: "sent", fr: "envoyée(s)" },
+		pending: { de: "ausstehend", en: "pending", fr: "en attente" },
+		clearAll: { de: "Alle löschen", en: "Clear all", fr: "Tout supprimer" },
+		letterSingular: { de: "Brief", en: "letter", fr: "lettre" },
+		letterPlural: { de: "Briefe", en: "letters", fr: "lettres" },
+		showLess: { de: "Weniger anzeigen", en: "Show less", fr: "Afficher moins" },
+		showMore: { de: "weitere anzeigen", en: "more", fr: "autres" },
+		to: { de: "An", en: "To", fr: "À" },
+		resume: { de: "Fortsetzen", en: "Resume", fr: "Reprendre" },
+		delete: { de: "Löschen", en: "Delete", fr: "Supprimer" },
 	},
 
 	// ===== Editor Page =====
@@ -145,55 +305,83 @@ export const translations = {
 		titleGenerating: {
 			de: "Brief wird geschrieben...",
 			en: "Writing your letter...",
+			fr: "Rédaction de votre lettre...",
 		},
-		titleReady: { de: "Dein Brief ist fertig", en: "Your letter is ready" },
+		titleReady: {
+			de: "Dein Brief ist fertig",
+			en: "Your letter is ready",
+			fr: "Votre lettre est prête",
+		},
 		subtitleGenerating: {
 			de: "Der Brief erscheint gleich - du kannst ihn dann noch bearbeiten.",
 			en: "The letter will appear shortly - you can then edit it.",
+			fr: "La lettre apparaîtra sous peu - vous pourrez ensuite la modifier.",
 		},
 		subtitleReady: {
 			de: "Prüfe und bearbeite deinen Brief, bevor du ihn sendest.",
 			en: "Review and edit your letter before sending it.",
+			fr: "Révisez et modifiez votre lettre avant de l'envoyer.",
 		},
-		subjectLabel: { de: "Betreff", en: "Subject" },
-		contentLabel: { de: "Dein Brief", en: "Your Letter" },
-		senderLabel: { de: "Absender", en: "Sender" },
-		modified: { de: "Bearbeitet", en: "Modified" },
-		writing: { de: "Wird geschrieben...", en: "Writing..." },
+		subjectLabel: { de: "Betreff", en: "Subject", fr: "Objet" },
+		contentLabel: { de: "Dein Brief", en: "Your Letter", fr: "Votre lettre" },
+		senderLabel: { de: "Absender", en: "Sender", fr: "Expéditeur" },
+		modified: { de: "Bearbeitet", en: "Modified", fr: "Modifié" },
+		writing: {
+			de: "Wird geschrieben...",
+			en: "Writing...",
+			fr: "Rédaction...",
+		},
 		wordStatus: {
-			tooShort: { de: "Etwas kurz", en: "A bit short" },
-			optimal: { de: "Optimal", en: "Optimal" },
-			tooLong: { de: "Etwas lang", en: "A bit long" },
-			wayTooLong: { de: "Zu lang", en: "Too long" },
+			tooShort: { de: "Etwas kurz", en: "A bit short", fr: "Un peu court" },
+			optimal: { de: "Optimal", en: "Optimal", fr: "Optimal" },
+			tooLong: { de: "Etwas lang", en: "A bit long", fr: "Un peu long" },
+			wayTooLong: { de: "Zu lang", en: "Too long", fr: "Trop long" },
 		},
 		sendButton: {
 			de: "Weiter zum Senden",
 			en: "Ready to Send",
+			fr: "Prêt à envoyer",
 		},
-		copyButton: { de: "Brief kopieren", en: "Copy Letter" },
+		copyButton: {
+			de: "Brief kopieren",
+			en: "Copy Letter",
+			fr: "Copier la lettre",
+		},
 		hint: {
 			de: "Der Brief wird in deinem E-Mail-Programm geöffnet. Dort kannst du ihn vor dem Senden nochmal prüfen.",
 			en: "The letter will open in your email client. You can review it there before sending.",
+			fr: "La lettre s'ouvrira dans votre client de messagerie. Vous pourrez la réviser avant de l'envoyer.",
 		},
 		errorTitle: {
 			de: "Fehler beim Generieren",
 			en: "Error generating letter",
+			fr: "Erreur lors de la génération",
 		},
 	},
 
 	// ===== Success Page =====
 	success: {
-		title: { de: "Vielen Dank!", en: "Thank You!" },
+		title: { de: "Vielen Dank!", en: "Thank You!", fr: "Merci !" },
 		subtitle: {
 			de: "Dein Brief wurde gesendet.",
 			en: "Your letter has been sent.",
+			fr: "Votre lettre a été envoyée.",
 		},
-		shareTitle: { de: "Teile die Aktion", en: "Share the Action" },
+		shareTitle: {
+			de: "Teile die Aktion",
+			en: "Share the Action",
+			fr: "Partagez l'action",
+		},
 		shareText: {
 			de: "Jeder weitere Brief erhöht den Druck. Teile das Tool mit Freunden und Familie.",
 			en: "Every additional letter increases the pressure. Share the tool with friends and family.",
+			fr: "Chaque lettre supplémentaire augmente la pression. Partagez l'outil avec vos amis et votre famille.",
 		},
-		whatsNext: { de: "Was passiert jetzt?", en: "What happens next?" },
+		whatsNext: {
+			de: "Was passiert jetzt?",
+			en: "What happens next?",
+			fr: "Que se passe-t-il ensuite ?",
+		},
 		whatsNextSteps: {
 			de: [
 				"Dein Brief landet im Posteingang des*der Abgeordneten",
@@ -209,55 +397,88 @@ export const translations = {
 				"The MP can act in plenary sessions or committees",
 				"Share this tool with friends – every voice counts!",
 			],
+			fr: [
+				"Votre lettre arrive dans la boîte de réception du/de la député(e)",
+				"Le personnel lit et classe le courrier entrant",
+				"Avec de nombreuses lettres sur le même sujet, cela devient une priorité",
+				"Le/La député(e) peut agir en séance plénière ou en comité",
+				"Partagez cet outil avec vos amis – chaque voix compte !",
+			],
 		},
-		newLetter: { de: "Neuen Brief schreiben", en: "Write Another Letter" },
+		newLetter: {
+			de: "Neuen Brief schreiben",
+			en: "Write Another Letter",
+			fr: "Écrire une autre lettre",
+		},
 
 		// Multi-MP feature
 		moreMps: {
 			title: {
 				de: "Noch mehr Wirkung?",
 				en: "Want more impact?",
+				fr: "Voulez-vous plus d'impact ?",
 			},
 			subtitle: {
 				de: "Weitere Abgeordnete in deinem Wahlkreis",
 				en: "More MPs in your constituency",
+				fr: "Plus de député(e)s dans votre circonscription",
 			},
 			description: {
 				de: "Dein Wahlkreis hat mehrere Abgeordnete. Mit einem Klick kannst du deinen Brief anpassen und an weitere senden.",
 				en: "Your constituency has multiple MPs. With one click you can adapt your letter and send it to more.",
+				fr: "Votre circonscription a plusieurs député(e)s. En un clic, vous pouvez adapter votre lettre et l'envoyer à d'autres.",
 			},
 			reuseButton: {
 				de: "Brief anpassen für",
 				en: "Adapt letter for",
+				fr: "Adapter la lettre pour",
 			},
 			allDone: {
 				de: "Du hast alle Abgeordneten in deinem Wahlkreis erreicht! 🎉",
 				en: "You've reached all MPs in your constituency! 🎉",
+				fr: "Vous avez atteint tous les député(e)s de votre circonscription ! 🎉",
 			},
 			newLetterHint: {
 				de: "Möchtest du einen neuen Brief schreiben? Dein bisheriger Text wird als Vorlage verwendet.",
 				en: "Want to write a new letter? Your previous text will be used as a template.",
+				fr: "Voulez-vous écrire une nouvelle lettre ? Votre texte précédent sera utilisé comme modèle.",
 			},
 			reuseExisting: {
 				de: "Vorlage verwenden",
 				en: "Use template",
+				fr: "Utiliser le modèle",
 			},
 			startFresh: {
 				de: "Neu beginnen",
 				en: "Start fresh",
+				fr: "Recommencer",
 			},
 			adapting: {
 				de: "Brief wird angepasst...",
 				en: "Adapting letter...",
+				fr: "Adaptation de la lettre...",
 			},
 			adapted: {
 				de: "Brief angepasst für {name}",
 				en: "Letter adapted for {name}",
+				fr: "Lettre adaptée pour {name}",
 			},
 			emailed: {
 				de: "✓ Bereits kontaktiert",
 				en: "✓ Already contacted",
+				fr: "✓ Déjà contacté(e)",
 			},
+		},
+		// Share via email
+		shareEmailSubject: {
+			de: "Schreib auch einen Brief für den Iran",
+			en: "Write a letter for Iran too",
+			fr: "Écrivez aussi une lettre pour l'Iran",
+		},
+		createdWith: {
+			de: "Erstellt mit",
+			en: "Created with",
+			fr: "Créé avec",
 		},
 	},
 
@@ -273,12 +494,18 @@ Du kannst in 5 Minuten auch einen Brief schreiben - das Tool hilft dir dabei:`,
 Why it matters: MPs count letters from their constituency. Personal messages have real influence on political decisions. The more people write, the louder our voice becomes.
 
 You can also write a letter in 5 minutes - the tool helps you:`,
+		fr: `Je viens d'écrire une lettre à mon/ma député(e) - pour les droits humains en Iran.
+
+Pourquoi c'est important : Les député(e)s comptent les lettres de leur circonscription. Les messages personnels ont une vraie influence sur les décisions politiques. Plus les gens écrivent, plus notre voix se fait entendre.
+
+Vous pouvez aussi écrire une lettre en 5 minutes - l'outil vous aide :`,
 	},
 
 	// ===== Language Names =====
 	languages: {
-		de: { de: "Deutsch", en: "German" },
-		en: { de: "Englisch", en: "English" },
+		de: { de: "Deutsch", en: "German", fr: "Allemand" },
+		en: { de: "Englisch", en: "English", fr: "Anglais" },
+		fr: { de: "Französisch", en: "French", fr: "Français" },
 	},
 } as const;
 
@@ -309,8 +536,9 @@ export function t(
 		value = value[part];
 	}
 
-	if (typeof value === "object" && value[lang]) {
-		const result = value[lang];
+	if (typeof value === "object" && (value[lang] || value.en)) {
+		// Fallback to English if requested language not available (e.g., French)
+		const result = value[lang] ?? value.en;
 
 		// Handle replacements like {count}, {num}
 		if (replacements && typeof result === "string") {
@@ -345,8 +573,9 @@ export function tArray(
 		value = value[part];
 	}
 
-	if (typeof value === "object" && value[lang]) {
-		const result = value[lang];
+	if (typeof value === "object" && (value[lang] || value.en)) {
+		// Fallback to English if requested language not available
+		const result = value[lang] ?? value.en;
 		return Array.isArray(result) ? result : [];
 	}
 

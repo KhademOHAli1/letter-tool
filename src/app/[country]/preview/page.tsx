@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,24 +17,62 @@ interface LetterData {
 	senderName: string;
 }
 
+// Localized text for preview page
+const PREVIEW_TEXT = {
+	de: {
+		loading: "Lade...",
+		title: "Dein Brief ist fertig",
+		subtitle: (name: string) => `Überprüfe den Text und sende ihn an ${name}`,
+		recipient: "Empfänger",
+		subject: "Betreff",
+		message: "Nachricht",
+		words: "Wörter",
+		sendEmail: "📧 E-Mail öffnen und senden",
+		copy: "Text kopieren",
+		copied: "Kopiert!",
+		newLetter: "Neuer Brief",
+		hint: 'Klicke auf "E-Mail öffnen" um deinen E-Mail-Client zu starten. Der Brief wird automatisch eingefügt.',
+	},
+	en: {
+		loading: "Loading...",
+		title: "Your letter is ready",
+		subtitle: (name: string) => `Review the text and send it to ${name}`,
+		recipient: "Recipient",
+		subject: "Subject",
+		message: "Message",
+		words: "words",
+		sendEmail: "📧 Open email and send",
+		copy: "Copy text",
+		copied: "Copied!",
+		newLetter: "New letter",
+		hint: 'Click "Open email" to launch your email client. The letter will be automatically inserted.',
+	},
+} as const;
+
 export default function PreviewPage() {
 	const router = useRouter();
+	const params = useParams<{ country: string }>();
+	const country = params.country || "de";
 	const [data, setData] = useState<LetterData | null>(null);
 	const [copied, setCopied] = useState(false);
+
+	// Use English for UK/CA, German for DE
+	const lang = country === "de" ? "de" : "en";
+	const t = PREVIEW_TEXT[lang];
 
 	useEffect(() => {
 		const stored = sessionStorage.getItem("letterData");
 		if (stored) {
 			setData(JSON.parse(stored));
 		} else {
-			router.push("/");
+			router.push(`/${country}`);
 		}
-	}, [router]);
+	}, [router, country]);
 
 	if (!data) {
 		return (
 			<div className="flex min-h-screen items-center justify-center">
-				<p>Lade...</p>
+				<p>{t.loading}</p>
 			</div>
 		);
 	}
@@ -52,25 +90,23 @@ export default function PreviewPage() {
 
 	const handleNewLetter = () => {
 		sessionStorage.removeItem("letterData");
-		router.push("/");
+		router.push(`/${country}`);
 	};
 
 	return (
 		<div className="min-h-screen bg-background">
 			<main className="container mx-auto max-w-3xl px-4 py-8">
 				<header className="mb-8">
-					<h1 className="text-2xl font-bold tracking-tight">
-						Dein Brief ist fertig
-					</h1>
+					<h1 className="text-2xl font-bold tracking-tight">{t.title}</h1>
 					<p className="mt-2 text-muted-foreground">
-						Überprüfe den Text und sende ihn an {data.mdb.name}
+						{t.subtitle(data.mdb.name)}
 					</p>
 				</header>
 
-				{/* Empfänger Info */}
+				{/* Recipient Info */}
 				<Card className="mb-6">
 					<CardHeader className="pb-3">
-						<CardTitle className="text-base">Empfänger</CardTitle>
+						<CardTitle className="text-base">{t.recipient}</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<p className="font-medium">{data.mdb.name}</p>
@@ -79,23 +115,23 @@ export default function PreviewPage() {
 					</CardContent>
 				</Card>
 
-				{/* Betreff */}
+				{/* Subject */}
 				<Card className="mb-6">
 					<CardHeader className="pb-3">
-						<CardTitle className="text-base">Betreff</CardTitle>
+						<CardTitle className="text-base">{t.subject}</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<p className="text-sm">{data.subject}</p>
 					</CardContent>
 				</Card>
 
-				{/* Brief Text */}
+				{/* Letter Text */}
 				<Card className="mb-6">
 					<CardHeader className="pb-3">
 						<CardTitle className="text-base flex justify-between items-center">
-							<span>Nachricht</span>
+							<span>{t.message}</span>
 							<span className="text-sm font-normal text-muted-foreground">
-								{data.wordCount} Wörter
+								{data.wordCount} {t.words}
 							</span>
 						</CardTitle>
 					</CardHeader>
@@ -106,24 +142,23 @@ export default function PreviewPage() {
 					</CardContent>
 				</Card>
 
-				{/* Aktionen */}
+				{/* Actions */}
 				<div className="space-y-3">
 					<Button onClick={handleSendEmail} size="lg" className="w-full">
-						📧 E-Mail öffnen und senden
+						{t.sendEmail}
 					</Button>
 					<div className="grid grid-cols-2 gap-3">
 						<Button onClick={handleCopy} variant="outline">
-							{copied ? "Kopiert!" : "Text kopieren"}
+							{copied ? t.copied : t.copy}
 						</Button>
 						<Button onClick={handleNewLetter} variant="outline">
-							Neuer Brief
+							{t.newLetter}
 						</Button>
 					</div>
 				</div>
 
 				<p className="mt-6 text-xs text-center text-muted-foreground">
-					Klicke auf &quot;E-Mail öffnen&quot; um deinen E-Mail-Client zu
-					starten. Der Brief wird automatisch eingefügt.
+					{t.hint}
 				</p>
 			</main>
 		</div>

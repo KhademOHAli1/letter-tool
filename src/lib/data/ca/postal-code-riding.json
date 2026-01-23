@@ -1,223 +1,38 @@
 {
-	"M5V": {
-		"ridingId": "35100",
-		"ridingName": "Spadina—Harbourfront",
-		"province": "ON"
+	"A0A": {
+		"ridingId": "10002",
+		"ridingName": "Cape Spear",
+		"province": "NL"
 	},
-	"M4W": {
-		"ridingId": "35112",
-		"ridingName": "University—Rosedale",
-		"province": "ON"
+	"A0B": {
+		"ridingId": "10007",
+		"ridingName": "Terra Nova—The Peninsulas",
+		"province": "NL"
 	},
-	"M6K": {
-		"ridingId": "35100",
-		"ridingName": "Spadina—Harbourfront",
-		"province": "ON"
+	"A0E": {
+		"ridingId": "10007",
+		"ridingName": "Terra Nova—The Peninsulas",
+		"province": "NL"
 	},
-	"L5B": {
-		"ridingId": "35061",
-		"ridingName": "Mississauga Centre",
-		"province": "ON"
+	"A0L": {
+		"ridingId": "10005",
+		"ridingName": "Long Range Mountains",
+		"province": "NL"
 	},
-	"K1A": {
-		"ridingId": "35079",
-		"ridingName": "Ottawa Centre",
-		"province": "ON"
+	"A0R": {
+		"ridingId": "10004",
+		"ridingName": "Labrador",
+		"province": "NL"
 	},
-	"N2L": {
-		"ridingId": "35114",
-		"ridingName": "Waterloo",
-		"province": "ON"
+	"A1A": {
+		"ridingId": "10006",
+		"ridingName": "St. John's East",
+		"province": "NL"
 	},
-	"L8P": {
-		"ridingId": "35036",
-		"ridingName": "Hamilton Centre",
-		"province": "ON"
-	},
-	"L4S": {
-		"ridingId": "35003",
-		"ridingName": "Aurora—Oak Ridges—Richmond Hill",
-		"province": "ON"
-	},
-	"K2P": {
-		"ridingId": "35079",
-		"ridingName": "Ottawa Centre",
-		"province": "ON"
-	},
-	"N9A": {
-		"ridingId": "35119",
-		"ridingName": "Windsor West",
-		"province": "ON"
-	},
-	"P3E": {
-		"ridingId": "35103",
-		"ridingName": "Sudbury",
-		"province": "ON"
-	},
-	"L3R": {
-		"ridingId": "35057",
-		"ridingName": "Markham—Thornhill",
-		"province": "ON"
-	},
-	"M1C": {
-		"ridingId": "35094",
-		"ridingName": "Scarborough—Guildwood—Rouge Park",
-		"province": "ON"
-	},
-	"M9W": {
-		"ridingId": "35031",
-		"ridingName": "Etobicoke North",
-		"province": "ON"
-	},
-	"H2X": {
-		"ridingId": "24037",
-		"ridingName": "Laurier—Sainte-Marie",
-		"province": "QC"
-	},
-	"H3A": {
-		"ridingId": "24077",
-		"ridingName": "Ville-Marie—Le Sud-Ouest—Île-des-Soeurs",
-		"province": "QC"
-	},
-	"G1R": {
-		"ridingId": "24059",
-		"ridingName": "Québec Centre",
-		"province": "QC"
-	},
-	"J4B": {
-		"ridingId": "24055",
-		"ridingName": "Pierre-Boucher—Les Patriotes—Verchères",
-		"province": "QC"
-	},
-	"H1A": {
-		"ridingId": "24027",
-		"ridingName": "Honoré-Mercier",
-		"province": "QC"
-	},
-	"G1V": {
-		"ridingId": "24043",
-		"ridingName": "Louis-Hébert",
-		"province": "QC"
-	},
-	"J1H": {
-		"ridingId": "24072",
-		"ridingName": "Sherbrooke",
-		"province": "QC"
-	},
-	"V6B": {
-		"ridingId": "59036",
-		"ridingName": "Vancouver East",
-		"province": "BC"
-	},
-	"V5K": {
-		"ridingId": "59036",
-		"ridingName": "Vancouver East",
-		"province": "BC"
-	},
-	"V8W": {
-		"ridingId": "59042",
-		"ridingName": "Victoria",
-		"province": "BC"
-	},
-	"V3N": {
-		"ridingId": "59002",
-		"ridingName": "Burnaby Central",
-		"province": "BC"
-	},
-	"V1V": {
-		"ridingId": "59016",
-		"ridingName": "Kelowna",
-		"province": "BC"
-	},
-	"V9A": {
-		"ridingId": "59012",
-		"ridingName": "Esquimalt—Saanich—Sooke",
-		"province": "BC"
-	},
-	"T2P": {
-		"ridingId": "48004",
-		"ridingName": "Calgary Centre",
-		"province": "AB"
-	},
-	"T5J": {
-		"ridingId": "48015",
-		"ridingName": "Edmonton Centre",
-		"province": "AB"
-	},
-	"T6G": {
-		"ridingId": "48022",
-		"ridingName": "Edmonton Strathcona",
-		"province": "AB"
-	},
-	"T3C": {
-		"ridingId": "48004",
-		"ridingName": "Calgary Centre",
-		"province": "AB"
-	},
-	"T4N": {
-		"ridingId": "48034",
-		"ridingName": "Red Deer",
-		"province": "AB"
-	},
-	"R3C": {
-		"ridingId": "46010",
-		"ridingName": "Winnipeg Centre",
-		"province": "MB"
-	},
-	"R2C": {
-		"ridingId": "46003",
-		"ridingName": "Elmwood—Transcona",
-		"province": "MB"
-	},
-	"R0A": {
-		"ridingId": "46006",
-		"ridingName": "Provencher",
-		"province": "MB"
-	},
-	"S7K": {
-		"ridingId": "47011",
-		"ridingName": "Saskatoon West",
-		"province": "SK"
-	},
-	"S4P": {
-		"ridingId": "47008",
-		"ridingName": "Regina—Wascana",
-		"province": "SK"
-	},
-	"S0A": {
-		"ridingId": "47007",
-		"ridingName": "Regina—Qu'Appelle",
-		"province": "SK"
-	},
-	"B3H": {
-		"ridingId": "12006",
-		"ridingName": "Halifax",
-		"province": "NS"
-	},
-	"B3K": {
-		"ridingId": "12006",
-		"ridingName": "Halifax",
-		"province": "NS"
-	},
-	"B0J": {
-		"ridingId": "12003",
-		"ridingName": "Central Nova",
-		"province": "NS"
-	},
-	"E1C": {
-		"ridingId": "13007",
-		"ridingName": "Moncton—Dieppe",
-		"province": "NB"
-	},
-	"E1A": {
-		"ridingId": "13002",
-		"ridingName": "Beauséjour",
-		"province": "NB"
-	},
-	"E3B": {
-		"ridingId": "13003",
-		"ridingName": "Fredericton—Oromocto",
-		"province": "NB"
+	"A1B": {
+		"ridingId": "10006",
+		"ridingName": "St. John's East",
+		"province": "NL"
 	},
 	"A1C": {
 		"ridingId": "10002",
@@ -229,34 +44,6749 @@
 		"ridingName": "St. John's East",
 		"province": "NL"
 	},
-	"A0A": {
+	"A1G": {
+		"ridingId": "10002",
+		"ridingName": "Cape Spear",
+		"province": "NL"
+	},
+	"A1H": {
 		"ridingId": "10001",
 		"ridingName": "Avalon",
 		"province": "NL"
+	},
+	"A1K": {
+		"ridingId": "10006",
+		"ridingName": "St. John's East",
+		"province": "NL"
+	},
+	"A1M": {
+		"ridingId": "10006",
+		"ridingName": "St. John's East",
+		"province": "NL"
+	},
+	"A1N": {
+		"ridingId": "10002",
+		"ridingName": "Cape Spear",
+		"province": "NL"
+	},
+	"A1S": {
+		"ridingId": "10001",
+		"ridingName": "Avalon",
+		"province": "NL"
+	},
+	"A1V": {
+		"ridingId": "10003",
+		"ridingName": "Central Newfoundland",
+		"province": "NL"
+	},
+	"A1W": {
+		"ridingId": "10001",
+		"ridingName": "Avalon",
+		"province": "NL"
+	},
+	"A1Y": {
+		"ridingId": "10001",
+		"ridingName": "Avalon",
+		"province": "NL"
+	},
+	"A2B": {
+		"ridingId": "10003",
+		"ridingName": "Central Newfoundland",
+		"province": "NL"
+	},
+	"A2H": {
+		"ridingId": "10005",
+		"ridingName": "Long Range Mountains",
+		"province": "NL"
+	},
+	"A2N": {
+		"ridingId": "10005",
+		"ridingName": "Long Range Mountains",
+		"province": "NL"
+	},
+	"A2V": {
+		"ridingId": "10004",
+		"ridingName": "Labrador",
+		"province": "NL"
+	},
+	"A5A": {
+		"ridingId": "10007",
+		"ridingName": "Terra Nova—The Peninsulas",
+		"province": "NL"
+	},
+	"A8A": {
+		"ridingId": "10005",
+		"ridingName": "Long Range Mountains",
+		"province": "NL"
+	},
+	"B0C": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B0E": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B0K": {
+		"ridingId": "12003",
+		"ridingName": "Central Nova",
+		"province": "NS"
+	},
+	"B0M": {
+		"ridingId": "12004",
+		"ridingName": "Cumberland—Colchester",
+		"province": "NS"
+	},
+	"B0P": {
+		"ridingId": "12008",
+		"ridingName": "Kings—Hants",
+		"province": "NS"
+	},
+	"B0S": {
+		"ridingId": "12001",
+		"ridingName": "Acadie—Annapolis",
+		"province": "NS"
+	},
+	"B1A": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B1B": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B1C": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B1E": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B1G": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B1J": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B1K": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B1L": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B1N": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B1P": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B1R": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B1S": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B1T": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B1W": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B1X": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B1Y": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B1Z": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B2A": {
+		"ridingId": "12011",
+		"ridingName": "Sydney—Glace Bay",
+		"province": "NS"
+	},
+	"B2C": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B2E": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B2G": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B2H": {
+		"ridingId": "12003",
+		"ridingName": "Central Nova",
+		"province": "NS"
+	},
+	"B2J": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
+	},
+	"B2N": {
+		"ridingId": "12004",
+		"ridingName": "Cumberland—Colchester",
+		"province": "NS"
+	},
+	"B2R": {
+		"ridingId": "12009",
+		"ridingName": "Sackville—Bedford—Preston",
+		"province": "NS"
+	},
+	"B2S": {
+		"ridingId": "12008",
+		"ridingName": "Kings—Hants",
+		"province": "NS"
+	},
+	"B2T": {
+		"ridingId": "12003",
+		"ridingName": "Central Nova",
+		"province": "NS"
+	},
+	"B2W": {
+		"ridingId": "12005",
+		"ridingName": "Dartmouth—Cole Harbour",
+		"province": "NS"
+	},
+	"B2Y": {
+		"ridingId": "12009",
+		"ridingName": "Sackville—Bedford—Preston",
+		"province": "NS"
+	},
+	"B3A": {
+		"ridingId": "12005",
+		"ridingName": "Dartmouth—Cole Harbour",
+		"province": "NS"
+	},
+	"B3B": {
+		"ridingId": "12009",
+		"ridingName": "Sackville—Bedford—Preston",
+		"province": "NS"
+	},
+	"B3E": {
+		"ridingId": "12003",
+		"ridingName": "Central Nova",
+		"province": "NS"
+	},
+	"B3G": {
+		"ridingId": "12005",
+		"ridingName": "Dartmouth—Cole Harbour",
+		"province": "NS"
+	},
+	"B3H": {
+		"ridingId": "12006",
+		"ridingName": "Halifax",
+		"province": "NS"
+	},
+	"B3K": {
+		"ridingId": "12006",
+		"ridingName": "Halifax",
+		"province": "NS"
+	},
+	"B3M": {
+		"ridingId": "12007",
+		"ridingName": "Halifax West",
+		"province": "NS"
+	},
+	"B3N": {
+		"ridingId": "12006",
+		"ridingName": "Halifax",
+		"province": "NS"
+	},
+	"B3P": {
+		"ridingId": "12006",
+		"ridingName": "Halifax",
+		"province": "NS"
+	},
+	"B3R": {
+		"ridingId": "12007",
+		"ridingName": "Halifax West",
+		"province": "NS"
+	},
+	"B3S": {
+		"ridingId": "12007",
+		"ridingName": "Halifax West",
+		"province": "NS"
+	},
+	"B3T": {
+		"ridingId": "12007",
+		"ridingName": "Halifax West",
+		"province": "NS"
+	},
+	"B3Z": {
+		"ridingId": "12007",
+		"ridingName": "Halifax West",
+		"province": "NS"
+	},
+	"B4A": {
+		"ridingId": "12009",
+		"ridingName": "Sackville—Bedford—Preston",
+		"province": "NS"
+	},
+	"B4B": {
+		"ridingId": "12007",
+		"ridingName": "Halifax West",
+		"province": "NS"
+	},
+	"B4C": {
+		"ridingId": "12009",
+		"ridingName": "Sackville—Bedford—Preston",
+		"province": "NS"
+	},
+	"B4E": {
+		"ridingId": "12009",
+		"ridingName": "Sackville—Bedford—Preston",
+		"province": "NS"
+	},
+	"B4N": {
+		"ridingId": "12008",
+		"ridingName": "Kings—Hants",
+		"province": "NS"
+	},
+	"B4P": {
+		"ridingId": "12008",
+		"ridingName": "Kings—Hants",
+		"province": "NS"
+	},
+	"B4R": {
+		"ridingId": "12008",
+		"ridingName": "Kings—Hants",
+		"province": "NS"
+	},
+	"B4V": {
+		"ridingId": "12010",
+		"ridingName": "South Shore—St. Margarets",
+		"province": "NS"
+	},
+	"B5A": {
+		"ridingId": "12001",
+		"ridingName": "Acadie—Annapolis",
+		"province": "NS"
+	},
+	"B6L": {
+		"ridingId": "12004",
+		"ridingName": "Cumberland—Colchester",
+		"province": "NS"
+	},
+	"B9A": {
+		"ridingId": "12002",
+		"ridingName": "Cape Breton—Canso—Antigonish",
+		"province": "NS"
 	},
 	"C1A": {
 		"ridingId": "11002",
 		"ridingName": "Charlottetown",
 		"province": "PE"
 	},
-	"C0A": {
+	"C1B": {
 		"ridingId": "11001",
 		"ridingName": "Cardigan",
 		"province": "PE"
 	},
-	"Y1A": {
-		"ridingId": "60001",
-		"ridingName": "Yukon",
-		"province": "YT"
+	"C1C": {
+		"ridingId": "11002",
+		"ridingName": "Charlottetown",
+		"province": "PE"
+	},
+	"C1E": {
+		"ridingId": "11002",
+		"ridingName": "Charlottetown",
+		"province": "PE"
+	},
+	"E1B": {
+		"ridingId": "13004",
+		"ridingName": "Fundy Royal",
+		"province": "NB"
+	},
+	"E1C": {
+		"ridingId": "13007",
+		"ridingName": "Moncton—Dieppe",
+		"province": "NB"
+	},
+	"E1G": {
+		"ridingId": "13007",
+		"ridingName": "Moncton—Dieppe",
+		"province": "NB"
+	},
+	"E1H": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E1J": {
+		"ridingId": "13004",
+		"ridingName": "Fundy Royal",
+		"province": "NB"
+	},
+	"E1N": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E1W": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E1X": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E2A": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E2B": {
+		"ridingId": "13003",
+		"ridingName": "Fredericton—Oromocto",
+		"province": "NB"
+	},
+	"E2E": {
+		"ridingId": "13008",
+		"ridingName": "Saint John—Kennebecasis",
+		"province": "NB"
+	},
+	"E2G": {
+		"ridingId": "13008",
+		"ridingName": "Saint John—Kennebecasis",
+		"province": "NB"
+	},
+	"E2H": {
+		"ridingId": "13008",
+		"ridingName": "Saint John—Kennebecasis",
+		"province": "NB"
+	},
+	"E2J": {
+		"ridingId": "13008",
+		"ridingName": "Saint John—Kennebecasis",
+		"province": "NB"
+	},
+	"E2L": {
+		"ridingId": "13008",
+		"ridingName": "Saint John—Kennebecasis",
+		"province": "NB"
+	},
+	"E2M": {
+		"ridingId": "13008",
+		"ridingName": "Saint John—Kennebecasis",
+		"province": "NB"
+	},
+	"E2N": {
+		"ridingId": "13008",
+		"ridingName": "Saint John—Kennebecasis",
+		"province": "NB"
+	},
+	"E2P": {
+		"ridingId": "13008",
+		"ridingName": "Saint John—Kennebecasis",
+		"province": "NB"
+	},
+	"E2S": {
+		"ridingId": "13008",
+		"ridingName": "Saint John—Kennebecasis",
+		"province": "NB"
+	},
+	"E2V": {
+		"ridingId": "13003",
+		"ridingName": "Fredericton—Oromocto",
+		"province": "NB"
+	},
+	"E3B": {
+		"ridingId": "13003",
+		"ridingName": "Fredericton—Oromocto",
+		"province": "NB"
+	},
+	"E3C": {
+		"ridingId": "13003",
+		"ridingName": "Fredericton—Oromocto",
+		"province": "NB"
+	},
+	"E3E": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E3L": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E3N": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E3V": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E3Y": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E3Z": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E4A": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E4B": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E4C": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E4E": {
+		"ridingId": "13004",
+		"ridingName": "Fundy Royal",
+		"province": "NB"
+	},
+	"E4G": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E4H": {
+		"ridingId": "13004",
+		"ridingName": "Fundy Royal",
+		"province": "NB"
+	},
+	"E4J": {
+		"ridingId": "13004",
+		"ridingName": "Fundy Royal",
+		"province": "NB"
+	},
+	"E4K": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E4L": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E4M": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E4N": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E4P": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E4R": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E4S": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E4T": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E4V": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E4W": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E4X": {
+		"ridingId": "13002",
+		"ridingName": "Beauséjour",
+		"province": "NB"
+	},
+	"E4Y": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E4Z": {
+		"ridingId": "13004",
+		"ridingName": "Fundy Royal",
+		"province": "NB"
+	},
+	"E5A": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E5B": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E5C": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E5E": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E5G": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E5H": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E5K": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E5L": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E5M": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E5N": {
+		"ridingId": "13004",
+		"ridingName": "Fundy Royal",
+		"province": "NB"
+	},
+	"E5P": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E5R": {
+		"ridingId": "13004",
+		"ridingName": "Fundy Royal",
+		"province": "NB"
+	},
+	"E5S": {
+		"ridingId": "13004",
+		"ridingName": "Fundy Royal",
+		"province": "NB"
+	},
+	"E5T": {
+		"ridingId": "13004",
+		"ridingName": "Fundy Royal",
+		"province": "NB"
+	},
+	"E6A": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E6B": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E6C": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E6E": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E6G": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E6H": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E6J": {
+		"ridingId": "13009",
+		"ridingName": "Saint John—St. Croix",
+		"province": "NB"
+	},
+	"E6K": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E6L": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E7A": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E7B": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E7C": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E7E": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E7G": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E7H": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E7J": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E7K": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E7L": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E7M": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E7N": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E7P": {
+		"ridingId": "13010",
+		"ridingName": "Tobique—Mactaquac",
+		"province": "NB"
+	},
+	"E8A": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E8B": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E8C": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E8E": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E8G": {
+		"ridingId": "13005",
+		"ridingName": "Madawaska—Restigouche",
+		"province": "NB"
+	},
+	"E8J": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E8K": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E8L": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E8N": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E8P": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E8R": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E8S": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E8T": {
+		"ridingId": "13001",
+		"ridingName": "Acadie—Bathurst",
+		"province": "NB"
+	},
+	"E9A": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E9B": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E9C": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E9E": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E9G": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"E9H": {
+		"ridingId": "13006",
+		"ridingName": "Miramichi—Grand Lake",
+		"province": "NB"
+	},
+	"G0A": {
+		"ridingId": "24051",
+		"ridingName": "Montmorency—Charlevoix",
+		"province": "QC"
+	},
+	"G0P": {
+		"ridingId": "24061",
+		"ridingName": "Richmond—Arthabaska",
+		"province": "QC"
+	},
+	"G0R": {
+		"ridingId": "24020",
+		"ridingName": "Côte-du-Sud—Rivière-du-Loup—Kataskomiq—Témiscouata",
+		"province": "QC"
+	},
+	"G0V": {
+		"ridingId": "24018",
+		"ridingName": "Chicoutimi—Le Fjord",
+		"province": "QC"
+	},
+	"G1A": {
+		"ridingId": "24059",
+		"ridingName": "Québec Centre",
+		"province": "QC"
+	},
+	"G1B": {
+		"ridingId": "24051",
+		"ridingName": "Montmorency—Charlevoix",
+		"province": "QC"
+	},
+	"G1C": {
+		"ridingId": "24051",
+		"ridingName": "Montmorency—Charlevoix",
+		"province": "QC"
+	},
+	"G1E": {
+		"ridingId": "24008",
+		"ridingName": "Beauport—Limoilou",
+		"province": "QC"
+	},
+	"G1H": {
+		"ridingId": "24016",
+		"ridingName": "Charlesbourg—Haute-Saint-Charles",
+		"province": "QC"
+	},
+	"G1J": {
+		"ridingId": "24008",
+		"ridingName": "Beauport—Limoilou",
+		"province": "QC"
+	},
+	"G1K": {
+		"ridingId": "24059",
+		"ridingName": "Québec Centre",
+		"province": "QC"
+	},
+	"G1L": {
+		"ridingId": "24008",
+		"ridingName": "Beauport—Limoilou",
+		"province": "QC"
+	},
+	"G1M": {
+		"ridingId": "24059",
+		"ridingName": "Québec Centre",
+		"province": "QC"
+	},
+	"G1N": {
+		"ridingId": "24059",
+		"ridingName": "Québec Centre",
+		"province": "QC"
+	},
+	"G1P": {
+		"ridingId": "24044",
+		"ridingName": "Louis-Saint-Laurent—Akiawenhrahk",
+		"province": "QC"
+	},
+	"G1S": {
+		"ridingId": "24059",
+		"ridingName": "Québec Centre",
+		"province": "QC"
+	},
+	"G1W": {
+		"ridingId": "24043",
+		"ridingName": "Louis-Hébert",
+		"province": "QC"
+	},
+	"G1X": {
+		"ridingId": "24043",
+		"ridingName": "Louis-Hébert",
+		"province": "QC"
+	},
+	"G1Y": {
+		"ridingId": "24051",
+		"ridingName": "Montmorency—Charlevoix",
+		"province": "QC"
+	},
+	"G2A": {
+		"ridingId": "24058",
+		"ridingName": "Portneuf—Jacques-Cartier",
+		"province": "QC"
+	},
+	"G2B": {
+		"ridingId": "24044",
+		"ridingName": "Louis-Saint-Laurent—Akiawenhrahk",
+		"province": "QC"
+	},
+	"G2C": {
+		"ridingId": "24044",
+		"ridingName": "Louis-Saint-Laurent—Akiawenhrahk",
+		"province": "QC"
+	},
+	"G2E": {
+		"ridingId": "24044",
+		"ridingName": "Louis-Saint-Laurent—Akiawenhrahk",
+		"province": "QC"
+	},
+	"G2G": {
+		"ridingId": "24043",
+		"ridingName": "Louis-Hébert",
+		"province": "QC"
+	},
+	"G2H": {
+		"ridingId": "24059",
+		"ridingName": "Québec Centre",
+		"province": "QC"
+	},
+	"G2J": {
+		"ridingId": "24016",
+		"ridingName": "Charlesbourg—Haute-Saint-Charles",
+		"province": "QC"
+	},
+	"G2K": {
+		"ridingId": "24059",
+		"ridingName": "Québec Centre",
+		"province": "QC"
+	},
+	"G2L": {
+		"ridingId": "24016",
+		"ridingName": "Charlesbourg—Haute-Saint-Charles",
+		"province": "QC"
+	},
+	"G2M": {
+		"ridingId": "24016",
+		"ridingName": "Charlesbourg—Haute-Saint-Charles",
+		"province": "QC"
+	},
+	"G2N": {
+		"ridingId": "24016",
+		"ridingName": "Charlesbourg—Haute-Saint-Charles",
+		"province": "QC"
+	},
+	"G3A": {
+		"ridingId": "24058",
+		"ridingName": "Portneuf—Jacques-Cartier",
+		"province": "QC"
+	},
+	"G3B": {
+		"ridingId": "24051",
+		"ridingName": "Montmorency—Charlevoix",
+		"province": "QC"
+	},
+	"G3C": {
+		"ridingId": "24058",
+		"ridingName": "Portneuf—Jacques-Cartier",
+		"province": "QC"
+	},
+	"G3E": {
+		"ridingId": "24016",
+		"ridingName": "Charlesbourg—Haute-Saint-Charles",
+		"province": "QC"
+	},
+	"G3G": {
+		"ridingId": "24016",
+		"ridingName": "Charlesbourg—Haute-Saint-Charles",
+		"province": "QC"
+	},
+	"G3H": {
+		"ridingId": "24058",
+		"ridingName": "Portneuf—Jacques-Cartier",
+		"province": "QC"
+	},
+	"G3J": {
+		"ridingId": "24044",
+		"ridingName": "Louis-Saint-Laurent—Akiawenhrahk",
+		"province": "QC"
+	},
+	"G3K": {
+		"ridingId": "24044",
+		"ridingName": "Louis-Saint-Laurent—Akiawenhrahk",
+		"province": "QC"
+	},
+	"G3L": {
+		"ridingId": "24058",
+		"ridingName": "Portneuf—Jacques-Cartier",
+		"province": "QC"
+	},
+	"G3S": {
+		"ridingId": "24044",
+		"ridingName": "Louis-Saint-Laurent—Akiawenhrahk",
+		"province": "QC"
+	},
+	"G3Z": {
+		"ridingId": "24051",
+		"ridingName": "Montmorency—Charlevoix",
+		"province": "QC"
+	},
+	"G4A": {
+		"ridingId": "24051",
+		"ridingName": "Montmorency—Charlevoix",
+		"province": "QC"
+	},
+	"G4R": {
+		"ridingId": "24021",
+		"ridingName": "Côte-Nord—Kawawachikamach—Nitassinan",
+		"province": "QC"
+	},
+	"G4S": {
+		"ridingId": "24021",
+		"ridingName": "Côte-Nord—Kawawachikamach—Nitassinan",
+		"province": "QC"
+	},
+	"G4T": {
+		"ridingId": "24024",
+		"ridingName": "Gaspésie—Les Îles-de-la-Madeleine—Listuguj",
+		"province": "QC"
+	},
+	"G4V": {
+		"ridingId": "24024",
+		"ridingName": "Gaspésie—Les Îles-de-la-Madeleine—Listuguj",
+		"province": "QC"
+	},
+	"G4W": {
+		"ridingId": "24024",
+		"ridingName": "Gaspésie—Les Îles-de-la-Madeleine—Listuguj",
+		"province": "QC"
+	},
+	"G4X": {
+		"ridingId": "24024",
+		"ridingName": "Gaspésie—Les Îles-de-la-Madeleine—Listuguj",
+		"province": "QC"
+	},
+	"G4Z": {
+		"ridingId": "24021",
+		"ridingName": "Côte-Nord—Kawawachikamach—Nitassinan",
+		"province": "QC"
+	},
+	"G5A": {
+		"ridingId": "24051",
+		"ridingName": "Montmorency—Charlevoix",
+		"province": "QC"
+	},
+	"G5B": {
+		"ridingId": "24021",
+		"ridingName": "Côte-Nord—Kawawachikamach—Nitassinan",
+		"province": "QC"
+	},
+	"G5C": {
+		"ridingId": "24021",
+		"ridingName": "Côte-Nord—Kawawachikamach—Nitassinan",
+		"province": "QC"
+	},
+	"G5H": {
+		"ridingId": "24062",
+		"ridingName": "Rimouski—La Matapédia",
+		"province": "QC"
+	},
+	"G5J": {
+		"ridingId": "24062",
+		"ridingName": "Rimouski—La Matapédia",
+		"province": "QC"
+	},
+	"G5L": {
+		"ridingId": "24062",
+		"ridingName": "Rimouski—La Matapédia",
+		"province": "QC"
+	},
+	"G5M": {
+		"ridingId": "24062",
+		"ridingName": "Rimouski—La Matapédia",
+		"province": "QC"
+	},
+	"G5R": {
+		"ridingId": "24020",
+		"ridingName": "Côte-du-Sud—Rivière-du-Loup—Kataskomiq—Témiscouata",
+		"province": "QC"
+	},
+	"G5V": {
+		"ridingId": "24020",
+		"ridingName": "Côte-du-Sud—Rivière-du-Loup—Kataskomiq—Témiscouata",
+		"province": "QC"
+	},
+	"G5X": {
+		"ridingId": "24006",
+		"ridingName": "Beauce",
+		"province": "QC"
+	},
+	"G5Y": {
+		"ridingId": "24006",
+		"ridingName": "Beauce",
+		"province": "QC"
+	},
+	"G5Z": {
+		"ridingId": "24006",
+		"ridingName": "Beauce",
+		"province": "QC"
+	},
+	"G6A": {
+		"ridingId": "24006",
+		"ridingName": "Beauce",
+		"province": "QC"
+	},
+	"G6B": {
+		"ridingId": "24046",
+		"ridingName": "Mégantic—L’Érable—Lotbinière",
+		"province": "QC"
+	},
+	"G6C": {
+		"ridingId": "24010",
+		"ridingName": "Bellechasse—Les Etchemins—Lévis",
+		"province": "QC"
+	},
+	"G6E": {
+		"ridingId": "24006",
+		"ridingName": "Beauce",
+		"province": "QC"
+	},
+	"G6G": {
+		"ridingId": "24046",
+		"ridingName": "Mégantic—L’Érable—Lotbinière",
+		"province": "QC"
+	},
+	"G6H": {
+		"ridingId": "24046",
+		"ridingName": "Mégantic—L’Érable—Lotbinière",
+		"province": "QC"
+	},
+	"G6J": {
+		"ridingId": "24040",
+		"ridingName": "Lévis—Lotbinière",
+		"province": "QC"
+	},
+	"G6K": {
+		"ridingId": "24040",
+		"ridingName": "Lévis—Lotbinière",
+		"province": "QC"
+	},
+	"G6L": {
+		"ridingId": "24046",
+		"ridingName": "Mégantic—L’Érable—Lotbinière",
+		"province": "QC"
+	},
+	"G6P": {
+		"ridingId": "24061",
+		"ridingName": "Richmond—Arthabaska",
+		"province": "QC"
+	},
+	"G6R": {
+		"ridingId": "24061",
+		"ridingName": "Richmond—Arthabaska",
+		"province": "QC"
+	},
+	"G6S": {
+		"ridingId": "24061",
+		"ridingName": "Richmond—Arthabaska",
+		"province": "QC"
+	},
+	"G6T": {
+		"ridingId": "24061",
+		"ridingName": "Richmond—Arthabaska",
+		"province": "QC"
+	},
+	"G6V": {
+		"ridingId": "24010",
+		"ridingName": "Bellechasse—Les Etchemins—Lévis",
+		"province": "QC"
+	},
+	"G6W": {
+		"ridingId": "24010",
+		"ridingName": "Bellechasse—Les Etchemins—Lévis",
+		"province": "QC"
+	},
+	"G6X": {
+		"ridingId": "24040",
+		"ridingName": "Lévis—Lotbinière",
+		"province": "QC"
+	},
+	"G6Z": {
+		"ridingId": "24040",
+		"ridingName": "Lévis—Lotbinière",
+		"province": "QC"
+	},
+	"G7A": {
+		"ridingId": "24040",
+		"ridingName": "Lévis—Lotbinière",
+		"province": "QC"
+	},
+	"G7H": {
+		"ridingId": "24018",
+		"ridingName": "Chicoutimi—Le Fjord",
+		"province": "QC"
+	},
+	"G7J": {
+		"ridingId": "24018",
+		"ridingName": "Chicoutimi—Le Fjord",
+		"province": "QC"
+	},
+	"G7K": {
+		"ridingId": "24030",
+		"ridingName": "Jonquière",
+		"province": "QC"
+	},
+	"G7N": {
+		"ridingId": "24030",
+		"ridingName": "Jonquière",
+		"province": "QC"
+	},
+	"G7P": {
+		"ridingId": "24030",
+		"ridingName": "Jonquière",
+		"province": "QC"
+	},
+	"G7T": {
+		"ridingId": "24030",
+		"ridingName": "Jonquière",
+		"province": "QC"
+	},
+	"G7X": {
+		"ridingId": "24030",
+		"ridingName": "Jonquière",
+		"province": "QC"
+	},
+	"G8A": {
+		"ridingId": "24030",
+		"ridingName": "Jonquière",
+		"province": "QC"
+	},
+	"G8B": {
+		"ridingId": "24033",
+		"ridingName": "Lac-Saint-Jean",
+		"province": "QC"
+	},
+	"G8C": {
+		"ridingId": "24033",
+		"ridingName": "Lac-Saint-Jean",
+		"province": "QC"
+	},
+	"G8E": {
+		"ridingId": "24033",
+		"ridingName": "Lac-Saint-Jean",
+		"province": "QC"
+	},
+	"G8G": {
+		"ridingId": "24033",
+		"ridingName": "Lac-Saint-Jean",
+		"province": "QC"
+	},
+	"G8H": {
+		"ridingId": "24033",
+		"ridingName": "Lac-Saint-Jean",
+		"province": "QC"
+	},
+	"G8J": {
+		"ridingId": "24033",
+		"ridingName": "Lac-Saint-Jean",
+		"province": "QC"
+	},
+	"G8K": {
+		"ridingId": "24033",
+		"ridingName": "Lac-Saint-Jean",
+		"province": "QC"
+	},
+	"G8L": {
+		"ridingId": "24033",
+		"ridingName": "Lac-Saint-Jean",
+		"province": "QC"
+	},
+	"G8N": {
+		"ridingId": "24030",
+		"ridingName": "Jonquière",
+		"province": "QC"
+	},
+	"G8P": {
+		"ridingId": "24001",
+		"ridingName": "Abitibi—Baie-James—Nunavik—Eeyou",
+		"province": "QC"
+	},
+	"G8T": {
+		"ridingId": "24070",
+		"ridingName": "Saint-Maurice—Champlain",
+		"province": "QC"
+	},
+	"G8V": {
+		"ridingId": "24070",
+		"ridingName": "Saint-Maurice—Champlain",
+		"province": "QC"
+	},
+	"G8W": {
+		"ridingId": "24070",
+		"ridingName": "Saint-Maurice—Champlain",
+		"province": "QC"
+	},
+	"G8Y": {
+		"ridingId": "24075",
+		"ridingName": "Trois-Rivières",
+		"province": "QC"
+	},
+	"G9A": {
+		"ridingId": "24075",
+		"ridingName": "Trois-Rivières",
+		"province": "QC"
+	},
+	"G9B": {
+		"ridingId": "24075",
+		"ridingName": "Trois-Rivières",
+		"province": "QC"
+	},
+	"G9C": {
+		"ridingId": "24075",
+		"ridingName": "Trois-Rivières",
+		"province": "QC"
+	},
+	"G9H": {
+		"ridingId": "24009",
+		"ridingName": "Bécancour—Nicolet—Saurel—Alnôbak",
+		"province": "QC"
+	},
+	"G9N": {
+		"ridingId": "24070",
+		"ridingName": "Saint-Maurice—Champlain",
+		"province": "QC"
+	},
+	"G9P": {
+		"ridingId": "24070",
+		"ridingName": "Saint-Maurice—Champlain",
+		"province": "QC"
+	},
+	"G9T": {
+		"ridingId": "24070",
+		"ridingName": "Saint-Maurice—Champlain",
+		"province": "QC"
+	},
+	"G9X": {
+		"ridingId": "24070",
+		"ridingName": "Saint-Maurice—Champlain",
+		"province": "QC"
+	},
+	"H1A": {
+		"ridingId": "24027",
+		"ridingName": "Honoré-Mercier",
+		"province": "QC"
+	},
+	"H1B": {
+		"ridingId": "24031",
+		"ridingName": "La Pointe-de-l'Île",
+		"province": "QC"
+	},
+	"H1C": {
+		"ridingId": "24027",
+		"ridingName": "Honoré-Mercier",
+		"province": "QC"
+	},
+	"H1E": {
+		"ridingId": "24027",
+		"ridingName": "Honoré-Mercier",
+		"province": "QC"
+	},
+	"H1G": {
+		"ridingId": "24013",
+		"ridingName": "Bourassa",
+		"province": "QC"
+	},
+	"H1H": {
+		"ridingId": "24003",
+		"ridingName": "Ahuntsic-Cartierville",
+		"province": "QC"
+	},
+	"H1J": {
+		"ridingId": "24027",
+		"ridingName": "Honoré-Mercier",
+		"province": "QC"
+	},
+	"H1K": {
+		"ridingId": "24027",
+		"ridingName": "Honoré-Mercier",
+		"province": "QC"
+	},
+	"H1L": {
+		"ridingId": "24031",
+		"ridingName": "La Pointe-de-l'Île",
+		"province": "QC"
+	},
+	"H1N": {
+		"ridingId": "24026",
+		"ridingName": "Hochelaga—Rosemont-Est",
+		"province": "QC"
+	},
+	"H1P": {
+		"ridingId": "24013",
+		"ridingName": "Bourassa",
+		"province": "QC"
+	},
+	"H1R": {
+		"ridingId": "24069",
+		"ridingName": "Saint-Léonard—Saint-Michel",
+		"province": "QC"
+	},
+	"H1S": {
+		"ridingId": "24069",
+		"ridingName": "Saint-Léonard—Saint-Michel",
+		"province": "QC"
+	},
+	"H1T": {
+		"ridingId": "24054",
+		"ridingName": "Papineau",
+		"province": "QC"
+	},
+	"H1V": {
+		"ridingId": "24026",
+		"ridingName": "Hochelaga—Rosemont-Est",
+		"province": "QC"
+	},
+	"H1W": {
+		"ridingId": "24026",
+		"ridingName": "Hochelaga—Rosemont-Est",
+		"province": "QC"
+	},
+	"H1X": {
+		"ridingId": "24065",
+		"ridingName": "Rosemont—La Petite-Patrie",
+		"province": "QC"
+	},
+	"H1Y": {
+		"ridingId": "24065",
+		"ridingName": "Rosemont—La Petite-Patrie",
+		"province": "QC"
+	},
+	"H2A": {
+		"ridingId": "24054",
+		"ridingName": "Papineau",
+		"province": "QC"
+	},
+	"H2B": {
+		"ridingId": "24013",
+		"ridingName": "Bourassa",
+		"province": "QC"
+	},
+	"H2C": {
+		"ridingId": "24003",
+		"ridingName": "Ahuntsic-Cartierville",
+		"province": "QC"
+	},
+	"H2E": {
+		"ridingId": "24054",
+		"ridingName": "Papineau",
+		"province": "QC"
+	},
+	"H2G": {
+		"ridingId": "24065",
+		"ridingName": "Rosemont—La Petite-Patrie",
+		"province": "QC"
+	},
+	"H2H": {
+		"ridingId": "24065",
+		"ridingName": "Rosemont—La Petite-Patrie",
+		"province": "QC"
+	},
+	"H2K": {
+		"ridingId": "24037",
+		"ridingName": "Laurier—Sainte-Marie",
+		"province": "QC"
+	},
+	"H2L": {
+		"ridingId": "24077",
+		"ridingName": "Ville-Marie—Le Sud-Ouest—Île-des-Soeurs",
+		"province": "QC"
+	},
+	"H2N": {
+		"ridingId": "24003",
+		"ridingName": "Ahuntsic-Cartierville",
+		"province": "QC"
+	},
+	"H2P": {
+		"ridingId": "24054",
+		"ridingName": "Papineau",
+		"province": "QC"
+	},
+	"H2R": {
+		"ridingId": "24054",
+		"ridingName": "Papineau",
+		"province": "QC"
+	},
+	"H2S": {
+		"ridingId": "24065",
+		"ridingName": "Rosemont—La Petite-Patrie",
+		"province": "QC"
+	},
+	"H2T": {
+		"ridingId": "24053",
+		"ridingName": "Outremont",
+		"province": "QC"
+	},
+	"H2V": {
+		"ridingId": "24048",
+		"ridingName": "Mount Royal",
+		"province": "QC"
+	},
+	"H2W": {
+		"ridingId": "24037",
+		"ridingName": "Laurier—Sainte-Marie",
+		"province": "QC"
+	},
+	"H2X": {
+		"ridingId": "24037",
+		"ridingName": "Laurier—Sainte-Marie",
+		"province": "QC"
+	},
+	"H2Y": {
+		"ridingId": "24037",
+		"ridingName": "Laurier—Sainte-Marie",
+		"province": "QC"
+	},
+	"H2Z": {
+		"ridingId": "24037",
+		"ridingName": "Laurier—Sainte-Marie",
+		"province": "QC"
+	},
+	"H3A": {
+		"ridingId": "24077",
+		"ridingName": "Ville-Marie—Le Sud-Ouest—Île-des-Soeurs",
+		"province": "QC"
+	},
+	"H3B": {
+		"ridingId": "24077",
+		"ridingName": "Ville-Marie—Le Sud-Ouest—Île-des-Soeurs",
+		"province": "QC"
+	},
+	"H3C": {
+		"ridingId": "24037",
+		"ridingName": "Laurier—Sainte-Marie",
+		"province": "QC"
+	},
+	"H3E": {
+		"ridingId": "24077",
+		"ridingName": "Ville-Marie—Le Sud-Ouest—Île-des-Soeurs",
+		"province": "QC"
+	},
+	"H3G": {
+		"ridingId": "24077",
+		"ridingName": "Ville-Marie—Le Sud-Ouest—Île-des-Soeurs",
+		"province": "QC"
+	},
+	"H3H": {
+		"ridingId": "24077",
+		"ridingName": "Ville-Marie—Le Sud-Ouest—Île-des-Soeurs",
+		"province": "QC"
+	},
+	"H3J": {
+		"ridingId": "24037",
+		"ridingName": "Laurier—Sainte-Marie",
+		"province": "QC"
+	},
+	"H3K": {
+		"ridingId": "24077",
+		"ridingName": "Ville-Marie—Le Sud-Ouest—Île-des-Soeurs",
+		"province": "QC"
+	},
+	"H3L": {
+		"ridingId": "24003",
+		"ridingName": "Ahuntsic-Cartierville",
+		"province": "QC"
+	},
+	"H3M": {
+		"ridingId": "24003",
+		"ridingName": "Ahuntsic-Cartierville",
+		"province": "QC"
+	},
+	"H3N": {
+		"ridingId": "24003",
+		"ridingName": "Ahuntsic-Cartierville",
+		"province": "QC"
+	},
+	"H3P": {
+		"ridingId": "24048",
+		"ridingName": "Mount Royal",
+		"province": "QC"
+	},
+	"H3R": {
+		"ridingId": "24048",
+		"ridingName": "Mount Royal",
+		"province": "QC"
+	},
+	"H3S": {
+		"ridingId": "24048",
+		"ridingName": "Mount Royal",
+		"province": "QC"
+	},
+	"H3T": {
+		"ridingId": "24053",
+		"ridingName": "Outremont",
+		"province": "QC"
+	},
+	"H3V": {
+		"ridingId": "24053",
+		"ridingName": "Outremont",
+		"province": "QC"
+	},
+	"H3W": {
+		"ridingId": "24052",
+		"ridingName": "Notre-Dame-de-Grâce—Westmount",
+		"province": "QC"
+	},
+	"H3X": {
+		"ridingId": "24048",
+		"ridingName": "Mount Royal",
+		"province": "QC"
+	},
+	"H3Y": {
+		"ridingId": "24052",
+		"ridingName": "Notre-Dame-de-Grâce—Westmount",
+		"province": "QC"
+	},
+	"H3Z": {
+		"ridingId": "24037",
+		"ridingName": "Laurier—Sainte-Marie",
+		"province": "QC"
+	},
+	"H4B": {
+		"ridingId": "24052",
+		"ridingName": "Notre-Dame-de-Grâce—Westmount",
+		"province": "QC"
+	},
+	"H4C": {
+		"ridingId": "24037",
+		"ridingName": "Laurier—Sainte-Marie",
+		"province": "QC"
+	},
+	"H4E": {
+		"ridingId": "24035",
+		"ridingName": "LaSalle—Émard—Verdun",
+		"province": "QC"
+	},
+	"H4G": {
+		"ridingId": "24035",
+		"ridingName": "LaSalle—Émard—Verdun",
+		"province": "QC"
+	},
+	"H4H": {
+		"ridingId": "24035",
+		"ridingName": "LaSalle—Émard—Verdun",
+		"province": "QC"
+	},
+	"H4J": {
+		"ridingId": "24003",
+		"ridingName": "Ahuntsic-Cartierville",
+		"province": "QC"
+	},
+	"H4K": {
+		"ridingId": "24003",
+		"ridingName": "Ahuntsic-Cartierville",
+		"province": "QC"
+	},
+	"H4L": {
+		"ridingId": "24068",
+		"ridingName": "Saint-Laurent",
+		"province": "QC"
+	},
+	"H4M": {
+		"ridingId": "24068",
+		"ridingName": "Saint-Laurent",
+		"province": "QC"
+	},
+	"H4N": {
+		"ridingId": "24068",
+		"ridingName": "Saint-Laurent",
+		"province": "QC"
+	},
+	"H4P": {
+		"ridingId": "24048",
+		"ridingName": "Mount Royal",
+		"province": "QC"
+	},
+	"H4R": {
+		"ridingId": "24068",
+		"ridingName": "Saint-Laurent",
+		"province": "QC"
+	},
+	"H4S": {
+		"ridingId": "24068",
+		"ridingName": "Saint-Laurent",
+		"province": "QC"
+	},
+	"H4T": {
+		"ridingId": "24068",
+		"ridingName": "Saint-Laurent",
+		"province": "QC"
+	},
+	"H4V": {
+		"ridingId": "24048",
+		"ridingName": "Mount Royal",
+		"province": "QC"
+	},
+	"H4W": {
+		"ridingId": "24048",
+		"ridingName": "Mount Royal",
+		"province": "QC"
+	},
+	"H4X": {
+		"ridingId": "24048",
+		"ridingName": "Mount Royal",
+		"province": "QC"
+	},
+	"H4Y": {
+		"ridingId": "24068",
+		"ridingName": "Saint-Laurent",
+		"province": "QC"
+	},
+	"H4Z": {
+		"ridingId": "24048",
+		"ridingName": "Mount Royal",
+		"province": "QC"
+	},
+	"H5A": {
+		"ridingId": "24077",
+		"ridingName": "Ville-Marie—Le Sud-Ouest—Île-des-Soeurs",
+		"province": "QC"
+	},
+	"H5B": {
+		"ridingId": "24037",
+		"ridingName": "Laurier—Sainte-Marie",
+		"province": "QC"
+	},
+	"H7A": {
+		"ridingId": "24004",
+		"ridingName": "Alfred-Pellan",
+		"province": "QC"
+	},
+	"H7B": {
+		"ridingId": "24004",
+		"ridingName": "Alfred-Pellan",
+		"province": "QC"
+	},
+	"H7C": {
+		"ridingId": "24004",
+		"ridingName": "Alfred-Pellan",
+		"province": "QC"
+	},
+	"H7E": {
+		"ridingId": "24004",
+		"ridingName": "Alfred-Pellan",
+		"province": "QC"
+	},
+	"H7G": {
+		"ridingId": "24078",
+		"ridingName": "Vimy",
+		"province": "QC"
+	},
+	"H7H": {
+		"ridingId": "24045",
+		"ridingName": "Marc-Aurèle-Fortin",
+		"province": "QC"
+	},
+	"H7J": {
+		"ridingId": "24004",
+		"ridingName": "Alfred-Pellan",
+		"province": "QC"
+	},
+	"H7K": {
+		"ridingId": "24045",
+		"ridingName": "Marc-Aurèle-Fortin",
+		"province": "QC"
+	},
+	"H7L": {
+		"ridingId": "24045",
+		"ridingName": "Marc-Aurèle-Fortin",
+		"province": "QC"
+	},
+	"H7M": {
+		"ridingId": "24078",
+		"ridingName": "Vimy",
+		"province": "QC"
+	},
+	"H7N": {
+		"ridingId": "24004",
+		"ridingName": "Alfred-Pellan",
+		"province": "QC"
+	},
+	"H7P": {
+		"ridingId": "24045",
+		"ridingName": "Marc-Aurèle-Fortin",
+		"province": "QC"
+	},
+	"H7S": {
+		"ridingId": "24078",
+		"ridingName": "Vimy",
+		"province": "QC"
+	},
+	"H7V": {
+		"ridingId": "24078",
+		"ridingName": "Vimy",
+		"province": "QC"
+	},
+	"H7W": {
+		"ridingId": "24038",
+		"ridingName": "Laval—Les Îles",
+		"province": "QC"
+	},
+	"H7X": {
+		"ridingId": "24038",
+		"ridingName": "Laval—Les Îles",
+		"province": "QC"
+	},
+	"H7Y": {
+		"ridingId": "24038",
+		"ridingName": "Laval—Les Îles",
+		"province": "QC"
+	},
+	"H8N": {
+		"ridingId": "24022",
+		"ridingName": "Dorval—Lachine—LaSalle",
+		"province": "QC"
+	},
+	"H8P": {
+		"ridingId": "24035",
+		"ridingName": "LaSalle—Émard—Verdun",
+		"province": "QC"
+	},
+	"H8R": {
+		"ridingId": "24022",
+		"ridingName": "Dorval—Lachine—LaSalle",
+		"province": "QC"
+	},
+	"H8S": {
+		"ridingId": "24022",
+		"ridingName": "Dorval—Lachine—LaSalle",
+		"province": "QC"
+	},
+	"H8T": {
+		"ridingId": "24022",
+		"ridingName": "Dorval—Lachine—LaSalle",
+		"province": "QC"
+	},
+	"H8Y": {
+		"ridingId": "24056",
+		"ridingName": "Pierrefonds—Dollard",
+		"province": "QC"
+	},
+	"H9A": {
+		"ridingId": "24056",
+		"ridingName": "Pierrefonds—Dollard",
+		"province": "QC"
+	},
+	"H9B": {
+		"ridingId": "24056",
+		"ridingName": "Pierrefonds—Dollard",
+		"province": "QC"
+	},
+	"H9C": {
+		"ridingId": "24056",
+		"ridingName": "Pierrefonds—Dollard",
+		"province": "QC"
+	},
+	"H9E": {
+		"ridingId": "24056",
+		"ridingName": "Pierrefonds—Dollard",
+		"province": "QC"
+	},
+	"H9G": {
+		"ridingId": "24056",
+		"ridingName": "Pierrefonds—Dollard",
+		"province": "QC"
+	},
+	"H9H": {
+		"ridingId": "24034",
+		"ridingName": "Lac-Saint-Louis",
+		"province": "QC"
+	},
+	"H9J": {
+		"ridingId": "24034",
+		"ridingName": "Lac-Saint-Louis",
+		"province": "QC"
+	},
+	"H9P": {
+		"ridingId": "24022",
+		"ridingName": "Dorval—Lachine—LaSalle",
+		"province": "QC"
+	},
+	"H9R": {
+		"ridingId": "24034",
+		"ridingName": "Lac-Saint-Louis",
+		"province": "QC"
+	},
+	"H9S": {
+		"ridingId": "24022",
+		"ridingName": "Dorval—Lachine—LaSalle",
+		"province": "QC"
+	},
+	"H9W": {
+		"ridingId": "24034",
+		"ridingName": "Lac-Saint-Louis",
+		"province": "QC"
+	},
+	"H9X": {
+		"ridingId": "24034",
+		"ridingName": "Lac-Saint-Louis",
+		"province": "QC"
+	},
+	"J0B": {
+		"ridingId": "24019",
+		"ridingName": "Compton—Stanstead",
+		"province": "QC"
+	},
+	"J0E": {
+		"ridingId": "24014",
+		"ridingName": "Brome—Missisquoi",
+		"province": "QC"
+	},
+	"J0H": {
+		"ridingId": "24066",
+		"ridingName": "Saint-Hyacinthe—Bagot—Acton",
+		"province": "QC"
+	},
+	"J0L": {
+		"ridingId": "24049",
+		"ridingName": "Mont-Saint-Bruno—L’Acadie",
+		"province": "QC"
+	},
+	"J0P": {
+		"ridingId": "24007",
+		"ridingName": "Beauharnois—Salaberry—Soulanges—Huntingdon",
+		"province": "QC"
+	},
+	"J0R": {
+		"ridingId": "24039",
+		"ridingName": "Les Pays-d'en-Haut",
+		"province": "QC"
+	},
+	"J1A": {
+		"ridingId": "24019",
+		"ridingName": "Compton—Stanstead",
+		"province": "QC"
+	},
+	"J1C": {
+		"ridingId": "24019",
+		"ridingName": "Compton—Stanstead",
+		"province": "QC"
+	},
+	"J1E": {
+		"ridingId": "24072",
+		"ridingName": "Sherbrooke",
+		"province": "QC"
+	},
+	"J1G": {
+		"ridingId": "24072",
+		"ridingName": "Sherbrooke",
+		"province": "QC"
+	},
+	"J1H": {
+		"ridingId": "24072",
+		"ridingName": "Sherbrooke",
+		"province": "QC"
+	},
+	"J1J": {
+		"ridingId": "24072",
+		"ridingName": "Sherbrooke",
+		"province": "QC"
+	},
+	"J1K": {
+		"ridingId": "24072",
+		"ridingName": "Sherbrooke",
+		"province": "QC"
+	},
+	"J1L": {
+		"ridingId": "24072",
+		"ridingName": "Sherbrooke",
+		"province": "QC"
+	},
+	"J1M": {
+		"ridingId": "24019",
+		"ridingName": "Compton—Stanstead",
+		"province": "QC"
+	},
+	"J1N": {
+		"ridingId": "24019",
+		"ridingName": "Compton—Stanstead",
+		"province": "QC"
+	},
+	"J1R": {
+		"ridingId": "24072",
+		"ridingName": "Sherbrooke",
+		"province": "QC"
+	},
+	"J1S": {
+		"ridingId": "24061",
+		"ridingName": "Richmond—Arthabaska",
+		"province": "QC"
+	},
+	"J1T": {
+		"ridingId": "24061",
+		"ridingName": "Richmond—Arthabaska",
+		"province": "QC"
+	},
+	"J1X": {
+		"ridingId": "24014",
+		"ridingName": "Brome—Missisquoi",
+		"province": "QC"
+	},
+	"J1Z": {
+		"ridingId": "24023",
+		"ridingName": "Drummond",
+		"province": "QC"
+	},
+	"J2A": {
+		"ridingId": "24023",
+		"ridingName": "Drummond",
+		"province": "QC"
+	},
+	"J2B": {
+		"ridingId": "24023",
+		"ridingName": "Drummond",
+		"province": "QC"
+	},
+	"J2C": {
+		"ridingId": "24023",
+		"ridingName": "Drummond",
+		"province": "QC"
+	},
+	"J2G": {
+		"ridingId": "24071",
+		"ridingName": "Shefford",
+		"province": "QC"
+	},
+	"J2H": {
+		"ridingId": "24071",
+		"ridingName": "Shefford",
+		"province": "QC"
+	},
+	"J2J": {
+		"ridingId": "24071",
+		"ridingName": "Shefford",
+		"province": "QC"
+	},
+	"J2K": {
+		"ridingId": "24014",
+		"ridingName": "Brome—Missisquoi",
+		"province": "QC"
+	},
+	"J2L": {
+		"ridingId": "24014",
+		"ridingName": "Brome—Missisquoi",
+		"province": "QC"
+	},
+	"J2N": {
+		"ridingId": "24014",
+		"ridingName": "Brome—Missisquoi",
+		"province": "QC"
+	},
+	"J2R": {
+		"ridingId": "24066",
+		"ridingName": "Saint-Hyacinthe—Bagot—Acton",
+		"province": "QC"
+	},
+	"J2T": {
+		"ridingId": "24066",
+		"ridingName": "Saint-Hyacinthe—Bagot—Acton",
+		"province": "QC"
+	},
+	"J2W": {
+		"ridingId": "24067",
+		"ridingName": "Saint-Jean",
+		"province": "QC"
+	},
+	"J2X": {
+		"ridingId": "24067",
+		"ridingName": "Saint-Jean",
+		"province": "QC"
+	},
+	"J2Y": {
+		"ridingId": "24067",
+		"ridingName": "Saint-Jean",
+		"province": "QC"
+	},
+	"J3A": {
+		"ridingId": "24067",
+		"ridingName": "Saint-Jean",
+		"province": "QC"
+	},
+	"J3B": {
+		"ridingId": "24067",
+		"ridingName": "Saint-Jean",
+		"province": "QC"
+	},
+	"J3E": {
+		"ridingId": "24049",
+		"ridingName": "Mont-Saint-Bruno—L’Acadie",
+		"province": "QC"
+	},
+	"J3G": {
+		"ridingId": "24011",
+		"ridingName": "Beloeil—Chambly",
+		"province": "QC"
+	},
+	"J3H": {
+		"ridingId": "24011",
+		"ridingName": "Beloeil—Chambly",
+		"province": "QC"
+	},
+	"J3J": {
+		"ridingId": "24009",
+		"ridingName": "Bécancour—Nicolet—Saurel—Alnôbak",
+		"province": "QC"
+	},
+	"J3L": {
+		"ridingId": "24011",
+		"ridingName": "Beloeil—Chambly",
+		"province": "QC"
+	},
+	"J3M": {
+		"ridingId": "24011",
+		"ridingName": "Beloeil—Chambly",
+		"province": "QC"
+	},
+	"J3N": {
+		"ridingId": "24049",
+		"ridingName": "Mont-Saint-Bruno—L’Acadie",
+		"province": "QC"
+	},
+	"J3P": {
+		"ridingId": "24009",
+		"ridingName": "Bécancour—Nicolet—Saurel—Alnôbak",
+		"province": "QC"
+	},
+	"J3R": {
+		"ridingId": "24009",
+		"ridingName": "Bécancour—Nicolet—Saurel—Alnôbak",
+		"province": "QC"
+	},
+	"J3T": {
+		"ridingId": "24009",
+		"ridingName": "Bécancour—Nicolet—Saurel—Alnôbak",
+		"province": "QC"
+	},
+	"J3V": {
+		"ridingId": "24049",
+		"ridingName": "Mont-Saint-Bruno—L’Acadie",
+		"province": "QC"
+	},
+	"J3X": {
+		"ridingId": "24055",
+		"ridingName": "Pierre-Boucher—Les Patriotes—Verchères",
+		"province": "QC"
+	},
+	"J3Y": {
+		"ridingId": "24049",
+		"ridingName": "Mont-Saint-Bruno—L’Acadie",
+		"province": "QC"
+	},
+	"J3Z": {
+		"ridingId": "24049",
+		"ridingName": "Mont-Saint-Bruno—L’Acadie",
+		"province": "QC"
+	},
+	"J4B": {
+		"ridingId": "24055",
+		"ridingName": "Pierre-Boucher—Les Patriotes—Verchères",
+		"province": "QC"
+	},
+	"J4H": {
+		"ridingId": "24042",
+		"ridingName": "Longueuil—Saint-Hubert",
+		"province": "QC"
+	},
+	"J4J": {
+		"ridingId": "24041",
+		"ridingName": "Longueuil—Charles-LeMoyne",
+		"province": "QC"
+	},
+	"J4K": {
+		"ridingId": "24041",
+		"ridingName": "Longueuil—Charles-LeMoyne",
+		"province": "QC"
+	},
+	"J4M": {
+		"ridingId": "24042",
+		"ridingName": "Longueuil—Saint-Hubert",
+		"province": "QC"
+	},
+	"J4N": {
+		"ridingId": "24042",
+		"ridingName": "Longueuil—Saint-Hubert",
+		"province": "QC"
+	},
+	"J4P": {
+		"ridingId": "24015",
+		"ridingName": "Brossard—Saint-Lambert",
+		"province": "QC"
+	},
+	"J4R": {
+		"ridingId": "24015",
+		"ridingName": "Brossard—Saint-Lambert",
+		"province": "QC"
+	},
+	"J4S": {
+		"ridingId": "24015",
+		"ridingName": "Brossard—Saint-Lambert",
+		"province": "QC"
+	},
+	"J4T": {
+		"ridingId": "24041",
+		"ridingName": "Longueuil—Charles-LeMoyne",
+		"province": "QC"
+	},
+	"J4V": {
+		"ridingId": "24042",
+		"ridingName": "Longueuil—Saint-Hubert",
+		"province": "QC"
+	},
+	"J4X": {
+		"ridingId": "24015",
+		"ridingName": "Brossard—Saint-Lambert",
+		"province": "QC"
+	},
+	"J4Y": {
+		"ridingId": "24015",
+		"ridingName": "Brossard—Saint-Lambert",
+		"province": "QC"
+	},
+	"J4Z": {
+		"ridingId": "24015",
+		"ridingName": "Brossard—Saint-Lambert",
+		"province": "QC"
+	},
+	"J5A": {
+		"ridingId": "24032",
+		"ridingName": "La Prairie—Atateken",
+		"province": "QC"
+	},
+	"J5B": {
+		"ridingId": "24032",
+		"ridingName": "La Prairie—Atateken",
+		"province": "QC"
+	},
+	"J5C": {
+		"ridingId": "24032",
+		"ridingName": "La Prairie—Atateken",
+		"province": "QC"
+	},
+	"J5J": {
+		"ridingId": "24064",
+		"ridingName": "Rivière-du-Nord",
+		"province": "QC"
+	},
+	"J5K": {
+		"ridingId": "24039",
+		"ridingName": "Les Pays-d'en-Haut",
+		"province": "QC"
+	},
+	"J5M": {
+		"ridingId": "24050",
+		"ridingName": "Montcalm",
+		"province": "QC"
+	},
+	"J5N": {
+		"ridingId": "24064",
+		"ridingName": "Rivière-du-Nord",
+		"province": "QC"
+	},
+	"J5R": {
+		"ridingId": "24032",
+		"ridingName": "La Prairie—Atateken",
+		"province": "QC"
+	},
+	"J5T": {
+		"ridingId": "24012",
+		"ridingName": "Berthier—Maskinongé",
+		"province": "QC"
+	},
+	"J5V": {
+		"ridingId": "24012",
+		"ridingName": "Berthier—Maskinongé",
+		"province": "QC"
+	},
+	"J5W": {
+		"ridingId": "24060",
+		"ridingName": "Repentigny",
+		"province": "QC"
+	},
+	"J5X": {
+		"ridingId": "24060",
+		"ridingName": "Repentigny",
+		"province": "QC"
+	},
+	"J5Y": {
+		"ridingId": "24060",
+		"ridingName": "Repentigny",
+		"province": "QC"
+	},
+	"J5Z": {
+		"ridingId": "24060",
+		"ridingName": "Repentigny",
+		"province": "QC"
+	},
+	"J6A": {
+		"ridingId": "24060",
+		"ridingName": "Repentigny",
+		"province": "QC"
+	},
+	"J6E": {
+		"ridingId": "24029",
+		"ridingName": "Joliette—Manawan",
+		"province": "QC"
+	},
+	"J6K": {
+		"ridingId": "24017",
+		"ridingName": "Châteauguay—Les Jardins-de-Napierville",
+		"province": "QC"
+	},
+	"J6N": {
+		"ridingId": "24017",
+		"ridingName": "Châteauguay—Les Jardins-de-Napierville",
+		"province": "QC"
+	},
+	"J6R": {
+		"ridingId": "24017",
+		"ridingName": "Châteauguay—Les Jardins-de-Napierville",
+		"province": "QC"
+	},
+	"J6T": {
+		"ridingId": "24007",
+		"ridingName": "Beauharnois—Salaberry—Soulanges—Huntingdon",
+		"province": "QC"
+	},
+	"J6V": {
+		"ridingId": "24073",
+		"ridingName": "Terrebonne",
+		"province": "QC"
+	},
+	"J6W": {
+		"ridingId": "24073",
+		"ridingName": "Terrebonne",
+		"province": "QC"
+	},
+	"J6X": {
+		"ridingId": "24073",
+		"ridingName": "Terrebonne",
+		"province": "QC"
+	},
+	"J6Y": {
+		"ridingId": "24073",
+		"ridingName": "Terrebonne",
+		"province": "QC"
+	},
+	"J6Z": {
+		"ridingId": "24074",
+		"ridingName": "Thérèse-De Blainville",
+		"province": "QC"
+	},
+	"J7A": {
+		"ridingId": "24063",
+		"ridingName": "Rivière-des-Mille-Îles",
+		"province": "QC"
+	},
+	"J7B": {
+		"ridingId": "24063",
+		"ridingName": "Rivière-des-Mille-Îles",
+		"province": "QC"
+	},
+	"J7C": {
+		"ridingId": "24074",
+		"ridingName": "Thérèse-De Blainville",
+		"province": "QC"
+	},
+	"J7E": {
+		"ridingId": "24074",
+		"ridingName": "Thérèse-De Blainville",
+		"province": "QC"
+	},
+	"J7G": {
+		"ridingId": "24074",
+		"ridingName": "Thérèse-De Blainville",
+		"province": "QC"
+	},
+	"J7J": {
+		"ridingId": "24047",
+		"ridingName": "Mirabel",
+		"province": "QC"
+	},
+	"J7K": {
+		"ridingId": "24050",
+		"ridingName": "Montcalm",
+		"province": "QC"
+	},
+	"J7L": {
+		"ridingId": "24050",
+		"ridingName": "Montcalm",
+		"province": "QC"
+	},
+	"J7N": {
+		"ridingId": "24047",
+		"ridingName": "Mirabel",
+		"province": "QC"
+	},
+	"J7P": {
+		"ridingId": "24063",
+		"ridingName": "Rivière-des-Mille-Îles",
+		"province": "QC"
+	},
+	"J7R": {
+		"ridingId": "24063",
+		"ridingName": "Rivière-des-Mille-Îles",
+		"province": "QC"
+	},
+	"J7T": {
+		"ridingId": "24007",
+		"ridingName": "Beauharnois—Salaberry—Soulanges—Huntingdon",
+		"province": "QC"
+	},
+	"J7V": {
+		"ridingId": "24076",
+		"ridingName": "Vaudreuil",
+		"province": "QC"
+	},
+	"J7W": {
+		"ridingId": "24076",
+		"ridingName": "Vaudreuil",
+		"province": "QC"
+	},
+	"J7X": {
+		"ridingId": "24007",
+		"ridingName": "Beauharnois—Salaberry—Soulanges—Huntingdon",
+		"province": "QC"
+	},
+	"J7Y": {
+		"ridingId": "24064",
+		"ridingName": "Rivière-du-Nord",
+		"province": "QC"
+	},
+	"J7Z": {
+		"ridingId": "24064",
+		"ridingName": "Rivière-du-Nord",
+		"province": "QC"
+	},
+	"J8B": {
+		"ridingId": "24039",
+		"ridingName": "Les Pays-d'en-Haut",
+		"province": "QC"
+	},
+	"J8C": {
+		"ridingId": "24036",
+		"ridingName": "Laurentides—Labelle",
+		"province": "QC"
+	},
+	"J8E": {
+		"ridingId": "24036",
+		"ridingName": "Laurentides—Labelle",
+		"province": "QC"
+	},
+	"J8G": {
+		"ridingId": "24005",
+		"ridingName": "Argenteuil—La Petite-Nation",
+		"province": "QC"
+	},
+	"J8L": {
+		"ridingId": "24005",
+		"ridingName": "Argenteuil—La Petite-Nation",
+		"province": "QC"
+	},
+	"J8M": {
+		"ridingId": "24005",
+		"ridingName": "Argenteuil—La Petite-Nation",
+		"province": "QC"
+	},
+	"J8N": {
+		"ridingId": "24005",
+		"ridingName": "Argenteuil—La Petite-Nation",
+		"province": "QC"
+	},
+	"J8P": {
+		"ridingId": "24025",
+		"ridingName": "Gatineau",
+		"province": "QC"
+	},
+	"J8R": {
+		"ridingId": "24025",
+		"ridingName": "Gatineau",
+		"province": "QC"
+	},
+	"J8X": {
+		"ridingId": "24028",
+		"ridingName": "Hull—Aylmer",
+		"province": "QC"
+	},
+	"J8Y": {
+		"ridingId": "24028",
+		"ridingName": "Hull—Aylmer",
+		"province": "QC"
+	},
+	"J9B": {
+		"ridingId": "24028",
+		"ridingName": "Hull—Aylmer",
+		"province": "QC"
+	},
+	"J9E": {
+		"ridingId": "24057",
+		"ridingName": "Pontiac—Kitigan Zibi",
+		"province": "QC"
+	},
+	"J9J": {
+		"ridingId": "24028",
+		"ridingName": "Hull—Aylmer",
+		"province": "QC"
+	},
+	"J9L": {
+		"ridingId": "24036",
+		"ridingName": "Laurentides—Labelle",
+		"province": "QC"
+	},
+	"J9P": {
+		"ridingId": "24001",
+		"ridingName": "Abitibi—Baie-James—Nunavik—Eeyou",
+		"province": "QC"
+	},
+	"J9V": {
+		"ridingId": "24002",
+		"ridingName": "Abitibi—Témiscamingue",
+		"province": "QC"
+	},
+	"J9Y": {
+		"ridingId": "24002",
+		"ridingName": "Abitibi—Témiscamingue",
+		"province": "QC"
+	},
+	"K0A": {
+		"ridingId": "35020",
+		"ridingName": "Carleton",
+		"province": "ON"
+	},
+	"K0E": {
+		"ridingId": "35052",
+		"ridingName": "Leeds—Grenville—Thousand Islands—Rideau Lakes",
+		"province": "ON"
+	},
+	"K0K": {
+		"ridingId": "35040",
+		"ridingName": "Hastings—Lennox and Addington—Tyendinaga",
+		"province": "ON"
+	},
+	"K0L": {
+		"ridingId": "35035",
+		"ridingName": "Haliburton—Kawartha Lakes",
+		"province": "ON"
+	},
+	"K0M": {
+		"ridingId": "35035",
+		"ridingName": "Haliburton—Kawartha Lakes",
+		"province": "ON"
+	},
+	"K1A": {
+		"ridingId": "35079",
+		"ridingName": "Ottawa Centre",
+		"province": "ON"
+	},
+	"K1C": {
+		"ridingId": "35043",
+		"ridingName": "Kanata",
+		"province": "ON"
+	},
+	"K1E": {
+		"ridingId": "35077",
+		"ridingName": "Orléans",
+		"province": "ON"
+	},
+	"K1G": {
+		"ridingId": "35080",
+		"ridingName": "Ottawa South",
+		"province": "ON"
+	},
+	"K1H": {
+		"ridingId": "35080",
+		"ridingName": "Ottawa South",
+		"province": "ON"
+	},
+	"K1J": {
+		"ridingId": "35081",
+		"ridingName": "Ottawa—Vanier—Gloucester",
+		"province": "ON"
+	},
+	"K1M": {
+		"ridingId": "35081",
+		"ridingName": "Ottawa—Vanier—Gloucester",
+		"province": "ON"
+	},
+	"K1N": {
+		"ridingId": "35081",
+		"ridingName": "Ottawa—Vanier—Gloucester",
+		"province": "ON"
+	},
+	"K1P": {
+		"ridingId": "35079",
+		"ridingName": "Ottawa Centre",
+		"province": "ON"
+	},
+	"K1R": {
+		"ridingId": "35079",
+		"ridingName": "Ottawa Centre",
+		"province": "ON"
+	},
+	"K1S": {
+		"ridingId": "35079",
+		"ridingName": "Ottawa Centre",
+		"province": "ON"
+	},
+	"K1T": {
+		"ridingId": "35080",
+		"ridingName": "Ottawa South",
+		"province": "ON"
+	},
+	"K1V": {
+		"ridingId": "35080",
+		"ridingName": "Ottawa South",
+		"province": "ON"
+	},
+	"K1W": {
+		"ridingId": "35077",
+		"ridingName": "Orléans",
+		"province": "ON"
+	},
+	"K1Y": {
+		"ridingId": "35079",
+		"ridingName": "Ottawa Centre",
+		"province": "ON"
+	},
+	"K2A": {
+		"ridingId": "35082",
+		"ridingName": "Ottawa West—Nepean",
+		"province": "ON"
+	},
+	"K2B": {
+		"ridingId": "35082",
+		"ridingName": "Ottawa West—Nepean",
+		"province": "ON"
+	},
+	"K2E": {
+		"ridingId": "35067",
+		"ridingName": "Nepean",
+		"province": "ON"
+	},
+	"K2G": {
+		"ridingId": "35067",
+		"ridingName": "Nepean",
+		"province": "ON"
+	},
+	"K2H": {
+		"ridingId": "35043",
+		"ridingName": "Kanata",
+		"province": "ON"
+	},
+	"K2J": {
+		"ridingId": "35067",
+		"ridingName": "Nepean",
+		"province": "ON"
+	},
+	"K2K": {
+		"ridingId": "35043",
+		"ridingName": "Kanata",
+		"province": "ON"
+	},
+	"K2L": {
+		"ridingId": "35043",
+		"ridingName": "Kanata",
+		"province": "ON"
+	},
+	"K2M": {
+		"ridingId": "35043",
+		"ridingName": "Kanata",
+		"province": "ON"
+	},
+	"K2P": {
+		"ridingId": "35079",
+		"ridingName": "Ottawa Centre",
+		"province": "ON"
+	},
+	"K2R": {
+		"ridingId": "35067",
+		"ridingName": "Nepean",
+		"province": "ON"
+	},
+	"K2S": {
+		"ridingId": "35020",
+		"ridingName": "Carleton",
+		"province": "ON"
+	},
+	"K2T": {
+		"ridingId": "35043",
+		"ridingName": "Kanata",
+		"province": "ON"
+	},
+	"K2V": {
+		"ridingId": "35043",
+		"ridingName": "Kanata",
+		"province": "ON"
+	},
+	"K2W": {
+		"ridingId": "35043",
+		"ridingName": "Kanata",
+		"province": "ON"
+	},
+	"K4A": {
+		"ridingId": "35077",
+		"ridingName": "Orléans",
+		"province": "ON"
+	},
+	"K4B": {
+		"ridingId": "35088",
+		"ridingName": "Prescott—Russell—Cumberland",
+		"province": "ON"
+	},
+	"K4K": {
+		"ridingId": "35088",
+		"ridingName": "Prescott—Russell—Cumberland",
+		"province": "ON"
+	},
+	"K4P": {
+		"ridingId": "35020",
+		"ridingName": "Carleton",
+		"province": "ON"
+	},
+	"K4R": {
+		"ridingId": "35088",
+		"ridingName": "Prescott—Russell—Cumberland",
+		"province": "ON"
+	},
+	"K6A": {
+		"ridingId": "35088",
+		"ridingName": "Prescott—Russell—Cumberland",
+		"province": "ON"
+	},
+	"K6J": {
+		"ridingId": "35102",
+		"ridingName": "Stormont—Dundas—Glengarry",
+		"province": "ON"
+	},
+	"K6T": {
+		"ridingId": "35052",
+		"ridingName": "Leeds—Grenville—Thousand Islands—Rideau Lakes",
+		"province": "ON"
+	},
+	"K6V": {
+		"ridingId": "35052",
+		"ridingName": "Leeds—Grenville—Thousand Islands—Rideau Lakes",
+		"province": "ON"
+	},
+	"K7A": {
+		"ridingId": "35051",
+		"ridingName": "Lanark—Frontenac",
+		"province": "ON"
+	},
+	"K7C": {
+		"ridingId": "35051",
+		"ridingName": "Lanark—Frontenac",
+		"province": "ON"
+	},
+	"K7G": {
+		"ridingId": "35052",
+		"ridingName": "Leeds—Grenville—Thousand Islands—Rideau Lakes",
+		"province": "ON"
+	},
+	"K7H": {
+		"ridingId": "35051",
+		"ridingName": "Lanark—Frontenac",
+		"province": "ON"
+	},
+	"K7M": {
+		"ridingId": "35046",
+		"ridingName": "Kingston and the Islands",
+		"province": "ON"
+	},
+	"K7N": {
+		"ridingId": "35040",
+		"ridingName": "Hastings—Lennox and Addington—Tyendinaga",
+		"province": "ON"
+	},
+	"K7P": {
+		"ridingId": "35046",
+		"ridingName": "Kingston and the Islands",
+		"province": "ON"
+	},
+	"K7R": {
+		"ridingId": "35040",
+		"ridingName": "Hastings—Lennox and Addington—Tyendinaga",
+		"province": "ON"
+	},
+	"K7S": {
+		"ridingId": "35002",
+		"ridingName": "Algonquin—Renfrew—Pembroke",
+		"province": "ON"
+	},
+	"K7V": {
+		"ridingId": "35002",
+		"ridingName": "Algonquin—Renfrew—Pembroke",
+		"province": "ON"
+	},
+	"K8A": {
+		"ridingId": "35002",
+		"ridingName": "Algonquin—Renfrew—Pembroke",
+		"province": "ON"
+	},
+	"K8H": {
+		"ridingId": "35002",
+		"ridingName": "Algonquin—Renfrew—Pembroke",
+		"province": "ON"
+	},
+	"K8N": {
+		"ridingId": "35006",
+		"ridingName": "Bay of Quinte",
+		"province": "ON"
+	},
+	"K8P": {
+		"ridingId": "35006",
+		"ridingName": "Bay of Quinte",
+		"province": "ON"
+	},
+	"K8R": {
+		"ridingId": "35006",
+		"ridingName": "Bay of Quinte",
+		"province": "ON"
+	},
+	"K8V": {
+		"ridingId": "35006",
+		"ridingName": "Bay of Quinte",
+		"province": "ON"
+	},
+	"K9A": {
+		"ridingId": "35074",
+		"ridingName": "Northumberland—Clarke",
+		"province": "ON"
+	},
+	"K9H": {
+		"ridingId": "35086",
+		"ridingName": "Peterborough",
+		"province": "ON"
+	},
+	"K9J": {
+		"ridingId": "35086",
+		"ridingName": "Peterborough",
+		"province": "ON"
+	},
+	"L0A": {
+		"ridingId": "35035",
+		"ridingName": "Haliburton—Kawartha Lakes",
+		"province": "ON"
+	},
+	"L0G": {
+		"ridingId": "35047",
+		"ridingName": "King—Vaughan",
+		"province": "ON"
+	},
+	"L0K": {
+		"ridingId": "35005",
+		"ridingName": "Barrie—Springwater—Oro-Medonte",
+		"province": "ON"
+	},
+	"L0L": {
+		"ridingId": "35005",
+		"ridingName": "Barrie—Springwater—Oro-Medonte",
+		"province": "ON"
+	},
+	"L0N": {
+		"ridingId": "35025",
+		"ridingName": "Dufferin—Caledon",
+		"province": "ON"
+	},
+	"L0R": {
+		"ridingId": "35072",
+		"ridingName": "Niagara West",
+		"province": "ON"
+	},
+	"L1A": {
+		"ridingId": "35074",
+		"ridingName": "Northumberland—Clarke",
+		"province": "ON"
+	},
+	"L1B": {
+		"ridingId": "35008",
+		"ridingName": "Bowmanville—Oshawa North",
+		"province": "ON"
+	},
+	"L1C": {
+		"ridingId": "35008",
+		"ridingName": "Bowmanville—Oshawa North",
+		"province": "ON"
+	},
+	"L1G": {
+		"ridingId": "35078",
+		"ridingName": "Oshawa",
+		"province": "ON"
+	},
+	"L1H": {
+		"ridingId": "35078",
+		"ridingName": "Oshawa",
+		"province": "ON"
+	},
+	"L1J": {
+		"ridingId": "35078",
+		"ridingName": "Oshawa",
+		"province": "ON"
+	},
+	"L1K": {
+		"ridingId": "35008",
+		"ridingName": "Bowmanville—Oshawa North",
+		"province": "ON"
+	},
+	"L1L": {
+		"ridingId": "35008",
+		"ridingName": "Bowmanville—Oshawa North",
+		"province": "ON"
+	},
+	"L1M": {
+		"ridingId": "35087",
+		"ridingName": "Pickering—Brooklin",
+		"province": "ON"
+	},
+	"L1N": {
+		"ridingId": "35116",
+		"ridingName": "Whitby",
+		"province": "ON"
+	},
+	"L1P": {
+		"ridingId": "35116",
+		"ridingName": "Whitby",
+		"province": "ON"
+	},
+	"L1R": {
+		"ridingId": "35116",
+		"ridingName": "Whitby",
+		"province": "ON"
+	},
+	"L1S": {
+		"ridingId": "35001",
+		"ridingName": "Ajax",
+		"province": "ON"
+	},
+	"L1T": {
+		"ridingId": "35001",
+		"ridingName": "Ajax",
+		"province": "ON"
+	},
+	"L1V": {
+		"ridingId": "35087",
+		"ridingName": "Pickering—Brooklin",
+		"province": "ON"
+	},
+	"L1W": {
+		"ridingId": "35087",
+		"ridingName": "Pickering—Brooklin",
+		"province": "ON"
+	},
+	"L1X": {
+		"ridingId": "35087",
+		"ridingName": "Pickering—Brooklin",
+		"province": "ON"
+	},
+	"L1Z": {
+		"ridingId": "35001",
+		"ridingName": "Ajax",
+		"province": "ON"
+	},
+	"L2A": {
+		"ridingId": "35071",
+		"ridingName": "Niagara South",
+		"province": "ON"
+	},
+	"L2E": {
+		"ridingId": "35070",
+		"ridingName": "Niagara Falls—Niagara-on-the-Lake",
+		"province": "ON"
+	},
+	"L2G": {
+		"ridingId": "35070",
+		"ridingName": "Niagara Falls—Niagara-on-the-Lake",
+		"province": "ON"
+	},
+	"L2H": {
+		"ridingId": "35070",
+		"ridingName": "Niagara Falls—Niagara-on-the-Lake",
+		"province": "ON"
+	},
+	"L2J": {
+		"ridingId": "35070",
+		"ridingName": "Niagara Falls—Niagara-on-the-Lake",
+		"province": "ON"
+	},
+	"L2M": {
+		"ridingId": "35101",
+		"ridingName": "St. Catharines",
+		"province": "ON"
+	},
+	"L2N": {
+		"ridingId": "35101",
+		"ridingName": "St. Catharines",
+		"province": "ON"
+	},
+	"L2P": {
+		"ridingId": "35101",
+		"ridingName": "St. Catharines",
+		"province": "ON"
+	},
+	"L2R": {
+		"ridingId": "35101",
+		"ridingName": "St. Catharines",
+		"province": "ON"
+	},
+	"L2S": {
+		"ridingId": "35072",
+		"ridingName": "Niagara West",
+		"province": "ON"
+	},
+	"L2T": {
+		"ridingId": "35101",
+		"ridingName": "St. Catharines",
+		"province": "ON"
+	},
+	"L2V": {
+		"ridingId": "35071",
+		"ridingName": "Niagara South",
+		"province": "ON"
+	},
+	"L2W": {
+		"ridingId": "35101",
+		"ridingName": "St. Catharines",
+		"province": "ON"
+	},
+	"L3B": {
+		"ridingId": "35071",
+		"ridingName": "Niagara South",
+		"province": "ON"
+	},
+	"L3C": {
+		"ridingId": "35071",
+		"ridingName": "Niagara South",
+		"province": "ON"
+	},
+	"L3J": {
+		"ridingId": "35072",
+		"ridingName": "Niagara West",
+		"province": "ON"
+	},
+	"L3K": {
+		"ridingId": "35071",
+		"ridingName": "Niagara South",
+		"province": "ON"
+	},
+	"L3M": {
+		"ridingId": "35072",
+		"ridingName": "Niagara West",
+		"province": "ON"
+	},
+	"L3P": {
+		"ridingId": "35056",
+		"ridingName": "Markham—Stouffville",
+		"province": "ON"
+	},
+	"L3R": {
+		"ridingId": "35058",
+		"ridingName": "Markham—Unionville",
+		"province": "ON"
+	},
+	"L3S": {
+		"ridingId": "35057",
+		"ridingName": "Markham—Thornhill",
+		"province": "ON"
+	},
+	"L3T": {
+		"ridingId": "35057",
+		"ridingName": "Markham—Thornhill",
+		"province": "ON"
+	},
+	"L3V": {
+		"ridingId": "35099",
+		"ridingName": "Simcoe North",
+		"province": "ON"
+	},
+	"L3X": {
+		"ridingId": "35068",
+		"ridingName": "Newmarket—Aurora",
+		"province": "ON"
+	},
+	"L3Y": {
+		"ridingId": "35068",
+		"ridingName": "Newmarket—Aurora",
+		"province": "ON"
+	},
+	"L3Z": {
+		"ridingId": "35106",
+		"ridingName": "Thornhill",
+		"province": "ON"
+	},
+	"L4A": {
+		"ridingId": "35056",
+		"ridingName": "Markham—Stouffville",
+		"province": "ON"
+	},
+	"L4B": {
+		"ridingId": "35089",
+		"ridingName": "Richmond Hill South",
+		"province": "ON"
+	},
+	"L4C": {
+		"ridingId": "35089",
+		"ridingName": "Richmond Hill South",
+		"province": "ON"
+	},
+	"L4E": {
+		"ridingId": "35003",
+		"ridingName": "Aurora—Oak Ridges—Richmond Hill",
+		"province": "ON"
+	},
+	"L4G": {
+		"ridingId": "35003",
+		"ridingName": "Aurora—Oak Ridges—Richmond Hill",
+		"province": "ON"
+	},
+	"L4H": {
+		"ridingId": "35113",
+		"ridingName": "Vaughan—Woodbridge",
+		"province": "ON"
+	},
+	"L4J": {
+		"ridingId": "35106",
+		"ridingName": "Thornhill",
+		"province": "ON"
+	},
+	"L4K": {
+		"ridingId": "35120",
+		"ridingName": "York Centre",
+		"province": "ON"
+	},
+	"L4L": {
+		"ridingId": "35113",
+		"ridingName": "Vaughan—Woodbridge",
+		"province": "ON"
+	},
+	"L4M": {
+		"ridingId": "35005",
+		"ridingName": "Barrie—Springwater—Oro-Medonte",
+		"province": "ON"
+	},
+	"L4N": {
+		"ridingId": "35005",
+		"ridingName": "Barrie—Springwater—Oro-Medonte",
+		"province": "ON"
+	},
+	"L4P": {
+		"ridingId": "35121",
+		"ridingName": "York—Durham",
+		"province": "ON"
+	},
+	"L4R": {
+		"ridingId": "35099",
+		"ridingName": "Simcoe North",
+		"province": "ON"
+	},
+	"L4S": {
+		"ridingId": "35003",
+		"ridingName": "Aurora—Oak Ridges—Richmond Hill",
+		"province": "ON"
+	},
+	"L4T": {
+		"ridingId": "35065",
+		"ridingName": "Mississauga—Malton",
+		"province": "ON"
+	},
+	"L4V": {
+		"ridingId": "35065",
+		"ridingName": "Mississauga—Malton",
+		"province": "ON"
+	},
+	"L4W": {
+		"ridingId": "35062",
+		"ridingName": "Mississauga East—Cooksville",
+		"province": "ON"
+	},
+	"L4X": {
+		"ridingId": "35064",
+		"ridingName": "Mississauga—Lakeshore",
+		"province": "ON"
+	},
+	"L4Y": {
+		"ridingId": "35064",
+		"ridingName": "Mississauga—Lakeshore",
+		"province": "ON"
+	},
+	"L4Z": {
+		"ridingId": "35062",
+		"ridingName": "Mississauga East—Cooksville",
+		"province": "ON"
+	},
+	"L5A": {
+		"ridingId": "35064",
+		"ridingName": "Mississauga—Lakeshore",
+		"province": "ON"
+	},
+	"L5B": {
+		"ridingId": "35064",
+		"ridingName": "Mississauga—Lakeshore",
+		"province": "ON"
+	},
+	"L5C": {
+		"ridingId": "35064",
+		"ridingName": "Mississauga—Lakeshore",
+		"province": "ON"
+	},
+	"L5E": {
+		"ridingId": "35064",
+		"ridingName": "Mississauga—Lakeshore",
+		"province": "ON"
+	},
+	"L5G": {
+		"ridingId": "35064",
+		"ridingName": "Mississauga—Lakeshore",
+		"province": "ON"
+	},
+	"L5H": {
+		"ridingId": "35064",
+		"ridingName": "Mississauga—Lakeshore",
+		"province": "ON"
+	},
+	"L5J": {
+		"ridingId": "35064",
+		"ridingName": "Mississauga—Lakeshore",
+		"province": "ON"
+	},
+	"L5K": {
+		"ridingId": "35064",
+		"ridingName": "Mississauga—Lakeshore",
+		"province": "ON"
+	},
+	"L5L": {
+		"ridingId": "35063",
+		"ridingName": "Mississauga—Erin Mills",
+		"province": "ON"
+	},
+	"L5M": {
+		"ridingId": "35066",
+		"ridingName": "Mississauga—Streetsville",
+		"province": "ON"
+	},
+	"L5N": {
+		"ridingId": "35066",
+		"ridingName": "Mississauga—Streetsville",
+		"province": "ON"
+	},
+	"L5P": {
+		"ridingId": "35065",
+		"ridingName": "Mississauga—Malton",
+		"province": "ON"
+	},
+	"L5R": {
+		"ridingId": "35061",
+		"ridingName": "Mississauga Centre",
+		"province": "ON"
+	},
+	"L5S": {
+		"ridingId": "35065",
+		"ridingName": "Mississauga—Malton",
+		"province": "ON"
+	},
+	"L5V": {
+		"ridingId": "35065",
+		"ridingName": "Mississauga—Malton",
+		"province": "ON"
+	},
+	"L6A": {
+		"ridingId": "35047",
+		"ridingName": "King—Vaughan",
+		"province": "ON"
+	},
+	"L6B": {
+		"ridingId": "35056",
+		"ridingName": "Markham—Stouffville",
+		"province": "ON"
+	},
+	"L6C": {
+		"ridingId": "35058",
+		"ridingName": "Markham—Unionville",
+		"province": "ON"
+	},
+	"L6E": {
+		"ridingId": "35056",
+		"ridingName": "Markham—Stouffville",
+		"province": "ON"
+	},
+	"L6G": {
+		"ridingId": "35057",
+		"ridingName": "Markham—Thornhill",
+		"province": "ON"
+	},
+	"L6H": {
+		"ridingId": "35075",
+		"ridingName": "Oakville East",
+		"province": "ON"
+	},
+	"L6J": {
+		"ridingId": "35075",
+		"ridingName": "Oakville East",
+		"province": "ON"
+	},
+	"L6K": {
+		"ridingId": "35076",
+		"ridingName": "Oakville West",
+		"province": "ON"
+	},
+	"L6L": {
+		"ridingId": "35076",
+		"ridingName": "Oakville West",
+		"province": "ON"
+	},
+	"L6M": {
+		"ridingId": "35076",
+		"ridingName": "Oakville West",
+		"province": "ON"
+	},
+	"L6P": {
+		"ridingId": "35011",
+		"ridingName": "Brampton East",
+		"province": "ON"
+	},
+	"L6R": {
+		"ridingId": "35010",
+		"ridingName": "Brampton—Chinguacousy Park",
+		"province": "ON"
+	},
+	"L6S": {
+		"ridingId": "35010",
+		"ridingName": "Brampton—Chinguacousy Park",
+		"province": "ON"
+	},
+	"L6T": {
+		"ridingId": "35010",
+		"ridingName": "Brampton—Chinguacousy Park",
+		"province": "ON"
+	},
+	"L6V": {
+		"ridingId": "35014",
+		"ridingName": "Brampton West",
+		"province": "ON"
+	},
+	"L6W": {
+		"ridingId": "35009",
+		"ridingName": "Brampton Centre",
+		"province": "ON"
+	},
+	"L6X": {
+		"ridingId": "35009",
+		"ridingName": "Brampton Centre",
+		"province": "ON"
+	},
+	"L6Y": {
+		"ridingId": "35009",
+		"ridingName": "Brampton Centre",
+		"province": "ON"
+	},
+	"L6Z": {
+		"ridingId": "35012",
+		"ridingName": "Brampton North—Caledon",
+		"province": "ON"
+	},
+	"L7A": {
+		"ridingId": "35014",
+		"ridingName": "Brampton West",
+		"province": "ON"
+	},
+	"L7B": {
+		"ridingId": "35047",
+		"ridingName": "King—Vaughan",
+		"province": "ON"
+	},
+	"L7C": {
+		"ridingId": "35012",
+		"ridingName": "Brampton North—Caledon",
+		"province": "ON"
+	},
+	"L7E": {
+		"ridingId": "35025",
+		"ridingName": "Dufferin—Caledon",
+		"province": "ON"
+	},
+	"L7G": {
+		"ridingId": "35060",
+		"ridingName": "Milton East—Halton Hills South",
+		"province": "ON"
+	},
+	"L7J": {
+		"ridingId": "35115",
+		"ridingName": "Wellington—Halton Hills North",
+		"province": "ON"
+	},
+	"L7K": {
+		"ridingId": "35025",
+		"ridingName": "Dufferin—Caledon",
+		"province": "ON"
+	},
+	"L7L": {
+		"ridingId": "35017",
+		"ridingName": "Burlington",
+		"province": "ON"
+	},
+	"L7M": {
+		"ridingId": "35017",
+		"ridingName": "Burlington",
+		"province": "ON"
+	},
+	"L7N": {
+		"ridingId": "35017",
+		"ridingName": "Burlington",
+		"province": "ON"
+	},
+	"L7R": {
+		"ridingId": "35017",
+		"ridingName": "Burlington",
+		"province": "ON"
+	},
+	"L7S": {
+		"ridingId": "35017",
+		"ridingName": "Burlington",
+		"province": "ON"
+	},
+	"L7T": {
+		"ridingId": "35017",
+		"ridingName": "Burlington",
+		"province": "ON"
+	},
+	"L7V": {
+		"ridingId": "35017",
+		"ridingName": "Burlington",
+		"province": "ON"
+	},
+	"L8B": {
+		"ridingId": "35032",
+		"ridingName": "Flamborough—Glanbrook—Brant North",
+		"province": "ON"
+	},
+	"L8E": {
+		"ridingId": "35037",
+		"ridingName": "Hamilton East—Stoney Creek",
+		"province": "ON"
+	},
+	"L8G": {
+		"ridingId": "35037",
+		"ridingName": "Hamilton East—Stoney Creek",
+		"province": "ON"
+	},
+	"L8J": {
+		"ridingId": "35037",
+		"ridingName": "Hamilton East—Stoney Creek",
+		"province": "ON"
+	},
+	"L8K": {
+		"ridingId": "35036",
+		"ridingName": "Hamilton Centre",
+		"province": "ON"
+	},
+	"L8L": {
+		"ridingId": "35036",
+		"ridingName": "Hamilton Centre",
+		"province": "ON"
+	},
+	"L8M": {
+		"ridingId": "35036",
+		"ridingName": "Hamilton Centre",
+		"province": "ON"
+	},
+	"L8N": {
+		"ridingId": "35036",
+		"ridingName": "Hamilton Centre",
+		"province": "ON"
+	},
+	"L8P": {
+		"ridingId": "35036",
+		"ridingName": "Hamilton Centre",
+		"province": "ON"
+	},
+	"L8R": {
+		"ridingId": "35036",
+		"ridingName": "Hamilton Centre",
+		"province": "ON"
+	},
+	"L8S": {
+		"ridingId": "35039",
+		"ridingName": "Hamilton West—Ancaster—Dundas",
+		"province": "ON"
+	},
+	"L8T": {
+		"ridingId": "35038",
+		"ridingName": "Hamilton Mountain",
+		"province": "ON"
+	},
+	"L8V": {
+		"ridingId": "35038",
+		"ridingName": "Hamilton Mountain",
+		"province": "ON"
+	},
+	"L9A": {
+		"ridingId": "35038",
+		"ridingName": "Hamilton Mountain",
+		"province": "ON"
+	},
+	"L9B": {
+		"ridingId": "35038",
+		"ridingName": "Hamilton Mountain",
+		"province": "ON"
+	},
+	"L9C": {
+		"ridingId": "35038",
+		"ridingName": "Hamilton Mountain",
+		"province": "ON"
+	},
+	"L9E": {
+		"ridingId": "35060",
+		"ridingName": "Milton East—Halton Hills South",
+		"province": "ON"
+	},
+	"L9G": {
+		"ridingId": "35039",
+		"ridingName": "Hamilton West—Ancaster—Dundas",
+		"province": "ON"
+	},
+	"L9H": {
+		"ridingId": "35039",
+		"ridingName": "Hamilton West—Ancaster—Dundas",
+		"province": "ON"
+	},
+	"L9J": {
+		"ridingId": "35032",
+		"ridingName": "Flamborough—Glanbrook—Brant North",
+		"province": "ON"
+	},
+	"L9K": {
+		"ridingId": "35039",
+		"ridingName": "Hamilton West—Ancaster—Dundas",
+		"province": "ON"
+	},
+	"L9L": {
+		"ridingId": "35121",
+		"ridingName": "York—Durham",
+		"province": "ON"
+	},
+	"L9M": {
+		"ridingId": "35098",
+		"ridingName": "Simcoe—Grey",
+		"province": "ON"
+	},
+	"L9N": {
+		"ridingId": "35069",
+		"ridingName": "New Tecumseth—Gwillimbury",
+		"province": "ON"
+	},
+	"L9P": {
+		"ridingId": "35121",
+		"ridingName": "York—Durham",
+		"province": "ON"
+	},
+	"L9R": {
+		"ridingId": "35098",
+		"ridingName": "Simcoe—Grey",
+		"province": "ON"
+	},
+	"L9S": {
+		"ridingId": "35004",
+		"ridingName": "Barrie South—Innisfil",
+		"province": "ON"
+	},
+	"L9T": {
+		"ridingId": "35018",
+		"ridingName": "Burlington North—Milton West",
+		"province": "ON"
+	},
+	"L9V": {
+		"ridingId": "35025",
+		"ridingName": "Dufferin—Caledon",
+		"province": "ON"
+	},
+	"L9W": {
+		"ridingId": "35025",
+		"ridingName": "Dufferin—Caledon",
+		"province": "ON"
+	},
+	"L9X": {
+		"ridingId": "35005",
+		"ridingName": "Barrie—Springwater—Oro-Medonte",
+		"province": "ON"
+	},
+	"L9Y": {
+		"ridingId": "35098",
+		"ridingName": "Simcoe—Grey",
+		"province": "ON"
+	},
+	"L9Z": {
+		"ridingId": "35098",
+		"ridingName": "Simcoe—Grey",
+		"province": "ON"
+	},
+	"M1A": {
+		"ridingId": "35030",
+		"ridingName": "Etobicoke—Lakeshore",
+		"province": "ON"
+	},
+	"M1B": {
+		"ridingId": "35095",
+		"ridingName": "Scarborough North",
+		"province": "ON"
+	},
+	"M1C": {
+		"ridingId": "35094",
+		"ridingName": "Scarborough—Guildwood—Rouge Park",
+		"province": "ON"
+	},
+	"M1E": {
+		"ridingId": "35094",
+		"ridingName": "Scarborough—Guildwood—Rouge Park",
+		"province": "ON"
+	},
+	"M1G": {
+		"ridingId": "35097",
+		"ridingName": "Scarborough—Woburn",
+		"province": "ON"
+	},
+	"M1H": {
+		"ridingId": "35097",
+		"ridingName": "Scarborough—Woburn",
+		"province": "ON"
+	},
+	"M1J": {
+		"ridingId": "35096",
+		"ridingName": "Scarborough Southwest",
+		"province": "ON"
+	},
+	"M1K": {
+		"ridingId": "35096",
+		"ridingName": "Scarborough Southwest",
+		"province": "ON"
+	},
+	"M1L": {
+		"ridingId": "35096",
+		"ridingName": "Scarborough Southwest",
+		"province": "ON"
+	},
+	"M1M": {
+		"ridingId": "35096",
+		"ridingName": "Scarborough Southwest",
+		"province": "ON"
+	},
+	"M1N": {
+		"ridingId": "35096",
+		"ridingName": "Scarborough Southwest",
+		"province": "ON"
+	},
+	"M1P": {
+		"ridingId": "35093",
+		"ridingName": "Scarborough Centre—Don Valley East",
+		"province": "ON"
+	},
+	"M1R": {
+		"ridingId": "35093",
+		"ridingName": "Scarborough Centre—Don Valley East",
+		"province": "ON"
+	},
+	"M1S": {
+		"ridingId": "35092",
+		"ridingName": "Scarborough—Agincourt",
+		"province": "ON"
+	},
+	"M1T": {
+		"ridingId": "35092",
+		"ridingName": "Scarborough—Agincourt",
+		"province": "ON"
+	},
+	"M1V": {
+		"ridingId": "35095",
+		"ridingName": "Scarborough North",
+		"province": "ON"
+	},
+	"M1W": {
+		"ridingId": "35092",
+		"ridingName": "Scarborough—Agincourt",
+		"province": "ON"
+	},
+	"M1X": {
+		"ridingId": "35095",
+		"ridingName": "Scarborough North",
+		"province": "ON"
+	},
+	"M2H": {
+		"ridingId": "35023",
+		"ridingName": "Don Valley North",
+		"province": "ON"
+	},
+	"M2J": {
+		"ridingId": "35023",
+		"ridingName": "Don Valley North",
+		"province": "ON"
+	},
+	"M2K": {
+		"ridingId": "35023",
+		"ridingName": "Don Valley North",
+		"province": "ON"
+	},
+	"M2N": {
+		"ridingId": "35117",
+		"ridingName": "Willowdale",
+		"province": "ON"
+	},
+	"M2P": {
+		"ridingId": "35024",
+		"ridingName": "Don Valley West",
+		"province": "ON"
+	},
+	"M2R": {
+		"ridingId": "35117",
+		"ridingName": "Willowdale",
+		"province": "ON"
+	},
+	"M3A": {
+		"ridingId": "35093",
+		"ridingName": "Scarborough Centre—Don Valley East",
+		"province": "ON"
+	},
+	"M3B": {
+		"ridingId": "35024",
+		"ridingName": "Don Valley West",
+		"province": "ON"
+	},
+	"M3C": {
+		"ridingId": "35024",
+		"ridingName": "Don Valley West",
+		"province": "ON"
+	},
+	"M3G": {
+		"ridingId": "35024",
+		"ridingName": "Don Valley West",
+		"province": "ON"
+	},
+	"M3H": {
+		"ridingId": "35120",
+		"ridingName": "York Centre",
+		"province": "ON"
+	},
+	"M3J": {
+		"ridingId": "35041",
+		"ridingName": "Humber River—Black Creek",
+		"province": "ON"
+	},
+	"M3L": {
+		"ridingId": "35041",
+		"ridingName": "Humber River—Black Creek",
+		"province": "ON"
+	},
+	"M3M": {
+		"ridingId": "35120",
+		"ridingName": "York Centre",
+		"province": "ON"
+	},
+	"M3P": {
+		"ridingId": "35024",
+		"ridingName": "Don Valley West",
+		"province": "ON"
+	},
+	"M3R": {
+		"ridingId": "35023",
+		"ridingName": "Don Valley North",
+		"province": "ON"
+	},
+	"M3V": {
+		"ridingId": "35024",
+		"ridingName": "Don Valley West",
+		"province": "ON"
+	},
+	"M4A": {
+		"ridingId": "35007",
+		"ridingName": "Beaches—East York",
+		"province": "ON"
+	},
+	"M4B": {
+		"ridingId": "35007",
+		"ridingName": "Beaches—East York",
+		"province": "ON"
+	},
+	"M4C": {
+		"ridingId": "35007",
+		"ridingName": "Beaches—East York",
+		"province": "ON"
+	},
+	"M4E": {
+		"ridingId": "35007",
+		"ridingName": "Beaches—East York",
+		"province": "ON"
+	},
+	"M4G": {
+		"ridingId": "35024",
+		"ridingName": "Don Valley West",
+		"province": "ON"
+	},
+	"M4H": {
+		"ridingId": "35024",
+		"ridingName": "Don Valley West",
+		"province": "ON"
+	},
+	"M4J": {
+		"ridingId": "35110",
+		"ridingName": "Toronto—Danforth",
+		"province": "ON"
+	},
+	"M4K": {
+		"ridingId": "35110",
+		"ridingName": "Toronto—Danforth",
+		"province": "ON"
+	},
+	"M4L": {
+		"ridingId": "35110",
+		"ridingName": "Toronto—Danforth",
+		"province": "ON"
+	},
+	"M4M": {
+		"ridingId": "35110",
+		"ridingName": "Toronto—Danforth",
+		"province": "ON"
+	},
+	"M4N": {
+		"ridingId": "35024",
+		"ridingName": "Don Valley West",
+		"province": "ON"
+	},
+	"M4P": {
+		"ridingId": "35111",
+		"ridingName": "Toronto—St. Paul's",
+		"province": "ON"
+	},
+	"M4R": {
+		"ridingId": "35026",
+		"ridingName": "Eglinton—Lawrence",
+		"province": "ON"
+	},
+	"M4S": {
+		"ridingId": "35111",
+		"ridingName": "Toronto—St. Paul's",
+		"province": "ON"
+	},
+	"M4T": {
+		"ridingId": "35111",
+		"ridingName": "Toronto—St. Paul's",
+		"province": "ON"
+	},
+	"M4V": {
+		"ridingId": "35111",
+		"ridingName": "Toronto—St. Paul's",
+		"province": "ON"
+	},
+	"M4W": {
+		"ridingId": "35112",
+		"ridingName": "University—Rosedale",
+		"province": "ON"
+	},
+	"M4X": {
+		"ridingId": "35109",
+		"ridingName": "Toronto Centre",
+		"province": "ON"
+	},
+	"M4Y": {
+		"ridingId": "35109",
+		"ridingName": "Toronto Centre",
+		"province": "ON"
+	},
+	"M5A": {
+		"ridingId": "35110",
+		"ridingName": "Toronto—Danforth",
+		"province": "ON"
+	},
+	"M5B": {
+		"ridingId": "35109",
+		"ridingName": "Toronto Centre",
+		"province": "ON"
+	},
+	"M5C": {
+		"ridingId": "35109",
+		"ridingName": "Toronto Centre",
+		"province": "ON"
+	},
+	"M5E": {
+		"ridingId": "35109",
+		"ridingName": "Toronto Centre",
+		"province": "ON"
+	},
+	"M5H": {
+		"ridingId": "35100",
+		"ridingName": "Spadina—Harbourfront",
+		"province": "ON"
+	},
+	"M5L": {
+		"ridingId": "35100",
+		"ridingName": "Spadina—Harbourfront",
+		"province": "ON"
+	},
+	"M5M": {
+		"ridingId": "35026",
+		"ridingName": "Eglinton—Lawrence",
+		"province": "ON"
+	},
+	"M5P": {
+		"ridingId": "35111",
+		"ridingName": "Toronto—St. Paul's",
+		"province": "ON"
+	},
+	"M5R": {
+		"ridingId": "35112",
+		"ridingName": "University—Rosedale",
+		"province": "ON"
+	},
+	"M5S": {
+		"ridingId": "35112",
+		"ridingName": "University—Rosedale",
+		"province": "ON"
+	},
+	"M5T": {
+		"ridingId": "35112",
+		"ridingName": "University—Rosedale",
+		"province": "ON"
+	},
+	"M5V": {
+		"ridingId": "35100",
+		"ridingName": "Spadina—Harbourfront",
+		"province": "ON"
+	},
+	"M5W": {
+		"ridingId": "35100",
+		"ridingName": "Spadina—Harbourfront",
+		"province": "ON"
+	},
+	"M5X": {
+		"ridingId": "35100",
+		"ridingName": "Spadina—Harbourfront",
+		"province": "ON"
+	},
+	"M6A": {
+		"ridingId": "35026",
+		"ridingName": "Eglinton—Lawrence",
+		"province": "ON"
+	},
+	"M6B": {
+		"ridingId": "35026",
+		"ridingName": "Eglinton—Lawrence",
+		"province": "ON"
+	},
+	"M6C": {
+		"ridingId": "35111",
+		"ridingName": "Toronto—St. Paul's",
+		"province": "ON"
+	},
+	"M6E": {
+		"ridingId": "35022",
+		"ridingName": "Davenport",
+		"province": "ON"
+	},
+	"M6G": {
+		"ridingId": "35112",
+		"ridingName": "University—Rosedale",
+		"province": "ON"
+	},
+	"M6H": {
+		"ridingId": "35022",
+		"ridingName": "Davenport",
+		"province": "ON"
+	},
+	"M6J": {
+		"ridingId": "35100",
+		"ridingName": "Spadina—Harbourfront",
+		"province": "ON"
+	},
+	"M6K": {
+		"ridingId": "35100",
+		"ridingName": "Spadina—Harbourfront",
+		"province": "ON"
+	},
+	"M6L": {
+		"ridingId": "35122",
+		"ridingName": "York South—Weston—Etobicoke",
+		"province": "ON"
+	},
+	"M6M": {
+		"ridingId": "35022",
+		"ridingName": "Davenport",
+		"province": "ON"
+	},
+	"M6N": {
+		"ridingId": "35022",
+		"ridingName": "Davenport",
+		"province": "ON"
+	},
+	"M6P": {
+		"ridingId": "35105",
+		"ridingName": "Taiaiako'n—Parkdale—High Park",
+		"province": "ON"
+	},
+	"M6R": {
+		"ridingId": "35105",
+		"ridingName": "Taiaiako'n—Parkdale—High Park",
+		"province": "ON"
+	},
+	"M6S": {
+		"ridingId": "35105",
+		"ridingName": "Taiaiako'n—Parkdale—High Park",
+		"province": "ON"
+	},
+	"M7A": {
+		"ridingId": "35112",
+		"ridingName": "University—Rosedale",
+		"province": "ON"
+	},
+	"M7R": {
+		"ridingId": "35062",
+		"ridingName": "Mississauga East—Cooksville",
+		"province": "ON"
+	},
+	"M7Y": {
+		"ridingId": "35097",
+		"ridingName": "Scarborough—Woburn",
+		"province": "ON"
+	},
+	"M7Z": {
+		"ridingId": "35097",
+		"ridingName": "Scarborough—Woburn",
+		"province": "ON"
+	},
+	"M8R": {
+		"ridingId": "35030",
+		"ridingName": "Etobicoke—Lakeshore",
+		"province": "ON"
+	},
+	"M8V": {
+		"ridingId": "35030",
+		"ridingName": "Etobicoke—Lakeshore",
+		"province": "ON"
+	},
+	"M8W": {
+		"ridingId": "35030",
+		"ridingName": "Etobicoke—Lakeshore",
+		"province": "ON"
+	},
+	"M8X": {
+		"ridingId": "35030",
+		"ridingName": "Etobicoke—Lakeshore",
+		"province": "ON"
+	},
+	"M8Y": {
+		"ridingId": "35030",
+		"ridingName": "Etobicoke—Lakeshore",
+		"province": "ON"
+	},
+	"M9A": {
+		"ridingId": "35030",
+		"ridingName": "Etobicoke—Lakeshore",
+		"province": "ON"
+	},
+	"M9B": {
+		"ridingId": "35029",
+		"ridingName": "Etobicoke Centre",
+		"province": "ON"
+	},
+	"M9C": {
+		"ridingId": "35030",
+		"ridingName": "Etobicoke—Lakeshore",
+		"province": "ON"
+	},
+	"M9L": {
+		"ridingId": "35041",
+		"ridingName": "Humber River—Black Creek",
+		"province": "ON"
+	},
+	"M9M": {
+		"ridingId": "35041",
+		"ridingName": "Humber River—Black Creek",
+		"province": "ON"
+	},
+	"M9N": {
+		"ridingId": "35122",
+		"ridingName": "York South—Weston—Etobicoke",
+		"province": "ON"
+	},
+	"M9P": {
+		"ridingId": "35029",
+		"ridingName": "Etobicoke Centre",
+		"province": "ON"
+	},
+	"M9R": {
+		"ridingId": "35029",
+		"ridingName": "Etobicoke Centre",
+		"province": "ON"
+	},
+	"M9V": {
+		"ridingId": "35031",
+		"ridingName": "Etobicoke North",
+		"province": "ON"
+	},
+	"M9W": {
+		"ridingId": "35031",
+		"ridingName": "Etobicoke North",
+		"province": "ON"
+	},
+	"N0H": {
+		"ridingId": "35016",
+		"ridingName": "Bruce—Grey—Owen Sound",
+		"province": "ON"
+	},
+	"N0J": {
+		"ridingId": "35083",
+		"ridingName": "Oxford",
+		"province": "ON"
+	},
+	"N0K": {
+		"ridingId": "35085",
+		"ridingName": "Perth—Wellington",
+		"province": "ON"
+	},
+	"N0R": {
+		"ridingId": "35028",
+		"ridingName": "Essex",
+		"province": "ON"
+	},
+	"N1A": {
+		"ridingId": "35034",
+		"ridingName": "Haldimand—Norfolk",
+		"province": "ON"
+	},
+	"N1C": {
+		"ridingId": "35115",
+		"ridingName": "Wellington—Halton Hills North",
+		"province": "ON"
+	},
+	"N1E": {
+		"ridingId": "35033",
+		"ridingName": "Guelph",
+		"province": "ON"
+	},
+	"N1G": {
+		"ridingId": "35033",
+		"ridingName": "Guelph",
+		"province": "ON"
+	},
+	"N1H": {
+		"ridingId": "35033",
+		"ridingName": "Guelph",
+		"province": "ON"
+	},
+	"N1P": {
+		"ridingId": "35019",
+		"ridingName": "Cambridge",
+		"province": "ON"
+	},
+	"N1R": {
+		"ridingId": "35019",
+		"ridingName": "Cambridge",
+		"province": "ON"
+	},
+	"N1S": {
+		"ridingId": "35019",
+		"ridingName": "Cambridge",
+		"province": "ON"
+	},
+	"N2A": {
+		"ridingId": "35048",
+		"ridingName": "Kitchener Centre",
+		"province": "ON"
+	},
+	"N2B": {
+		"ridingId": "35048",
+		"ridingName": "Kitchener Centre",
+		"province": "ON"
+	},
+	"N2C": {
+		"ridingId": "35050",
+		"ridingName": "Kitchener South—Hespeler",
+		"province": "ON"
+	},
+	"N2E": {
+		"ridingId": "35050",
+		"ridingName": "Kitchener South—Hespeler",
+		"province": "ON"
+	},
+	"N2G": {
+		"ridingId": "35048",
+		"ridingName": "Kitchener Centre",
+		"province": "ON"
+	},
+	"N2H": {
+		"ridingId": "35048",
+		"ridingName": "Kitchener Centre",
+		"province": "ON"
+	},
+	"N2J": {
+		"ridingId": "35114",
+		"ridingName": "Waterloo",
+		"province": "ON"
+	},
+	"N2K": {
+		"ridingId": "35114",
+		"ridingName": "Waterloo",
+		"province": "ON"
+	},
+	"N2L": {
+		"ridingId": "35114",
+		"ridingName": "Waterloo",
+		"province": "ON"
+	},
+	"N2M": {
+		"ridingId": "35048",
+		"ridingName": "Kitchener Centre",
+		"province": "ON"
+	},
+	"N2N": {
+		"ridingId": "35049",
+		"ridingName": "Kitchener—Conestoga",
+		"province": "ON"
+	},
+	"N2P": {
+		"ridingId": "35050",
+		"ridingName": "Kitchener South—Hespeler",
+		"province": "ON"
+	},
+	"N2R": {
+		"ridingId": "35050",
+		"ridingName": "Kitchener South—Hespeler",
+		"province": "ON"
+	},
+	"N2S": {
+		"ridingId": "35050",
+		"ridingName": "Kitchener South—Hespeler",
+		"province": "ON"
+	},
+	"N2T": {
+		"ridingId": "35114",
+		"ridingName": "Waterloo",
+		"province": "ON"
+	},
+	"N2V": {
+		"ridingId": "35114",
+		"ridingName": "Waterloo",
+		"province": "ON"
+	},
+	"N2Z": {
+		"ridingId": "35042",
+		"ridingName": "Huron—Bruce",
+		"province": "ON"
+	},
+	"N3A": {
+		"ridingId": "35049",
+		"ridingName": "Kitchener—Conestoga",
+		"province": "ON"
+	},
+	"N3B": {
+		"ridingId": "35049",
+		"ridingName": "Kitchener—Conestoga",
+		"province": "ON"
+	},
+	"N3C": {
+		"ridingId": "35050",
+		"ridingName": "Kitchener South—Hespeler",
+		"province": "ON"
+	},
+	"N3E": {
+		"ridingId": "35050",
+		"ridingName": "Kitchener South—Hespeler",
+		"province": "ON"
+	},
+	"N3H": {
+		"ridingId": "35019",
+		"ridingName": "Cambridge",
+		"province": "ON"
+	},
+	"N3P": {
+		"ridingId": "35015",
+		"ridingName": "Brantford—Brant South—Six Nations",
+		"province": "ON"
+	},
+	"N3T": {
+		"ridingId": "35015",
+		"ridingName": "Brantford—Brant South—Six Nations",
+		"province": "ON"
+	},
+	"N3W": {
+		"ridingId": "35034",
+		"ridingName": "Haldimand—Norfolk",
+		"province": "ON"
+	},
+	"N4B": {
+		"ridingId": "35034",
+		"ridingName": "Haldimand—Norfolk",
+		"province": "ON"
+	},
+	"N4G": {
+		"ridingId": "35083",
+		"ridingName": "Oxford",
+		"province": "ON"
+	},
+	"N4K": {
+		"ridingId": "35016",
+		"ridingName": "Bruce—Grey—Owen Sound",
+		"province": "ON"
+	},
+	"N4N": {
+		"ridingId": "35016",
+		"ridingName": "Bruce—Grey—Owen Sound",
+		"province": "ON"
+	},
+	"N4R": {
+		"ridingId": "35027",
+		"ridingName": "Elgin—St. Thomas—London South",
+		"province": "ON"
+	},
+	"N4S": {
+		"ridingId": "35083",
+		"ridingName": "Oxford",
+		"province": "ON"
+	},
+	"N4T": {
+		"ridingId": "35083",
+		"ridingName": "Oxford",
+		"province": "ON"
+	},
+	"N4W": {
+		"ridingId": "35085",
+		"ridingName": "Perth—Wellington",
+		"province": "ON"
+	},
+	"N4X": {
+		"ridingId": "35085",
+		"ridingName": "Perth—Wellington",
+		"province": "ON"
+	},
+	"N4Z": {
+		"ridingId": "35085",
+		"ridingName": "Perth—Wellington",
+		"province": "ON"
+	},
+	"N5A": {
+		"ridingId": "35085",
+		"ridingName": "Perth—Wellington",
+		"province": "ON"
+	},
+	"N5C": {
+		"ridingId": "35083",
+		"ridingName": "Oxford",
+		"province": "ON"
+	},
+	"N5H": {
+		"ridingId": "35027",
+		"ridingName": "Elgin—St. Thomas—London South",
+		"province": "ON"
+	},
+	"N5P": {
+		"ridingId": "35027",
+		"ridingName": "Elgin—St. Thomas—London South",
+		"province": "ON"
+	},
+	"N5R": {
+		"ridingId": "35027",
+		"ridingName": "Elgin—St. Thomas—London South",
+		"province": "ON"
+	},
+	"N5V": {
+		"ridingId": "35054",
+		"ridingName": "London—Fanshawe",
+		"province": "ON"
+	},
+	"N5W": {
+		"ridingId": "35053",
+		"ridingName": "London Centre",
+		"province": "ON"
+	},
+	"N5X": {
+		"ridingId": "35059",
+		"ridingName": "Middlesex—London",
+		"province": "ON"
+	},
+	"N5Z": {
+		"ridingId": "35054",
+		"ridingName": "London—Fanshawe",
+		"province": "ON"
+	},
+	"N6A": {
+		"ridingId": "35053",
+		"ridingName": "London Centre",
+		"province": "ON"
+	},
+	"N6B": {
+		"ridingId": "35054",
+		"ridingName": "London—Fanshawe",
+		"province": "ON"
+	},
+	"N6C": {
+		"ridingId": "35053",
+		"ridingName": "London Centre",
+		"province": "ON"
+	},
+	"N6E": {
+		"ridingId": "35054",
+		"ridingName": "London—Fanshawe",
+		"province": "ON"
+	},
+	"N6G": {
+		"ridingId": "35053",
+		"ridingName": "London Centre",
+		"province": "ON"
+	},
+	"N6H": {
+		"ridingId": "35053",
+		"ridingName": "London Centre",
+		"province": "ON"
+	},
+	"N6J": {
+		"ridingId": "35053",
+		"ridingName": "London Centre",
+		"province": "ON"
+	},
+	"N6K": {
+		"ridingId": "35055",
+		"ridingName": "London West",
+		"province": "ON"
+	},
+	"N6L": {
+		"ridingId": "35027",
+		"ridingName": "Elgin—St. Thomas—London South",
+		"province": "ON"
+	},
+	"N6M": {
+		"ridingId": "35054",
+		"ridingName": "London—Fanshawe",
+		"province": "ON"
+	},
+	"N6N": {
+		"ridingId": "35027",
+		"ridingName": "Elgin—St. Thomas—London South",
+		"province": "ON"
+	},
+	"N6P": {
+		"ridingId": "35027",
+		"ridingName": "Elgin—St. Thomas—London South",
+		"province": "ON"
+	},
+	"N7A": {
+		"ridingId": "35042",
+		"ridingName": "Huron—Bruce",
+		"province": "ON"
+	},
+	"N7G": {
+		"ridingId": "35059",
+		"ridingName": "Middlesex—London",
+		"province": "ON"
+	},
+	"N7L": {
+		"ridingId": "35021",
+		"ridingName": "Chatham-Kent—Leamington",
+		"province": "ON"
+	},
+	"N7S": {
+		"ridingId": "35090",
+		"ridingName": "Sarnia—Lambton—Bkejwanong",
+		"province": "ON"
+	},
+	"N7T": {
+		"ridingId": "35090",
+		"ridingName": "Sarnia—Lambton—Bkejwanong",
+		"province": "ON"
+	},
+	"N7W": {
+		"ridingId": "35090",
+		"ridingName": "Sarnia—Lambton—Bkejwanong",
+		"province": "ON"
+	},
+	"N8A": {
+		"ridingId": "35021",
+		"ridingName": "Chatham-Kent—Leamington",
+		"province": "ON"
+	},
+	"N8H": {
+		"ridingId": "35021",
+		"ridingName": "Chatham-Kent—Leamington",
+		"province": "ON"
+	},
+	"N8M": {
+		"ridingId": "35028",
+		"ridingName": "Essex",
+		"province": "ON"
+	},
+	"N8N": {
+		"ridingId": "35118",
+		"ridingName": "Windsor—Tecumseh—Lakeshore",
+		"province": "ON"
+	},
+	"N8P": {
+		"ridingId": "35118",
+		"ridingName": "Windsor—Tecumseh—Lakeshore",
+		"province": "ON"
+	},
+	"N8S": {
+		"ridingId": "35118",
+		"ridingName": "Windsor—Tecumseh—Lakeshore",
+		"province": "ON"
+	},
+	"N8T": {
+		"ridingId": "35118",
+		"ridingName": "Windsor—Tecumseh—Lakeshore",
+		"province": "ON"
+	},
+	"N8W": {
+		"ridingId": "35118",
+		"ridingName": "Windsor—Tecumseh—Lakeshore",
+		"province": "ON"
+	},
+	"N8X": {
+		"ridingId": "35119",
+		"ridingName": "Windsor West",
+		"province": "ON"
+	},
+	"N8Y": {
+		"ridingId": "35118",
+		"ridingName": "Windsor—Tecumseh—Lakeshore",
+		"province": "ON"
+	},
+	"N9A": {
+		"ridingId": "35119",
+		"ridingName": "Windsor West",
+		"province": "ON"
+	},
+	"N9B": {
+		"ridingId": "35119",
+		"ridingName": "Windsor West",
+		"province": "ON"
+	},
+	"N9C": {
+		"ridingId": "35119",
+		"ridingName": "Windsor West",
+		"province": "ON"
+	},
+	"N9E": {
+		"ridingId": "35119",
+		"ridingName": "Windsor West",
+		"province": "ON"
+	},
+	"N9G": {
+		"ridingId": "35119",
+		"ridingName": "Windsor West",
+		"province": "ON"
+	},
+	"N9H": {
+		"ridingId": "35028",
+		"ridingName": "Essex",
+		"province": "ON"
+	},
+	"N9J": {
+		"ridingId": "35028",
+		"ridingName": "Essex",
+		"province": "ON"
+	},
+	"N9K": {
+		"ridingId": "35118",
+		"ridingName": "Windsor—Tecumseh—Lakeshore",
+		"province": "ON"
+	},
+	"N9V": {
+		"ridingId": "35028",
+		"ridingName": "Essex",
+		"province": "ON"
+	},
+	"N9Y": {
+		"ridingId": "35028",
+		"ridingName": "Essex",
+		"province": "ON"
+	},
+	"P0A": {
+		"ridingId": "35084",
+		"ridingName": "Parry Sound—Muskoka",
+		"province": "ON"
+	},
+	"P0B": {
+		"ridingId": "35084",
+		"ridingName": "Parry Sound—Muskoka",
+		"province": "ON"
+	},
+	"P0C": {
+		"ridingId": "35084",
+		"ridingName": "Parry Sound—Muskoka",
+		"province": "ON"
+	},
+	"P0W": {
+		"ridingId": "35107",
+		"ridingName": "Thunder Bay—Rainy River",
+		"province": "ON"
+	},
+	"P1A": {
+		"ridingId": "35073",
+		"ridingName": "Nipissing—Timiskaming",
+		"province": "ON"
+	},
+	"P1B": {
+		"ridingId": "35073",
+		"ridingName": "Nipissing—Timiskaming",
+		"province": "ON"
+	},
+	"P1C": {
+		"ridingId": "35073",
+		"ridingName": "Nipissing—Timiskaming",
+		"province": "ON"
+	},
+	"P1P": {
+		"ridingId": "35084",
+		"ridingName": "Parry Sound—Muskoka",
+		"province": "ON"
+	},
+	"P2A": {
+		"ridingId": "35084",
+		"ridingName": "Parry Sound—Muskoka",
+		"province": "ON"
+	},
+	"P2B": {
+		"ridingId": "35104",
+		"ridingName": "Sudbury East—Manitoulin—Nickel Belt",
+		"province": "ON"
+	},
+	"P2N": {
+		"ridingId": "35044",
+		"ridingName": "Kapuskasing—Timmins—Mushkegowuk",
+		"province": "ON"
+	},
+	"P3A": {
+		"ridingId": "35103",
+		"ridingName": "Sudbury",
+		"province": "ON"
+	},
+	"P3B": {
+		"ridingId": "35103",
+		"ridingName": "Sudbury",
+		"province": "ON"
+	},
+	"P3C": {
+		"ridingId": "35103",
+		"ridingName": "Sudbury",
+		"province": "ON"
+	},
+	"P3E": {
+		"ridingId": "35103",
+		"ridingName": "Sudbury",
+		"province": "ON"
+	},
+	"P3G": {
+		"ridingId": "35103",
+		"ridingName": "Sudbury",
+		"province": "ON"
+	},
+	"P3L": {
+		"ridingId": "35103",
+		"ridingName": "Sudbury",
+		"province": "ON"
+	},
+	"P3N": {
+		"ridingId": "35104",
+		"ridingName": "Sudbury East—Manitoulin—Nickel Belt",
+		"province": "ON"
+	},
+	"P3P": {
+		"ridingId": "35104",
+		"ridingName": "Sudbury East—Manitoulin—Nickel Belt",
+		"province": "ON"
+	},
+	"P4N": {
+		"ridingId": "35044",
+		"ridingName": "Kapuskasing—Timmins—Mushkegowuk",
+		"province": "ON"
+	},
+	"P4P": {
+		"ridingId": "35044",
+		"ridingName": "Kapuskasing—Timmins—Mushkegowuk",
+		"province": "ON"
+	},
+	"P4R": {
+		"ridingId": "35044",
+		"ridingName": "Kapuskasing—Timmins—Mushkegowuk",
+		"province": "ON"
+	},
+	"P5A": {
+		"ridingId": "35091",
+		"ridingName": "Sault Ste. Marie—Algoma",
+		"province": "ON"
+	},
+	"P5E": {
+		"ridingId": "35104",
+		"ridingName": "Sudbury East—Manitoulin—Nickel Belt",
+		"province": "ON"
+	},
+	"P5N": {
+		"ridingId": "35044",
+		"ridingName": "Kapuskasing—Timmins—Mushkegowuk",
+		"province": "ON"
+	},
+	"P6A": {
+		"ridingId": "35091",
+		"ridingName": "Sault Ste. Marie—Algoma",
+		"province": "ON"
+	},
+	"P6B": {
+		"ridingId": "35091",
+		"ridingName": "Sault Ste. Marie—Algoma",
+		"province": "ON"
+	},
+	"P6C": {
+		"ridingId": "35091",
+		"ridingName": "Sault Ste. Marie—Algoma",
+		"province": "ON"
+	},
+	"P7A": {
+		"ridingId": "35108",
+		"ridingName": "Thunder Bay—Superior North",
+		"province": "ON"
+	},
+	"P7B": {
+		"ridingId": "35108",
+		"ridingName": "Thunder Bay—Superior North",
+		"province": "ON"
+	},
+	"P7C": {
+		"ridingId": "35107",
+		"ridingName": "Thunder Bay—Rainy River",
+		"province": "ON"
+	},
+	"P7E": {
+		"ridingId": "35107",
+		"ridingName": "Thunder Bay—Rainy River",
+		"province": "ON"
+	},
+	"P7J": {
+		"ridingId": "35107",
+		"ridingName": "Thunder Bay—Rainy River",
+		"province": "ON"
+	},
+	"P7K": {
+		"ridingId": "35107",
+		"ridingName": "Thunder Bay—Rainy River",
+		"province": "ON"
+	},
+	"P8N": {
+		"ridingId": "35045",
+		"ridingName": "Kenora—Kiiwetinoong",
+		"province": "ON"
+	},
+	"P8T": {
+		"ridingId": "35045",
+		"ridingName": "Kenora—Kiiwetinoong",
+		"province": "ON"
+	},
+	"P9A": {
+		"ridingId": "35107",
+		"ridingName": "Thunder Bay—Rainy River",
+		"province": "ON"
+	},
+	"P9N": {
+		"ridingId": "35045",
+		"ridingName": "Kenora—Kiiwetinoong",
+		"province": "ON"
+	},
+	"R0C": {
+		"ridingId": "46009",
+		"ridingName": "Selkirk—Interlake—Eastman",
+		"province": "MB"
+	},
+	"R0E": {
+		"ridingId": "46009",
+		"ridingName": "Selkirk—Interlake—Eastman",
+		"province": "MB"
+	},
+	"R1A": {
+		"ridingId": "46009",
+		"ridingName": "Selkirk—Interlake—Eastman",
+		"province": "MB"
+	},
+	"R1B": {
+		"ridingId": "46009",
+		"ridingName": "Selkirk—Interlake—Eastman",
+		"province": "MB"
+	},
+	"R1N": {
+		"ridingId": "46005",
+		"ridingName": "Portage—Lisgar",
+		"province": "MB"
+	},
+	"R2C": {
+		"ridingId": "46003",
+		"ridingName": "Elmwood—Transcona",
+		"province": "MB"
+	},
+	"R2E": {
+		"ridingId": "46004",
+		"ridingName": "Kildonan—St. Paul",
+		"province": "MB"
+	},
+	"R2G": {
+		"ridingId": "46004",
+		"ridingName": "Kildonan—St. Paul",
+		"province": "MB"
+	},
+	"R2H": {
+		"ridingId": "46008",
+		"ridingName": "St. Boniface—St. Vital",
+		"province": "MB"
+	},
+	"R2J": {
+		"ridingId": "46008",
+		"ridingName": "St. Boniface—St. Vital",
+		"province": "MB"
+	},
+	"R2M": {
+		"ridingId": "46008",
+		"ridingName": "St. Boniface—St. Vital",
+		"province": "MB"
+	},
+	"R2N": {
+		"ridingId": "46012",
+		"ridingName": "Winnipeg South",
+		"province": "MB"
+	},
+	"R2P": {
+		"ridingId": "46011",
+		"ridingName": "Winnipeg North",
+		"province": "MB"
+	},
+	"R2R": {
+		"ridingId": "46011",
+		"ridingName": "Winnipeg North",
+		"province": "MB"
+	},
+	"R2V": {
+		"ridingId": "46004",
+		"ridingName": "Kildonan—St. Paul",
+		"province": "MB"
+	},
+	"R2W": {
+		"ridingId": "46011",
+		"ridingName": "Winnipeg North",
+		"province": "MB"
+	},
+	"R2Y": {
+		"ridingId": "46014",
+		"ridingName": "Winnipeg West",
+		"province": "MB"
+	},
+	"R3A": {
+		"ridingId": "46010",
+		"ridingName": "Winnipeg Centre",
+		"province": "MB"
+	},
+	"R3B": {
+		"ridingId": "46010",
+		"ridingName": "Winnipeg Centre",
+		"province": "MB"
+	},
+	"R3C": {
+		"ridingId": "46010",
+		"ridingName": "Winnipeg Centre",
+		"province": "MB"
+	},
+	"R3E": {
+		"ridingId": "46010",
+		"ridingName": "Winnipeg Centre",
+		"province": "MB"
+	},
+	"R3J": {
+		"ridingId": "46014",
+		"ridingName": "Winnipeg West",
+		"province": "MB"
+	},
+	"R3K": {
+		"ridingId": "46014",
+		"ridingName": "Winnipeg West",
+		"province": "MB"
+	},
+	"R3L": {
+		"ridingId": "46013",
+		"ridingName": "Winnipeg South Centre",
+		"province": "MB"
+	},
+	"R3M": {
+		"ridingId": "46010",
+		"ridingName": "Winnipeg Centre",
+		"province": "MB"
+	},
+	"R3N": {
+		"ridingId": "46013",
+		"ridingName": "Winnipeg South Centre",
+		"province": "MB"
+	},
+	"R3P": {
+		"ridingId": "46013",
+		"ridingName": "Winnipeg South Centre",
+		"province": "MB"
+	},
+	"R3R": {
+		"ridingId": "46014",
+		"ridingName": "Winnipeg West",
+		"province": "MB"
+	},
+	"R3S": {
+		"ridingId": "46014",
+		"ridingName": "Winnipeg West",
+		"province": "MB"
+	},
+	"R3T": {
+		"ridingId": "46013",
+		"ridingName": "Winnipeg South Centre",
+		"province": "MB"
+	},
+	"R3V": {
+		"ridingId": "46012",
+		"ridingName": "Winnipeg South",
+		"province": "MB"
+	},
+	"R3W": {
+		"ridingId": "46003",
+		"ridingName": "Elmwood—Transcona",
+		"province": "MB"
+	},
+	"R3X": {
+		"ridingId": "46008",
+		"ridingName": "St. Boniface—St. Vital",
+		"province": "MB"
+	},
+	"R3Y": {
+		"ridingId": "46013",
+		"ridingName": "Winnipeg South Centre",
+		"province": "MB"
+	},
+	"R4A": {
+		"ridingId": "46004",
+		"ridingName": "Kildonan—St. Paul",
+		"province": "MB"
+	},
+	"R4H": {
+		"ridingId": "46014",
+		"ridingName": "Winnipeg West",
+		"province": "MB"
+	},
+	"R4K": {
+		"ridingId": "46005",
+		"ridingName": "Portage—Lisgar",
+		"province": "MB"
+	},
+	"R5A": {
+		"ridingId": "46006",
+		"ridingName": "Provencher",
+		"province": "MB"
+	},
+	"R5G": {
+		"ridingId": "46006",
+		"ridingName": "Provencher",
+		"province": "MB"
+	},
+	"R5K": {
+		"ridingId": "46006",
+		"ridingName": "Provencher",
+		"province": "MB"
+	},
+	"R5L": {
+		"ridingId": "46006",
+		"ridingName": "Provencher",
+		"province": "MB"
+	},
+	"R5T": {
+		"ridingId": "46008",
+		"ridingName": "St. Boniface—St. Vital",
+		"province": "MB"
+	},
+	"R6W": {
+		"ridingId": "46005",
+		"ridingName": "Portage—Lisgar",
+		"province": "MB"
+	},
+	"R7A": {
+		"ridingId": "46001",
+		"ridingName": "Brandon—Souris",
+		"province": "MB"
+	},
+	"R7B": {
+		"ridingId": "46001",
+		"ridingName": "Brandon—Souris",
+		"province": "MB"
+	},
+	"R7C": {
+		"ridingId": "46001",
+		"ridingName": "Brandon—Souris",
+		"province": "MB"
+	},
+	"R7N": {
+		"ridingId": "46007",
+		"ridingName": "Riding Mountain",
+		"province": "MB"
+	},
+	"R7R": {
+		"ridingId": "46001",
+		"ridingName": "Brandon—Souris",
+		"province": "MB"
+	},
+	"R8A": {
+		"ridingId": "47003",
+		"ridingName": "Desnethé—Missinippi—Churchill River",
+		"province": "MB"
+	},
+	"R8N": {
+		"ridingId": "46002",
+		"ridingName": "Churchill—Keewatinook Aski",
+		"province": "MB"
+	},
+	"R9A": {
+		"ridingId": "46002",
+		"ridingName": "Churchill—Keewatinook Aski",
+		"province": "MB"
+	},
+	"S0J": {
+		"ridingId": "47001",
+		"ridingName": "Battlefords—Lloydminster—Meadow Lake",
+		"province": "SK"
+	},
+	"S2V": {
+		"ridingId": "47004",
+		"ridingName": "Moose Jaw—Lake Centre—Lanigan",
+		"province": "SK"
+	},
+	"S3N": {
+		"ridingId": "47014",
+		"ridingName": "Yorkton—Melville",
+		"province": "SK"
+	},
+	"S4A": {
+		"ridingId": "47012",
+		"ridingName": "Souris—Moose Mountain",
+		"province": "SK"
+	},
+	"S4H": {
+		"ridingId": "47012",
+		"ridingName": "Souris—Moose Mountain",
+		"province": "SK"
+	},
+	"S4N": {
+		"ridingId": "47008",
+		"ridingName": "Regina—Wascana",
+		"province": "SK"
+	},
+	"S4P": {
+		"ridingId": "47008",
+		"ridingName": "Regina—Wascana",
+		"province": "SK"
+	},
+	"S4R": {
+		"ridingId": "47007",
+		"ridingName": "Regina—Qu'Appelle",
+		"province": "SK"
+	},
+	"S4S": {
+		"ridingId": "47006",
+		"ridingName": "Regina—Lewvan",
+		"province": "SK"
+	},
+	"S4T": {
+		"ridingId": "47006",
+		"ridingName": "Regina—Lewvan",
+		"province": "SK"
+	},
+	"S4V": {
+		"ridingId": "47008",
+		"ridingName": "Regina—Wascana",
+		"province": "SK"
+	},
+	"S4W": {
+		"ridingId": "47006",
+		"ridingName": "Regina—Lewvan",
+		"province": "SK"
+	},
+	"S4X": {
+		"ridingId": "47006",
+		"ridingName": "Regina—Lewvan",
+		"province": "SK"
+	},
+	"S4Y": {
+		"ridingId": "47006",
+		"ridingName": "Regina—Lewvan",
+		"province": "SK"
+	},
+	"S4Z": {
+		"ridingId": "47008",
+		"ridingName": "Regina—Wascana",
+		"province": "SK"
+	},
+	"S6J": {
+		"ridingId": "47004",
+		"ridingName": "Moose Jaw—Lake Centre—Lanigan",
+		"province": "SK"
+	},
+	"S6V": {
+		"ridingId": "47005",
+		"ridingName": "Prince Albert",
+		"province": "SK"
+	},
+	"S6X": {
+		"ridingId": "47005",
+		"ridingName": "Prince Albert",
+		"province": "SK"
+	},
+	"S7H": {
+		"ridingId": "47009",
+		"ridingName": "Saskatoon South",
+		"province": "SK"
+	},
+	"S7J": {
+		"ridingId": "47009",
+		"ridingName": "Saskatoon South",
+		"province": "SK"
+	},
+	"S7M": {
+		"ridingId": "47011",
+		"ridingName": "Saskatoon West",
+		"province": "SK"
+	},
+	"S7N": {
+		"ridingId": "47010",
+		"ridingName": "Saskatoon—University",
+		"province": "SK"
+	},
+	"S7P": {
+		"ridingId": "47002",
+		"ridingName": "Carlton Trail—Eagle Creek",
+		"province": "SK"
+	},
+	"S7R": {
+		"ridingId": "47011",
+		"ridingName": "Saskatoon West",
+		"province": "SK"
+	},
+	"S7S": {
+		"ridingId": "47010",
+		"ridingName": "Saskatoon—University",
+		"province": "SK"
+	},
+	"S7W": {
+		"ridingId": "47011",
+		"ridingName": "Saskatoon West",
+		"province": "SK"
+	},
+	"S9A": {
+		"ridingId": "47001",
+		"ridingName": "Battlefords—Lloydminster—Meadow Lake",
+		"province": "SK"
+	},
+	"S9H": {
+		"ridingId": "47013",
+		"ridingName": "Swift Current—Grasslands—Kindersley",
+		"province": "SK"
+	},
+	"S9V": {
+		"ridingId": "47001",
+		"ridingName": "Battlefords—Lloydminster—Meadow Lake",
+		"province": "SK"
+	},
+	"S9X": {
+		"ridingId": "47001",
+		"ridingName": "Battlefords—Lloydminster—Meadow Lake",
+		"province": "SK"
+	},
+	"T0B": {
+		"ridingId": "48002",
+		"ridingName": "Battle River—Crowfoot",
+		"province": "AB"
+	},
+	"T1A": {
+		"ridingId": "48030",
+		"ridingName": "Medicine Hat—Cardston—Warner",
+		"province": "AB"
+	},
+	"T1B": {
+		"ridingId": "48030",
+		"ridingName": "Medicine Hat—Cardston—Warner",
+		"province": "AB"
+	},
+	"T1C": {
+		"ridingId": "48030",
+		"ridingName": "Medicine Hat—Cardston—Warner",
+		"province": "AB"
+	},
+	"T1H": {
+		"ridingId": "48029",
+		"ridingName": "Lethbridge",
+		"province": "AB"
+	},
+	"T1J": {
+		"ridingId": "48029",
+		"ridingName": "Lethbridge",
+		"province": "AB"
+	},
+	"T1K": {
+		"ridingId": "48029",
+		"ridingName": "Lethbridge",
+		"province": "AB"
+	},
+	"T1L": {
+		"ridingId": "48037",
+		"ridingName": "Yellowhead",
+		"province": "AB"
+	},
+	"T1P": {
+		"ridingId": "48003",
+		"ridingName": "Bow River",
+		"province": "AB"
+	},
+	"T1S": {
+		"ridingId": "48024",
+		"ridingName": "Foothills",
+		"province": "AB"
+	},
+	"T1V": {
+		"ridingId": "48024",
+		"ridingName": "Foothills",
+		"province": "AB"
+	},
+	"T1W": {
+		"ridingId": "48037",
+		"ridingName": "Yellowhead",
+		"province": "AB"
+	},
+	"T1Y": {
+		"ridingId": "48009",
+		"ridingName": "Calgary McKnight",
+		"province": "AB"
+	},
+	"T2A": {
+		"ridingId": "48007",
+		"ridingName": "Calgary East",
+		"province": "AB"
+	},
+	"T2B": {
+		"ridingId": "48007",
+		"ridingName": "Calgary East",
+		"province": "AB"
+	},
+	"T2C": {
+		"ridingId": "48007",
+		"ridingName": "Calgary East",
+		"province": "AB"
+	},
+	"T2E": {
+		"ridingId": "48005",
+		"ridingName": "Calgary Confederation",
+		"province": "AB"
+	},
+	"T2G": {
+		"ridingId": "48004",
+		"ridingName": "Calgary Centre",
+		"province": "AB"
+	},
+	"T2H": {
+		"ridingId": "48004",
+		"ridingName": "Calgary Centre",
+		"province": "AB"
+	},
+	"T2J": {
+		"ridingId": "48010",
+		"ridingName": "Calgary Midnapore",
+		"province": "AB"
+	},
+	"T2L": {
+		"ridingId": "48005",
+		"ridingName": "Calgary Confederation",
+		"province": "AB"
+	},
+	"T2M": {
+		"ridingId": "48005",
+		"ridingName": "Calgary Confederation",
+		"province": "AB"
+	},
+	"T2N": {
+		"ridingId": "48005",
+		"ridingName": "Calgary Confederation",
+		"province": "AB"
+	},
+	"T2P": {
+		"ridingId": "48004",
+		"ridingName": "Calgary Centre",
+		"province": "AB"
+	},
+	"T2R": {
+		"ridingId": "48004",
+		"ridingName": "Calgary Centre",
+		"province": "AB"
+	},
+	"T2S": {
+		"ridingId": "48004",
+		"ridingName": "Calgary Centre",
+		"province": "AB"
+	},
+	"T2T": {
+		"ridingId": "48004",
+		"ridingName": "Calgary Centre",
+		"province": "AB"
+	},
+	"T2V": {
+		"ridingId": "48004",
+		"ridingName": "Calgary Centre",
+		"province": "AB"
+	},
+	"T2W": {
+		"ridingId": "48008",
+		"ridingName": "Calgary Heritage",
+		"province": "AB"
+	},
+	"T2X": {
+		"ridingId": "48010",
+		"ridingName": "Calgary Midnapore",
+		"province": "AB"
+	},
+	"T2Y": {
+		"ridingId": "48008",
+		"ridingName": "Calgary Heritage",
+		"province": "AB"
+	},
+	"T2Z": {
+		"ridingId": "48007",
+		"ridingName": "Calgary East",
+		"province": "AB"
+	},
+	"T3A": {
+		"ridingId": "48005",
+		"ridingName": "Calgary Confederation",
+		"province": "AB"
+	},
+	"T3B": {
+		"ridingId": "48013",
+		"ridingName": "Calgary Signal Hill",
+		"province": "AB"
+	},
+	"T3C": {
+		"ridingId": "48004",
+		"ridingName": "Calgary Centre",
+		"province": "AB"
+	},
+	"T3E": {
+		"ridingId": "48004",
+		"ridingName": "Calgary Centre",
+		"province": "AB"
+	},
+	"T3G": {
+		"ridingId": "48006",
+		"ridingName": "Calgary Crowfoot",
+		"province": "AB"
+	},
+	"T3H": {
+		"ridingId": "48013",
+		"ridingName": "Calgary Signal Hill",
+		"province": "AB"
+	},
+	"T3J": {
+		"ridingId": "48009",
+		"ridingName": "Calgary McKnight",
+		"province": "AB"
+	},
+	"T3K": {
+		"ridingId": "48011",
+		"ridingName": "Calgary Nose Hill",
+		"province": "AB"
+	},
+	"T3L": {
+		"ridingId": "48006",
+		"ridingName": "Calgary Crowfoot",
+		"province": "AB"
+	},
+	"T3N": {
+		"ridingId": "48009",
+		"ridingName": "Calgary McKnight",
+		"province": "AB"
+	},
+	"T3P": {
+		"ridingId": "48001",
+		"ridingName": "Airdrie—Cochrane",
+		"province": "AB"
+	},
+	"T3R": {
+		"ridingId": "48001",
+		"ridingName": "Airdrie—Cochrane",
+		"province": "AB"
+	},
+	"T3S": {
+		"ridingId": "48012",
+		"ridingName": "Calgary Shepard",
+		"province": "AB"
+	},
+	"T3Z": {
+		"ridingId": "48037",
+		"ridingName": "Yellowhead",
+		"province": "AB"
+	},
+	"T4A": {
+		"ridingId": "48001",
+		"ridingName": "Airdrie—Cochrane",
+		"province": "AB"
+	},
+	"T4B": {
+		"ridingId": "48001",
+		"ridingName": "Airdrie—Cochrane",
+		"province": "AB"
+	},
+	"T4C": {
+		"ridingId": "48001",
+		"ridingName": "Airdrie—Cochrane",
+		"province": "AB"
+	},
+	"T4E": {
+		"ridingId": "48033",
+		"ridingName": "Ponoka—Didsbury",
+		"province": "AB"
+	},
+	"T4H": {
+		"ridingId": "48033",
+		"ridingName": "Ponoka—Didsbury",
+		"province": "AB"
+	},
+	"T4N": {
+		"ridingId": "48034",
+		"ridingName": "Red Deer",
+		"province": "AB"
+	},
+	"T4P": {
+		"ridingId": "48034",
+		"ridingName": "Red Deer",
+		"province": "AB"
+	},
+	"T4R": {
+		"ridingId": "48034",
+		"ridingName": "Red Deer",
+		"province": "AB"
+	},
+	"T4S": {
+		"ridingId": "48033",
+		"ridingName": "Ponoka—Didsbury",
+		"province": "AB"
+	},
+	"T4T": {
+		"ridingId": "48037",
+		"ridingName": "Yellowhead",
+		"province": "AB"
+	},
+	"T4V": {
+		"ridingId": "48002",
+		"ridingName": "Battle River—Crowfoot",
+		"province": "AB"
+	},
+	"T4X": {
+		"ridingId": "48028",
+		"ridingName": "Leduc—Wetaskiwin",
+		"province": "AB"
+	},
+	"T5A": {
+		"ridingId": "48018",
+		"ridingName": "Edmonton Manning",
+		"province": "AB"
+	},
+	"T5B": {
+		"ridingId": "48017",
+		"ridingName": "Edmonton Griesbach",
+		"province": "AB"
+	},
+	"T5C": {
+		"ridingId": "48017",
+		"ridingName": "Edmonton Griesbach",
+		"province": "AB"
+	},
+	"T5E": {
+		"ridingId": "48015",
+		"ridingName": "Edmonton Centre",
+		"province": "AB"
+	},
+	"T5G": {
+		"ridingId": "48017",
+		"ridingName": "Edmonton Griesbach",
+		"province": "AB"
+	},
+	"T5H": {
+		"ridingId": "48015",
+		"ridingName": "Edmonton Centre",
+		"province": "AB"
+	},
+	"T5K": {
+		"ridingId": "48015",
+		"ridingName": "Edmonton Centre",
+		"province": "AB"
+	},
+	"T5L": {
+		"ridingId": "48015",
+		"ridingName": "Edmonton Centre",
+		"province": "AB"
+	},
+	"T5M": {
+		"ridingId": "48015",
+		"ridingName": "Edmonton Centre",
+		"province": "AB"
+	},
+	"T5N": {
+		"ridingId": "48015",
+		"ridingName": "Edmonton Centre",
+		"province": "AB"
+	},
+	"T5P": {
+		"ridingId": "48015",
+		"ridingName": "Edmonton Centre",
+		"province": "AB"
+	},
+	"T5R": {
+		"ridingId": "48023",
+		"ridingName": "Edmonton West",
+		"province": "AB"
+	},
+	"T5S": {
+		"ridingId": "48019",
+		"ridingName": "Edmonton Northwest",
+		"province": "AB"
+	},
+	"T5T": {
+		"ridingId": "48023",
+		"ridingName": "Edmonton West",
+		"province": "AB"
+	},
+	"T5W": {
+		"ridingId": "48017",
+		"ridingName": "Edmonton Griesbach",
+		"province": "AB"
+	},
+	"T5X": {
+		"ridingId": "48019",
+		"ridingName": "Edmonton Northwest",
+		"province": "AB"
+	},
+	"T5Y": {
+		"ridingId": "48018",
+		"ridingName": "Edmonton Manning",
+		"province": "AB"
+	},
+	"T5Z": {
+		"ridingId": "48017",
+		"ridingName": "Edmonton Griesbach",
+		"province": "AB"
+	},
+	"T6A": {
+		"ridingId": "48022",
+		"ridingName": "Edmonton Strathcona",
+		"province": "AB"
+	},
+	"T6B": {
+		"ridingId": "48022",
+		"ridingName": "Edmonton Strathcona",
+		"province": "AB"
+	},
+	"T6C": {
+		"ridingId": "48022",
+		"ridingName": "Edmonton Strathcona",
+		"province": "AB"
+	},
+	"T6E": {
+		"ridingId": "48022",
+		"ridingName": "Edmonton Strathcona",
+		"province": "AB"
+	},
+	"T6G": {
+		"ridingId": "48022",
+		"ridingName": "Edmonton Strathcona",
+		"province": "AB"
+	},
+	"T6H": {
+		"ridingId": "48022",
+		"ridingName": "Edmonton Strathcona",
+		"province": "AB"
+	},
+	"T6J": {
+		"ridingId": "48022",
+		"ridingName": "Edmonton Strathcona",
+		"province": "AB"
+	},
+	"T6K": {
+		"ridingId": "48016",
+		"ridingName": "Edmonton Gateway",
+		"province": "AB"
+	},
+	"T6L": {
+		"ridingId": "48021",
+		"ridingName": "Edmonton Southeast",
+		"province": "AB"
+	},
+	"T6P": {
+		"ridingId": "48022",
+		"ridingName": "Edmonton Strathcona",
+		"province": "AB"
+	},
+	"T6R": {
+		"ridingId": "48020",
+		"ridingName": "Edmonton Riverbend",
+		"province": "AB"
+	},
+	"T6S": {
+		"ridingId": "48018",
+		"ridingName": "Edmonton Manning",
+		"province": "AB"
+	},
+	"T6T": {
+		"ridingId": "48021",
+		"ridingName": "Edmonton Southeast",
+		"province": "AB"
+	},
+	"T6V": {
+		"ridingId": "48019",
+		"ridingName": "Edmonton Northwest",
+		"province": "AB"
+	},
+	"T6W": {
+		"ridingId": "48020",
+		"ridingName": "Edmonton Riverbend",
+		"province": "AB"
+	},
+	"T7A": {
+		"ridingId": "48031",
+		"ridingName": "Parkland",
+		"province": "AB"
+	},
+	"T7E": {
+		"ridingId": "48037",
+		"ridingName": "Yellowhead",
+		"province": "AB"
+	},
+	"T7N": {
+		"ridingId": "48032",
+		"ridingName": "Peace River—Westlock",
+		"province": "AB"
+	},
+	"T7P": {
+		"ridingId": "48032",
+		"ridingName": "Peace River—Westlock",
+		"province": "AB"
+	},
+	"T7S": {
+		"ridingId": "48032",
+		"ridingName": "Peace River—Westlock",
+		"province": "AB"
+	},
+	"T7V": {
+		"ridingId": "48037",
+		"ridingName": "Yellowhead",
+		"province": "AB"
+	},
+	"T7X": {
+		"ridingId": "48031",
+		"ridingName": "Parkland",
+		"province": "AB"
+	},
+	"T7Y": {
+		"ridingId": "48031",
+		"ridingName": "Parkland",
+		"province": "AB"
+	},
+	"T7Z": {
+		"ridingId": "48031",
+		"ridingName": "Parkland",
+		"province": "AB"
+	},
+	"T8A": {
+		"ridingId": "48035",
+		"ridingName": "Sherwood Park—Fort Saskatchewan",
+		"province": "AB"
+	},
+	"T8B": {
+		"ridingId": "48035",
+		"ridingName": "Sherwood Park—Fort Saskatchewan",
+		"province": "AB"
+	},
+	"T8C": {
+		"ridingId": "48035",
+		"ridingName": "Sherwood Park—Fort Saskatchewan",
+		"province": "AB"
+	},
+	"T8E": {
+		"ridingId": "48035",
+		"ridingName": "Sherwood Park—Fort Saskatchewan",
+		"province": "AB"
+	},
+	"T8G": {
+		"ridingId": "48035",
+		"ridingName": "Sherwood Park—Fort Saskatchewan",
+		"province": "AB"
+	},
+	"T8N": {
+		"ridingId": "48036",
+		"ridingName": "St. Albert—Sturgeon River",
+		"province": "AB"
+	},
+	"T8R": {
+		"ridingId": "48036",
+		"ridingName": "St. Albert—Sturgeon River",
+		"province": "AB"
+	},
+	"T8S": {
+		"ridingId": "48032",
+		"ridingName": "Peace River—Westlock",
+		"province": "AB"
+	},
+	"T8T": {
+		"ridingId": "48036",
+		"ridingName": "St. Albert—Sturgeon River",
+		"province": "AB"
+	},
+	"T8V": {
+		"ridingId": "48026",
+		"ridingName": "Grande Prairie",
+		"province": "AB"
+	},
+	"T8X": {
+		"ridingId": "48026",
+		"ridingName": "Grande Prairie",
+		"province": "AB"
+	},
+	"T9A": {
+		"ridingId": "48028",
+		"ridingName": "Leduc—Wetaskiwin",
+		"province": "AB"
+	},
+	"T9C": {
+		"ridingId": "48027",
+		"ridingName": "Lakeland",
+		"province": "AB"
+	},
+	"T9E": {
+		"ridingId": "48028",
+		"ridingName": "Leduc—Wetaskiwin",
+		"province": "AB"
+	},
+	"T9G": {
+		"ridingId": "48028",
+		"ridingName": "Leduc—Wetaskiwin",
+		"province": "AB"
+	},
+	"T9H": {
+		"ridingId": "48025",
+		"ridingName": "Fort McMurray—Cold Lake",
+		"province": "AB"
+	},
+	"T9K": {
+		"ridingId": "48025",
+		"ridingName": "Fort McMurray—Cold Lake",
+		"province": "AB"
+	},
+	"T9M": {
+		"ridingId": "48025",
+		"ridingName": "Fort McMurray—Cold Lake",
+		"province": "AB"
+	},
+	"T9N": {
+		"ridingId": "48027",
+		"ridingName": "Lakeland",
+		"province": "AB"
+	},
+	"T9S": {
+		"ridingId": "48027",
+		"ridingName": "Lakeland",
+		"province": "AB"
+	},
+	"T9V": {
+		"ridingId": "48027",
+		"ridingName": "Lakeland",
+		"province": "AB"
+	},
+	"T9X": {
+		"ridingId": "48027",
+		"ridingName": "Lakeland",
+		"province": "AB"
+	},
+	"V0A": {
+		"ridingId": "59014",
+		"ridingName": "Kamloops—Shuswap—Central Rockies",
+		"province": "BC"
+	},
+	"V0B": {
+		"ridingId": "59007",
+		"ridingName": "Columbia—Kootenay—Southern Rockies",
+		"province": "BC"
+	},
+	"V0G": {
+		"ridingId": "59041",
+		"ridingName": "Vernon—Lake Country—Monashee",
+		"province": "BC"
+	},
+	"V0N": {
+		"ridingId": "59021",
+		"ridingName": "North Island—Powell River",
+		"province": "BC"
+	},
+	"V0P": {
+		"ridingId": "59021",
+		"ridingName": "North Island—Powell River",
+		"province": "BC"
+	},
+	"V1A": {
+		"ridingId": "59007",
+		"ridingName": "Columbia—Kootenay—Southern Rockies",
+		"province": "BC"
+	},
+	"V1B": {
+		"ridingId": "59041",
+		"ridingName": "Vernon—Lake Country—Monashee",
+		"province": "BC"
+	},
+	"V1C": {
+		"ridingId": "59007",
+		"ridingName": "Columbia—Kootenay—Southern Rockies",
+		"province": "BC"
+	},
+	"V1E": {
+		"ridingId": "59014",
+		"ridingName": "Kamloops—Shuswap—Central Rockies",
+		"province": "BC"
+	},
+	"V1G": {
+		"ridingId": "59026",
+		"ridingName": "Prince George—Peace River—Northern Rockies",
+		"province": "BC"
+	},
+	"V1H": {
+		"ridingId": "59041",
+		"ridingName": "Vernon—Lake Country—Monashee",
+		"province": "BC"
+	},
+	"V1J": {
+		"ridingId": "59026",
+		"ridingName": "Prince George—Peace River—Northern Rockies",
+		"province": "BC"
+	},
+	"V1K": {
+		"ridingId": "59015",
+		"ridingName": "Kamloops—Thompson—Nicola",
+		"province": "BC"
+	},
+	"V1M": {
+		"ridingId": "59017",
+		"ridingName": "Langley Township—Fraser Heights",
+		"province": "BC"
+	},
+	"V1N": {
+		"ridingId": "59030",
+		"ridingName": "Similkameen—South Okanagan—West Kootenay",
+		"province": "BC"
+	},
+	"V1P": {
+		"ridingId": "59016",
+		"ridingName": "Kelowna",
+		"province": "BC"
+	},
+	"V1R": {
+		"ridingId": "59007",
+		"ridingName": "Columbia—Kootenay—Southern Rockies",
+		"province": "BC"
+	},
+	"V1S": {
+		"ridingId": "59015",
+		"ridingName": "Kamloops—Thompson—Nicola",
+		"province": "BC"
+	},
+	"V1T": {
+		"ridingId": "59041",
+		"ridingName": "Vernon—Lake Country—Monashee",
+		"province": "BC"
+	},
+	"V1V": {
+		"ridingId": "59016",
+		"ridingName": "Kelowna",
+		"province": "BC"
+	},
+	"V1W": {
+		"ridingId": "59023",
+		"ridingName": "Okanagan Lake West—South Kelowna",
+		"province": "BC"
+	},
+	"V1X": {
+		"ridingId": "59016",
+		"ridingName": "Kelowna",
+		"province": "BC"
+	},
+	"V1Z": {
+		"ridingId": "59023",
+		"ridingName": "Okanagan Lake West—South Kelowna",
+		"province": "BC"
+	},
+	"V2A": {
+		"ridingId": "59030",
+		"ridingName": "Similkameen—South Okanagan—West Kootenay",
+		"province": "BC"
+	},
+	"V2B": {
+		"ridingId": "59015",
+		"ridingName": "Kamloops—Thompson—Nicola",
+		"province": "BC"
+	},
+	"V2C": {
+		"ridingId": "59015",
+		"ridingName": "Kamloops—Thompson—Nicola",
+		"province": "BC"
+	},
+	"V2E": {
+		"ridingId": "59015",
+		"ridingName": "Kamloops—Thompson—Nicola",
+		"province": "BC"
+	},
+	"V2G": {
+		"ridingId": "59004",
+		"ridingName": "Cariboo—Prince George",
+		"province": "BC"
+	},
+	"V2H": {
+		"ridingId": "59015",
+		"ridingName": "Kamloops—Thompson—Nicola",
+		"province": "BC"
+	},
+	"V2J": {
+		"ridingId": "59004",
+		"ridingName": "Cariboo—Prince George",
+		"province": "BC"
+	},
+	"V2K": {
+		"ridingId": "59026",
+		"ridingName": "Prince George—Peace River—Northern Rockies",
+		"province": "BC"
+	},
+	"V2L": {
+		"ridingId": "59026",
+		"ridingName": "Prince George—Peace River—Northern Rockies",
+		"province": "BC"
+	},
+	"V2M": {
+		"ridingId": "59004",
+		"ridingName": "Cariboo—Prince George",
+		"province": "BC"
+	},
+	"V2N": {
+		"ridingId": "59004",
+		"ridingName": "Cariboo—Prince George",
+		"province": "BC"
+	},
+	"V2P": {
+		"ridingId": "59005",
+		"ridingName": "Chilliwack—Hope",
+		"province": "BC"
+	},
+	"V2R": {
+		"ridingId": "59005",
+		"ridingName": "Chilliwack—Hope",
+		"province": "BC"
+	},
+	"V2S": {
+		"ridingId": "59018",
+		"ridingName": "Mission—Matsqui—Abbotsford",
+		"province": "BC"
+	},
+	"V2T": {
+		"ridingId": "59001",
+		"ridingName": "Abbotsford—South Langley",
+		"province": "BC"
+	},
+	"V2V": {
+		"ridingId": "59024",
+		"ridingName": "Pitt Meadows—Maple Ridge",
+		"province": "BC"
+	},
+	"V2W": {
+		"ridingId": "59024",
+		"ridingName": "Pitt Meadows—Maple Ridge",
+		"province": "BC"
+	},
+	"V2X": {
+		"ridingId": "59024",
+		"ridingName": "Pitt Meadows—Maple Ridge",
+		"province": "BC"
+	},
+	"V2Y": {
+		"ridingId": "59017",
+		"ridingName": "Langley Township—Fraser Heights",
+		"province": "BC"
+	},
+	"V2Z": {
+		"ridingId": "59001",
+		"ridingName": "Abbotsford—South Langley",
+		"province": "BC"
+	},
+	"V3A": {
+		"ridingId": "59032",
+		"ridingName": "South Surrey—White Rock",
+		"province": "BC"
+	},
+	"V3B": {
+		"ridingId": "59025",
+		"ridingName": "Port Moody—Coquitlam",
+		"province": "BC"
+	},
+	"V3C": {
+		"ridingId": "59008",
+		"ridingName": "Coquitlam—Port Coquitlam",
+		"province": "BC"
+	},
+	"V3E": {
+		"ridingId": "59025",
+		"ridingName": "Port Moody—Coquitlam",
+		"province": "BC"
+	},
+	"V3G": {
+		"ridingId": "59018",
+		"ridingName": "Mission—Matsqui—Abbotsford",
+		"province": "BC"
+	},
+	"V3H": {
+		"ridingId": "59025",
+		"ridingName": "Port Moody—Coquitlam",
+		"province": "BC"
+	},
+	"V3J": {
+		"ridingId": "59003",
+		"ridingName": "Burnaby North—Seymour",
+		"province": "BC"
+	},
+	"V3K": {
+		"ridingId": "59020",
+		"ridingName": "New Westminster—Burnaby—Maillardville",
+		"province": "BC"
+	},
+	"V3L": {
+		"ridingId": "59020",
+		"ridingName": "New Westminster—Burnaby—Maillardville",
+		"province": "BC"
+	},
+	"V3M": {
+		"ridingId": "59020",
+		"ridingName": "New Westminster—Burnaby—Maillardville",
+		"province": "BC"
+	},
+	"V3N": {
+		"ridingId": "59037",
+		"ridingName": "Vancouver Fraserview—South Burnaby",
+		"province": "BC"
+	},
+	"V3P": {
+		"ridingId": "59008",
+		"ridingName": "Coquitlam—Port Coquitlam",
+		"province": "BC"
+	},
+	"V3R": {
+		"ridingId": "59033",
+		"ridingName": "Surrey Centre",
+		"province": "BC"
+	},
+	"V3S": {
+		"ridingId": "59032",
+		"ridingName": "South Surrey—White Rock",
+		"province": "BC"
+	},
+	"V3T": {
+		"ridingId": "59033",
+		"ridingName": "Surrey Centre",
+		"province": "BC"
+	},
+	"V3W": {
+		"ridingId": "59032",
+		"ridingName": "South Surrey—White Rock",
+		"province": "BC"
+	},
+	"V3Z": {
+		"ridingId": "59024",
+		"ridingName": "Pitt Meadows—Maple Ridge",
+		"province": "BC"
+	},
+	"V4A": {
+		"ridingId": "59032",
+		"ridingName": "South Surrey—White Rock",
+		"province": "BC"
+	},
+	"V4B": {
+		"ridingId": "59032",
+		"ridingName": "South Surrey—White Rock",
+		"province": "BC"
+	},
+	"V4C": {
+		"ridingId": "59011",
+		"ridingName": "Delta",
+		"province": "BC"
+	},
+	"V4E": {
+		"ridingId": "59011",
+		"ridingName": "Delta",
+		"province": "BC"
+	},
+	"V4K": {
+		"ridingId": "59011",
+		"ridingName": "Delta",
+		"province": "BC"
+	},
+	"V4M": {
+		"ridingId": "59011",
+		"ridingName": "Delta",
+		"province": "BC"
+	},
+	"V4N": {
+		"ridingId": "59013",
+		"ridingName": "Fleetwood—Port Kells",
+		"province": "BC"
+	},
+	"V4P": {
+		"ridingId": "59032",
+		"ridingName": "South Surrey—White Rock",
+		"province": "BC"
+	},
+	"V4R": {
+		"ridingId": "59024",
+		"ridingName": "Pitt Meadows—Maple Ridge",
+		"province": "BC"
+	},
+	"V4S": {
+		"ridingId": "59018",
+		"ridingName": "Mission—Matsqui—Abbotsford",
+		"province": "BC"
+	},
+	"V4T": {
+		"ridingId": "59023",
+		"ridingName": "Okanagan Lake West—South Kelowna",
+		"province": "BC"
+	},
+	"V4V": {
+		"ridingId": "59041",
+		"ridingName": "Vernon—Lake Country—Monashee",
+		"province": "BC"
+	},
+	"V4W": {
+		"ridingId": "59017",
+		"ridingName": "Langley Township—Fraser Heights",
+		"province": "BC"
+	},
+	"V4X": {
+		"ridingId": "59018",
+		"ridingName": "Mission—Matsqui—Abbotsford",
+		"province": "BC"
+	},
+	"V4Z": {
+		"ridingId": "59005",
+		"ridingName": "Chilliwack—Hope",
+		"province": "BC"
+	},
+	"V5A": {
+		"ridingId": "59003",
+		"ridingName": "Burnaby North—Seymour",
+		"province": "BC"
+	},
+	"V5B": {
+		"ridingId": "59003",
+		"ridingName": "Burnaby North—Seymour",
+		"province": "BC"
+	},
+	"V5C": {
+		"ridingId": "59003",
+		"ridingName": "Burnaby North—Seymour",
+		"province": "BC"
+	},
+	"V5E": {
+		"ridingId": "59037",
+		"ridingName": "Vancouver Fraserview—South Burnaby",
+		"province": "BC"
+	},
+	"V5G": {
+		"ridingId": "59002",
+		"ridingName": "Burnaby Central",
+		"province": "BC"
+	},
+	"V5H": {
+		"ridingId": "59002",
+		"ridingName": "Burnaby Central",
+		"province": "BC"
+	},
+	"V5J": {
+		"ridingId": "59037",
+		"ridingName": "Vancouver Fraserview—South Burnaby",
+		"province": "BC"
+	},
+	"V5K": {
+		"ridingId": "59036",
+		"ridingName": "Vancouver East",
+		"province": "BC"
+	},
+	"V5L": {
+		"ridingId": "59036",
+		"ridingName": "Vancouver East",
+		"province": "BC"
+	},
+	"V5N": {
+		"ridingId": "59036",
+		"ridingName": "Vancouver East",
+		"province": "BC"
+	},
+	"V5P": {
+		"ridingId": "59039",
+		"ridingName": "Vancouver Kingsway",
+		"province": "BC"
+	},
+	"V5R": {
+		"ridingId": "59039",
+		"ridingName": "Vancouver Kingsway",
+		"province": "BC"
+	},
+	"V5S": {
+		"ridingId": "59037",
+		"ridingName": "Vancouver Fraserview—South Burnaby",
+		"province": "BC"
+	},
+	"V5T": {
+		"ridingId": "59036",
+		"ridingName": "Vancouver East",
+		"province": "BC"
+	},
+	"V5V": {
+		"ridingId": "59039",
+		"ridingName": "Vancouver Kingsway",
+		"province": "BC"
+	},
+	"V5W": {
+		"ridingId": "59039",
+		"ridingName": "Vancouver Kingsway",
+		"province": "BC"
+	},
+	"V5X": {
+		"ridingId": "59038",
+		"ridingName": "Vancouver Granville",
+		"province": "BC"
+	},
+	"V5Y": {
+		"ridingId": "59038",
+		"ridingName": "Vancouver Granville",
+		"province": "BC"
+	},
+	"V5Z": {
+		"ridingId": "59038",
+		"ridingName": "Vancouver Granville",
+		"province": "BC"
+	},
+	"V6A": {
+		"ridingId": "59036",
+		"ridingName": "Vancouver East",
+		"province": "BC"
+	},
+	"V6B": {
+		"ridingId": "59035",
+		"ridingName": "Vancouver Centre",
+		"province": "BC"
+	},
+	"V6C": {
+		"ridingId": "59035",
+		"ridingName": "Vancouver Centre",
+		"province": "BC"
+	},
+	"V6E": {
+		"ridingId": "59035",
+		"ridingName": "Vancouver Centre",
+		"province": "BC"
+	},
+	"V6G": {
+		"ridingId": "59035",
+		"ridingName": "Vancouver Centre",
+		"province": "BC"
+	},
+	"V6H": {
+		"ridingId": "59038",
+		"ridingName": "Vancouver Granville",
+		"province": "BC"
+	},
+	"V6J": {
+		"ridingId": "59038",
+		"ridingName": "Vancouver Granville",
+		"province": "BC"
+	},
+	"V6K": {
+		"ridingId": "59040",
+		"ridingName": "Vancouver Quadra",
+		"province": "BC"
+	},
+	"V6L": {
+		"ridingId": "59040",
+		"ridingName": "Vancouver Quadra",
+		"province": "BC"
+	},
+	"V6M": {
+		"ridingId": "59040",
+		"ridingName": "Vancouver Quadra",
+		"province": "BC"
+	},
+	"V6N": {
+		"ridingId": "59040",
+		"ridingName": "Vancouver Quadra",
+		"province": "BC"
+	},
+	"V6P": {
+		"ridingId": "59038",
+		"ridingName": "Vancouver Granville",
+		"province": "BC"
+	},
+	"V6R": {
+		"ridingId": "59040",
+		"ridingName": "Vancouver Quadra",
+		"province": "BC"
+	},
+	"V6S": {
+		"ridingId": "59040",
+		"ridingName": "Vancouver Quadra",
+		"province": "BC"
+	},
+	"V6T": {
+		"ridingId": "59040",
+		"ridingName": "Vancouver Quadra",
+		"province": "BC"
+	},
+	"V6V": {
+		"ridingId": "59028",
+		"ridingName": "Richmond East—Steveston",
+		"province": "BC"
+	},
+	"V6W": {
+		"ridingId": "59028",
+		"ridingName": "Richmond East—Steveston",
+		"province": "BC"
+	},
+	"V6X": {
+		"ridingId": "59027",
+		"ridingName": "Richmond Centre—Marpole",
+		"province": "BC"
+	},
+	"V6Y": {
+		"ridingId": "59028",
+		"ridingName": "Richmond East—Steveston",
+		"province": "BC"
+	},
+	"V6Z": {
+		"ridingId": "59035",
+		"ridingName": "Vancouver Centre",
+		"province": "BC"
+	},
+	"V7A": {
+		"ridingId": "59027",
+		"ridingName": "Richmond Centre—Marpole",
+		"province": "BC"
+	},
+	"V7B": {
+		"ridingId": "59027",
+		"ridingName": "Richmond Centre—Marpole",
+		"province": "BC"
+	},
+	"V7C": {
+		"ridingId": "59027",
+		"ridingName": "Richmond Centre—Marpole",
+		"province": "BC"
+	},
+	"V7E": {
+		"ridingId": "59027",
+		"ridingName": "Richmond Centre—Marpole",
+		"province": "BC"
+	},
+	"V7G": {
+		"ridingId": "59003",
+		"ridingName": "Burnaby North—Seymour",
+		"province": "BC"
+	},
+	"V7H": {
+		"ridingId": "59003",
+		"ridingName": "Burnaby North—Seymour",
+		"province": "BC"
+	},
+	"V7J": {
+		"ridingId": "59003",
+		"ridingName": "Burnaby North—Seymour",
+		"province": "BC"
+	},
+	"V7K": {
+		"ridingId": "59022",
+		"ridingName": "North Vancouver—Capilano",
+		"province": "BC"
+	},
+	"V7L": {
+		"ridingId": "59022",
+		"ridingName": "North Vancouver—Capilano",
+		"province": "BC"
+	},
+	"V7M": {
+		"ridingId": "59022",
+		"ridingName": "North Vancouver—Capilano",
+		"province": "BC"
+	},
+	"V7N": {
+		"ridingId": "59022",
+		"ridingName": "North Vancouver—Capilano",
+		"province": "BC"
+	},
+	"V7P": {
+		"ridingId": "59022",
+		"ridingName": "North Vancouver—Capilano",
+		"province": "BC"
+	},
+	"V7R": {
+		"ridingId": "59022",
+		"ridingName": "North Vancouver—Capilano",
+		"province": "BC"
+	},
+	"V7T": {
+		"ridingId": "59022",
+		"ridingName": "North Vancouver—Capilano",
+		"province": "BC"
+	},
+	"V7V": {
+		"ridingId": "59022",
+		"ridingName": "North Vancouver—Capilano",
+		"province": "BC"
+	},
+	"V7X": {
+		"ridingId": "59011",
+		"ridingName": "Delta",
+		"province": "BC"
+	},
+	"V7Y": {
+		"ridingId": "59035",
+		"ridingName": "Vancouver Centre",
+		"province": "BC"
+	},
+	"V7Z": {
+		"ridingId": "59043",
+		"ridingName": "West Vancouver—Sunshine Coast—Sea to Sky Country",
+		"province": "BC"
+	},
+	"V8A": {
+		"ridingId": "59021",
+		"ridingName": "North Island—Powell River",
+		"province": "BC"
+	},
+	"V8B": {
+		"ridingId": "59043",
+		"ridingName": "West Vancouver—Sunshine Coast—Sea to Sky Country",
+		"province": "BC"
+	},
+	"V8C": {
+		"ridingId": "59031",
+		"ridingName": "Skeena—Bulkley Valley",
+		"province": "BC"
+	},
+	"V8E": {
+		"ridingId": "59010",
+		"ridingName": "Cowichan—Malahat—Langford",
+		"province": "BC"
+	},
+	"V8G": {
+		"ridingId": "59031",
+		"ridingName": "Skeena—Bulkley Valley",
+		"province": "BC"
+	},
+	"V8J": {
+		"ridingId": "59031",
+		"ridingName": "Skeena—Bulkley Valley",
+		"province": "BC"
+	},
+	"V8K": {
+		"ridingId": "59029",
+		"ridingName": "Saanich—Gulf Islands",
+		"province": "BC"
+	},
+	"V8L": {
+		"ridingId": "59029",
+		"ridingName": "Saanich—Gulf Islands",
+		"province": "BC"
+	},
+	"V8M": {
+		"ridingId": "59029",
+		"ridingName": "Saanich—Gulf Islands",
+		"province": "BC"
+	},
+	"V8N": {
+		"ridingId": "59029",
+		"ridingName": "Saanich—Gulf Islands",
+		"province": "BC"
+	},
+	"V8P": {
+		"ridingId": "59029",
+		"ridingName": "Saanich—Gulf Islands",
+		"province": "BC"
+	},
+	"V8R": {
+		"ridingId": "59042",
+		"ridingName": "Victoria",
+		"province": "BC"
+	},
+	"V8S": {
+		"ridingId": "59042",
+		"ridingName": "Victoria",
+		"province": "BC"
+	},
+	"V8T": {
+		"ridingId": "59042",
+		"ridingName": "Victoria",
+		"province": "BC"
+	},
+	"V8V": {
+		"ridingId": "59042",
+		"ridingName": "Victoria",
+		"province": "BC"
+	},
+	"V8W": {
+		"ridingId": "59042",
+		"ridingName": "Victoria",
+		"province": "BC"
+	},
+	"V8X": {
+		"ridingId": "59029",
+		"ridingName": "Saanich—Gulf Islands",
+		"province": "BC"
+	},
+	"V8Y": {
+		"ridingId": "59029",
+		"ridingName": "Saanich—Gulf Islands",
+		"province": "BC"
+	},
+	"V8Z": {
+		"ridingId": "59012",
+		"ridingName": "Esquimalt—Saanich—Sooke",
+		"province": "BC"
+	},
+	"V9A": {
+		"ridingId": "59012",
+		"ridingName": "Esquimalt—Saanich—Sooke",
+		"province": "BC"
+	},
+	"V9B": {
+		"ridingId": "59012",
+		"ridingName": "Esquimalt—Saanich—Sooke",
+		"province": "BC"
+	},
+	"V9C": {
+		"ridingId": "59012",
+		"ridingName": "Esquimalt—Saanich—Sooke",
+		"province": "BC"
+	},
+	"V9E": {
+		"ridingId": "59012",
+		"ridingName": "Esquimalt—Saanich—Sooke",
+		"province": "BC"
+	},
+	"V9G": {
+		"ridingId": "59019",
+		"ridingName": "Nanaimo—Ladysmith",
+		"province": "BC"
+	},
+	"V9J": {
+		"ridingId": "59021",
+		"ridingName": "North Island—Powell River",
+		"province": "BC"
+	},
+	"V9L": {
+		"ridingId": "59010",
+		"ridingName": "Cowichan—Malahat—Langford",
+		"province": "BC"
+	},
+	"V9M": {
+		"ridingId": "59021",
+		"ridingName": "North Island—Powell River",
+		"province": "BC"
+	},
+	"V9N": {
+		"ridingId": "59009",
+		"ridingName": "Courtenay—Alberni",
+		"province": "BC"
+	},
+	"V9P": {
+		"ridingId": "59009",
+		"ridingName": "Courtenay—Alberni",
+		"province": "BC"
+	},
+	"V9R": {
+		"ridingId": "59019",
+		"ridingName": "Nanaimo—Ladysmith",
+		"province": "BC"
+	},
+	"V9S": {
+		"ridingId": "59019",
+		"ridingName": "Nanaimo—Ladysmith",
+		"province": "BC"
+	},
+	"V9T": {
+		"ridingId": "59019",
+		"ridingName": "Nanaimo—Ladysmith",
+		"province": "BC"
+	},
+	"V9V": {
+		"ridingId": "59019",
+		"ridingName": "Nanaimo—Ladysmith",
+		"province": "BC"
+	},
+	"V9W": {
+		"ridingId": "59021",
+		"ridingName": "North Island—Powell River",
+		"province": "BC"
+	},
+	"V9X": {
+		"ridingId": "59019",
+		"ridingName": "Nanaimo—Ladysmith",
+		"province": "BC"
+	},
+	"V9Y": {
+		"ridingId": "59009",
+		"ridingName": "Courtenay—Alberni",
+		"province": "BC"
+	},
+	"V9Z": {
+		"ridingId": "59012",
+		"ridingName": "Esquimalt—Saanich—Sooke",
+		"province": "BC"
+	},
+	"X0E": {
+		"ridingId": "61001",
+		"ridingName": "Northwest Territories",
+		"province": "NT"
 	},
 	"X1A": {
 		"ridingId": "61001",
 		"ridingName": "Northwest Territories",
 		"province": "NT"
 	},
-	"X0A": {
-		"ridingId": "62001",
-		"ridingName": "Nunavut",
-		"province": "NU"
+	"Y0B": {
+		"ridingId": "60001",
+		"ridingName": "Yukon",
+		"province": "YT"
+	},
+	"Y1A": {
+		"ridingId": "60001",
+		"ridingName": "Yukon",
+		"province": "YT"
 	}
 }

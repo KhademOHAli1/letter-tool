@@ -171,6 +171,8 @@ export function EmailSender({
 			copiedToast: "Der Brief wurde kopiert. Füge ihn mit Strg+V / Cmd+V ein.",
 			openingMail: "E-Mail wird geöffnet...",
 			openDefault: "Standard E-Mail-App öffnen",
+			copyFailed: "Kopieren fehlgeschlagen",
+			or: "oder",
 		},
 		en: {
 			title: "How would you like to send the email?",
@@ -182,6 +184,21 @@ export function EmailSender({
 			copiedToast: "The letter has been copied. Paste it with Ctrl+V / Cmd+V.",
 			openingMail: "Opening email...",
 			openDefault: "Open default email app",
+			copyFailed: "Copy failed",
+			or: "or",
+		},
+		fr: {
+			title: "Comment souhaitez-vous envoyer l'e-mail ?",
+			description: "Choisissez votre application e-mail préférée",
+			rememberChoice: "Mémoriser mon choix",
+			copyAndOpen: "Copier et ouvrir",
+			copyOnly: "Copier uniquement",
+			copied: "Lettre copiée dans le presse-papiers !",
+			copiedToast: "La lettre a été copiée. Collez-la avec Ctrl+V / Cmd+V.",
+			openingMail: "Ouverture de l'e-mail...",
+			openDefault: "Ouvrir l'application e-mail par défaut",
+			copyFailed: "Échec de la copie",
+			or: "ou",
 		},
 	};
 
@@ -202,9 +219,7 @@ export function EmailSender({
 			setTimeout(() => setCopied(false), 3000);
 			return true;
 		} catch {
-			toast.error(
-				language === "de" ? "Kopieren fehlgeschlagen" : "Copy failed",
-			);
+			toast.error(t.copyFailed);
 			return false;
 		}
 	};
@@ -363,7 +378,7 @@ export function EmailSender({
 							</div>
 							<div className="relative flex justify-center text-xs uppercase">
 								<span className="bg-background px-2 text-muted-foreground">
-									{language === "de" ? "oder" : "or"}
+									{t.or}
 								</span>
 							</div>
 						</div>

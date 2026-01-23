@@ -22,7 +22,9 @@ export function getForderungText(
 	field: "title" | "description" | "briefText",
 	language: Language,
 ): string {
-	return forderung[field][language];
+	// French falls back to English since demands are only in de/en
+	const effectiveLang = language === "fr" ? "en" : language;
+	return forderung[field][effectiveLang];
 }
 
 export const FORDERUNGEN: Forderung[] = [

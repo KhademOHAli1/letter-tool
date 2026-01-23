@@ -9,15 +9,35 @@ import {
 	ShieldCheck,
 } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { VoiceInput } from "@/components/voice-input";
+import { DEMANDS_CA } from "@/lib/data/ca/forderungen-ca";
+import {
+	findMPByPostalCode,
+	findRidingByPostalCode,
+	type MP,
+	type Riding,
+} from "@/lib/data/ca/ridings";
 import { FORDERUNGEN } from "@/lib/data/forderungen";
+import {
+	DEPARTMENTS,
+	type Depute,
+	FR_PARTY_COLORS,
+	findDeputesByPostalCode,
+	getDepartmentFromPostalCode,
+} from "@/lib/data/fr/circonscriptions";
+import { DEMANDS_FR } from "@/lib/data/fr/forderungen-fr";
+import {
+	findMPByPostcode as findUKMPByPostcode,
+	type UKMP,
+} from "@/lib/data/uk/constituencies";
+import { DEMANDS_UK } from "@/lib/data/uk/forderungen-uk";
 import {
 	findMdBsByWahlkreis,
 	findWahlkreisByPlz,
@@ -31,14 +51,45 @@ import {
 	saveFormDraft,
 } from "@/lib/letter-cache";
 
-// Partei-Farben für Badge
-const PARTY_COLORS: Record<string, string> = {
+// Unified representative type for all countries
+type Representative = MdB | MP | UKMP | Depute;
+type District = Wahlkreis | Riding | { name: string };
+
+// German party colors
+const DE_PARTY_COLORS: Record<string, string> = {
 	"CDU/CSU": "bg-black text-white",
 	SPD: "bg-red-600 text-white",
 	GRÜNE: "bg-green-600 text-white",
 	"DIE LINKE": "bg-purple-600 text-white",
 	BSW: "bg-orange-600 text-white",
 	Fraktionslos: "bg-gray-500 text-white",
+};
+
+// Canadian party colors
+const CA_PARTY_COLORS: Record<string, string> = {
+	Liberal: "bg-red-600 text-white",
+	Conservative: "bg-blue-800 text-white",
+	NDP: "bg-orange-500 text-white",
+	"Bloc Québécois": "bg-sky-500 text-white",
+	Green: "bg-green-600 text-white",
+	Independent: "bg-gray-500 text-white",
+};
+
+// UK party colors (Tailwind classes)
+const UK_PARTY_COLORS: Record<string, string> = {
+	Labour: "bg-red-600 text-white",
+	Conservative: "bg-blue-800 text-white",
+	"Liberal Democrats": "bg-amber-500 text-black",
+	"Scottish National Party": "bg-yellow-400 text-black",
+	"Green Party": "bg-green-600 text-white",
+	"Reform UK": "bg-cyan-600 text-white",
+	"Plaid Cymru": "bg-green-700 text-white",
+	"Democratic Unionist Party": "bg-orange-700 text-white",
+	"Sinn Féin": "bg-green-800 text-white",
+	"Social Democratic & Labour Party": "bg-green-600 text-white",
+	Alliance: "bg-yellow-500 text-black",
+	"Ulster Unionist Party": "bg-blue-500 text-white",
+	Independent: "bg-gray-500 text-white",
 };
 
 // Validate personal story: just check it's not empty
@@ -98,27 +149,50 @@ function WhyBox({
 
 export function LetterForm() {
 	const router = useRouter();
+	const pathname = usePathname();
 	const { t, language } = useLanguage();
 	const [error, setError] = useState<string | null>(null);
+
+	// Detect country from URL path
+	const country = useMemo(() => {
+		const segment = pathname.split("/")[1];
+		if (segment === "ca") return "ca";
+		if (segment === "uk") return "uk";
+		if (segment === "fr") return "fr";
+		return "de";
+	}, [pathname]);
+	const isCanada = country === "ca";
+	const isUK = country === "uk";
+	const isFrance = country === "fr";
+
+	// Country-specific demands list
+	const demands = isCanada
+		? DEMANDS_CA
+		: isUK
+			? DEMANDS_UK
+			: isFrance
+				? DEMANDS_FR
+				: FORDERUNGEN;
 
 	// Honeypot field (hidden, bots will fill it)
 	const honeypotRef = useRef<HTMLInputElement>(null);
 	// Track form render time (bots submit too fast)
 	const formRenderTime = useRef(Date.now());
 
-	// Form state
+	// Form state - use unified types
 	const [name, setName] = useState("");
-	const [plz, setPlz] = useState("");
-	const [wahlkreis, setWahlkreis] = useState<Wahlkreis | null>(null);
-	const [mdbs, setMdbs] = useState<MdB[]>([]);
-	const [selectedMdB, setSelectedMdB] = useState<MdB | null>(null);
-	const [selectedForderungen, setSelectedForderungen] = useState<string[]>([]);
+	const [postalCode, setPostalCode] = useState("");
+	const [district, setDistrict] = useState<District | null>(null);
+	const [representatives, setRepresentatives] = useState<Representative[]>([]);
+	const [selectedRep, setSelectedRep] = useState<Representative | null>(null);
+	const [selectedDemands, setSelectedDemands] = useState<string[]>([]);
 	const [personalNote, setPersonalNote] = useState("");
 	const [consentGiven, setConsentGiven] = useState(false);
-	const [mdbSelectorOpen, setMdbSelectorOpen] = useState(false);
+	const [repSelectorOpen, setRepSelectorOpen] = useState(false);
 	const [isReusingTemplate, setIsReusingTemplate] = useState(false);
 	const [hasDraft, setHasDraft] = useState(false);
 	const [draftRestored, setDraftRestored] = useState(false);
+	const [isLookingUpPostcode, setIsLookingUpPostcode] = useState(false);
 
 	// Auto-save draft debounced
 	const saveTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -132,20 +206,20 @@ export function LetterForm() {
 			// Only save if there's meaningful content
 			if (
 				name.trim() ||
-				plz.trim() ||
+				postalCode.trim() ||
 				personalNote.trim() ||
-				selectedForderungen.length > 0
+				selectedDemands.length > 0
 			) {
 				saveFormDraft({
 					name,
-					plz,
+					plz: postalCode,
 					personalNote,
-					selectedForderungen,
-					selectedMdBId: selectedMdB?.id,
+					selectedForderungen: selectedDemands,
+					selectedMdBId: selectedRep?.id,
 				});
 			}
 		}, 1000); // Save after 1 second of inactivity
-	}, [name, plz, personalNote, selectedForderungen, selectedMdB]);
+	}, [name, postalCode, personalNote, selectedDemands, selectedRep]);
 
 	// Trigger auto-save on form changes
 	useEffect(() => {
@@ -171,23 +245,65 @@ export function LetterForm() {
 		if (!draft) return;
 
 		setName(draft.name);
-		setPlz(draft.plz);
+		setPostalCode(draft.plz);
 		setPersonalNote(draft.personalNote);
-		setSelectedForderungen(draft.selectedForderungen);
+		setSelectedDemands(draft.selectedForderungen);
 
-		// Trigger PLZ lookup
-		if (draft.plz.length === 5) {
-			const found = findWahlkreisByPlz(draft.plz);
-			if (found) {
-				setWahlkreis(found);
-				const foundMdbs = findMdBsByWahlkreis(found.id);
-				setMdbs(foundMdbs);
+		// Trigger postal code lookup based on country
+		if (isCanada) {
+			// Canadian FSA is at least 3 chars
+			if (draft.plz.length >= 3) {
+				const mp = findMPByPostalCode(draft.plz);
+				if (mp) {
+					setRepresentatives([mp]);
+					const riding = findRidingByPostalCode(draft.plz);
+					if (riding) {
+						setDistrict(riding);
+					}
+					if (draft.selectedMdBId && mp.id === draft.selectedMdBId) {
+						setSelectedRep(mp);
+					}
+				}
+			}
+		} else if (isUK) {
+			// UK postcode - async lookup, restore will need user to re-enter
+			// Can't do async lookup in useCallback easily, so just restore the postal code
+			// and let the user trigger lookup manually
+			// The postal code field will be populated and they can press Enter
+		} else if (isFrance) {
+			// French code postal is 5 digits
+			if (draft.plz.length === 5 && /^\d{5}$/.test(draft.plz)) {
+				const deputes = findDeputesByPostalCode(draft.plz);
+				if (deputes.length > 0) {
+					const deptCode = getDepartmentFromPostalCode(draft.plz);
+					const deptName = deptCode ? DEPARTMENTS[deptCode] : null;
+					setDistrict({ name: deptName || "France" });
+					setRepresentatives(deputes);
 
-				// Restore selected MdB if possible
-				if (draft.selectedMdBId) {
-					const mdb = foundMdbs.find((m) => m.id === draft.selectedMdBId);
-					if (mdb) {
-						setSelectedMdB(mdb);
+					// Restore selected député if possible
+					if (draft.selectedMdBId) {
+						const depute = deputes.find((d) => d.id === draft.selectedMdBId);
+						if (depute) {
+							setSelectedRep(depute);
+						}
+					}
+				}
+			}
+		} else {
+			// German PLZ is 5 digits
+			if (draft.plz.length === 5) {
+				const found = findWahlkreisByPlz(draft.plz);
+				if (found) {
+					setDistrict(found);
+					const foundMdbs = findMdBsByWahlkreis(found.id);
+					setRepresentatives(foundMdbs);
+
+					// Restore selected MdB if possible
+					if (draft.selectedMdBId) {
+						const mdb = foundMdbs.find((m) => m.id === draft.selectedMdBId);
+						if (mdb) {
+							setSelectedRep(mdb);
+						}
 					}
 				}
 			}
@@ -196,7 +312,7 @@ export function LetterForm() {
 		setHasDraft(false);
 		setDraftRestored(true);
 		setTimeout(() => setDraftRestored(false), 3000);
-	}, []);
+	}, [isCanada, isUK, isFrance]);
 
 	// Dismiss draft handler
 	const dismissDraft = useCallback(() => {
@@ -218,18 +334,44 @@ export function LetterForm() {
 
 				// Pre-fill form fields
 				setName(template.senderName);
-				setPlz(template.senderPlz);
+				setPostalCode(template.senderPlz);
 				setPersonalNote(template.personalNote);
-				setSelectedForderungen(template.forderungen);
+				setSelectedDemands(template.forderungen);
 				setIsReusingTemplate(true);
 
-				// Trigger PLZ lookup
-				if (template.senderPlz.length === 5) {
-					const found = findWahlkreisByPlz(template.senderPlz);
-					if (found) {
-						setWahlkreis(found);
-						const foundMdbs = findMdBsByWahlkreis(found.id);
-						setMdbs(foundMdbs);
+				// Trigger postal code lookup based on country
+				if (isCanada) {
+					if (template.senderPlz.length >= 3) {
+						const mp = findMPByPostalCode(template.senderPlz);
+						if (mp) {
+							setRepresentatives([mp]);
+							const riding = findRidingByPostalCode(template.senderPlz);
+							if (riding) {
+								setDistrict(riding);
+							}
+						}
+					}
+				} else if (isFrance) {
+					if (
+						template.senderPlz.length === 5 &&
+						/^\d{5}$/.test(template.senderPlz)
+					) {
+						const deputes = findDeputesByPostalCode(template.senderPlz);
+						if (deputes.length > 0) {
+							const deptCode = getDepartmentFromPostalCode(template.senderPlz);
+							const deptName = deptCode ? DEPARTMENTS[deptCode] : null;
+							setDistrict({ name: deptName || "France" });
+							setRepresentatives(deputes);
+						}
+					}
+				} else {
+					if (template.senderPlz.length === 5) {
+						const found = findWahlkreisByPlz(template.senderPlz);
+						if (found) {
+							setDistrict(found);
+							const foundMdbs = findMdBsByWahlkreis(found.id);
+							setRepresentatives(foundMdbs);
+						}
 					}
 				}
 
@@ -239,36 +381,87 @@ export function LetterForm() {
 				// Ignore parse errors
 			}
 		}
-	}, []);
+	}, [isCanada, isFrance]);
 
-	// PLZ eingeben → Wahlkreis finden
-	const handlePlzChange = (value: string) => {
-		setPlz(value);
-		setWahlkreis(null);
-		setMdbs([]);
-		setSelectedMdB(null);
+	// Postal code input → find district/representative
+	const handlePostalCodeChange = async (value: string) => {
+		setPostalCode(value);
+		setDistrict(null);
+		setRepresentatives([]);
+		setSelectedRep(null);
 
-		if (value.length === 5) {
-			const found = findWahlkreisByPlz(value);
-			if (found) {
-				setWahlkreis(found);
-				const foundMdbs = findMdBsByWahlkreis(found.id);
-				setMdbs(foundMdbs);
-				if (foundMdbs.length === 1) {
-					setSelectedMdB(foundMdbs[0]);
+		if (isCanada) {
+			// Canadian FSA: 3 alphanumeric chars (e.g., M5V, K1A)
+			const normalized = value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+			if (normalized.length >= 3) {
+				const fsa = normalized.substring(0, 3);
+				const mp = findMPByPostalCode(fsa);
+				if (mp) {
+					setRepresentatives([mp]);
+					setSelectedRep(mp);
+					const riding = findRidingByPostalCode(fsa);
+					if (riding) {
+						setDistrict(riding);
+					}
+				}
+			}
+		} else if (isUK) {
+			// UK postcode: format like "SW1A 1AA" or "SW1A1AA"
+			const normalized = value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+			// UK postcodes are 5-7 alphanumeric chars without space
+			if (normalized.length >= 5) {
+				setIsLookingUpPostcode(true);
+				try {
+					const mp = await findUKMPByPostcode(value);
+					if (mp) {
+						setRepresentatives([mp]);
+						setSelectedRep(mp);
+						setDistrict({ name: mp.constituencyName });
+					}
+				} catch (err) {
+					console.error("Failed to lookup UK postcode:", err);
+				} finally {
+					setIsLookingUpPostcode(false);
+				}
+			}
+		} else if (isFrance) {
+			// French code postal: 5 digits
+			if (value.length === 5 && /^\d{5}$/.test(value)) {
+				const deputes = findDeputesByPostalCode(value);
+				if (deputes.length > 0) {
+					const deptCode = getDepartmentFromPostalCode(value);
+					const deptName = deptCode ? DEPARTMENTS[deptCode] : null;
+					setDistrict({ name: deptName || "France" });
+					setRepresentatives(deputes);
+					if (deputes.length === 1) {
+						setSelectedRep(deputes[0]);
+					}
+				}
+			}
+		} else {
+			// German PLZ: 5 digits
+			if (value.length === 5) {
+				const found = findWahlkreisByPlz(value);
+				if (found) {
+					setDistrict(found);
+					const foundMdbs = findMdBsByWahlkreis(found.id);
+					setRepresentatives(foundMdbs);
+					if (foundMdbs.length === 1) {
+						setSelectedRep(foundMdbs[0]);
+					}
 				}
 			}
 		}
 	};
 
-	// Forderung an-/abwählen
-	const toggleForderung = (id: string) => {
-		setSelectedForderungen((prev) =>
+	// Toggle demand selection
+	const toggleDemand = (id: string) => {
+		setSelectedDemands((prev) =>
 			prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id],
 		);
 	};
 
-	// Formular absenden
+	// Form submission
 	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 
@@ -287,7 +480,7 @@ export function LetterForm() {
 			return;
 		}
 
-		if (!selectedMdB || selectedForderungen.length === 0) {
+		if (!selectedRep || selectedDemands.length === 0) {
 			setError(
 				language === "de"
 					? "Bitte wähle einen MdB und mindestens eine Forderung"
@@ -302,18 +495,19 @@ export function LetterForm() {
 			return;
 		}
 
-		// Speichere Formulardaten und leite direkt zur Editor-Seite weiter
-		// Der Brief wird dort im Hintergrund generiert mit Streaming
+		// Store form data and navigate to editor page
+		// Letter will be generated there in the background with streaming
 		sessionStorage.setItem(
 			"formData",
 			JSON.stringify({
 				senderName: name,
-				senderPlz: plz,
-				wahlkreis: wahlkreis?.name,
-				mdb: selectedMdB,
-				forderungen: selectedForderungen,
+				senderPlz: postalCode,
+				wahlkreis: district?.name,
+				mdb: selectedRep,
+				forderungen: selectedDemands,
 				personalNote,
 				language, // Store selected language for letter generation
+				country, // Store country for API route
 				_timing: timeSinceRender,
 			}),
 		);
@@ -321,13 +515,49 @@ export function LetterForm() {
 		// Clear draft on successful submission
 		clearFormDraft();
 
-		router.push("/editor");
+		router.push(`/${country}/editor`);
 	}
+
+	// Helper to get representative name
+	const getRepName = (rep: Representative): string => {
+		// Both MdB and MP have a name field
+		return rep.name;
+	};
+
+	// Helper to get party badge style - returns Tailwind classes
+	const getPartyBadge = (rep: Representative): string => {
+		// Both types use 'party' field
+		if (isCanada) {
+			return CA_PARTY_COLORS[rep.party] || "bg-gray-500 text-white";
+		}
+		if (isUK) {
+			return UK_PARTY_COLORS[rep.party] || "bg-gray-500 text-white";
+		}
+		if (isFrance) {
+			// French députés use partyShort field for lookup
+			const partyKey = "partyShort" in rep ? rep.partyShort : rep.party;
+			return FR_PARTY_COLORS[partyKey] || "bg-gray-500 text-white";
+		}
+		return DE_PARTY_COLORS[rep.party] || "bg-gray-500 text-white";
+	};
+
+	// Helper to get party name
+	const getPartyName = (rep: Representative): string => {
+		return rep.party;
+	};
+
+	// Helper to get representative image URL (French députés don't have images)
+	const getRepImageUrl = (rep: Representative): string | null => {
+		if ("imageUrl" in rep) {
+			return rep.imageUrl;
+		}
+		return null;
+	};
 
 	const isValid =
 		name.trim() &&
-		selectedMdB &&
-		selectedForderungen.length > 0 &&
+		selectedRep &&
+		selectedDemands.length > 0 &&
 		validatePersonalNote(personalNote, t).valid &&
 		consentGiven;
 
@@ -420,7 +650,9 @@ export function LetterForm() {
 					<span>
 						{language === "de"
 							? "Deine vorherigen Eingaben wurden übernommen. Wähle nur noch eine*n neue*n Abgeordnete*n aus."
-							: "Your previous inputs have been loaded. Just select a new MP."}
+							: language === "fr"
+								? "Vos entrées précédentes ont été chargées. Sélectionnez simplement un(e) nouveau/nouvelle député(e)."
+								: "Your previous inputs have been loaded. Just select a new MP."}
 					</span>
 				</div>
 			)}
@@ -428,11 +660,7 @@ export function LetterForm() {
 			{/* Privacy Notice Banner */}
 			<div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-muted/30 rounded-lg px-3 py-2">
 				<ShieldCheck className="h-4 w-4 text-emerald-600" />
-				<span>
-					{language === "de"
-						? "Deine Daten werden nicht gespeichert – nur für deinen Brief verwendet."
-						: "Your data is not stored – only used to create your letter."}
-				</span>
+				<span>{t("form", "dataNotice")}</span>
 			</div>
 
 			{/* Step 1: Name */}
@@ -464,7 +692,7 @@ export function LetterForm() {
 				</div>
 			</div>
 
-			{/* Step 2: Postal Code & MdB Selection */}
+			{/* Step 2: Postal Code & Representative Selection */}
 			<div className="p-4 md:p-5 rounded-xl bg-card border border-border/60 shadow-sm space-y-4">
 				<div className="flex items-center gap-2">
 					<span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
@@ -473,37 +701,91 @@ export function LetterForm() {
 					<h3 className="font-medium">{t("form", "step2.title")}</h3>
 				</div>
 				<div className="space-y-4 px-2">
-					{/* PLZ */}
+					{/* Postal Code */}
 					<div className="space-y-2">
-						<Label htmlFor="plz" className="text-sm">
-							{t("form", "step2.plzLabel")}
+						<Label htmlFor="postalCode" className="text-sm">
+							{isCanada
+								? language === "de"
+									? "Postleitzahl"
+									: "Postal Code"
+								: isUK
+									? "Postcode"
+									: t("form", "step2.plzLabel")}
 						</Label>
 						<Input
-							id="plz"
-							placeholder={t("form", "step2.plzPlaceholder")}
-							maxLength={5}
-							value={plz}
+							id="postalCode"
+							placeholder={
+								isCanada
+									? language === "de"
+										? "z.B. M5V 1A1"
+										: "e.g., M5V 1A1"
+									: isUK
+										? "e.g., SW1A 1AA"
+										: isFrance
+											? language === "fr"
+												? "ex. 75001"
+												: "e.g., 75001"
+											: t("form", "step2.plzPlaceholder")
+							}
+							maxLength={isCanada ? 7 : isUK ? 8 : isFrance ? 5 : 5}
+							value={postalCode}
 							onChange={(e) =>
-								handlePlzChange(e.target.value.replace(/\D/g, ""))
+								handlePostalCodeChange(
+									isCanada || isUK
+										? e.target.value.toUpperCase()
+										: e.target.value.replace(/\D/g, ""),
+								)
 							}
 							className="max-w-40"
 						/>
-						{plz.length === 5 && !wahlkreis && (
+						{isLookingUpPostcode && (
+							<p className="text-sm text-muted-foreground">
+								🔍 Looking up your constituency...
+							</p>
+						)}
+						{!isCanada && !isUK && postalCode.length === 5 && !district && (
 							<p className="text-sm text-destructive">
 								{t("form", "step2.wahlkreisNotFound")}
 							</p>
 						)}
-						{wahlkreis && (
+						{isCanada && postalCode.length >= 3 && !district && (
+							<p className="text-sm text-destructive">
+								{language === "de"
+									? "Kein Wahlkreis gefunden"
+									: "No riding found for this postal code"}
+							</p>
+						)}
+						{isUK &&
+							!isLookingUpPostcode &&
+							postalCode.length >= 5 &&
+							!district && (
+								<p className="text-sm text-destructive">
+									No constituency found for this postcode
+								</p>
+							)}
+						{district && (
 							<p className="text-sm text-muted-foreground">
-								📍 {t("form", "step2.wahlkreisFound")}: {wahlkreis.name}
+								📍{" "}
+								{isCanada
+									? language === "de"
+										? "Wahlkreis"
+										: "Riding"
+									: isUK
+										? "Constituency"
+										: t("form", "step2.wahlkreisFound")}
+								: {district.name}
 							</p>
 						)}
 					</div>
 
-					{wahlkreis && mdbs.length === 0 && (
+					{district && representatives.length === 0 && (
 						<div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800">
 							<p className="text-sm font-medium">
-								{language === "de" ? "Keine MdBs gefunden" : "No MPs found"}
+								{language === "de"
+									? isCanada
+										? "Kein/e Abgeordnete/r gefunden"
+										: "Keine MdBs gefunden"
+									: "No MPs found"}
 							</p>
 							<p className="text-xs mt-1">
 								{language === "de"
@@ -513,42 +795,46 @@ export function LetterForm() {
 						</div>
 					)}
 
-					{mdbs.length > 0 && (
+					{representatives.length > 0 && (
 						<div className="space-y-3">
 							<Label className="text-sm font-medium">
 								{t("form", "step2.selectLabel")}
 							</Label>
-							{/* Inline expandable MdB selector */}
+							{/* Inline expandable representative selector */}
 							<div className="rounded-lg border border-border overflow-hidden transition-all duration-200">
-								{/* Show selected MdB or placeholder when collapsed */}
-								{!mdbSelectorOpen && (
+								{/* Show selected representative or placeholder when collapsed */}
+								{!repSelectorOpen && (
 									<button
 										type="button"
-										onClick={() => setMdbSelectorOpen(true)}
+										onClick={() => setRepSelectorOpen(true)}
 										className="w-full flex items-center justify-between gap-3 p-3 bg-background hover:bg-muted/30 transition-colors text-left"
 									>
-										{selectedMdB ? (
+										{selectedRep ? (
 											<div className="flex items-center gap-3 flex-1 min-w-0">
-												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted shrink-0 border-2 border-primary/20">
-													<Image
-														src={selectedMdB.imageUrl}
-														alt={selectedMdB.name}
-														width={40}
-														height={40}
-														className="object-cover object-top w-full h-full"
-														unoptimized
-													/>
+												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted shrink-0 border-2 border-primary/20 flex items-center justify-center">
+													{getRepImageUrl(selectedRep) ? (
+														<Image
+															src={getRepImageUrl(selectedRep) as string}
+															alt={selectedRep.name}
+															width={40}
+															height={40}
+															className="object-cover object-top w-full h-full"
+															unoptimized
+														/>
+													) : (
+														<span className="text-lg font-medium text-muted-foreground">
+															{selectedRep.name.charAt(0)}
+														</span>
+													)}
 												</div>
 												<div className="flex-1 min-w-0">
 													<p className="font-medium text-foreground truncate">
-														{selectedMdB.name}
+														{getRepName(selectedRep)}
 													</p>
 													<span
-														className={`inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${
-															PARTY_COLORS[selectedMdB.party] || "bg-gray-200"
-														}`}
+														className={`inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${getPartyBadge(selectedRep)}`}
 													>
-														{selectedMdB.party}
+														{getPartyName(selectedRep)}
 													</span>
 												</div>
 											</div>
@@ -561,15 +847,15 @@ export function LetterForm() {
 									</button>
 								)}
 
-								{/* Expanded list of MdBs */}
-								{mdbSelectorOpen && (
+								{/* Expanded list of representatives */}
+								{repSelectorOpen && (
 									<div
 										className="divide-y divide-border"
 										role="listbox"
 										aria-label={t("form", "step2.selectLabel")}
 										onKeyDown={(e) => {
 											if (e.key === "Escape") {
-												setMdbSelectorOpen(false);
+												setRepSelectorOpen(false);
 											} else if (e.key === "ArrowDown" || e.key === "ArrowUp") {
 												e.preventDefault();
 												const buttons =
@@ -585,52 +871,56 @@ export function LetterForm() {
 											}
 										}}
 									>
-										{mdbs.map((mdb) => (
+										{representatives.map((rep) => (
 											<button
-												key={mdb.id}
+												key={rep.id}
 												type="button"
 												role="option"
-												aria-selected={selectedMdB?.id === mdb.id}
+												aria-selected={selectedRep?.id === rep.id}
 												onClick={() => {
-													setSelectedMdB(mdb);
-													setMdbSelectorOpen(false);
+													setSelectedRep(rep);
+													setRepSelectorOpen(false);
 												}}
 												onKeyDown={(e) => {
 													if (e.key === "Enter" || e.key === " ") {
 														e.preventDefault();
-														setSelectedMdB(mdb);
-														setMdbSelectorOpen(false);
+														setSelectedRep(rep);
+														setRepSelectorOpen(false);
 													}
 												}}
 												className={`w-full flex items-center gap-3 p-3 text-left transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset ${
-													selectedMdB?.id === mdb.id
+													selectedRep?.id === rep.id
 														? "bg-primary/10"
 														: "bg-background hover:bg-muted/50"
 												}`}
 											>
-												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted shrink-0 border border-border">
-													<Image
-														src={mdb.imageUrl}
-														alt={mdb.name}
-														width={40}
-														height={40}
-														className="object-cover object-top w-full h-full"
-														unoptimized
-													/>
+												<div className="h-10 w-10 overflow-hidden rounded-full bg-muted shrink-0 border border-border flex items-center justify-center">
+													{getRepImageUrl(rep) ? (
+														<Image
+															src={getRepImageUrl(rep) as string}
+															alt={rep.name}
+															width={40}
+															height={40}
+															className="object-cover object-top w-full h-full"
+															unoptimized
+														/>
+													) : (
+														<span className="text-lg font-medium text-muted-foreground">
+															{rep.name.charAt(0)}
+														</span>
+													)}
 												</div>
 												<div className="flex-1 min-w-0">
 													<p className="font-medium text-foreground truncate">
-														{mdb.name}
+														{getRepName(rep)}
 													</p>
 													<span
-														className={`inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${
-															PARTY_COLORS[mdb.party] || "bg-gray-200"
-														}`}
+														className={`inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${getPartyBadge(rep)}`}
 													>
-														{mdb.party}
+														{getPartyName(rep)}
 													</span>
 												</div>
-												{selectedMdB?.id === mdb.id && (
+												{selectedRep?.id === rep.id && (
 													<Check className="h-5 w-5 text-primary shrink-0" />
 												)}
 											</button>
@@ -668,7 +958,16 @@ export function LetterForm() {
 					<div className="relative">
 						<Textarea
 							id="story"
-							placeholder={t("form", "step3.placeholder")}
+							placeholder={t(
+								"form",
+								isCanada
+									? "step3.placeholderCA"
+									: isUK
+										? "step3.placeholderUK"
+										: isFrance
+											? "step3.placeholderFR"
+											: "step3.placeholderDE",
+							)}
 							className="min-h-30 resize-none pr-10"
 							value={personalNote}
 							onChange={(e) => setPersonalNote(e.target.value)}
@@ -714,13 +1013,22 @@ export function LetterForm() {
 						{t("form", "step4.hint")}
 					</p>
 					<div className="grid gap-2">
-						{FORDERUNGEN.map((forderung) => {
-							const isSelected = selectedForderungen.includes(forderung.id);
+						{demands.map((demand) => {
+							const isSelected = selectedDemands.includes(demand.id);
+							// Handle different language structures: DE has {de, en}, CA has {en, fr}
+							// biome-ignore lint/suspicious/noExplicitAny: Union type requires explicit casting
+							const titleObj = demand.title as any;
+							// biome-ignore lint/suspicious/noExplicitAny: Union type requires explicit casting
+							const descObj = demand.description as any;
+							const demandTitle =
+								titleObj[language] || titleObj.en || titleObj.de;
+							const demandDescription =
+								descObj[language] || descObj.en || descObj.de;
 							return (
 								<button
-									key={forderung.id}
+									key={demand.id}
 									type="button"
-									onClick={() => toggleForderung(forderung.id)}
+									onClick={() => toggleDemand(demand.id)}
 									className={`w-full text-left p-4 rounded-xl transition-all duration-200 ${
 										isSelected
 											? "bg-primary text-primary-foreground shadow-md ring-2 ring-primary ring-offset-2 ring-offset-background"
@@ -743,7 +1051,7 @@ export function LetterForm() {
 											<span
 												className={`font-medium text-sm block ${isSelected ? "text-primary-foreground" : ""}`}
 											>
-												{forderung.title[language]}
+												{demandTitle}
 											</span>
 											<p
 												className={`text-xs leading-relaxed ${
@@ -752,7 +1060,7 @@ export function LetterForm() {
 														: "text-muted-foreground"
 												}`}
 											>
-												{forderung.description[language]}
+												{demandDescription}
 											</p>
 										</div>
 									</div>

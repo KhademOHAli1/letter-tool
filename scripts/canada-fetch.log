@@ -10,8 +10,8 @@ Output: /Users/ali/letter-tools/src/lib/data/ca
 📥 Fetching ridings from Represent API...
   Fetching page 1...
   Fetching page 2...
-  Fetching page 2...
   Fetching page 3...
+  Fetching page 2...
   Fetching page 4...
   Found 338 ridings
   Fetching page 3...
@@ -22,35 +22,64 @@ Output: /Users/ali/letter-tools/src/lib/data/ca
   Fetching page 3...
   Fetching page 4...
 
-📥 Building FULL FSA to riding mapping...
-   Estimated time: ~60 minutes
+📥 Building FULL FSA to riding mapping (PARALLEL)...
+   Batch size: 10 | Batch delay: 1000ms
+   Estimated time: ~6-8 minutes
    FSAs to check: 3600
 
-   Checked 100/3600 FSAs | Found: 24 | Errors: 0 | Elapsed: 1.9m | ETA: 66.2m
-   Checked 200/3600 FSAs | Found: 26 | Errors: 0 | Elapsed: 3.8m | ETA: 64.2m
-   Checked 300/3600 FSAs | Found: 95 | Errors: 0 | Elapsed: 5.7m | ETA: 62.8m
-   Checked 400/3600 FSAs | Found: 98 | Errors: 0 | Elapsed: 7.6m | ETA: 60.8m
-   Checked 500/3600 FSAs | Found: 104 | Errors: 0 | Elapsed: 9.5m | ETA: 58.8m
-   Checked 600/3600 FSAs | Found: 104 | Errors: 0 | Elapsed: 11.4m | ETA: 56.8m
-   Checked 700/3600 FSAs | Found: 156 | Errors: 0 | Elapsed: 13.3m | ETA: 55.1m
-   Checked 800/3600 FSAs | Found: 213 | Errors: 0 | Elapsed: 15.2m | ETA: 53.3m
-   Checked 900/3600 FSAs | Found: 268 | Errors: 0 | Elapsed: 17.2m | ETA: 51.5m
-   Checked 1000/3600 FSAs | Found: 338 | Errors: 0 | Elapsed: 19.1m | ETA: 49.8m
-   Checked 1100/3600 FSAs | Found: 418 | Errors: 0 | Elapsed: 21.1m | ETA: 48.0m
-   Checked 1200/3600 FSAs | Found: 458 | Errors: 0 | Elapsed: 23.1m | ETA: 46.1m
-   Checked 1300/3600 FSAs | Found: 530 | Errors: 0 | Elapsed: 25.0m | ETA: 44.3m
-   Checked 1400/3600 FSAs | Found: 605 | Errors: 0 | Elapsed: 27.0m | ETA: 42.4m
-   Checked 1500/3600 FSAs | Found: 651 | Errors: 0 | Elapsed: 28.9m | ETA: 40.5m
-   Checked 1600/3600 FSAs | Found: 681 | Errors: 0 | Elapsed: 30.8m | ETA: 38.5m
-   Checked 1700/3600 FSAs | Found: 751 | Errors: 0 | Elapsed: 32.8m | ETA: 36.6m
-   Checked 1800/3600 FSAs | Found: 837 | Errors: 0 | Elapsed: 34.7m | ETA: 34.7m
-   Checked 1900/3600 FSAs | Found: 896 | Errors: 0 | Elapsed: 36.7m | ETA: 32.8m
-   Checked 2000/3600 FSAs | Found: 951 | Errors: 0 | Elapsed: 38.6m | ETA: 30.9m
-   Checked 2100/3600 FSAs | Found: 1005 | Errors: 0 | Elapsed: 40.6m | ETA: 29.0m
-   Checked 2200/3600 FSAs | Found: 1058 | Errors: 0 | Elapsed: 42.5m | ETA: 27.0m
-   Checked 2300/3600 FSAs | Found: 1083 | Errors: 0 | Elapsed: 44.4m | ETA: 25.1m
-   Checked 2400/3600 FSAs | Found: 1100 | Errors: 0 | Elapsed: 46.3m | ETA: 23.1m
-   Checked 2500/3600 FSAs | Found: 1143 | Errors: 0 | Elapsed: 48.2m | ETA: 21.2m
-   Checked 2600/3600 FSAs | Found: 1157 | Errors: 0 | Elapsed: 50.1m | ETA: 19.3m
-   Checked 2700/3600 FSAs | Found: 1172 | Errors: 0 | Elapsed: 52.0m | ETA: 17.3m
-   Checked 2800/3600 FSAs | Found: 1194 | Errors: 0 | Elapsed: 53.9m | ETA: 15.4m
+   110/3600 FSAs | Found: 23 | 5.5 req/s | 20s elapsed | ~635s remaining
+   210/3600 FSAs | Found: 28 | 5.1 req/s | 41s elapsed | ~665s remaining
+   310/3600 FSAs | Found: 81 | 5.2 req/s | 60s elapsed | ~633s remaining
+   410/3600 FSAs | Found: 83 | 5.1 req/s | 81s elapsed | ~625s remaining
+   510/3600 FSAs | Found: 87 | 5.0 req/s | 102s elapsed | ~618s remaining
+   610/3600 FSAs | Found: 87 | 5.0 req/s | 122s elapsed | ~598s remaining
+   710/3600 FSAs | Found: 144 | 0.2 req/s | 3373s elapsed | ~14450s remaining
+   810/3600 FSAs | Found: 190 | 0.1 req/s | 6764s elapsed | ~27900s remaining
+   910/3600 FSAs | Found: 245 | 0.1 req/s | 7367s elapsed | ~26900s remaining
+   1010/3600 FSAs | Found: 298 | 0.1 req/s | 7967s elapsed | ~25900s remaining
+   1110/3600 FSAs | Found: 375 | 0.1 req/s | 9166s elapsed | ~24900s remaining
+   1210/3600 FSAs | Found: 414 | 0.1 req/s | 9766s elapsed | ~23900s remaining
+   1310/3600 FSAs | Found: 481 | 0.1 req/s | 10371s elapsed | ~22900s remaining
+   1410/3600 FSAs | Found: 540 | 0.1 req/s | 11268s elapsed | ~21900s remaining
+   1510/3600 FSAs | Found: 575 | 0.1 req/s | 11867s elapsed | ~20900s remaining
+   1610/3600 FSAs | Found: 602 | 0.1 req/s | 12165s elapsed | ~19900s remaining
+   1710/3600 FSAs | Found: 678 | 0.1 req/s | 12768s elapsed | ~18900s remaining
+   1810/3600 FSAs | Found: 749 | 0.1 req/s | 14268s elapsed | ~17900s remaining
+   1910/3600 FSAs | Found: 810 | 0.1 req/s | 16370s elapsed | ~16900s remaining
+   2010/3600 FSAs | Found: 853 | 0.1 req/s | 20266s elapsed | ~15900s remaining
+   2110/3600 FSAs | Found: 900 | 0.1 req/s | 29462s elapsed | ~14900s remaining
+   2210/3600 FSAs | Found: 947 | 0.1 req/s | 31000s elapsed | ~13900s remaining
+   2310/3600 FSAs | Found: 968 | 0.1 req/s | 33557s elapsed | ~12900s remaining
+   2410/3600 FSAs | Found: 984 | 0.1 req/s | 34666s elapsed | ~11900s remaining
+   2510/3600 FSAs | Found: 1023 | 0.1 req/s | 35122s elapsed | ~10900s remaining
+   2610/3600 FSAs | Found: 1034 | 0.1 req/s | 38083s elapsed | ~9900s remaining
+   2710/3600 FSAs | Found: 1048 | 0.1 req/s | 38103s elapsed | ~8900s remaining
+   2810/3600 FSAs | Found: 1064 | 0.1 req/s | 38122s elapsed | ~7900s remaining
+   2910/3600 FSAs | Found: 1130 | 0.1 req/s | 38143s elapsed | ~6900s remaining
+   3010/3600 FSAs | Found: 1188 | 0.1 req/s | 38163s elapsed | ~5900s remaining
+   3110/3600 FSAs | Found: 1269 | 0.1 req/s | 38182s elapsed | ~4900s remaining
+   3210/3600 FSAs | Found: 1355 | 0.1 req/s | 38202s elapsed | ~3900s remaining
+   3310/3600 FSAs | Found: 1356 | 0.1 req/s | 38223s elapsed | ~2900s remaining
+   3410/3600 FSAs | Found: 1357 | 0.1 req/s | 38244s elapsed | ~1900s remaining
+   3510/3600 FSAs | Found: 1358 | 0.1 req/s | 38266s elapsed | ~900s remaining
+
+   ✅ Completed! Checked 3600 FSAs in 38287s.
+   Found 1358 valid FSA→riding mappings.
+
+✅ Wrote 343 MPs to /Users/ali/letter-tools/src/lib/data/ca/mp-data.json
+✅ Wrote 338 ridings to /Users/ali/letter-tools/src/lib/data/ca/ridings-data.json
+✅ Wrote 1358 FSA mappings to /Users/ali/letter-tools/src/lib/data/ca/postal-code-riding.json
+
+📊 Summary:
+   MPs: 343
+   Ridings: 338
+   FSA mappings: 1358
+
+   Party breakdown:
+     Liberal: 169
+     Conservative: 144
+     Bloc Québécois: 22
+     NDP: 7
+     Green: 1
+
+🎉 Done! Data files created successfully.

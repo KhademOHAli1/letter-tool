@@ -104,8 +104,6 @@ export function ImpactStats() {
 								))}
 						</div>
 					)}
-
-
 				</div>
 			</div>
 		</section>

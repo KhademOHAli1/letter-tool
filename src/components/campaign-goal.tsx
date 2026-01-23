@@ -15,6 +15,8 @@ import { useLanguage } from "@/lib/i18n/context";
 interface CampaignGoalProps {
 	/** Show compact version without text */
 	compact?: boolean;
+	/** Country code to fetch stats for */
+	country?: "de" | "ca" | "uk" | "fr";
 }
 
 interface Stats {
@@ -47,7 +49,10 @@ function getCrossedMilestone(current: number): number | null {
 	return null;
 }
 
-export function CampaignGoal({ compact = false }: CampaignGoalProps) {
+export function CampaignGoal({
+	compact = false,
+	country = "de",
+}: CampaignGoalProps) {
 	const { language } = useLanguage();
 	const [stats, setStats] = useState<Stats | null>(null);
 	const [showCelebration, setShowCelebration] = useState(false);
@@ -56,7 +61,7 @@ export function CampaignGoal({ compact = false }: CampaignGoalProps) {
 	const locale = language === "de" ? "de-DE" : "en-US";
 
 	useEffect(() => {
-		fetch("/api/stats")
+		fetch(`/api/stats?country=${country}`)
 			.then((res) => res.json())
 			.then((data) => {
 				if (data && typeof data.total_letters === "number") {
@@ -78,7 +83,7 @@ export function CampaignGoal({ compact = false }: CampaignGoalProps) {
 				}
 			})
 			.catch(() => setStats({ total_letters: 0, unique_mdbs: 0 }));
-	}, []);
+	}, [country]);
 
 	if (!stats) {
 		return <div className="animate-pulse h-16 bg-muted/50 rounded-lg" />;

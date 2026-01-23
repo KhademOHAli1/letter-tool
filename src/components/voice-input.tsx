@@ -156,8 +156,9 @@ export function VoiceInput({
 		// Configure recognition
 		recognition.continuous = true;
 		recognition.interimResults = true;
-		// Support German, English, and Farsi
-		recognition.lang = language === "de" ? "de-DE" : "en-US";
+		// Support German, English, and French
+		recognition.lang =
+			language === "de" ? "de-DE" : language === "fr" ? "fr-CA" : "en-US";
 
 		recognition.onstart = () => {
 			setIsListening(true);

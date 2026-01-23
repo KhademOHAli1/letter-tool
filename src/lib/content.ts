@@ -2,7 +2,49 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { cookies } from "next/headers";
 
-export type ContentLanguage = "de" | "en" | "fa";
+export type ContentLanguage = "de" | "en" | "fr" | "fa";
+
+/** Valid document slugs */
+export type DocSlug =
+	| "impressum"
+	| "datenschutz"
+	| "daten-transparenz"
+	| "privacy"
+	| "legal";
+
+/** Document slugs that are valid for each country */
+const COUNTRY_DOC_SLUGS: Record<string, DocSlug[]> = {
+	de: ["impressum", "datenschutz", "daten-transparenz"],
+	ca: ["privacy", "legal", "daten-transparenz"], // CA uses English-named routes
+	uk: ["privacy", "legal", "daten-transparenz"], // UK uses English-named routes
+};
+
+/** Map slugs to canonical document identifiers */
+const SLUG_TO_DOC: Record<DocSlug, keyof typeof docMeta> = {
+	impressum: "impressum",
+	datenschutz: "datenschutz",
+	"daten-transparenz": "daten-transparenz",
+	privacy: "datenschutz", // English alias for privacy policy
+	legal: "impressum", // English alias for legal notice
+};
+
+/**
+ * Check if a slug is a valid document slug
+ */
+export function isValidDocSlug(slug: string): slug is DocSlug {
+	return slug in SLUG_TO_DOC;
+}
+
+/**
+ * Check if a document is available for a specific country
+ */
+export function isDocAvailableForCountry(
+	slug: DocSlug,
+	country: string,
+): boolean {
+	const availableDocs = COUNTRY_DOC_SLUGS[country];
+	return availableDocs?.includes(slug) ?? false;
+}
 
 /**
  * Get the user's preferred language from cookies
@@ -21,7 +63,7 @@ export async function getPreferredLanguage(): Promise<"de" | "en"> {
 
 /**
  * Load markdown content for a document page
- * @param docName - The document name (e.g., "datenschutz", "impressum")
+ * @param docName - The document file name (without .md extension)
  * @param language - The language to load
  * @returns The markdown content
  */
@@ -39,14 +81,24 @@ export async function loadDocContent(
 		const content = await fs.readFile(filePath, "utf-8");
 		return content;
 	} catch {
-		// Fallback to German if the file doesn't exist
-		const fallbackPath = path.join(
-			process.cwd(),
-			"content",
-			"de",
-			`${docName}.md`,
-		);
-		return fs.readFile(fallbackPath, "utf-8");
+		// Fallback to German if the file doesn't exist, then English
+		try {
+			const fallbackPath = path.join(
+				process.cwd(),
+				"content",
+				"de",
+				`${docName}.md`,
+			);
+			return await fs.readFile(fallbackPath, "utf-8");
+		} catch {
+			const enFallbackPath = path.join(
+				process.cwd(),
+				"content",
+				"en",
+				`${docName}.md`,
+			);
+			return fs.readFile(enFallbackPath, "utf-8");
+		}
 	}
 }
 
@@ -98,28 +150,109 @@ export const docMeta = {
 } as const;
 
 /**
- * Footer links for each language
+ * Get document metadata for a slug
  */
+export function getDocMeta(
+	slug: DocSlug,
+	language: "de" | "en",
+	_country?: string,
+): { title: string; subtitle: string; fileName: string } | null {
+	const docKey = SLUG_TO_DOC[slug];
+	if (!docKey) return null;
+
+	const doc = docMeta[docKey];
+	if (!doc) return null;
+
+	// Use English for CA country if German not available
+	const meta = doc[language] || doc.en || doc.de;
+	return meta as { title: string; subtitle: string; fileName: string };
+}
+
+/**
+ * Get footer links for a specific language and country
+ */
+export function getFooterLinks(
+	language: ContentLanguage,
+	country: string,
+): Array<{ href: string; label: string }> {
+	const prefix = `/${country}`;
+
+	// Helper for trilingual labels (de, en, fr)
+	const label = (de: string, en: string, fr: string) => {
+		if (language === "de") return de;
+		if (language === "fr") return fr;
+		return en;
+	};
+
+	if (country === "ca" || country === "uk") {
+		// Canadian/UK links (English routes)
+		return [
+			{
+				href: `${prefix}/daten-transparenz`,
+				label: label(
+					"Daten-Transparenz",
+					"Data Transparency",
+					"Transparence des données",
+				),
+			},
+			{
+				href: `${prefix}/privacy`,
+				label: label(
+					"Datenschutz",
+					"Privacy Policy",
+					"Politique de confidentialité",
+				),
+			},
+			{
+				href: `${prefix}/legal`,
+				label: label("Impressum", "Legal Notice", "Mentions légales"),
+			},
+			{ href: prefix, label: label("Startseite", "Home", "Accueil") },
+		];
+	}
+
+	// German links (default)
+	if (language === "fa") {
+		return [
+			{ href: `${prefix}/daten-transparenz?lang=fa`, label: "شفافیت داده‌ها" },
+			{ href: `${prefix}/daten-transparenz?lang=de`, label: "Deutsch" },
+			{ href: `${prefix}/daten-transparenz?lang=en`, label: "English" },
+			{ href: prefix, label: "صفحه اصلی" },
+		];
+	}
+
+	return [
+		{
+			href: `${prefix}/daten-transparenz`,
+			label: label(
+				"Daten-Transparenz",
+				"Data Transparency",
+				"Transparence des données",
+			),
+		},
+		{
+			href: `${prefix}/datenschutz`,
+			label: label(
+				"Datenschutzerklärung",
+				"Privacy Policy",
+				"Politique de confidentialité",
+			),
+		},
+		{
+			href: `${prefix}/impressum`,
+			label: label("Impressum", "Legal Notice", "Mentions légales"),
+		},
+		{ href: prefix, label: label("Startseite", "Home", "Accueil") },
+	];
+}
+
+// Legacy export for backwards compatibility
 export const footerLinks: Record<
 	ContentLanguage,
 	Array<{ href: string; label: string }>
 > = {
-	de: [
-		{ href: "/daten-transparenz", label: "Daten-Transparenz" },
-		{ href: "/datenschutz", label: "Datenschutzerklärung" },
-		{ href: "/impressum", label: "Impressum" },
-		{ href: "/", label: "Startseite" },
-	],
-	en: [
-		{ href: "/daten-transparenz", label: "Data Transparency" },
-		{ href: "/datenschutz", label: "Privacy Policy" },
-		{ href: "/impressum", label: "Legal Notice" },
-		{ href: "/", label: "Home" },
-	],
-	fa: [
-		{ href: "/daten-transparenz?lang=fa", label: "شفافیت داده‌ها" },
-		{ href: "/daten-transparenz?lang=de", label: "Deutsch" },
-		{ href: "/daten-transparenz?lang=en", label: "English" },
-		{ href: "/", label: "صفحه اصلی" },
-	],
+	de: getFooterLinks("de", "de"),
+	en: getFooterLinks("en", "de"),
+	fr: getFooterLinks("fr", "ca"),
+	fa: getFooterLinks("fa", "de"),
 };

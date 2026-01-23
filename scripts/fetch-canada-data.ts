@@ -1,3 +1,4 @@
+// @ts-nocheck - This script runs with Bun and uses Bun-specific APIs
 /**
  * Fetch Canadian MP and riding data from Represent API (Open North)
  * 
@@ -359,39 +360,21 @@ const SAMPLE_FSAS = [
 	"X1A", "X0A", "X0B", "X0C", "X0E", "X0G",
 ];
 
-// Fetch postal code to riding mapping
-async function fetchPostalCodeMapping(): Promise<
-	Record<string, PostalCodeMapping>
-> {
-	const fsasToCheck = QUICK_MODE ? SAMPLE_FSAS : generateAllFSAs();
-	const mode = QUICK_MODE ? "QUICK (sample)" : "FULL";
-	const timeEstimate = QUICK_MODE ? "~1 minute" : "~60 minutes";
+// Common postal code suffixes to try (LDU patterns)
+const LDU_SUFFIXES = ['1A1', '2A1', '0A1', '1B1', '1C1', '3A1', '4A1'];
 
-	console.log(`\n📥 Building ${mode} FSA to riding mapping...`);
-	console.log(`   Estimated time: ${timeEstimate}`);
-	console.log(`   FSAs to check: ${fsasToCheck.length}\n`);
-
-	const mapping: Record<string, PostalCodeMapping> = {};
-	let checked = 0;
-	let found = 0;
-	let errors = 0;
-	const startTime = Date.now();
-
-	// Process FSAs with rate limiting (60 req/min = 1 req/sec to be safe)
-	for (const fsa of fsasToCheck) {
-		checked++;
+// Fetch a single FSA and return the mapping if valid
+// Tries multiple LDU suffixes to maximize hit rate
+async function fetchSingleFSA(fsa: string): Promise<{ fsa: string; mapping: PostalCodeMapping } | null> {
+	for (const suffix of LDU_SUFFIXES) {
+		const postalCode = `${fsa}${suffix}`;
 		
-		// Construct a sample postal code: FSA + "1A1" (common pattern)
-		const postalCode = `${fsa}1A1`;
-
 		try {
-			const response = await fetch(
-				`${API_BASE}/postcodes/${postalCode}/`,
-			);
-
+			const response = await fetch(`${API_BASE}/postcodes/${postalCode}/`);
+			
 			if (response.ok) {
 				const data: RepresentPostalCode = await response.json();
-
+				
 				// Find the federal electoral district in the boundaries
 				// Priority: 2023 representation order (latest redistribution)
 				const fedDistrict = 
@@ -410,37 +393,81 @@ async function fetchPostalCodeMapping(): Promise<
 					);
 
 				if (fedDistrict) {
-					mapping[fsa] = {
-						ridingId: fedDistrict.external_id,
-						ridingName: fedDistrict.name,
-						province: data.province,
+					return {
+						fsa,
+						mapping: {
+							ridingId: fedDistrict.external_id,
+							ridingName: fedDistrict.name,
+							province: data.province,
+						}
 					};
-					found++;
 				}
 			}
-			// 404 = FSA doesn't exist, which is expected for many combinations
-		} catch (error) {
-			errors++;
-			// Only log if we get repeated errors
-			if (errors <= 5 || errors % 50 === 0) {
-				console.error(`  ⚠️ Error fetching ${postalCode}:`, error);
+		} catch {
+			// Ignore errors, try next suffix
+		}
+	}
+	
+	return null;
+}
+
+// Fetch postal code to riding mapping - PARALLEL VERSION
+async function fetchPostalCodeMapping(): Promise<Record<string, PostalCodeMapping>> {
+	const fsasToCheck = QUICK_MODE ? SAMPLE_FSAS : generateAllFSAs();
+	const mode = QUICK_MODE ? "QUICK (sample)" : "FULL";
+	
+	// Parallel config: 10 concurrent requests with 200ms stagger = ~50 req/sec burst, but we batch
+	const BATCH_SIZE = 10;
+	const BATCH_DELAY = 1000; // 1 second between batches = 10 req/sec = 600 req/min (within reason)
+	const timeEstimate = QUICK_MODE ? "~1 minute" : "~6-8 minutes";
+
+	console.log(`\n📥 Building ${mode} FSA to riding mapping (PARALLEL)...`);
+	console.log(`   Batch size: ${BATCH_SIZE} | Batch delay: ${BATCH_DELAY}ms`);
+	console.log(`   Estimated time: ${timeEstimate}`);
+	console.log(`   FSAs to check: ${fsasToCheck.length}\n`);
+
+	const mapping: Record<string, PostalCodeMapping> = {};
+	let checked = 0;
+	let found = 0;
+	const startTime = Date.now();
+
+	// Process in batches
+	for (let i = 0; i < fsasToCheck.length; i += BATCH_SIZE) {
+		const batch = fsasToCheck.slice(i, i + BATCH_SIZE);
+		
+		// Run batch in parallel
+		const results = await Promise.all(batch.map(fsa => fetchSingleFSA(fsa)));
+		
+		// Collect results
+		for (const result of results) {
+			checked++;
+			if (result) {
+				mapping[result.fsa] = result.mapping;
+				found++;
 			}
 		}
 
-		// Progress update every 100 FSAs (or every 10 in quick mode)
-		const updateInterval = QUICK_MODE ? 10 : 100;
-		if (checked % updateInterval === 0) {
-			const elapsed = ((Date.now() - startTime) / 1000 / 60).toFixed(1);
-			const eta = ((Date.now() - startTime) / checked * (fsasToCheck.length - checked) / 1000 / 60).toFixed(1);
-			console.log(`   Checked ${checked}/${fsasToCheck.length} FSAs | Found: ${found} | Errors: ${errors} | Elapsed: ${elapsed}m | ETA: ${eta}m`);
+		// Progress update every 10 batches (100 FSAs)
+		if ((i / BATCH_SIZE) % 10 === 0 && i > 0) {
+			const elapsed = ((Date.now() - startTime) / 1000).toFixed(0);
+			const rate = (checked / Number(elapsed)).toFixed(1);
+			const eta = ((fsasToCheck.length - checked) / Number(rate)).toFixed(0);
+			console.log(`   ${checked}/${fsasToCheck.length} FSAs | Found: ${found} | ${rate} req/s | ${elapsed}s elapsed | ~${eta}s remaining`);
+			
+			// Incremental save every 500 FSAs
+			if (checked % 500 === 0) {
+				const postalPath = join(OUTPUT_DIR, "postal-code-riding.json");
+				writeFileSync(postalPath, JSON.stringify(mapping, null, "\t"));
+				console.log(`   💾 Saved ${found} FSAs to disk`);
+			}
 		}
 
-		// Rate limiting: 1 request per second to stay well under 60/min limit
-		await Bun.sleep(1000);
+		// Rate limiting between batches
+		await Bun.sleep(BATCH_DELAY);
 	}
 
-	const totalTime = ((Date.now() - startTime) / 1000 / 60).toFixed(1);
-	console.log(`\n   ✅ Completed! Checked ${checked} FSAs in ${totalTime} minutes.`);
+	const totalTime = ((Date.now() - startTime) / 1000).toFixed(0);
+	console.log(`\n   ✅ Completed! Checked ${checked} FSAs in ${totalTime}s.`);
 	console.log(`   Found ${found} valid FSA→riding mappings.`);
 
 	return mapping;

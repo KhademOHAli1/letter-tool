@@ -1,8 +1,40 @@
 import { ImageResponse } from "next/og";
+import type { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-export async function GET() {
+// Localized content for OG image
+const OG_CONTENT = {
+	de: {
+		badge: "Deine Stimme zählt",
+		title: "Stimme für Iran",
+		subtitle:
+			"Schreib deinem Bundestagsabgeordneten für Menschenrechte im Iran",
+		cta: "In 5 Minuten deinen Brief schreiben →",
+		domain: "stimme-fuer-iran.de",
+	},
+	ca: {
+		badge: "Your Voice Matters",
+		title: "Voice for Iran",
+		subtitle: "Write to your Member of Parliament for human rights in Iran",
+		cta: "Write your letter in 5 minutes →",
+		domain: "voiceforiran.ca",
+	},
+	uk: {
+		badge: "Your Voice Matters",
+		title: "Voice for Iran",
+		subtitle: "Write to your Member of Parliament for human rights in Iran",
+		cta: "Write your letter in 5 minutes →",
+		domain: "voiceforiran.uk",
+	},
+} as const;
+
+export async function GET(request: NextRequest) {
+	const { searchParams } = new URL(request.url);
+	const country = searchParams.get("country") || "de";
+	const content =
+		OG_CONTENT[country as keyof typeof OG_CONTENT] || OG_CONTENT.de;
+
 	return new ImageResponse(
 		<div
 			style={{
@@ -49,7 +81,7 @@ export async function GET() {
 							fontWeight: "600",
 						}}
 					>
-						Deine Stimme zählt
+						{content.badge}
 					</span>
 				</div>
 
@@ -63,7 +95,7 @@ export async function GET() {
 						lineHeight: 1.1,
 					}}
 				>
-					Stimme für Iran
+					{content.title}
 				</h1>
 
 				{/* Subtitle */}
@@ -75,7 +107,7 @@ export async function GET() {
 						lineHeight: 1.4,
 					}}
 				>
-					Schreib deinem Bundestagsabgeordneten für Menschenrechte im Iran
+					{content.subtitle}
 				</p>
 
 				{/* CTA hint */}
@@ -96,7 +128,7 @@ export async function GET() {
 							color: "#ffffff",
 						}}
 					>
-						In 5 Minuten deinen Brief schreiben →
+						{content.cta}
 					</span>
 				</div>
 			</div>
@@ -113,7 +145,7 @@ export async function GET() {
 					fontSize: "18px",
 				}}
 			>
-				<span>stimme-fuer-iran.de</span>
+				<span>{content.domain}</span>
 			</div>
 		</div>,
 		{

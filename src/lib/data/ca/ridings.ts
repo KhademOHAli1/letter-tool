@@ -78,7 +78,10 @@ interface FsaRidingMapping {
 	ridingName: string;
 	province: string;
 }
-const FSA_RIDING_DATA = postalCodeRidingData as Record<string, FsaRidingMapping>;
+const FSA_RIDING_DATA = postalCodeRidingData as Record<
+	string,
+	FsaRidingMapping
+>;
 
 /**
  * All 343 federal electoral districts
@@ -144,7 +147,7 @@ import mpJson from "./mp-data.json";
 export const MPS: MP[] = (mpJson as MP[]).filter((m) => m.ridingId !== "");
 
 /**
- * Find MP(s) for a riding
+ * Find MP(s) for a riding by ID or name
  * Should return exactly 1 MP per riding (Canada has single-member constituencies)
  */
 export function findMPsByRiding(ridingId: string): MP[] {
@@ -152,13 +155,43 @@ export function findMPsByRiding(ridingId: string): MP[] {
 }
 
 /**
+ * Normalize riding name for comparison (handle ligatures, dashes, etc.)
+ */
+function normalizeRidingName(name: string): string {
+	return name
+		.toLowerCase()
+		.normalize("NFD") // Decompose ligatures
+		.replace(/[\u0300-\u036f]/g, "") // Remove diacritics
+		.replace(/œ/g, "oe")
+		.replace(/æ/g, "ae")
+		.replace(/—/g, "-")
+		.replace(/–/g, "-")
+		.replace(/\s+/g, " ")
+		.trim();
+}
+
+/**
  * Find MP by postal code
+ * Uses FSA to find riding, then matches MP by riding name (handles ID mismatches)
  */
 export function findMPByPostalCode(postalCode: string): MP | undefined {
-	const riding = findRidingByPostalCode(postalCode);
-	if (!riding) return undefined;
-	const mps = findMPsByRiding(riding.id);
-	return mps[0];
+	// Normalize: remove spaces, uppercase, take first 3 chars (FSA)
+	const fsa = postalCode.replace(/\s/g, "").toUpperCase().slice(0, 3);
+	const fsaData = FSA_RIDING_DATA[fsa];
+
+	if (!fsaData) return undefined;
+
+	// First try exact riding ID match
+	let mp = MPS.find((m) => m.ridingId === fsaData.ridingId);
+	if (mp) return mp;
+
+	// Fallback: match by normalized riding name
+	const normalizedFsaRiding = normalizeRidingName(fsaData.ridingName);
+	mp = MPS.find(
+		(m) => normalizeRidingName(m.ridingName) === normalizedFsaRiding,
+	);
+
+	return mp;
 }
 
 /**

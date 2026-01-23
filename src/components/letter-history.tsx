@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/i18n/context";
+import { t } from "@/lib/i18n/translations";
 import {
 	clearLetterHistory,
 	deleteFromHistory,
@@ -47,7 +48,7 @@ function LetterCard({
 }: {
 	letter: HistoryLetter;
 	onDelete: (id: string) => void;
-	language: "de" | "en";
+	language: "de" | "en" | "fr";
 	locale: string;
 }) {
 	const [expanded, setExpanded] = useState(false);
@@ -125,11 +126,11 @@ function LetterCard({
 							{formatTime(letter.createdAt, locale)}
 						</span>
 						<span>
-							{letter.wordCount} {language === "de" ? "Wörter" : "words"}
+							{letter.wordCount} {t("common", "words", language)}
 						</span>
 						{letter.emailSent && letter.emailSentAt && (
 							<span className="text-green-600 dark:text-green-400">
-								{language === "de" ? "Gesendet am" : "Sent on"}{" "}
+								{t("letterHistory", "sent", language)}{" "}
 								{formatDate(letter.emailSentAt, locale)}
 							</span>
 						)}
@@ -148,7 +149,7 @@ function LetterCard({
 								}}
 							>
 								<Mail className="h-4 w-4 mr-1.5" />
-								{language === "de" ? "Jetzt senden" : "Send now"}
+								{t("common", "send", language)}
 							</Button>
 						)}
 						<Button
@@ -174,7 +175,8 @@ export function LetterHistory({ compact = false }: LetterHistoryProps) {
 	const [history, setHistory] = useState<HistoryLetter[]>([]);
 	const [showAll, setShowAll] = useState(false);
 
-	const locale = language === "de" ? "de-DE" : "en-US";
+	const locale =
+		language === "de" ? "de-DE" : language === "fr" ? "fr-CA" : "en-US";
 
 	useEffect(() => {
 		setHistory(getLetterHistory());
@@ -186,13 +188,13 @@ export function LetterHistory({ compact = false }: LetterHistoryProps) {
 	};
 
 	const handleClearAll = () => {
-		if (
-			window.confirm(
-				language === "de"
-					? "Alle Briefe aus dem Verlauf löschen?"
-					: "Delete all letters from history?",
-			)
-		) {
+		const confirmMsg =
+			language === "de"
+				? "Alle Briefe aus dem Verlauf löschen?"
+				: language === "fr"
+					? "Supprimer toutes les lettres de l'historique?"
+					: "Delete all letters from history?";
+		if (window.confirm(confirmMsg)) {
 			clearLetterHistory();
 			setHistory([]);
 		}
@@ -207,20 +209,23 @@ export function LetterHistory({ compact = false }: LetterHistoryProps) {
 	const sentCount = history.filter((l) => l.emailSent).length;
 
 	if (compact) {
+		const letterWord =
+			history.length === 1
+				? t("letterHistory", "letterSingular", language)
+				: t("letterHistory", "letterPlural", language);
+		const createdWord =
+			language === "de"
+				? "erstellt"
+				: language === "fr"
+					? "créée(s)"
+					: "created";
 		return (
 			<div className="text-sm text-muted-foreground">
-				{history.length}{" "}
-				{language === "de"
-					? history.length === 1
-						? "Brief erstellt"
-						: "Briefe erstellt"
-					: history.length === 1
-						? "letter created"
-						: "letters created"}
+				{history.length} {letterWord} {createdWord}
 				{sentCount > 0 && (
 					<span className="text-green-600 dark:text-green-400">
 						{" "}
-						({sentCount} {language === "de" ? "gesendet" : "sent"})
+						({sentCount} {t("letterHistory", "sent", language)})
 					</span>
 				)}
 			</div>
@@ -232,18 +237,14 @@ export function LetterHistory({ compact = false }: LetterHistoryProps) {
 			{/* Header */}
 			<div className="flex items-center justify-between">
 				<h3 className="font-semibold">
-					{language === "de" ? "Deine Briefe" : "Your Letters"}
+					{t("letterHistory", "title", language)}
 				</h3>
 				<div className="flex items-center gap-2">
 					<span className="text-xs text-muted-foreground">
 						{history.length}{" "}
-						{language === "de"
-							? history.length === 1
-								? "Brief"
-								: "Briefe"
-							: history.length === 1
-								? "letter"
-								: "letters"}
+						{history.length === 1
+							? t("letterHistory", "letterSingular", language)
+							: t("letterHistory", "letterPlural", language)}
 					</span>
 					{history.length > 0 && (
 						<Button
@@ -252,7 +253,7 @@ export function LetterHistory({ compact = false }: LetterHistoryProps) {
 							className="text-xs text-destructive hover:text-destructive"
 							onClick={handleClearAll}
 						>
-							{language === "de" ? "Alle löschen" : "Clear all"}
+							{t("letterHistory", "clearAll", language)}
 						</Button>
 					)}
 				</div>
@@ -263,14 +264,14 @@ export function LetterHistory({ compact = false }: LetterHistoryProps) {
 				<div className="flex items-center gap-1.5">
 					<div className="w-2 h-2 rounded-full bg-green-500" />
 					<span>
-						{sentCount} {language === "de" ? "gesendet" : "sent"}
+						{sentCount} {t("letterHistory", "sent", language)}
 					</span>
 				</div>
 				<div className="flex items-center gap-1.5">
 					<div className="w-2 h-2 rounded-full bg-amber-500" />
 					<span>
 						{history.length - sentCount}{" "}
-						{language === "de" ? "ausstehend" : "pending"}
+						{t("letterHistory", "pending", language)}
 					</span>
 				</div>
 			</div>
@@ -296,12 +297,8 @@ export function LetterHistory({ compact = false }: LetterHistoryProps) {
 					onClick={() => setShowAll(!showAll)}
 				>
 					{showAll
-						? language === "de"
-							? "Weniger anzeigen"
-							: "Show less"
-						: language === "de"
-							? `${history.length - 3} weitere anzeigen`
-							: `Show ${history.length - 3} more`}
+						? t("letterHistory", "showLess", language)
+						: `${history.length - 3} ${t("letterHistory", "showMore", language)}`}
 				</Button>
 			)}
 		</div>
