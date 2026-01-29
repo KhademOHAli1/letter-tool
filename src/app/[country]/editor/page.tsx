@@ -32,6 +32,7 @@ interface FormData {
 	mdb: MdBData;
 	forderungen: string[];
 	personalNote: string;
+	language?: string;
 	country?: string;
 	_timing: number;
 }
@@ -62,39 +63,68 @@ function countWords(text: string): number {
 // Wort-Status bestimmen
 function getWordCountStatus(
 	count: number,
-	language: "de" | "en" | "fr",
+	language: "de" | "en" | "fr" | "es",
 ): {
 	color: string;
 	bg: string;
 	message: string;
 } {
-	// French falls back to English
-	const isGerman = language === "de";
+	const messages: Record<
+		string,
+		{ short: string; optimal: string; long: string; tooLong: string }
+	> = {
+		de: {
+			short: "Etwas kurz",
+			optimal: "Optimal",
+			long: "Etwas lang",
+			tooLong: "Zu lang",
+		},
+		en: {
+			short: "A bit short",
+			optimal: "Optimal",
+			long: "A bit long",
+			tooLong: "Too long",
+		},
+		fr: {
+			short: "Un peu court",
+			optimal: "Optimal",
+			long: "Un peu long",
+			tooLong: "Trop long",
+		},
+		es: {
+			short: "Un poco corto",
+			optimal: "Óptimo",
+			long: "Un poco largo",
+			tooLong: "Demasiado largo",
+		},
+	};
+	const t = messages[language] || messages.en;
+
 	if (count < 250) {
 		return {
 			color: "text-amber-700",
 			bg: "bg-amber-50",
-			message: isGerman ? "Etwas kurz" : "A bit short",
+			message: t.short,
 		};
 	}
 	if (count <= 700) {
 		return {
 			color: "text-green-700",
 			bg: "bg-green-50",
-			message: "Optimal",
+			message: t.optimal,
 		};
 	}
 	if (count <= 900) {
 		return {
 			color: "text-amber-700",
 			bg: "bg-amber-50",
-			message: isGerman ? "Etwas lang" : "A bit long",
+			message: t.long,
 		};
 	}
 	return {
 		color: "text-red-700",
 		bg: "bg-red-50",
-		message: language === "de" ? "Zu lang" : "Too long",
+		message: t.tooLong,
 	};
 }
 
@@ -219,6 +249,7 @@ export default function EditorPage() {
 						mdb: formData.mdb,
 						forderungen: formData.forderungen,
 						personalNote: formData.personalNote,
+						language: formData.language || language,
 						country: formData.country || country,
 						_timing: formData._timing,
 					}),

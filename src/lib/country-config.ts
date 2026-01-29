@@ -10,17 +10,19 @@ export interface CountryConfig {
 	name: {
 		en: string;
 		native: string;
+		es?: string;
 	};
 	flag: string;
 	/** Primary language for this country version */
 	defaultLanguage: "de" | "en";
 	/** Available languages */
-	languages: ("de" | "en" | "fr")[];
+	languages: ("de" | "en" | "fr" | "es")[];
 	/** Target of advocacy (e.g., "Bundestag" or "Parliament") */
 	legislatureLabel: {
 		en: string;
 		native: string;
 		fr?: string;
+		es?: string;
 	};
 	/** What we call the representative */
 	representativeLabel: {
@@ -28,10 +30,11 @@ export interface CountryConfig {
 		native: string;
 		short: string;
 		fr?: string;
+		es?: string;
 	};
 	/** Postal code format info */
 	postalCode: {
-		label: { en: string; native: string; fr?: string };
+		label: { en: string; native: string; fr?: string; es?: string };
 		placeholder: string;
 		pattern: RegExp;
 		maxLength: number;
@@ -44,8 +47,8 @@ export interface CountryConfig {
 	};
 	/** Footer text */
 	footer: {
-		diaspora: { en: string; native: string; fr?: string };
-		mission: { en: string; native: string; fr?: string };
+		diaspora: { en: string; native: string; fr?: string; es?: string };
+		mission: { en: string; native: string; fr?: string; es?: string };
 	};
 	/** Whether this country version is fully implemented */
 	isReady: boolean;
@@ -214,21 +217,27 @@ export const COUNTRY_CONFIGS: Record<CountryCode, CountryConfig> = {
 	},
 	us: {
 		code: "us",
-		name: { en: "United States", native: "United States" },
+		name: {
+			en: "United States",
+			native: "United States",
+			es: "Estados Unidos",
+		},
 		flag: "🇺🇸",
 		defaultLanguage: "en",
-		languages: ["en"],
+		languages: ["en", "es"],
 		legislatureLabel: {
 			en: "US Congress",
 			native: "US Congress",
+			es: "Congreso de EE.UU.",
 		},
 		representativeLabel: {
 			en: "Representative/Senator",
 			native: "Representative/Senator",
 			short: "Rep./Sen.",
+			es: "Representante/Senador(a)",
 		},
 		postalCode: {
-			label: { en: "ZIP Code", native: "ZIP Code" },
+			label: { en: "ZIP Code", native: "ZIP Code", es: "Código postal" },
 			placeholder: "90210",
 			pattern: /^\d{5}(-\d{4})?$/,
 			maxLength: 10,
@@ -242,10 +251,12 @@ export const COUNTRY_CONFIGS: Record<CountryCode, CountryConfig> = {
 			diaspora: {
 				en: "A project by the Iranian-American community.",
 				native: "A project by the Iranian-American community.",
+				es: "Un proyecto de la comunidad irano-estadounidense.",
 			},
 			mission: {
 				en: "For freedom, dignity and human rights.",
 				native: "For freedom, dignity and human rights.",
+				es: "Por la libertad, la dignidad y los derechos humanos.",
 			},
 		},
 		isReady: true,

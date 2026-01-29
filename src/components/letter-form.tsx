@@ -1379,7 +1379,16 @@ export function LetterForm() {
 				</div>
 				<div className="space-y-4 px-2">
 					<p className="text-sm text-muted-foreground">
-						{t("form", "step3.languageHint")}
+						{t(
+							"form",
+							isUS
+								? "step3.languageHintUS"
+								: isFrance
+									? "step3.languageHintFR"
+									: country === "de"
+										? "step3.languageHintDE"
+										: "step3.languageHint",
+						)}
 					</p>
 
 					{/* Textarea with subtle voice input icon */}

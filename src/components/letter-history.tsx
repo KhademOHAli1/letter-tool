@@ -48,7 +48,7 @@ function LetterCard({
 }: {
 	letter: HistoryLetter;
 	onDelete: (id: string) => void;
-	language: "de" | "en" | "fr";
+	language: "de" | "en" | "fr" | "es";
 	locale: string;
 }) {
 	const [expanded, setExpanded] = useState(false);

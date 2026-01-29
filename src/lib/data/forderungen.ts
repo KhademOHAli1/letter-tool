@@ -22,8 +22,9 @@ export function getForderungText(
 	field: "title" | "description" | "briefText",
 	language: Language,
 ): string {
-	// French falls back to English since demands are only in de/en
-	const effectiveLang = language === "fr" ? "en" : language;
+	// French and Spanish fall back to English since German demands are only in de/en
+	const effectiveLang =
+		language === "fr" || language === "es" ? "en" : language;
 	return forderung[field][effectiveLang];
 }
 

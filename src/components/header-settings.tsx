@@ -21,6 +21,7 @@ const LANGUAGES: { code: string; name: string; nativeName: string }[] = [
 	{ code: "de", name: "German", nativeName: "Deutsch" },
 	{ code: "en", name: "English", nativeName: "English" },
 	{ code: "fr", name: "French", nativeName: "Français" },
+	{ code: "es", name: "Spanish", nativeName: "Español" },
 ];
 
 // Languages available per country
@@ -29,7 +30,7 @@ const COUNTRY_LANGUAGES: Record<CountryCode, string[]> = {
 	ca: ["en", "fr"], // Canada: English, French
 	uk: ["en"], // UK: English only
 	fr: ["fr", "en"], // France: French, English
-	us: ["en"], // US: English only
+	us: ["en", "es"], // US: English, Spanish
 };
 
 export function HeaderSettings() {

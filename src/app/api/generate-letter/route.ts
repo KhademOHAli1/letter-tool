@@ -10,6 +10,7 @@ import { LETTER_SYSTEM_PROMPT_CA } from "@/lib/prompts/letter-prompt-ca";
 import { LETTER_SYSTEM_PROMPT_FR } from "@/lib/prompts/letter-prompt-fr";
 import { LETTER_SYSTEM_PROMPT_UK } from "@/lib/prompts/letter-prompt-uk";
 import { LETTER_SYSTEM_PROMPT_US } from "@/lib/prompts/letter-prompt-us";
+import { LETTER_SYSTEM_PROMPT_US_ES } from "@/lib/prompts/letter-prompt-us-es";
 import { checkRateLimit, getClientIP } from "@/lib/rate-limit";
 import {
 	detectSuspiciousContent,
@@ -35,6 +36,7 @@ type CountryCode = "de" | "ca" | "uk" | "fr" | "us";
 function getDemandInfo(
 	demand: Forderung | DemandCA | DemandUK | DemandFR | DemandUS,
 	country: CountryCode,
+	language = "en",
 ): { title: string; briefText: string } {
 	if (country === "ca") {
 		const d = demand as DemandCA;
@@ -51,6 +53,10 @@ function getDemandInfo(
 	}
 	if (country === "us") {
 		const d = demand as DemandUS;
+		// Use Spanish if available and requested
+		if (language === "es" && d.title.es && d.briefText.es) {
+			return { title: d.title.es, briefText: d.briefText.es };
+		}
 		return { title: d.title.en, briefText: d.briefText.en };
 	}
 	const d = demand as Forderung;
@@ -166,6 +172,8 @@ export async function POST(request: NextRequest) {
 						: rawBody.country === "us"
 							? "us"
 							: "de";
+		const userLanguage: string =
+			typeof rawBody.language === "string" ? rawBody.language : "en";
 		const demands =
 			country === "ca"
 				? DEMANDS_CA
@@ -184,7 +192,9 @@ export async function POST(request: NextRequest) {
 					: country === "fr"
 						? LETTER_SYSTEM_PROMPT_FR
 						: country === "us"
-							? LETTER_SYSTEM_PROMPT_US
+							? userLanguage === "es"
+								? LETTER_SYSTEM_PROMPT_US_ES
+								: LETTER_SYSTEM_PROMPT_US
 							: LETTER_SYSTEM_PROMPT;
 
 		// 6. Timing-based bot detection (form must be open for at least 2 seconds)
@@ -277,7 +287,7 @@ export async function POST(request: NextRequest) {
 		if (country === "uk") {
 			const demandsText = selectedDemands
 				.map((d, index) => {
-					const info = getDemandInfo(d, country);
+					const info = getDemandInfo(d, country, userLanguage);
 					return `${index + 1}. ${info.title}\n   Phrasing for letter: "${info.briefText}"`;
 				})
 				.join("\n\n");
@@ -304,7 +314,7 @@ Please write the letter now.`;
 		} else if (country === "ca") {
 			const demandsText = selectedDemands
 				.map((d, index) => {
-					const info = getDemandInfo(d, country);
+					const info = getDemandInfo(d, country, userLanguage);
 					return `${index + 1}. ${info.title}\n   Phrasing for letter: "${info.briefText}"`;
 				})
 				.join("\n\n");
@@ -331,7 +341,7 @@ Please write the letter now.`;
 		} else if (country === "fr") {
 			const demandsText = selectedDemands
 				.map((d, index) => {
-					const info = getDemandInfo(d, country);
+					const info = getDemandInfo(d, country, userLanguage);
 					return `${index + 1}. ${info.title}\n   Formulation pour la lettre : "${info.briefText}"`;
 				})
 				.join("\n\n");
@@ -358,12 +368,37 @@ Veuillez rédiger la lettre maintenant.`;
 		} else if (country === "us") {
 			const demandsText = selectedDemands
 				.map((d, index) => {
-					const info = getDemandInfo(d, country);
-					return `${index + 1}. ${info.title}\n   Phrasing for letter: "${info.briefText}"`;
+					const info = getDemandInfo(d, country, userLanguage);
+					const phrasingLabel =
+						userLanguage === "es"
+							? "Formulación para la carta"
+							: "Phrasing for letter";
+					return `${index + 1}. ${info.title}\n   ${phrasingLabel}: "${info.briefText}"`;
 				})
 				.join("\n\n");
 
-			userPrompt = `Write a letter with the following details:
+			if (userLanguage === "es") {
+				userPrompt = `Escribe una carta con los siguientes datos:
+
+REMITENTE:
+Nombre: ${senderName}
+Código Postal/Distrito: ${senderPlz} (${wahlkreis})
+
+DESTINATARIO:
+${mdb.name} (${mdb.party})
+Miembro del Congreso de los Estados Unidos
+
+DEMANDAS (CANTIDAD: ${selectedDemands.length} - ¡TODAS DEBEN APARECER EN LA CARTA!):
+${demandsText}
+
+HISTORIA PERSONAL DEL REMITENTE:
+${personalNote}
+
+CRÍTICO: ¡La carta DEBE incluir las ${selectedDemands.length} demandas como una lista numerada! ¡No solo una!
+
+Por favor escribe la carta ahora.`;
+			} else {
+				userPrompt = `Write a letter with the following details:
 
 SENDER:
 Name: ${senderName}
@@ -382,10 +417,11 @@ ${personalNote}
 CRITICAL: The letter MUST include all ${selectedDemands.length} demands as a numbered list! Not just one!
 
 Please write the letter now.`;
+			}
 		} else {
 			const forderungenTexte = selectedDemands
 				.map((f, index) => {
-					const info = getDemandInfo(f, country);
+					const info = getDemandInfo(f, country, userLanguage);
 					return `${index + 1}. ${info.title}\n   Formulierung für den Brief: "${info.briefText}"`;
 				})
 				.join("\n\n");

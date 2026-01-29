@@ -57,7 +57,10 @@ export function LanguageProvider({
 		const cookieLang = getCookie(COOKIE_LANGUAGE) as Language | null;
 		if (
 			cookieLang &&
-			(cookieLang === "de" || cookieLang === "en" || cookieLang === "fr") &&
+			(cookieLang === "de" ||
+				cookieLang === "en" ||
+				cookieLang === "fr" ||
+				cookieLang === "es") &&
 			availableLanguages.includes(cookieLang)
 		) {
 			setLanguageState(cookieLang);
@@ -67,7 +70,10 @@ export function LanguageProvider({
 		const stored = localStorage.getItem(STORAGE_KEY) as Language | null;
 		if (
 			stored &&
-			(stored === "de" || stored === "en" || stored === "fr") &&
+			(stored === "de" ||
+				stored === "en" ||
+				stored === "fr" ||
+				stored === "es") &&
 			availableLanguages.includes(stored)
 		) {
 			setLanguageState(stored);

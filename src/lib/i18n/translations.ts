@@ -1,9 +1,9 @@
 /**
- * Translation strings for German, English, and French.
+ * Translation strings for German, English, French, and Spanish.
  * All UI text should come from here to support internationalization.
  */
 
-export type Language = "de" | "en" | "fr";
+export type Language = "de" | "en" | "fr" | "es";
 
 export const translations = {
 	// ===== SEO / Metadata =====
@@ -32,6 +32,7 @@ export const translations = {
 			de: "Stimme für Iran | USA",
 			en: "Voice for Iran | Write to Congress",
 			fr: "Voix pour l'Iran | États-Unis",
+			es: "Voz por Irán | Escribe al Congreso",
 		},
 		descriptionDE: {
 			de: "Setze dich für Menschenrechte im Iran ein. Schreibe einen persönlichen Brief an deinen Bundestagsabgeordneten – schnell, einfach und wirkungsvoll.",
@@ -57,6 +58,7 @@ export const translations = {
 			de: "Setze dich für Menschenrechte im Iran ein. Schreibe deinem US-Kongressabgeordneten oder Senator.",
 			en: "Advocate for human rights in Iran. Write a personal letter to your Representative or Senator – quick, easy and effective.",
 			fr: "Défendez les droits humains en Iran. Écrivez à votre représentant au Congrès américain.",
+			es: "Defiende los derechos humanos en Irán. Escribe una carta personal a tu Representante o Senador – rápido, fácil y efectivo.",
 		},
 		ogAltDE: {
 			de: "Stimme für Iran - Schreib deinem Bundestagsabgeordneten",
@@ -82,21 +84,32 @@ export const translations = {
 			de: "Stimme für Iran - USA",
 			en: "Voice for Iran - Write to Congress",
 			fr: "Voix pour l'Iran - États-Unis",
+			es: "Voz por Irán - Escribe al Congreso",
 		},
 	},
 
 	// ===== Common =====
 	common: {
-		back: { de: "Zurück", en: "Back", fr: "Retour" },
-		next: { de: "Weiter", en: "Next", fr: "Suivant" },
-		loading: { de: "Laden...", en: "Loading...", fr: "Chargement..." },
-		error: { de: "Fehler", en: "Error", fr: "Erreur" },
-		retry: { de: "Erneut versuchen", en: "Try again", fr: "Réessayer" },
-		copy: { de: "Kopieren", en: "Copy", fr: "Copier" },
-		copied: { de: "Kopiert!", en: "Copied!", fr: "Copié !" },
-		share: { de: "Teilen", en: "Share", fr: "Partager" },
-		send: { de: "Senden", en: "Send", fr: "Envoyer" },
-		words: { de: "Wörter", en: "words", fr: "mots" },
+		back: { de: "Zurück", en: "Back", fr: "Retour", es: "Atrás" },
+		next: { de: "Weiter", en: "Next", fr: "Suivant", es: "Siguiente" },
+		loading: {
+			de: "Laden...",
+			en: "Loading...",
+			fr: "Chargement...",
+			es: "Cargando...",
+		},
+		error: { de: "Fehler", en: "Error", fr: "Erreur", es: "Error" },
+		retry: {
+			de: "Erneut versuchen",
+			en: "Try again",
+			fr: "Réessayer",
+			es: "Intentar de nuevo",
+		},
+		copy: { de: "Kopieren", en: "Copy", fr: "Copier", es: "Copiar" },
+		copied: { de: "Kopiert!", en: "Copied!", fr: "Copié !", es: "¡Copiado!" },
+		share: { de: "Teilen", en: "Share", fr: "Partager", es: "Compartir" },
+		send: { de: "Senden", en: "Send", fr: "Envoyer", es: "Enviar" },
+		words: { de: "Wörter", en: "words", fr: "mots", es: "palabras" },
 	},
 
 	// ===== Home Page =====
@@ -105,21 +118,25 @@ export const translations = {
 			de: "Brief an deine*n Abgeordnete*n",
 			en: "Letter to Your MP",
 			fr: "Lettre à votre député(e)",
+			es: "Carta a tu Representante",
 		},
 		subtitle: {
 			de: "In 5 Minuten einen persönlichen Brief schreiben - für Menschenrechte im Iran",
 			en: "Write a personal letter in 5 minutes - for human rights in Iran",
 			fr: "Écrivez une lettre personnelle en 5 minutes - pour les droits humains en Iran",
+			es: "Escribe una carta personal en 5 minutos - por los derechos humanos en Irán",
 		},
 		whyTitle: {
 			de: "Warum Briefe an Abgeordnete?",
 			en: "Why Write to MPs?",
 			fr: "Pourquoi écrire aux député(e)s ?",
+			es: "¿Por qué escribir a los Representantes?",
 		},
 		whyText: {
 			de: "Bundestagsabgeordnete zählen Nachrichten aus ihrem Wahlkreis. Persönliche Briefe haben nachweislich Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird die Stimme für Menschenrechte.",
 			en: "Members of Parliament count messages from their constituency. Personal letters have proven influence on political decisions. The more people write, the louder the voice for human rights becomes.",
 			fr: "Les député(e)s comptent les messages de leur circonscription. Les lettres personnelles ont une influence prouvée sur les décisions politiques. Plus les gens écrivent, plus la voix pour les droits humains se fait entendre.",
+			es: "Los miembros del Congreso cuentan los mensajes de sus distritos. Las cartas personales tienen una influencia comprobada en las decisiones políticas. Cuantas más personas escriban, más fuerte será la voz por los derechos humanos.",
 		},
 	},
 
@@ -127,11 +144,17 @@ export const translations = {
 	form: {
 		// Step 1: Name only
 		step1: {
-			title: { de: "Dein Name", en: "Your Name", fr: "Votre nom" },
+			title: {
+				de: "Dein Name",
+				en: "Your Name",
+				fr: "Votre nom",
+				es: "Tu nombre",
+			},
 			whyTitle: {
 				de: "Warum brauchen wir das?",
 				en: "Why do we need this?",
 				fr: "Pourquoi avons-nous besoin de cela ?",
+				es: "¿Por qué necesitamos esto?",
 			},
 			whyText: {
 				de: "Dein Name macht den Brief persönlich und glaubwürdig. Abgeordnete nehmen Briefe von echten Menschen ernst. Dein Name wird nur für den Brief verwendet und nicht auf unseren Servern gespeichert.",
@@ -235,6 +258,7 @@ export const translations = {
 				de: "z.B. Als Iranisch-Amerikanerin verfolge ich die Nachrichten aus dem Iran jeden Tag. Ich habe Freunde und Familie dort, die unter der Situation leiden.",
 				en: "e.g. As an Iranian-American, I follow the news from Iran every day. I have friends and family there who are suffering under the situation. The human rights situation deeply concerns me and I want the United States to take a stronger stance.",
 				fr: "ex. En tant qu'Irano-Américain(e), je suis les nouvelles de l'Iran chaque jour. J'ai des amis et de la famille là-bas qui souffrent de la situation.",
+				es: "p.ej. Como irano-estadounidense, sigo las noticias de Irán todos los días. Tengo amigos y familiares allí que sufren bajo la situación. La situación de los derechos humanos me preocupa profundamente y quiero que Estados Unidos tome una posición más fuerte.",
 			},
 			hint: {
 				de: "Details machen deinen Brief authentisch: Konkrete Erlebnisse, Namen, Orte, Gefühle.",
@@ -243,8 +267,27 @@ export const translations = {
 			},
 			languageHint: {
 				de: "Du kannst auf Deutsch, Englisch oder Farsi schreiben - wir übersetzen es für den Brief.",
-				en: "You can write in German, English or Farsi - we'll translate it for the letter.",
+				en: "You can write in English or Farsi - we'll translate it for the letter.",
 				fr: "Vous pouvez écrire en français, anglais ou farsi - nous traduirons pour la lettre.",
+				es: "Puedes escribir en inglés, español o farsi - lo traduciremos para la carta.",
+			},
+			languageHintDE: {
+				de: "Du kannst auf Deutsch, Englisch oder Farsi schreiben - wir übersetzen es für den Brief.",
+				en: "You can write in German, English or Farsi - we'll translate it for the letter.",
+				fr: "Vous pouvez écrire en allemand, anglais ou farsi - nous traduirons pour la lettre.",
+				es: "Puedes escribir en alemán, inglés o farsi - lo traduciremos para la carta.",
+			},
+			languageHintUS: {
+				de: "Du kannst auf Englisch, Spanisch oder Farsi schreiben - wir übersetzen es für den Brief.",
+				en: "You can write in English, Spanish or Farsi - we'll translate it for the letter.",
+				fr: "Vous pouvez écrire en anglais, espagnol ou farsi - nous traduirons pour la lettre.",
+				es: "Puedes escribir en inglés, español o farsi - lo traduciremos para la carta.",
+			},
+			languageHintFR: {
+				de: "Du kannst auf Französisch, Englisch oder Farsi schreiben - wir übersetzen es für den Brief.",
+				en: "You can write in French, English or Farsi - we'll translate it for the letter.",
+				fr: "Vous pouvez écrire en français, anglais ou farsi - nous traduirons pour la lettre.",
+				es: "Puedes escribir en francés, inglés o farsi - lo traduciremos para la carta.",
 			},
 			validation: {
 				empty: {

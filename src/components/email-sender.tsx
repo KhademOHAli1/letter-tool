@@ -160,7 +160,22 @@ export function EmailSender({
 	const [showDialog, setShowDialog] = useState(false);
 	const [copied, setCopied] = useState(false);
 
-	const translations = {
+	const translations: Record<
+		string,
+		{
+			title: string;
+			description: string;
+			rememberChoice: string;
+			copyAndOpen: string;
+			copyOnly: string;
+			copied: string;
+			copiedToast: string;
+			openingMail: string;
+			openDefault: string;
+			copyFailed: string;
+			or: string;
+		}
+	> = {
 		de: {
 			title: "Wie möchtest du die E-Mail senden?",
 			description: "Wähle deine bevorzugte E-Mail-Anwendung",
@@ -200,9 +215,22 @@ export function EmailSender({
 			copyFailed: "Échec de la copie",
 			or: "ou",
 		},
+		es: {
+			title: "¿Cómo deseas enviar el correo electrónico?",
+			description: "Elige tu aplicación de correo preferida",
+			rememberChoice: "Recordar mi elección",
+			copyAndOpen: "Copiar y abrir",
+			copyOnly: "Solo copiar",
+			copied: "¡Carta copiada al portapapeles!",
+			copiedToast: "La carta ha sido copiada. Pégala con Ctrl+V / Cmd+V.",
+			openingMail: "Abriendo correo electrónico...",
+			openDefault: "Abrir aplicación de correo predeterminada",
+			copyFailed: "Error al copiar",
+			or: "o",
+		},
 	};
 
-	const t = translations[language];
+	const t = translations[language] || translations.en;
 
 	// Check if mailto URL would be too long
 	const mailtoUrl = buildMailtoUrl(to, subject, body);

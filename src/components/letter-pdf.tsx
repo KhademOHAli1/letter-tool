@@ -318,36 +318,41 @@ interface LetterPdfProps {
 	recipientOffice?: string; // Individual office address (e.g., "153 Cannon HOB")
 	recipientState?: string; // For US: state name
 	country: string;
-	language: "de" | "en" | "fr";
+	language: "de" | "en" | "fr" | "es";
 }
 
 // Get localized strings
-function getStrings(language: "de" | "en" | "fr", country: string) {
+function getStrings(language: "de" | "en" | "fr" | "es", country: string) {
 	const representativeTitle: Record<string, Record<string, string>> = {
 		de: {
 			de: "Mitglied des Deutschen Bundestages",
 			en: "Member of German Parliament",
 			fr: "Député(e) du Bundestag",
+			es: "Miembro del Parlamento Alemán",
 		},
 		ca: {
 			de: "Mitglied des kanadischen Parlaments",
 			en: "Member of Parliament, House of Commons",
 			fr: "Député(e), Chambre des communes",
+			es: "Miembro del Parlamento, Cámara de los Comunes",
 		},
 		uk: {
 			de: "Mitglied des britischen Parlaments",
 			en: "Member of Parliament, House of Commons",
 			fr: "Député(e) du Parlement britannique",
+			es: "Miembro del Parlamento Británico",
 		},
 		fr: {
 			de: "Mitglied der französischen Nationalversammlung",
 			en: "Member of the French National Assembly",
 			fr: "Député(e) à l'Assemblée nationale",
+			es: "Miembro de la Asamblea Nacional Francesa",
 		},
 		us: {
 			de: "Mitglied des US-Kongresses",
 			en: "Member of Congress",
 			fr: "Membre du Congrès américain",
+			es: "Miembro del Congreso de EE.UU.",
 		},
 	};
 
@@ -355,6 +360,7 @@ function getStrings(language: "de" | "en" | "fr", country: string) {
 		de: "Erstellt mit stimme-fuer-iran.de",
 		en: "Generated with voiceforiran.org",
 		fr: "Créé avec voixpourliran.fr",
+		es: "Generado con voiceforiran.org",
 	};
 
 	return {
@@ -364,7 +370,10 @@ function getStrings(language: "de" | "en" | "fr", country: string) {
 }
 
 // Format date based on country/language
-function formatDate(language: "de" | "en" | "fr", country: string): string {
+function formatDate(
+	language: "de" | "en" | "fr" | "es",
+	country: string,
+): string {
 	const date = new Date();
 
 	// German format: "Berlin, den 29. Januar 2026" or just "29. Januar 2026"
@@ -385,6 +394,16 @@ function formatDate(language: "de" | "en" | "fr", country: string): string {
 			year: "numeric",
 		});
 		return `Le ${formatted}`;
+	}
+
+	// Spanish format: "29 de enero de 2026"
+	if (language === "es") {
+		const formatted = date.toLocaleDateString("es-US", {
+			day: "numeric",
+			month: "long",
+			year: "numeric",
+		});
+		return formatted;
 	}
 
 	// English formats vary by country

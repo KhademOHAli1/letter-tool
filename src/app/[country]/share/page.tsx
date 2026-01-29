@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/i18n/context";
 
 // Progress steps for letter generation
-const PROGRESS_STEPS = {
+const PROGRESS_STEPS: Record<string, string[]> = {
 	de: [
 		"Verbindung wird hergestellt...",
 		"Brief wird geschrieben...",
@@ -31,6 +31,7 @@ const PROGRESS_STEPS = {
 		"Rédaction de votre lettre...",
 		"Presque terminé...",
 	],
+	es: ["Conectando...", "Escribiendo tu carta...", "Casi listo..."],
 };
 
 interface FormData {
@@ -66,7 +67,7 @@ export default function SharePage() {
 	const shareUrl = typeof window !== "undefined" ? window.location.origin : "";
 
 	// Language-aware share messages
-	const SHARE_MESSAGES = {
+	const SHARE_MESSAGES: Record<string, string> = {
 		de: `Ich habe gerade einen Brief an meine*n Bundestagsabgeordnete*n geschrieben - für Menschenrechte im Iran.
 
 Warum das wichtig ist: Abgeordnete zählen Briefe aus ihrem Wahlkreis. Persönliche Nachrichten haben echten Einfluss auf politische Entscheidungen. Je mehr Menschen schreiben, desto lauter wird unsere Stimme.
@@ -86,6 +87,13 @@ ${shareUrl}`,
 Pourquoi c'est important : Les député(e)s comptent les messages de leurs électeurs. Les lettres personnelles ont une réelle influence sur les décisions politiques. Plus nous écrivons, plus notre voix se fait entendre.
 
 Vous pouvez aussi écrire une lettre en 5 minutes - cet outil vous aide :
+
+${shareUrl}`,
+		es: `Acabo de escribir una carta a mi representante del Congreso - por los derechos humanos en Irán.
+
+Por qué importa: Los congresistas cuentan los mensajes de sus electores. Las cartas personales tienen influencia real en las decisiones políticas. Cuantas más personas escriban, más fuerte será nuestra voz.
+
+Tú también puedes escribir una carta en 5 minutos - esta herramienta te ayuda:
 
 ${shareUrl}`,
 	};
@@ -236,10 +244,11 @@ ${shareUrl}`,
 	};
 
 	const handleEmailShare = () => {
-		const subjects = {
+		const subjects: Record<string, string> = {
 			de: "Schreib auch einen Brief für den Iran",
 			en: "Write a letter for Iran too",
 			fr: "Écrivez aussi une lettre pour l'Iran",
+			es: "Escribe también una carta por Irán",
 		};
 		const subject = subjects[language] || subjects.en;
 		window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(shareMessage)}`;
@@ -247,10 +256,11 @@ ${shareUrl}`,
 
 	const handleNativeShare = async () => {
 		if (navigator.share) {
-			const titles = {
+			const titles: Record<string, string> = {
 				de: "Stimme für Iran",
 				en: "Voice for Iran",
 				fr: "Voix pour l'Iran",
+				es: "Voz por Irán",
 			};
 			try {
 				await navigator.share({
