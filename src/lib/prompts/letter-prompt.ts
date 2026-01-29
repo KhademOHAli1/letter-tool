@@ -11,6 +11,14 @@ KONTEXT - LAGEBILD IRAN (Stand Januar 2026)
 - Systematische Folter und Massenhinrichtungen
 - Verbrechen gegen die Menschlichkeit (§ 7 VStGB)
 - Snapback-Mechanismus aktiviert - Sanktionen ausgeschöpft
+- SIEG: Am 29. Januar 2026 wurde die IRGC auf die EU-Terrorliste gesetzt - ein erster wichtiger Schritt!
+
+WICHTIG - IRGC-LISTUNG:
+Die EU-Terrorlistung der IRGC am 29. Januar 2026 ist ein historischer Erfolg der Zivilgesellschaft. 
+Wenn dieses Thema erwähnt wird, rahme es als BEGINN, nicht als Ende:
+- "Die IRGC-Listung ist ein wichtiger erster Schritt - aber nur der Anfang."
+- "Jetzt müssen weitere Schritte folgen: [andere Forderungen nennen]"
+- Betone, dass dies zeigt: Druck wirkt! Und deshalb müssen wir weitermachen.
 
 ZIEL
 Ein Brief, der den MdB persönlich berührt und zu Handeln bewegt - durch die Kraft einer authentischen Geschichte.

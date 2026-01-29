@@ -1529,65 +1529,70 @@ export function LetterForm() {
 											? "¡Logrado!"
 											: "Achieved!";
 
+							// Completed demands are NOT selectable - shown as achievements only
+							if (isCompleted) {
+								return (
+									<div
+										key={demand.id}
+										className="w-full text-left p-4 rounded-xl bg-green-50 dark:bg-green-950/40 text-foreground border-2 border-green-500 relative overflow-hidden"
+									>
+										{/* Celebration corner ribbon */}
+										<div className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+											🎉 {completedBadgeText}
+										</div>
+										<div className="flex items-start gap-3">
+											<div className="shrink-0 mt-0.5 h-5 w-5 rounded-full flex items-center justify-center bg-green-500 text-white">
+												<Check className="h-3 w-3 text-white" />
+											</div>
+											<div className="space-y-1 min-w-0 flex-1 pr-16">
+												<span className="font-medium text-sm text-green-800 dark:text-green-200">
+													{demandTitle}
+												</span>
+												<p className="text-xs leading-relaxed text-green-700 dark:text-green-300">
+													{demandDescription}
+												</p>
+											</div>
+										</div>
+									</div>
+								);
+							}
+
 							return (
 								<button
 									key={demand.id}
 									type="button"
 									onClick={() => toggleDemand(demand.id)}
 									className={`w-full text-left p-4 rounded-xl transition-all duration-200 ${
-										isCompleted
-											? isSelected
-												? "bg-green-600 text-white shadow-md ring-2 ring-green-500 ring-offset-2 ring-offset-background"
-												: "bg-green-50 dark:bg-green-950/40 hover:bg-green-100 dark:hover:bg-green-950/60 text-foreground border-2 border-green-500/60 hover:border-green-500"
-											: isSelected
-												? "bg-primary text-primary-foreground shadow-md ring-2 ring-primary ring-offset-2 ring-offset-background"
-												: "bg-muted/40 hover:bg-muted/70 text-foreground border border-border/50 hover:border-primary/30"
+										isSelected
+											? "bg-primary text-primary-foreground shadow-md ring-2 ring-primary ring-offset-2 ring-offset-background"
+											: "bg-muted/40 hover:bg-muted/70 text-foreground border border-border/50 hover:border-primary/30"
 									}`}
 								>
 									<div className="flex items-start gap-3">
 										<div
 											className={`shrink-0 mt-0.5 h-5 w-5 rounded-full flex items-center justify-center transition-colors ${
-												isCompleted
-													? "bg-green-500 text-white"
-													: isSelected
-														? "bg-primary-foreground/20"
-														: "bg-primary/10"
+												isSelected
+													? "bg-primary-foreground/20"
+													: "bg-primary/10"
 											}`}
 										>
-											{(isSelected || isCompleted) && (
-												<Check
-													className={`h-3 w-3 ${isCompleted ? "text-white" : "text-primary-foreground"}`}
-												/>
+											{isSelected && (
+												<Check className="h-3 w-3 text-primary-foreground" />
 											)}
 										</div>
 										<div className="space-y-1 min-w-0 flex-1">
-											<div className="flex items-center gap-2 flex-wrap">
-												<span
-													className={`font-medium text-sm ${isCompleted && isSelected ? "text-white" : isSelected ? "text-primary-foreground" : ""}`}
-												>
-													{demandTitle}
-												</span>
-												{isCompleted && (
-													<span
-														className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold ${
-															isSelected
-																? "bg-white/20 text-white"
-																: "bg-green-500 text-white"
-														}`}
-													>
-														🎉 {completedBadgeText}
-													</span>
-												)}
-											</div>
+											<span
+												className={`font-medium text-sm ${
+													isSelected ? "text-primary-foreground" : ""
+												}`}
+											>
+												{demandTitle}
+											</span>
 											<p
 												className={`text-xs leading-relaxed ${
-													isCompleted && isSelected
-														? "text-white/90"
-														: isSelected
-															? "text-primary-foreground/80"
-															: isCompleted
-																? "text-green-800 dark:text-green-200"
-																: "text-muted-foreground"
+													isSelected
+														? "text-primary-foreground/80"
+														: "text-muted-foreground"
 												}`}
 											>
 												{demandDescription}

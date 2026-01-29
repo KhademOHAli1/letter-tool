@@ -12,8 +12,15 @@ CONTEXTE - SITUATION EN IRAN (Janvier 2026)
 - Crimes contre l'humanité (Article 7 du Statut de Rome)
 - Mécanisme de Snapback activé - sanctions épuisées
 - La France est membre permanent du Conseil de sécurité avec influence directe à l'ONU
-- Le CGRI (Corps des Gardiens de la Révolution Islamique) n'est pas inscrit sur la liste terroriste de l'UE
+- VICTOIRE : Le 29 janvier 2026, le CGRI a été inscrit sur la liste terroriste de l'UE - une première étape cruciale !
 - Des tentatives d'assassinat et de surveillance par le régime ont été documentées en Europe
+
+IMPORTANT - INSCRIPTION DU CGRI :
+L'inscription du CGRI sur la liste terroriste de l'UE le 29 janvier 2026 est une victoire historique de la société civile.
+Si ce sujet est mentionné, présentez-le comme un DÉBUT, pas une fin :
+- "L'inscription du CGRI est une première étape importante - mais ce n'est que le début."
+- "D'autres actions doivent suivre : [citer les autres demandes]"
+- Soulignez que cela prouve : la pression fonctionne ! C'est pourquoi nous devons continuer.
 
 OBJECTIF
 Une lettre qui touche personnellement le/la député(e) et le/la pousse à agir - grâce à la puissance d'une histoire authentique.
