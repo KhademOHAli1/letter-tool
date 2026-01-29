@@ -161,11 +161,17 @@ export const translations = {
 				en: "Your name makes the letter personal and credible. MPs take letters from real people seriously. Your name is only used for the letter and is not stored on our servers.",
 				fr: "Votre nom rend la lettre personnelle et crédible. Les député(e)s prennent au sérieux les lettres de vraies personnes. Votre nom n'est utilisé que pour la lettre et n'est pas stocké sur nos serveurs.",
 			},
-			nameLabel: { de: "Dein Name", en: "Your Name", fr: "Votre nom" },
+			nameLabel: {
+				de: "Dein Name",
+				en: "Your Name",
+				fr: "Votre nom",
+				es: "Tu nombre",
+			},
 			namePlaceholder: {
 				de: "Vorname Nachname",
 				en: "First Last Name",
 				fr: "Prénom Nom",
+				es: "Nombre Apellido",
 			},
 		},
 
@@ -175,11 +181,13 @@ export const translations = {
 				de: "Dein*e Abgeordnete*r",
 				en: "Your MP",
 				fr: "Votre député(e)",
+				es: "Tu representante",
 			},
 			whyTitle: {
 				de: "Warum brauchen wir das?",
 				en: "Why do we need this?",
 				fr: "Pourquoi avons-nous besoin de cela ?",
+				es: "¿Por qué necesitamos esto?",
 			},
 			whyText: {
 				de: "Abgeordnete antworten nur auf Briefe aus ihrem Wahlkreis. Mit deiner PLZ finden wir deine*n zuständige*n Abgeordnete*n. Deine PLZ wird nur lokal im Browser verarbeitet und nicht an unsere Server gesendet.",
@@ -190,33 +198,48 @@ export const translations = {
 				de: "Deine Postleitzahl",
 				en: "Your Postal Code",
 				fr: "Votre code postal",
+				es: "Tu código postal",
 			},
-			plzPlaceholder: { de: "z.B. 10115", en: "e.g. 10115", fr: "ex. H2X 1Y4" },
+			plzPlaceholder: {
+				de: "z.B. 10115",
+				en: "e.g. 10115",
+				fr: "ex. H2X 1Y4",
+				es: "ej. 90210",
+			},
 			wahlkreisFound: {
 				de: "Wahlkreis gefunden",
 				en: "Constituency found",
 				fr: "Circonscription trouvée",
+				es: "Distrito encontrado",
 			},
 			wahlkreisNotFound: {
 				de: "Kein Wahlkreis gefunden",
 				en: "No constituency found",
 				fr: "Aucune circonscription trouvée",
+				es: "No se encontró distrito",
 			},
 			selectLabel: {
 				de: "Wähle deine*n Abgeordnete*n",
 				en: "Select your MP",
 				fr: "Sélectionnez votre député(e)",
+				es: "Selecciona tu representante",
 			},
 			selectPlaceholder: {
 				de: "Abgeordnete*n auswählen...",
 				en: "Select MP...",
 				fr: "Sélectionner un(e) député(e)...",
+				es: "Seleccionar representante...",
 			},
 		},
 
 		// Step 3: Personal Story
 		step3: {
-			title: { de: "Deine Geschichte", en: "Your Story", fr: "Votre histoire" },
+			title: {
+				de: "Deine Geschichte",
+				en: "Your Story",
+				fr: "Votre histoire",
+				es: "Tu historia",
+			},
 			whyTitle: {
 				de: "Warum brauchen wir das?",
 				en: "Why do we need this?",
@@ -300,7 +323,12 @@ export const translations = {
 
 		// Step 4: Demands
 		step4: {
-			title: { de: "Forderungen", en: "Demands", fr: "Demandes" },
+			title: {
+				de: "Forderungen",
+				en: "Demands",
+				fr: "Demandes",
+				es: "Demandas",
+			},
 			whyTitle: {
 				de: "Warum brauchen wir das?",
 				en: "Why do we need this?",
@@ -333,11 +361,13 @@ export const translations = {
 				de: "Brief wird erstellt...",
 				en: "Creating letter...",
 				fr: "Création de la lettre...",
+				es: "Creando carta...",
 			},
 			default: {
 				de: "Brief erstellen",
 				en: "Create Letter",
 				fr: "Créer la lettre",
+				es: "Crear carta",
 			},
 		},
 
@@ -433,11 +463,13 @@ export const translations = {
 			de: "Brief wird geschrieben...",
 			en: "Writing your letter...",
 			fr: "Rédaction de votre lettre...",
+			es: "Escribiendo tu carta...",
 		},
 		titleReady: {
 			de: "Dein Brief ist fertig",
 			en: "Your letter is ready",
 			fr: "Votre lettre est prête",
+			es: "Tu carta está lista",
 		},
 		subtitleGenerating: {
 			de: "Der Brief erscheint gleich - du kannst ihn dann noch bearbeiten.",
@@ -449,9 +481,19 @@ export const translations = {
 			en: "Review and edit your letter before sending it.",
 			fr: "Révisez et modifiez votre lettre avant de l'envoyer.",
 		},
-		subjectLabel: { de: "Betreff", en: "Subject", fr: "Objet" },
-		contentLabel: { de: "Dein Brief", en: "Your Letter", fr: "Votre lettre" },
-		senderLabel: { de: "Absender", en: "Sender", fr: "Expéditeur" },
+		subjectLabel: { de: "Betreff", en: "Subject", fr: "Objet", es: "Asunto" },
+		contentLabel: {
+			de: "Dein Brief",
+			en: "Your Letter",
+			fr: "Votre lettre",
+			es: "Tu carta",
+		},
+		senderLabel: {
+			de: "Absender",
+			en: "Sender",
+			fr: "Expéditeur",
+			es: "Remitente",
+		},
 		modified: { de: "Bearbeitet", en: "Modified", fr: "Modifié" },
 		writing: {
 			de: "Wird geschrieben...",
@@ -468,6 +510,7 @@ export const translations = {
 			de: "Weiter zum Senden",
 			en: "Ready to Send",
 			fr: "Prêt à envoyer",
+			es: "Listo para enviar",
 		},
 		copyButton: {
 			de: "Brief kopieren",
