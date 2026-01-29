@@ -28,6 +28,11 @@ export const translations = {
 			en: "Voice for Iran | France",
 			fr: "Voix pour l'Iran | Écrivez à votre député(e)",
 		},
+		titleUS: {
+			de: "Stimme für Iran | USA",
+			en: "Voice for Iran | Write to Congress",
+			fr: "Voix pour l'Iran | États-Unis",
+		},
 		descriptionDE: {
 			de: "Setze dich für Menschenrechte im Iran ein. Schreibe einen persönlichen Brief an deinen Bundestagsabgeordneten – schnell, einfach und wirkungsvoll.",
 			en: "Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
@@ -48,6 +53,11 @@ export const translations = {
 			en: "Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
 			fr: "Défendez les droits humains en Iran. Écrivez une lettre personnelle à votre député(e) – rapide, simple et efficace.",
 		},
+		descriptionUS: {
+			de: "Setze dich für Menschenrechte im Iran ein. Schreibe deinem US-Kongressabgeordneten oder Senator.",
+			en: "Advocate for human rights in Iran. Write a personal letter to your Representative or Senator – quick, easy and effective.",
+			fr: "Défendez les droits humains en Iran. Écrivez à votre représentant au Congrès américain.",
+		},
 		ogAltDE: {
 			de: "Stimme für Iran - Schreib deinem Bundestagsabgeordneten",
 			en: "Voice for Iran - Write to Your MP",
@@ -67,6 +77,11 @@ export const translations = {
 			de: "Stimme für Iran - Frankreich",
 			en: "Voice for Iran - France",
 			fr: "Voix pour l'Iran - Écrivez à votre député(e)",
+		},
+		ogAltUS: {
+			de: "Stimme für Iran - USA",
+			en: "Voice for Iran - Write to Congress",
+			fr: "Voix pour l'Iran - États-Unis",
 		},
 	},
 
@@ -215,6 +230,11 @@ export const translations = {
 				de: "z.B. Als Französisch-Iranerin verfolge ich die Nachrichten aus dem Iran jeden Tag. Ich habe Freunde und Familie dort, die unter der Situation leiden.",
 				en: "e.g. As a French-Iranian, I follow the news from Iran every day. I have friends and family there who are suffering under the situation. The human rights situation deeply concerns me and I want France to take a stronger stance.",
 				fr: "ex. En tant qu'Irano-Français(e), je suis les nouvelles de l'Iran chaque jour. J'ai des amis et de la famille là-bas qui souffrent de la situation. La situation des droits humains me préoccupe profondément et je veux que la France prenne une position plus forte.",
+			},
+			placeholderUS: {
+				de: "z.B. Als Iranisch-Amerikanerin verfolge ich die Nachrichten aus dem Iran jeden Tag. Ich habe Freunde und Familie dort, die unter der Situation leiden.",
+				en: "e.g. As an Iranian-American, I follow the news from Iran every day. I have friends and family there who are suffering under the situation. The human rights situation deeply concerns me and I want the United States to take a stronger stance.",
+				fr: "ex. En tant qu'Irano-Américain(e), je suis les nouvelles de l'Iran chaque jour. J'ai des amis et de la famille là-bas qui souffrent de la situation.",
 			},
 			hint: {
 				de: "Details machen deinen Brief authentisch: Konkrete Erlebnisse, Namen, Orte, Gefühle.",

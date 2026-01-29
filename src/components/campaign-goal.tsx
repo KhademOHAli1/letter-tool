@@ -16,7 +16,7 @@ interface CampaignGoalProps {
 	/** Show compact version without text */
 	compact?: boolean;
 	/** Country code to fetch stats for */
-	country?: "de" | "ca" | "uk" | "fr";
+	country?: "de" | "ca" | "uk" | "fr" | "us";
 }
 
 interface Stats {

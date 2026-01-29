@@ -8,7 +8,7 @@ import { serverEnv } from "./env";
 // Types for our database tables
 export interface LetterGeneration {
 	id?: string;
-	country: "de" | "ca" | "uk" | "fr"; // Campaign country
+	country: "de" | "ca" | "uk" | "fr" | "us"; // Campaign country
 	mdb_id: string;
 	mdb_name: string;
 	mdb_party: string | null;
@@ -109,7 +109,7 @@ export async function trackLetterGeneration(
  * @param country - Filter by country (default: "de" for backwards compatibility)
  */
 export async function getLetterStats(
-	country: "de" | "ca" | "uk" | "fr" = "de",
+	country: "de" | "ca" | "uk" | "fr" | "us" = "de",
 ): Promise<LetterStats | null> {
 	try {
 		const supabase = createServerSupabaseClient();

@@ -3,11 +3,13 @@ import { DEMANDS_CA, type DemandCA } from "@/lib/data/ca/forderungen-ca";
 import { FORDERUNGEN, type Forderung } from "@/lib/data/forderungen";
 import { DEMANDS_FR, type DemandFR } from "@/lib/data/fr/forderungen-fr";
 import { DEMANDS_UK, type DemandUK } from "@/lib/data/uk/forderungen-uk";
+import { DEMANDS_US, type DemandUS } from "@/lib/data/us/forderungen-us";
 import { serverEnv, validateServerEnv } from "@/lib/env";
 import { LETTER_SYSTEM_PROMPT } from "@/lib/prompts/letter-prompt";
 import { LETTER_SYSTEM_PROMPT_CA } from "@/lib/prompts/letter-prompt-ca";
 import { LETTER_SYSTEM_PROMPT_FR } from "@/lib/prompts/letter-prompt-fr";
 import { LETTER_SYSTEM_PROMPT_UK } from "@/lib/prompts/letter-prompt-uk";
+import { LETTER_SYSTEM_PROMPT_US } from "@/lib/prompts/letter-prompt-us";
 import { checkRateLimit, getClientIP } from "@/lib/rate-limit";
 import {
 	detectSuspiciousContent,
@@ -27,11 +29,11 @@ import {
 import { trackLetterGeneration } from "@/lib/supabase";
 
 // Country-specific configuration
-type CountryCode = "de" | "ca" | "uk" | "fr";
+type CountryCode = "de" | "ca" | "uk" | "fr" | "us";
 
 // Helper to get demand title/brief text
 function getDemandInfo(
-	demand: Forderung | DemandCA | DemandUK | DemandFR,
+	demand: Forderung | DemandCA | DemandUK | DemandFR | DemandUS,
 	country: CountryCode,
 ): { title: string; briefText: string } {
 	if (country === "ca") {
@@ -46,6 +48,10 @@ function getDemandInfo(
 		const d = demand as DemandFR;
 		// Use French for letter content
 		return { title: d.title.fr, briefText: d.briefText.fr };
+	}
+	if (country === "us") {
+		const d = demand as DemandUS;
+		return { title: d.title.en, briefText: d.briefText.en };
 	}
 	const d = demand as Forderung;
 	return { title: d.title.de, briefText: d.briefText.de };
@@ -157,7 +163,9 @@ export async function POST(request: NextRequest) {
 					? "uk"
 					: rawBody.country === "fr"
 						? "fr"
-						: "de";
+						: rawBody.country === "us"
+							? "us"
+							: "de";
 		const demands =
 			country === "ca"
 				? DEMANDS_CA
@@ -165,7 +173,9 @@ export async function POST(request: NextRequest) {
 					? DEMANDS_UK
 					: country === "fr"
 						? DEMANDS_FR
-						: FORDERUNGEN;
+						: country === "us"
+							? DEMANDS_US
+							: FORDERUNGEN;
 		const systemPrompt =
 			country === "ca"
 				? LETTER_SYSTEM_PROMPT_CA
@@ -173,7 +183,9 @@ export async function POST(request: NextRequest) {
 					? LETTER_SYSTEM_PROMPT_UK
 					: country === "fr"
 						? LETTER_SYSTEM_PROMPT_FR
-						: LETTER_SYSTEM_PROMPT;
+						: country === "us"
+							? LETTER_SYSTEM_PROMPT_US
+							: LETTER_SYSTEM_PROMPT;
 
 		// 6. Timing-based bot detection (form must be open for at least 2 seconds)
 		const timing = rawBody._timing;
@@ -343,6 +355,33 @@ ${personalNote}
 CRITIQUE : La lettre DOIT inclure les ${selectedDemands.length} demandes en liste numérotée ! Pas seulement une !
 
 Veuillez rédiger la lettre maintenant.`;
+		} else if (country === "us") {
+			const demandsText = selectedDemands
+				.map((d, index) => {
+					const info = getDemandInfo(d, country);
+					return `${index + 1}. ${info.title}\n   Phrasing for letter: "${info.briefText}"`;
+				})
+				.join("\n\n");
+
+			userPrompt = `Write a letter with the following details:
+
+SENDER:
+Name: ${senderName}
+ZIP Code/District: ${senderPlz} (${wahlkreis})
+
+RECIPIENT:
+${mdb.name} (${mdb.party})
+Member of the United States Congress
+
+DEMANDS (COUNT: ${selectedDemands.length} - ALL MUST APPEAR IN THE LETTER!):
+${demandsText}
+
+PERSONAL STORY OF THE SENDER:
+${personalNote}
+
+CRITICAL: The letter MUST include all ${selectedDemands.length} demands as a numbered list! Not just one!
+
+Please write the letter now.`;
 		} else {
 			const forderungenTexte = selectedDemands
 				.map((f, index) => {
@@ -516,7 +555,7 @@ Bitte erstelle nun den Brief.`;
 
 		// Generate subject line
 		const subject =
-			country === "ca" || country === "uk"
+			country === "ca" || country === "uk" || country === "us"
 				? "Request for Support: Human Rights in Iran"
 				: country === "fr"
 					? "Demande de soutien : Droits de l'Homme en Iran"

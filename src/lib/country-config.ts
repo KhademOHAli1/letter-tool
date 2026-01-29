@@ -3,7 +3,7 @@
  * Defines content, settings, and routes per country
  */
 
-export type CountryCode = "de" | "ca" | "uk" | "fr";
+export type CountryCode = "de" | "ca" | "uk" | "fr" | "us";
 
 export interface CountryConfig {
 	code: CountryCode;
@@ -212,6 +212,44 @@ export const COUNTRY_CONFIGS: Record<CountryCode, CountryConfig> = {
 		},
 		isReady: true,
 	},
+	us: {
+		code: "us",
+		name: { en: "United States", native: "United States" },
+		flag: "🇺🇸",
+		defaultLanguage: "en",
+		languages: ["en"],
+		legislatureLabel: {
+			en: "US Congress",
+			native: "US Congress",
+		},
+		representativeLabel: {
+			en: "Representative/Senator",
+			native: "Representative/Senator",
+			short: "Rep./Sen.",
+		},
+		postalCode: {
+			label: { en: "ZIP Code", native: "ZIP Code" },
+			placeholder: "90210",
+			pattern: /^\d{5}(-\d{4})?$/,
+			maxLength: 10,
+		},
+		legalPages: {
+			impressum: null,
+			privacy: null,
+			dataTransparency: null,
+		},
+		footer: {
+			diaspora: {
+				en: "A project by the Iranian-American community.",
+				native: "A project by the Iranian-American community.",
+			},
+			mission: {
+				en: "For freedom, dignity and human rights.",
+				native: "For freedom, dignity and human rights.",
+			},
+		},
+		isReady: true,
+	},
 };
 
 /** Get config for a country, with validation */
@@ -220,7 +258,8 @@ export function getCountryConfig(country: string): CountryConfig | null {
 		country === "de" ||
 		country === "ca" ||
 		country === "uk" ||
-		country === "fr"
+		country === "fr" ||
+		country === "us"
 	) {
 		return COUNTRY_CONFIGS[country];
 	}
@@ -228,7 +267,7 @@ export function getCountryConfig(country: string): CountryConfig | null {
 }
 
 /** List of valid country codes */
-export const VALID_COUNTRIES: CountryCode[] = ["de", "ca", "uk", "fr"];
+export const VALID_COUNTRIES: CountryCode[] = ["de", "ca", "uk", "fr", "us"];
 
 /** Check if a country code is valid */
 export function isValidCountry(country: string): country is CountryCode {

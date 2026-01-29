@@ -39,6 +39,13 @@ import {
 } from "@/lib/data/uk/constituencies";
 import { DEMANDS_UK } from "@/lib/data/uk/forderungen-uk";
 import {
+	findAllRepresentativesByZipCode,
+	type Senator,
+	STATE_CODES,
+	type Representative as USRepresentative,
+} from "@/lib/data/us/districts";
+import { DEMANDS_US } from "@/lib/data/us/forderungen-us";
+import {
 	findMdBsByWahlkreis,
 	findWahlkreisByPlz,
 	type MdB,
@@ -52,7 +59,7 @@ import {
 } from "@/lib/letter-cache";
 
 // Unified representative type for all countries
-type Representative = MdB | MP | UKMP | Depute;
+type Representative = MdB | MP | UKMP | Depute | USRepresentative | Senator;
 type District = Wahlkreis | Riding | { name: string };
 
 // German party colors
@@ -90,6 +97,14 @@ const UK_PARTY_COLORS: Record<string, string> = {
 	Alliance: "bg-yellow-500 text-black",
 	"Ulster Unionist Party": "bg-blue-500 text-white",
 	Independent: "bg-gray-500 text-white",
+};
+
+// US party colors (Tailwind classes)
+const US_PARTY_COLORS: Record<string, string> = {
+	Democratic: "bg-blue-700 text-white",
+	Republican: "bg-red-600 text-white",
+	Independent: "bg-gray-500 text-white",
+	Libertarian: "bg-yellow-500 text-black",
 };
 
 // Validate personal story: just check it's not empty
@@ -159,11 +174,13 @@ export function LetterForm() {
 		if (segment === "ca") return "ca";
 		if (segment === "uk") return "uk";
 		if (segment === "fr") return "fr";
+		if (segment === "us") return "us";
 		return "de";
 	}, [pathname]);
 	const isCanada = country === "ca";
 	const isUK = country === "uk";
 	const isFrance = country === "fr";
+	const isUS = country === "us";
 
 	// Country-specific demands list
 	const demands = isCanada
@@ -172,7 +189,9 @@ export function LetterForm() {
 			? DEMANDS_UK
 			: isFrance
 				? DEMANDS_FR
-				: FORDERUNGEN;
+				: isUS
+					? DEMANDS_US
+					: FORDERUNGEN;
 
 	// Honeypot field (hidden, bots will fill it)
 	const honeypotRef = useRef<HTMLInputElement>(null);
@@ -289,6 +308,34 @@ export function LetterForm() {
 					}
 				}
 			}
+		} else if (isUS) {
+			// US ZIP code is 5 digits
+			if (draft.plz.length === 5 && /^\d{5}$/.test(draft.plz)) {
+				const {
+					representative,
+					senators,
+					district: usDistrict,
+				} = findAllRepresentativesByZipCode(draft.plz);
+				const allReps: Representative[] = [];
+				if (representative) allReps.push(representative);
+				allReps.push(...senators);
+
+				if (allReps.length > 0) {
+					const stateName = usDistrict?.stateCode
+						? STATE_CODES[usDistrict.stateCode]
+						: "United States";
+					setDistrict({ name: stateName || "United States" });
+					setRepresentatives(allReps);
+
+					// Restore selected representative if possible
+					if (draft.selectedMdBId) {
+						const rep = allReps.find((r) => r.id === draft.selectedMdBId);
+						if (rep) {
+							setSelectedRep(rep);
+						}
+					}
+				}
+			}
 		} else {
 			// German PLZ is 5 digits
 			if (draft.plz.length === 5) {
@@ -312,7 +359,7 @@ export function LetterForm() {
 		setHasDraft(false);
 		setDraftRestored(true);
 		setTimeout(() => setDraftRestored(false), 3000);
-	}, [isCanada, isUK, isFrance]);
+	}, [isCanada, isUK, isFrance, isUS]);
 
 	// Dismiss draft handler
 	const dismissDraft = useCallback(() => {
@@ -364,6 +411,28 @@ export function LetterForm() {
 							setRepresentatives(deputes);
 						}
 					}
+				} else if (isUS) {
+					if (
+						template.senderPlz.length === 5 &&
+						/^\d{5}$/.test(template.senderPlz)
+					) {
+						const {
+							representative,
+							senators,
+							district: usDistrict,
+						} = findAllRepresentativesByZipCode(template.senderPlz);
+						const allReps: Representative[] = [];
+						if (representative) allReps.push(representative);
+						allReps.push(...senators);
+
+						if (allReps.length > 0) {
+							const stateName = usDistrict?.stateCode
+								? STATE_CODES[usDistrict.stateCode]
+								: "United States";
+							setDistrict({ name: stateName || "United States" });
+							setRepresentatives(allReps);
+						}
+					}
 				} else {
 					if (template.senderPlz.length === 5) {
 						const found = findWahlkreisByPlz(template.senderPlz);
@@ -381,7 +450,7 @@ export function LetterForm() {
 				// Ignore parse errors
 			}
 		}
-	}, [isCanada, isFrance]);
+	}, [isCanada, isFrance, isUS]);
 
 	// Postal code input → find district/representative
 	const handlePostalCodeChange = async (value: string) => {
@@ -435,6 +504,29 @@ export function LetterForm() {
 					setRepresentatives(deputes);
 					if (deputes.length === 1) {
 						setSelectedRep(deputes[0]);
+					}
+				}
+			}
+		} else if (isUS) {
+			// US ZIP code: 5 digits
+			if (value.length === 5 && /^\d{5}$/.test(value)) {
+				const {
+					representative,
+					senators,
+					district: usDistrict,
+				} = findAllRepresentativesByZipCode(value);
+				const allReps: Representative[] = [];
+				if (representative) allReps.push(representative);
+				allReps.push(...senators);
+
+				if (allReps.length > 0) {
+					const stateName = usDistrict?.stateCode
+						? STATE_CODES[usDistrict.stateCode]
+						: "United States";
+					setDistrict({ name: stateName || "United States" });
+					setRepresentatives(allReps);
+					if (allReps.length === 1) {
+						setSelectedRep(allReps[0]);
 					}
 				}
 			}
@@ -538,6 +630,9 @@ export function LetterForm() {
 			const partyKey = "partyShort" in rep ? rep.partyShort : rep.party;
 			return FR_PARTY_COLORS[partyKey] || "bg-gray-500 text-white";
 		}
+		if (isUS) {
+			return US_PARTY_COLORS[rep.party] || "bg-gray-500 text-white";
+		}
 		return DE_PARTY_COLORS[rep.party] || "bg-gray-500 text-white";
 	};
 
@@ -554,11 +649,20 @@ export function LetterForm() {
 		return null;
 	};
 
-	// Helper to get circonscription display for French députés
+	// Helper to get circonscription display for French députés and US representatives
 	const getCirconscriptionDisplay = (rep: Representative): string | null => {
 		if ("constituency" in rep && typeof rep.constituency === "number") {
 			const ordinal = rep.constituency === 1 ? "1ère" : `${rep.constituency}e`;
 			return `${ordinal} circ.`;
+		}
+		// For US, show district or "Senator"
+		if (isUS) {
+			if ("district" in rep && rep.district) {
+				return rep.district; // e.g., "CA-12"
+			}
+			if ("class" in rep) {
+				return "Senator";
+			}
 		}
 		return null;
 	};
