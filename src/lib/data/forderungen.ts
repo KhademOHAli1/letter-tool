@@ -14,6 +14,10 @@ export interface Forderung {
 	briefText: { de: string; en: string };
 	/** Zuständigkeit im Bundestag/Regierung */
 	zustaendigkeit: string;
+	/** Whether this demand has been achieved/completed */
+	completed?: boolean;
+	/** Date when the demand was achieved (ISO format) */
+	completedDate?: string;
 }
 
 /** Helper to get localized text from a Forderung */
@@ -80,18 +84,20 @@ export const FORDERUNGEN: Forderung[] = [
 	{
 		id: "irgc-terrorliste",
 		title: {
-			de: "IRGC auf die EU-Terrorliste",
-			en: "Put the IRGC on the EU Terror List",
+			de: "✓ IRGC auf EU-Terrorliste gesetzt",
+			en: "✓ IRGC Listed on EU Terror List",
 		},
 		description: {
-			de: "Die Islamischen Revolutionsgarden sind eine Terrororganisation. Sie müssen auf die EU-Terrorliste - mit Betätigungsverbot, Vermögenseinfrierung und strafrechtlicher Verfolgung von Unterstützern in Deutschland.",
-			en: "The Islamic Revolutionary Guard Corps is a terrorist organization. It must be placed on the EU terror list - with activity bans, asset freezes, and criminal prosecution of supporters in Germany.",
+			de: "ERREICHT am 29. Januar 2026! Die EU hat die Islamischen Revolutionsgarden (IRGC) als Terrororganisation eingestuft. Dies ermöglicht Betätigungsverbote, Vermögenseinfrierungen und strafrechtliche Verfolgung von Unterstützern.",
+			en: "ACHIEVED on January 29, 2026! The EU has designated the Islamic Revolutionary Guard Corps (IRGC) as a terrorist organization. This enables activity bans, asset freezes, and criminal prosecution of supporters.",
 		},
 		briefText: {
-			de: "Setzen Sie sich dafür ein, dass Deutschland die sofortige Listung der IRGC als terroristische Organisation auf EU-Ebene durchsetzt. Das EU-Parlament fordert dies seit 2023. Wann handelt die Bundesregierung?",
-			en: "Advocate for Germany to push for the immediate listing of the IRGC as a terrorist organization at the EU level. The EU Parliament has demanded this since 2023. When will the government act?",
+			de: "Ich begrüße die Listung der IRGC als Terrororganisation auf EU-Ebene am 29. Januar 2026. Jetzt muss Deutschland die konsequente Umsetzung sicherstellen: Betätigungsverbote durchsetzen, Vermögen einfrieren und Unterstützernetzwerke strafrechtlich verfolgen.",
+			en: "I welcome the EU's designation of the IRGC as a terrorist organization on January 29, 2026. Now Germany must ensure rigorous implementation: enforce activity bans, freeze assets, and prosecute support networks.",
 		},
 		zustaendigkeit: "AA/BMI",
+		completed: true,
+		completedDate: "2026-01-29",
 	},
 	{
 		id: "interpol",

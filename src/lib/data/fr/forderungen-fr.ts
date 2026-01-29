@@ -27,6 +27,10 @@ export interface DemandFR {
 	};
 	/** Ministère ou institution concernée */
 	jurisdiction: string;
+	/** Whether this demand has been achieved/completed */
+	completed?: boolean;
+	/** Date when the demand was achieved (ISO format) */
+	completedDate?: string;
 }
 
 /**
@@ -70,18 +74,20 @@ export const DEMANDS_FR: DemandFR[] = [
 	{
 		id: "cgri-liste-terroriste",
 		title: {
-			fr: "Inscrire le CGRI sur la liste terroriste de l'UE",
-			en: "Put the IRGC on the EU Terror List",
+			fr: "✓ CGRI inscrit sur la liste terroriste de l'UE",
+			en: "✓ IRGC Listed on EU Terror List",
 		},
 		description: {
-			fr: "Le Corps des Gardiens de la Révolution Islamique est une organisation terroriste. La France doit pousser pour son inscription intégrale sur la liste des organisations terroristes de l'UE.",
-			en: "The Islamic Revolutionary Guard Corps is a terrorist organization. France must push for its full listing on the EU terrorist organizations list.",
+			fr: "ACCOMPLI le 29 janvier 2026 ! L'UE a désigné le Corps des Gardiens de la Révolution Islamique (CGRI) comme organisation terroriste. Cela permet des interdictions d'activité, des gels d'avoirs et des poursuites pénales.",
+			en: "ACHIEVED on January 29, 2026! The EU has designated the Islamic Revolutionary Guard Corps (IRGC) as a terrorist organization. This enables activity bans, asset freezes, and criminal prosecution.",
 		},
 		briefText: {
-			fr: "Je vous demande de défendre l'inscription du CGRI comme organisation terroriste au niveau européen. Le Parlement européen l'exige depuis 2023. Le Canada a inscrit le CGRI en juin 2024. Quand la France agira-t-elle pour que l'UE suive ?",
-			en: "Advocate for listing the IRGC as a terrorist organization at EU level. The European Parliament has demanded this since 2023. Canada listed the IRGC in June 2024. When will France act to ensure the EU follows suit?",
+			fr: "Je salue l'inscription du CGRI comme organisation terroriste au niveau européen le 29 janvier 2026. La France doit maintenant assurer une mise en œuvre rigoureuse : appliquer les interdictions d'activité, geler les avoirs et poursuivre les réseaux de soutien.",
+			en: "I welcome the EU's designation of the IRGC as a terrorist organization on January 29, 2026. France must now ensure rigorous implementation: enforce activity bans, freeze assets, and prosecute support networks.",
 		},
 		jurisdiction: "Quai d'Orsay / Affaires européennes",
+		completed: true,
+		completedDate: "2026-01-29",
 	},
 	{
 		id: "sanctions-gel-avoirs",
