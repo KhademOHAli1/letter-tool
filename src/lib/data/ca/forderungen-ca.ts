@@ -35,12 +35,12 @@ export const DEMANDS_CA: DemandCA[] = [
 			fr: "Invoquer la Responsabilité de Protéger (R2P)",
 		},
 		description: {
-			en: "With over 18,000 killed since September 2025 and systematic crimes against humanity, Canada must invoke the Responsibility to Protect doctrine at the UN - including preparation for measures under Article 42 of the UN Charter.",
-			fr: "Avec plus de 18 000 morts depuis septembre 2025, le Canada doit invoquer la doctrine de la Responsabilité de Protéger aux Nations Unies.",
+			en: "With over 36,500 killed and systematic crimes against humanity, Canada must invoke the Responsibility to Protect doctrine at the UN - including preparation for measures under Article 42 of the UN Charter.",
+			fr: "Avec plus de 36 500 morts, le Canada doit invoquer la doctrine de la Responsabilité de Protéger aux Nations Unies.",
 		},
 		briefText: {
-			en: "I urge you to advocate for invoking the Responsibility to Protect. With over 18,000 dead and ongoing crimes against humanity, all Article 41 measures are exhausted. Canada must lead at the UN Security Council in preparing further action under Article 42 of the UN Charter.",
-			fr: "Je vous exhorte à plaider pour l'invocation de la Responsabilité de Protéger. Avec plus de 18 000 morts, le Canada doit agir au Conseil de sécurité de l'ONU.",
+			en: "I urge you to advocate for invoking the Responsibility to Protect. With over 36,500 dead and ongoing crimes against humanity, all Article 41 measures are exhausted. Canada must lead at the UN Security Council in preparing further action under Article 42 of the UN Charter.",
+			fr: "Je vous exhorte à plaider pour l'invocation de la Responsabilité de Protéger. Avec plus de 36 500 morts, le Canada doit agir au Conseil de sécurité de l'ONU.",
 		},
 		jurisdiction: "Global Affairs Canada / PM",
 	},
@@ -55,8 +55,8 @@ export const DEMANDS_CA: DemandCA[] = [
 			fr: "Le régime iranien a perdu toute légitimité en massacrant son propre peuple. Le Canada doit le déclarer publiquement illégitime.",
 		},
 		briefText: {
-			en: "Call on the government to publicly state what is obvious: this regime has lost all legitimacy. A government that massacres 18,000 of its own citizens cannot be treated as a legitimate partner. Canada must lead the international community in formal delegitimization.",
-			fr: "Appelez le gouvernement à déclarer publiquement ce régime illégitime. Un gouvernement qui massacre son propre peuple ne peut pas être traité comme un partenaire légitime.",
+			en: "Call on the government to publicly state what is obvious: this regime has lost all legitimacy. A government that massacres 36,500 of its own citizens cannot be treated as a legitimate partner. Canada must lead the international community in formal delegitimization.",
+			fr: "Appelez le gouvernement à déclarer publiquement ce régime illégitime. Un gouvernement qui massacre 36 500 de ses propres citoyens ne peut pas être traité comme un partenaire légitime.",
 		},
 		jurisdiction: "Global Affairs Canada / PM",
 	},

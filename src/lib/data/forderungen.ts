@@ -35,12 +35,12 @@ export const FORDERUNGEN: Forderung[] = [
 			en: "Activate Responsibility to Protect (R2P)",
 		},
 		description: {
-			de: "Bei über 12.000 Toten und systematischen Verbrechen gegen die Menschlichkeit muss Deutschland die Schutzverantwortung (Responsibility to Protect) im UN-Rahmen aktivieren - inklusive Artikel 42 der UN-Charta.",
-			en: "With over 12,000 dead and systematic crimes against humanity, Germany must activate the Responsibility to Protect (R2P) within the UN framework - including Article 42 of the UN Charter.",
+			de: "Bei über 36.500 Toten und systematischen Verbrechen gegen die Menschlichkeit muss Deutschland die Schutzverantwortung (Responsibility to Protect) im UN-Rahmen aktivieren - inklusive Artikel 42 der UN-Charta.",
+			en: "With over 36,500 dead and systematic crimes against humanity, Germany must activate the Responsibility to Protect (R2P) within the UN framework - including Article 42 of the UN Charter.",
 		},
 		briefText: {
-			de: "Ich fordere Sie auf, sich für die Aktivierung der Schutzverantwortung (R2P) einzusetzen. Bei über 12.000 Toten sind alle Artikel-41-Maßnahmen ausgeschöpft. Deutschland muss im UN-Sicherheitsrat weitergehende Schritte nach Artikel 42 der UN-Charta vorbereiten.",
-			en: "I urge you to advocate for activating the Responsibility to Protect (R2P). With over 12,000 dead, all Article 41 measures are exhausted. Germany must prepare further steps under Article 42 of the UN Charter in the Security Council.",
+			de: "Ich fordere Sie auf, sich für die Aktivierung der Schutzverantwortung (R2P) einzusetzen. Bei über 36.500 Toten sind alle Artikel-41-Maßnahmen ausgeschöpft. Deutschland muss im UN-Sicherheitsrat weitergehende Schritte nach Artikel 42 der UN-Charta vorbereiten.",
+			en: "I urge you to advocate for activating the Responsibility to Protect (R2P). With over 36,500 dead, all Article 41 measures are exhausted. Germany must prepare further steps under Article 42 of the UN Charter in the Security Council.",
 		},
 		zustaendigkeit: "AA/BK",
 	},

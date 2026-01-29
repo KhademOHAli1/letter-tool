@@ -42,12 +42,12 @@ export const DEMANDS_FR: DemandFR[] = [
 			en: "Invoke Responsibility to Protect (R2P)",
 		},
 		description: {
-			fr: "Avec plus de 18 000 morts depuis septembre 2025 et des crimes contre l'humanité systématiques, la France doit invoquer la doctrine de la Responsabilité de Protéger à l'ONU - y compris la préparation de mesures au titre de l'article 42 de la Charte.",
-			en: "With over 18,000 killed since September 2025 and systematic crimes against humanity, France must invoke the Responsibility to Protect doctrine at the UN - including preparation for measures under Article 42 of the UN Charter.",
+			fr: "Avec plus de 36 500 morts et des crimes contre l'humanité systématiques, la France doit invoquer la doctrine de la Responsabilité de Protéger à l'ONU - y compris la préparation de mesures au titre de l'article 42 de la Charte.",
+			en: "With over 36,500 killed and systematic crimes against humanity, France must invoke the Responsibility to Protect doctrine at the UN - including preparation for measures under Article 42 of the UN Charter.",
 		},
 		briefText: {
-			fr: "Je vous demande de plaider pour l'invocation de la Responsabilité de Protéger. Avec plus de 18 000 morts et des crimes contre l'humanité en cours, toutes les mesures de l'article 41 sont épuisées. La France, membre permanent du Conseil de sécurité, doit préparer des actions supplémentaires au titre de l'article 42 de la Charte des Nations Unies.",
-			en: "I urge you to advocate for invoking the Responsibility to Protect. With over 18,000 dead and ongoing crimes against humanity, all Article 41 measures are exhausted. France, as a permanent Security Council member, must prepare further action under Article 42 of the UN Charter.",
+			fr: "Je vous demande de plaider pour l'invocation de la Responsabilité de Protéger. Avec plus de 36 500 morts et des crimes contre l'humanité en cours, toutes les mesures de l'article 41 sont épuisées. La France, membre permanent du Conseil de sécurité, doit préparer des actions supplémentaires au titre de l'article 42 de la Charte des Nations Unies.",
+			en: "I urge you to advocate for invoking the Responsibility to Protect. With over 36,500 dead and ongoing crimes against humanity, all Article 41 measures are exhausted. France, as a permanent Security Council member, must prepare further action under Article 42 of the UN Charter.",
 		},
 		jurisdiction: "Quai d'Orsay / Élysée",
 	},
@@ -62,8 +62,8 @@ export const DEMANDS_FR: DemandFR[] = [
 			en: "The Iranian regime has lost all legitimacy by massacring its own people. France must publicly declare it illegitimate and cease treating it as a legitimate negotiating partner.",
 		},
 		briefText: {
-			fr: "Je vous demande d'appeler le gouvernement à affirmer ce qui est évident : ce régime a perdu toute légitimité. Un gouvernement qui massacre 18 000 de ses propres citoyens ne peut être traité comme un partenaire légitime. La France doit mener la communauté internationale vers une délégitimation formelle.",
-			en: "Call on the government to publicly state what is obvious: this regime has lost all legitimacy. A government that massacres 18,000 of its own citizens cannot be treated as a legitimate partner. France must lead the international community in formal delegitimization.",
+			fr: "Je vous demande d'appeler le gouvernement à affirmer ce qui est évident : ce régime a perdu toute légitimité. Un gouvernement qui massacre 36 500 de ses propres citoyens ne peut être traité comme un partenaire légitime. La France doit mener la communauté internationale vers une délégitimation formelle.",
+			en: "Call on the government to publicly state what is obvious: this regime has lost all legitimacy. A government that massacres 36,500 of its own citizens cannot be treated as a legitimate partner. France must lead the international community in formal delegitimization.",
 		},
 		jurisdiction: "Quai d'Orsay / Élysée",
 	},

@@ -7,7 +7,7 @@ export const LETTER_SYSTEM_PROMPT = `ROLLE
 Du schreibst im Auftrag einer Person aus dem Wahlkreis einen formellen, aber persönlichen Brief an ihren Bundestagsabgeordneten. Der Brief soll professionell und respektvoll sein, aber dennoch menschlich und authentisch.
 
 KONTEXT - LAGEBILD IRAN (Stand Januar 2026)
-- Mehr als 18.000 Tote seit September 2025
+- Mehr als 36.500 Tote (Quelle: Iran International, Januar 2026)
 - Systematische Folter und Massenhinrichtungen
 - Verbrechen gegen die Menschlichkeit (§ 7 VStGB)
 - Snapback-Mechanismus aktiviert - Sanktionen ausgeschöpft

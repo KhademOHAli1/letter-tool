@@ -8,13 +8,14 @@ import { setCookie } from "@/lib/cookies";
 import { useLanguage } from "@/lib/i18n/context";
 
 type Theme = "light" | "dark" | "system";
-type CountryCode = "de" | "ca" | "uk" | "fr";
+type CountryCode = "de" | "ca" | "uk" | "fr" | "us";
 
 const COUNTRIES: { code: CountryCode; name: string }[] = [
 	{ code: "de", name: "Deutschland" },
 	{ code: "ca", name: "Canada" },
 	{ code: "uk", name: "United Kingdom" },
 	{ code: "fr", name: "France" },
+	{ code: "us", name: "United States" },
 ];
 
 export function FooterSettings() {
@@ -33,9 +34,11 @@ export function FooterSettings() {
 			? "uk"
 			: pathname.startsWith("/fr")
 				? "fr"
-				: pathname.startsWith("/de")
-					? "de"
-					: "de";
+				: pathname.startsWith("/us")
+					? "us"
+					: pathname.startsWith("/de")
+						? "de"
+						: "de";
 
 	const currentCountryData = COUNTRIES.find((c) => c.code === currentCountry);
 

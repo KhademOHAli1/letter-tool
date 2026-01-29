@@ -99,6 +99,16 @@ const OG_CONTENT = {
 			domain: "voixpourliran.fr",
 		},
 	},
+	us: {
+		en: {
+			badge: "Your Voice Matters",
+			title: "Voice for Iran",
+			subtitle:
+				"Write to your Representative or Senator for human rights in Iran",
+			cta: "Write your letter in 5 minutes →",
+			domain: "voiceforiran.us",
+		},
+	},
 } as const;
 
 // Default language per country
@@ -107,6 +117,7 @@ const DEFAULT_LANG: Record<string, "de" | "en" | "fr"> = {
 	ca: "en",
 	uk: "en",
 	fr: "fr",
+	us: "en",
 };
 
 export async function GET(request: NextRequest) {

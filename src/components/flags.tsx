@@ -103,12 +103,62 @@ export function FlagFrance({ className = "h-4 w-5" }: FlagProps) {
 	);
 }
 
+export function FlagUSA({ className = "h-4 w-5" }: FlagProps) {
+	return (
+		<svg
+			className={className}
+			viewBox="0 0 32 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			role="img"
+			aria-labelledby="flagUSATitle"
+		>
+			<title id="flagUSATitle">United States</title>
+			{/* Stripes */}
+			<rect width="32" height="24" fill="#B22234" />
+			<rect y="1.85" width="32" height="1.85" fill="#FFF" />
+			<rect y="5.54" width="32" height="1.85" fill="#FFF" />
+			<rect y="9.23" width="32" height="1.85" fill="#FFF" />
+			<rect y="12.92" width="32" height="1.85" fill="#FFF" />
+			<rect y="16.62" width="32" height="1.85" fill="#FFF" />
+			<rect y="20.31" width="32" height="1.85" fill="#FFF" />
+			{/* Blue canton */}
+			<rect width="12.8" height="12.92" fill="#3C3B6E" />
+			{/* Stars (simplified - 9 dots representing stars) */}
+			<circle cx="2.1" cy="2.2" r="0.8" fill="#FFF" />
+			<circle cx="4.3" cy="2.2" r="0.8" fill="#FFF" />
+			<circle cx="6.4" cy="2.2" r="0.8" fill="#FFF" />
+			<circle cx="8.5" cy="2.2" r="0.8" fill="#FFF" />
+			<circle cx="10.7" cy="2.2" r="0.8" fill="#FFF" />
+			<circle cx="3.2" cy="4.3" r="0.8" fill="#FFF" />
+			<circle cx="5.3" cy="4.3" r="0.8" fill="#FFF" />
+			<circle cx="7.5" cy="4.3" r="0.8" fill="#FFF" />
+			<circle cx="9.6" cy="4.3" r="0.8" fill="#FFF" />
+			<circle cx="2.1" cy="6.5" r="0.8" fill="#FFF" />
+			<circle cx="4.3" cy="6.5" r="0.8" fill="#FFF" />
+			<circle cx="6.4" cy="6.5" r="0.8" fill="#FFF" />
+			<circle cx="8.5" cy="6.5" r="0.8" fill="#FFF" />
+			<circle cx="10.7" cy="6.5" r="0.8" fill="#FFF" />
+			<circle cx="3.2" cy="8.6" r="0.8" fill="#FFF" />
+			<circle cx="5.3" cy="8.6" r="0.8" fill="#FFF" />
+			<circle cx="7.5" cy="8.6" r="0.8" fill="#FFF" />
+			<circle cx="9.6" cy="8.6" r="0.8" fill="#FFF" />
+			<circle cx="2.1" cy="10.8" r="0.8" fill="#FFF" />
+			<circle cx="4.3" cy="10.8" r="0.8" fill="#FFF" />
+			<circle cx="6.4" cy="10.8" r="0.8" fill="#FFF" />
+			<circle cx="8.5" cy="10.8" r="0.8" fill="#FFF" />
+			<circle cx="10.7" cy="10.8" r="0.8" fill="#FFF" />
+		</svg>
+	);
+}
+
 // Map country codes to flag components
 export const FLAGS: Record<string, React.FC<FlagProps>> = {
 	de: FlagGermany,
 	ca: FlagCanada,
 	uk: FlagUK,
 	fr: FlagFrance,
+	us: FlagUSA,
 };
 
 export function Flag({ country, className }: { country: string } & FlagProps) {

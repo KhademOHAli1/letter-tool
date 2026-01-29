@@ -53,8 +53,11 @@ function getShareMessage(lang: Language, url: string): string {
 
 // Country-specific default email subject
 function getDefaultSubject(country: string): string {
-	if (country === "ca" || country === "uk") {
+	if (country === "ca" || country === "uk" || country === "us") {
 		return "Request for Support: Human Rights in Iran";
+	}
+	if (country === "fr") {
+		return "Demande de soutien : Droits humains en Iran";
 	}
 	return "Bitte um Unterstützung: Menschenrechte im Iran";
 }

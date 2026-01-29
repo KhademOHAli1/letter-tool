@@ -7,6 +7,9 @@ import { setCookie } from "@/lib/cookies";
 const COUNTRIES = [
 	{ code: "de", label: "🇩🇪", name: "Deutschland" },
 	{ code: "ca", label: "🇨🇦", name: "Canada" },
+	{ code: "uk", label: "🇬🇧", name: "United Kingdom" },
+	{ code: "fr", label: "🇫🇷", name: "France" },
+	{ code: "us", label: "🇺🇸", name: "United States" },
 ] as const;
 
 type CountryCode = (typeof COUNTRIES)[number]["code"];
@@ -20,11 +23,8 @@ export function CountrySwitcher() {
 	const pathname = usePathname();
 
 	// Determine current country from pathname
-	const currentCountry = pathname.startsWith("/ca")
-		? "ca"
-		: pathname.startsWith("/de")
-			? "de"
-			: "de";
+	const currentCountry =
+		COUNTRIES.find((c) => pathname.startsWith(`/${c.code}`))?.code ?? "de";
 
 	const handleCountryChange = (newCountry: CountryCode) => {
 		if (newCountry === currentCountry) return;
@@ -34,10 +34,9 @@ export function CountrySwitcher() {
 
 		// Navigate to the new country route
 		// Replace the current country prefix with the new one
+		const countryPrefixMatch = pathname.match(/^\/([a-z]{2})(\/|$)/);
 		let newPath: string;
-		if (pathname.startsWith("/de")) {
-			newPath = `/${newCountry}${pathname.slice(3)}`;
-		} else if (pathname.startsWith("/ca")) {
+		if (countryPrefixMatch) {
 			newPath = `/${newCountry}${pathname.slice(3)}`;
 		} else {
 			newPath = `/${newCountry}`;

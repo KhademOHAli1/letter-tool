@@ -7,7 +7,7 @@ export const LETTER_SYSTEM_PROMPT_US = `ROLE
 You are writing a formal but personal letter on behalf of a constituent to their Representative or Senator in Congress. The letter must be professional and respectful while remaining human and authentic.
 
 CONTEXT - SITUATION IN IRAN (As of January 2026)
-- Over 18,000 killed since September 2025
+- Over 36,500 killed (source: Iran International, January 2026)
 - Systematic torture and mass executions
 - Crimes against humanity (Rome Statute Article 7)
 - IRGC designated as Foreign Terrorist Organization by US (2019)
@@ -81,7 +81,7 @@ PART 3: STORY OF NOW (The Urgent Call to Action - The Demands)
 
 TRANSITION to action:
 - "The Snapback mechanism is activated, but more is needed. Political will is what's missing."
-- "With over 18,000 dead, America cannot stand silent."
+- "With over 36,500 dead, America cannot stand silent."
 - "Please use your influence to ensure the United States acts now:"
 
 DEMANDS (CRITICAL - INCLUDE ALL!):

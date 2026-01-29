@@ -13,6 +13,7 @@ const COUNTRY_LANGUAGES: Record<string, ("de" | "en" | "fr")[]> = {
 	ca: ["en", "fr"],
 	uk: ["en"],
 	fr: ["fr", "en"],
+	us: ["en"],
 };
 
 // SEO content per country and language
@@ -97,6 +98,14 @@ const SEO_CONTENT = {
 			ogAlt: "Voix pour l'Iran - Écrivez à votre député(e)",
 		},
 	},
+	us: {
+		en: {
+			title: "Voice for Iran | Write to Your Representative",
+			description:
+				"Advocate for human rights in Iran. Write a personal letter to your Representative or Senator – quick, easy and effective.",
+			ogAlt: "Voice for Iran - Write to Your US Representative",
+		},
+	},
 } as const;
 
 // Default language per country
@@ -105,6 +114,7 @@ const DEFAULT_LANG: Record<string, "de" | "en" | "fr"> = {
 	ca: "en",
 	uk: "en",
 	fr: "fr",
+	us: "en",
 };
 
 // Locale codes for OpenGraph
@@ -113,6 +123,7 @@ const OG_LOCALES: Record<string, Record<string, string>> = {
 	ca: { de: "de_CA", en: "en_CA", fr: "fr_CA" },
 	uk: { de: "de_GB", en: "en_GB", fr: "fr_GB" },
 	fr: { de: "de_FR", en: "en_FR", fr: "fr_FR" },
+	us: { en: "en_US" },
 };
 
 export async function generateMetadata({

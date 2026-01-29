@@ -114,10 +114,60 @@ const CA_PARTY_COLORS: Record<string, string> = {
 	Independent: "bg-gray-500 text-white",
 };
 
+// UK party colors
+const UK_PARTY_COLORS: Record<string, string> = {
+	Labour: "bg-red-600 text-white",
+	Conservative: "bg-blue-800 text-white",
+	"Liberal Democrats": "bg-amber-500 text-black",
+	"Scottish National Party": "bg-yellow-400 text-black",
+	"Green Party": "bg-green-600 text-white",
+	"Reform UK": "bg-cyan-600 text-white",
+	"Plaid Cymru": "bg-green-700 text-white",
+	Independent: "bg-gray-500 text-white",
+};
+
+// French party colors
+const FR_PARTY_COLORS: Record<string, string> = {
+	RN: "bg-blue-900 text-white",
+	LFI: "bg-red-700 text-white",
+	RE: "bg-yellow-500 text-black",
+	LR: "bg-blue-700 text-white",
+	SOC: "bg-pink-600 text-white",
+	EELV: "bg-green-600 text-white",
+	HOR: "bg-orange-400 text-black",
+	MODEM: "bg-orange-500 text-white",
+	LIOT: "bg-gray-600 text-white",
+	GDR: "bg-red-800 text-white",
+	NI: "bg-gray-500 text-white",
+};
+
+// US party colors
+const US_PARTY_COLORS: Record<string, string> = {
+	Democratic: "bg-blue-700 text-white",
+	Republican: "bg-red-600 text-white",
+	Independent: "bg-gray-500 text-white",
+	Libertarian: "bg-yellow-500 text-black",
+};
+
+// Get party color based on country
+function getPartyColor(country: string, party: string): string {
+	const colorMaps: Record<string, Record<string, string>> = {
+		de: DE_PARTY_COLORS,
+		ca: CA_PARTY_COLORS,
+		uk: UK_PARTY_COLORS,
+		fr: FR_PARTY_COLORS,
+		us: US_PARTY_COLORS,
+	};
+	return colorMaps[country]?.[party] || "bg-gray-200 text-gray-800";
+}
+
 // Country-specific default email subject
 function getDefaultSubject(country: string): string {
-	if (country === "ca" || country === "uk") {
+	if (country === "ca" || country === "uk" || country === "us") {
 		return "Request for Support: Human Rights in Iran";
+	}
+	if (country === "fr") {
+		return "Demande de soutien : Droits humains en Iran";
 	}
 	return "Bitte um Unterstützung: Menschenrechte im Iran";
 }
@@ -492,11 +542,7 @@ export default function EditorPage() {
 									{mdb.name}
 								</h2>
 								<span
-									className={`inline-block px-2 py-0.5 rounded text-xs ${
-										(country === "ca" ? CA_PARTY_COLORS : DE_PARTY_COLORS)[
-											mdb.party
-										] || "bg-gray-200 text-gray-800"
-									}`}
+									className={`inline-block px-2 py-0.5 rounded text-xs ${getPartyColor(country, mdb.party)}`}
 								>
 									{mdb.party}
 								</span>

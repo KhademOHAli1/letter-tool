@@ -29,10 +29,10 @@ export const DEMANDS_UK: DemandUK[] = [
 		id: "r2p",
 		title: { en: "Invoke Responsibility to Protect (R2P)" },
 		description: {
-			en: "With over 18,000 killed since September 2025 and systematic crimes against humanity, the UK must invoke the Responsibility to Protect doctrine at the UN - including preparation for measures under Article 42 of the UN Charter.",
+			en: "With over 36,500 killed and systematic crimes against humanity, the UK must invoke the Responsibility to Protect doctrine at the UN - including preparation for measures under Article 42 of the UN Charter.",
 		},
 		briefText: {
-			en: "I urge you to advocate for invoking the Responsibility to Protect. With over 18,000 dead and ongoing crimes against humanity, all Article 41 measures are exhausted. The UK must lead at the UN Security Council in preparing further action under Article 42 of the UN Charter.",
+			en: "I urge you to advocate for invoking the Responsibility to Protect. With over 36,500 dead and ongoing crimes against humanity, all Article 41 measures are exhausted. The UK must lead at the UN Security Council in preparing further action under Article 42 of the UN Charter.",
 		},
 		jurisdiction: "FCDO / Prime Minister",
 	},
@@ -43,7 +43,7 @@ export const DEMANDS_UK: DemandUK[] = [
 			en: "The Iranian regime has lost all legitimacy by massacring its own people. The UK must publicly declare it illegitimate and cease treating it as a legitimate negotiating partner on the world stage.",
 		},
 		briefText: {
-			en: "Call on the government to publicly state what is obvious: this regime has lost all legitimacy. A government that massacres 18,000 of its own citizens cannot be treated as a legitimate partner. The UK must lead the international community in formal delegitimization.",
+			en: "Call on the government to publicly state what is obvious: this regime has lost all legitimacy. A government that massacres 36,500 of its own citizens cannot be treated as a legitimate partner. The UK must lead the international community in formal delegitimization.",
 		},
 		jurisdiction: "FCDO / Prime Minister",
 	},

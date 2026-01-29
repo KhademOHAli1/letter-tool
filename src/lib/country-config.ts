@@ -114,9 +114,9 @@ export const COUNTRY_CONFIGS: Record<CountryCode, CountryConfig> = {
 			maxLength: 7,
 		},
 		legalPages: {
-			impressum: null, // No German Impressum requirement
-			privacy: null, // TODO: Create Canadian privacy policy
-			dataTransparency: null,
+			impressum: "/legal",
+			privacy: "/privacy",
+			dataTransparency: "/data-transparency",
 		},
 		footer: {
 			diaspora: {
@@ -154,9 +154,9 @@ export const COUNTRY_CONFIGS: Record<CountryCode, CountryConfig> = {
 			maxLength: 8,
 		},
 		legalPages: {
-			impressum: null,
-			privacy: null,
-			dataTransparency: null,
+			impressum: "/legal",
+			privacy: "/privacy",
+			dataTransparency: "/data-transparency",
 		},
 		footer: {
 			diaspora: {
@@ -194,9 +194,9 @@ export const COUNTRY_CONFIGS: Record<CountryCode, CountryConfig> = {
 			maxLength: 5,
 		},
 		legalPages: {
-			impressum: null,
-			privacy: null,
-			dataTransparency: null,
+			impressum: "/legal",
+			privacy: "/privacy",
+			dataTransparency: "/data-transparency",
 		},
 		footer: {
 			diaspora: {
@@ -234,9 +234,9 @@ export const COUNTRY_CONFIGS: Record<CountryCode, CountryConfig> = {
 			maxLength: 10,
 		},
 		legalPages: {
-			impressum: null,
-			privacy: null,
-			dataTransparency: null,
+			impressum: "/legal",
+			privacy: "/privacy",
+			dataTransparency: "/data-transparency",
 		},
 		footer: {
 			diaspora: {

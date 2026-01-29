@@ -7,7 +7,7 @@ export const LETTER_SYSTEM_PROMPT_FR = `RÔLE
 Vous rédigez une lettre formelle mais personnelle au nom d'un(e) électeur(trice) à destination de son/sa député(e). La lettre doit être professionnelle et respectueuse tout en restant humaine et authentique.
 
 CONTEXTE - SITUATION EN IRAN (Janvier 2026)
-- Plus de 18 000 morts depuis septembre 2025
+- Plus de 36 500 morts (source : Iran International, janvier 2026)
 - Torture systématique et exécutions de masse
 - Crimes contre l'humanité (Article 7 du Statut de Rome)
 - Mécanisme de Snapback activé - sanctions épuisées
@@ -82,7 +82,7 @@ PARTIE 3 : STORY OF NOW (L'Appel Urgent à l'Action - Les Demandes)
 
 TRANSITION vers l'action :
 - "Le mécanisme de Snapback est activé, les sanctions sont épuisées. Ce qui manque, c'est la volonté politique."
-- "Avec plus de 18 000 morts, la Responsabilité de Protéger n'est pas optionnelle - c'est un impératif moral."
+- "Avec plus de 36 500 morts, la Responsabilité de Protéger n'est pas optionnelle - c'est un impératif moral."
 - "Je vous prie d'user de votre influence pour que la France agisse maintenant :"
 
 DEMANDES (CRITIQUE - INCLURE TOUTES !) :

@@ -240,10 +240,36 @@ export async function getLetterStats(
 			.sort((a, b) => b.count - a.count)
 			.slice(0, 10);
 
+		// Top Forderungen (demands) - aggregate from forderung_ids array
+		let forderungQuery = supabase
+			.from("letter_generations")
+			.select("forderung_ids")
+			.limit(10000);
+		if (useCountryFilter) {
+			forderungQuery = forderungQuery.eq("country", country);
+		}
+		const { data: forderungData } = await forderungQuery;
+
+		const forderungRows =
+			(forderungData as { forderung_ids: string[] | null }[] | null) || [];
+		const forderungCount: Record<string, number> = {};
+		for (const row of forderungRows) {
+			if (row.forderung_ids && Array.isArray(row.forderung_ids)) {
+				for (const fId of row.forderung_ids) {
+					forderungCount[fId] = (forderungCount[fId] || 0) + 1;
+				}
+			}
+		}
+
+		const topForderungen = Object.entries(forderungCount)
+			.map(([id, count]) => ({ id, count }))
+			.sort((a, b) => b.count - a.count)
+			.slice(0, 10);
+
 		return {
 			total_letters: finalCount,
 			unique_mdbs: uniqueMdbCount,
-			top_forderungen: [], // TODO: Implement when needed
+			top_forderungen: topForderungen,
 			letters_by_party: Object.entries(partyCount).map(([party, count]) => ({
 				party,
 				count,

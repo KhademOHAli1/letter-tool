@@ -9,12 +9,16 @@ import { type NextRequest, NextResponse } from "next/server";
  * - /ca → Canadian version
  * - /uk → UK version
  * - /fr → French version
+ * - /us → US version
  *
  * Uses Vercel's geo detection via x-vercel-ip-country header
  */
 
+// Countries that should route to US version
+const US_COUNTRIES = ["US"];
+
 // Countries that should route to Canadian version
-const CANADA_COUNTRIES = ["CA", "US"];
+const CANADA_COUNTRIES = ["CA"];
 
 // Countries that should route to UK version
 const UK_COUNTRIES = ["GB", "UK"];
@@ -45,14 +49,15 @@ export function proxy(request: NextRequest) {
 		pathname.startsWith("/de") ||
 		pathname.startsWith("/ca") ||
 		pathname.startsWith("/uk") ||
-		pathname.startsWith("/fr")
+		pathname.startsWith("/fr") ||
+		pathname.startsWith("/us")
 	) {
 		return NextResponse.next();
 	}
 
 	// Check for manual country override cookie
 	const countryCookie = request.cookies.get("country")?.value;
-	if (countryCookie && ["de", "ca", "uk", "fr"].includes(countryCookie)) {
+	if (countryCookie && ["de", "ca", "uk", "fr", "us"].includes(countryCookie)) {
 		const url = request.nextUrl.clone();
 		url.pathname = `/${countryCookie}${pathname}`;
 		return NextResponse.redirect(url);
@@ -64,8 +69,10 @@ export function proxy(request: NextRequest) {
 	const detectedCountry = request.headers.get("x-vercel-ip-country") || "DE";
 
 	// Determine target country route
-	let targetCountry: "de" | "ca" | "uk" | "fr" = "de";
-	if (CANADA_COUNTRIES.includes(detectedCountry)) {
+	let targetCountry: "de" | "ca" | "uk" | "fr" | "us" = "de";
+	if (US_COUNTRIES.includes(detectedCountry)) {
+		targetCountry = "us";
+	} else if (CANADA_COUNTRIES.includes(detectedCountry)) {
 		targetCountry = "ca";
 	} else if (UK_COUNTRIES.includes(detectedCountry)) {
 		targetCountry = "uk";

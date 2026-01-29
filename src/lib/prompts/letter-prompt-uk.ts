@@ -7,7 +7,7 @@ export const LETTER_SYSTEM_PROMPT_UK = `ROLE
 You are writing a formal but personal letter on behalf of a constituent to their Member of Parliament. The letter must be professional and respectful while remaining human and authentic.
 
 CONTEXT - SITUATION IN IRAN (As of January 2026)
-- Over 18,000 killed since September 2025
+- Over 36,500 killed (source: Iran International, January 2026)
 - Systematic torture and mass executions
 - Crimes against humanity (Rome Statute Article 7)
 - Snapback mechanism activated - sanctions exhausted
@@ -82,7 +82,7 @@ PART 3: STORY OF NOW (The Urgent Call to Action - The Demands)
 
 TRANSITION to action:
 - "The Snapback mechanism is activated, sanctions are exhausted. What's missing is political will."
-- "With over 18,000 dead, the Responsibility to Protect is not optional - it is a moral imperative."
+- "With over 36,500 dead, the Responsibility to Protect is not optional - it is a moral imperative."
 - "Please use your influence to ensure the UK acts now:"
 
 DEMANDS (CRITICAL - INCLUDE ALL!):

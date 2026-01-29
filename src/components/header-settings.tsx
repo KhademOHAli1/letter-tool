@@ -7,13 +7,14 @@ import { Flag } from "@/components/flags";
 import { setCookie } from "@/lib/cookies";
 import { useLanguage } from "@/lib/i18n/context";
 
-type CountryCode = "de" | "ca" | "uk" | "fr";
+type CountryCode = "de" | "ca" | "uk" | "fr" | "us";
 
 const COUNTRIES: { code: CountryCode; name: string }[] = [
 	{ code: "de", name: "Deutschland" },
 	{ code: "ca", name: "Canada" },
 	{ code: "uk", name: "United Kingdom" },
 	{ code: "fr", name: "France" },
+	{ code: "us", name: "United States" },
 ];
 
 const LANGUAGES: { code: string; name: string; nativeName: string }[] = [
@@ -28,6 +29,7 @@ const COUNTRY_LANGUAGES: Record<CountryCode, string[]> = {
 	ca: ["en", "fr"], // Canada: English, French
 	uk: ["en"], // UK: English only
 	fr: ["fr", "en"], // France: French, English
+	us: ["en"], // US: English only
 };
 
 export function HeaderSettings() {
@@ -47,7 +49,9 @@ export function HeaderSettings() {
 			? "uk"
 			: pathname.startsWith("/fr")
 				? "fr"
-				: "de";
+				: pathname.startsWith("/us")
+					? "us"
+					: "de";
 
 	// Filter languages available for current country
 	const availableLanguages = LANGUAGES.filter((lang) =>

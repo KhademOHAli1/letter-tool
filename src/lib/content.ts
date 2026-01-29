@@ -10,13 +10,16 @@ export type DocSlug =
 	| "datenschutz"
 	| "daten-transparenz"
 	| "privacy"
-	| "legal";
+	| "legal"
+	| "data-transparency";
 
 /** Document slugs that are valid for each country */
 const COUNTRY_DOC_SLUGS: Record<string, DocSlug[]> = {
 	de: ["impressum", "datenschutz", "daten-transparenz"],
-	ca: ["privacy", "legal", "daten-transparenz"], // CA uses English-named routes
-	uk: ["privacy", "legal", "daten-transparenz"], // UK uses English-named routes
+	ca: ["privacy", "legal", "data-transparency"],
+	uk: ["privacy", "legal", "data-transparency"],
+	fr: ["privacy", "legal", "data-transparency"],
+	us: ["privacy", "legal", "data-transparency"],
 };
 
 /** Map slugs to canonical document identifiers */
@@ -26,6 +29,7 @@ const SLUG_TO_DOC: Record<DocSlug, keyof typeof docMeta> = {
 	"daten-transparenz": "daten-transparenz",
 	privacy: "datenschutz", // English alias for privacy policy
 	legal: "impressum", // English alias for legal notice
+	"data-transparency": "daten-transparenz", // English alias for data transparency
 };
 
 /**
