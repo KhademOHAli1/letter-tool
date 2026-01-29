@@ -576,7 +576,9 @@ export function LetterForm() {
 			setError(
 				language === "de"
 					? "Bitte wähle einen MdB und mindestens eine Forderung"
-					: "Please select an MP and at least one demand",
+					: isUS
+						? "Please select a representative and at least one demand"
+						: "Please select an MP and at least one demand",
 			);
 			return;
 		}
@@ -655,13 +657,16 @@ export function LetterForm() {
 			const ordinal = rep.constituency === 1 ? "1ère" : `${rep.constituency}e`;
 			return `${ordinal} circ.`;
 		}
-		// For US, show district or "Senator"
+		// For US, show chamber and district info
 		if (isUS) {
 			if ("district" in rep && rep.district) {
-				return rep.district; // e.g., "CA-12"
+				// House Representative - show district code
+				return `Rep. · ${rep.district}`;
 			}
-			if ("class" in rep) {
-				return "Senator";
+			if ("senateClass" in rep) {
+				// Senator - show rank
+				const rank = "stateRank" in rep ? rep.stateRank : "";
+				return rank === "senior" ? "Sen. (Senior)" : "Sen. (Junior)";
 			}
 		}
 		return null;
@@ -693,14 +698,18 @@ export function LetterForm() {
 					? "Bitte gib deine Postleitzahl ein"
 					: language === "fr"
 						? "Veuillez entrer votre code postal"
-						: "Please enter your postal code";
+						: isUS
+							? "Please enter your ZIP code"
+							: "Please enter your postal code";
 		} else if (!district) {
 			errors.postalCode =
 				language === "de"
 					? "Kein Wahlkreis für diese PLZ gefunden"
 					: language === "fr"
 						? "Aucune circonscription trouvée pour ce code postal"
-						: "No constituency found for this postal code";
+						: isUS
+							? "No congressional district found for this ZIP code"
+							: "No constituency found for this postal code";
 		}
 
 		if (!selectedRep) {
@@ -709,7 +718,9 @@ export function LetterForm() {
 					? "Bitte wähle eine*n Abgeordnete*n aus"
 					: language === "fr"
 						? "Veuillez sélectionner un(e) député(e)"
-						: "Please select an MP";
+						: isUS
+							? "Please select a representative"
+							: "Please select an MP";
 		}
 
 		const noteValidation = validatePersonalNote(personalNote, t);
@@ -745,6 +756,7 @@ export function LetterForm() {
 		selectedDemands,
 		consentGiven,
 		language,
+		isUS,
 		t,
 	]);
 
@@ -1014,7 +1026,9 @@ export function LetterForm() {
 									: "Postal Code"
 								: isUK
 									? "Postcode"
-									: t("form", "step2.plzLabel")}
+									: isUS
+										? "ZIP Code"
+										: t("form", "step2.plzLabel")}
 						</Label>
 						<Input
 							id="postalCode"
@@ -1029,9 +1043,11 @@ export function LetterForm() {
 											? language === "fr"
 												? "ex. 75001"
 												: "e.g., 75001"
-											: t("form", "step2.plzPlaceholder")
+											: isUS
+												? "e.g., 90210"
+												: t("form", "step2.plzPlaceholder")
 							}
-							maxLength={isCanada ? 7 : isUK ? 8 : isFrance ? 5 : 5}
+							maxLength={isCanada ? 7 : isUK ? 8 : isFrance ? 5 : isUS ? 5 : 5}
 							value={postalCode}
 							onChange={(e) =>
 								handlePostalCodeChange(
@@ -1057,9 +1073,18 @@ export function LetterForm() {
 								🔍 Looking up your constituency...
 							</p>
 						)}
-						{!isCanada && !isUK && postalCode.length === 5 && !district && (
+						{!isCanada &&
+							!isUK &&
+							!isUS &&
+							postalCode.length === 5 &&
+							!district && (
+								<p className="text-sm text-destructive">
+									{t("form", "step2.wahlkreisNotFound")}
+								</p>
+							)}
+						{isUS && postalCode.length === 5 && !district && (
 							<p className="text-sm text-destructive">
-								{t("form", "step2.wahlkreisNotFound")}
+								No congressional district found for this ZIP code
 							</p>
 						)}
 						{isCanada && postalCode.length >= 3 && !district && (
@@ -1086,7 +1111,9 @@ export function LetterForm() {
 										: "Riding"
 									: isUK
 										? "Constituency"
-										: t("form", "step2.wahlkreisFound")}
+										: isUS
+											? "Congressional District"
+											: t("form", "step2.wahlkreisFound")}
 								: {district.name}
 							</p>
 						)}
@@ -1099,12 +1126,16 @@ export function LetterForm() {
 									? isCanada
 										? "Kein/e Abgeordnete/r gefunden"
 										: "Keine MdBs gefunden"
-									: "No MPs found"}
+									: isUS
+										? "No representatives found"
+										: "No MPs found"}
 							</p>
 							<p className="text-xs mt-1">
 								{language === "de"
 									? "Für diesen Wahlkreis sind derzeit keine Daten verfügbar."
-									: "No data available for this constituency."}
+									: isUS
+										? "No data available for this ZIP code."
+										: "No data available for this constituency."}
 							</p>
 						</div>
 					)}
@@ -1363,7 +1394,9 @@ export function LetterForm() {
 										? "step3.placeholderUK"
 										: isFrance
 											? "step3.placeholderFR"
-											: "step3.placeholderDE",
+											: isUS
+												? "step3.placeholderUS"
+												: "step3.placeholderDE",
 							)}
 							className={`min-h-30 resize-none pr-10 ${
 								showValidationErrors && validationErrors.personalNote

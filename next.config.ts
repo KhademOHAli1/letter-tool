@@ -5,7 +5,7 @@ const cspHeader = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval';
   style-src 'self' 'unsafe-inline';
-  img-src 'self' https://www.bundestag.de https://www.ourcommons.ca https://members-api.parliament.uk data: blob:;
+  img-src 'self' https://www.bundestag.de https://www.ourcommons.ca https://members-api.parliament.uk https://bioguide.congress.gov data: blob:;
   font-src 'self';
   connect-src 'self' https://api.openai.com https://api.postcodes.io;
   frame-ancestors 'none';
@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
 				protocol: "https",
 				hostname: "members-api.parliament.uk",
 				pathname: "/api/Members/*/Thumbnail",
+			},
+			{
+				protocol: "https",
+				hostname: "bioguide.congress.gov",
+				pathname: "/bioguide/photo/**",
 			},
 		],
 	},
