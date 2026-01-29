@@ -431,6 +431,16 @@ export const translations = {
 			en: "Copy Letter",
 			fr: "Copier la lettre",
 		},
+		downloadPdf: {
+			de: "Als PDF herunterladen",
+			en: "Download as PDF",
+			fr: "Télécharger en PDF",
+		},
+		downloading: {
+			de: "Wird erstellt...",
+			en: "Generating...",
+			fr: "Génération...",
+		},
 		hint: {
 			de: "Der Brief wird in deinem E-Mail-Programm geöffnet. Dort kannst du ihn vor dem Senden nochmal prüfen.",
 			en: "The letter will open in your email client. You can review it there before sending.",

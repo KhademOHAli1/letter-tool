@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Download, Mail } from "lucide-react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FooterSettings } from "@/components/footer-settings";
+import { downloadLetterPdf } from "@/components/letter-pdf";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,6 +20,9 @@ interface MdBData {
 	party: string;
 	wahlkreisId?: string;
 	imageUrl?: string;
+	// US-specific fields
+	office?: string;
+	state?: string;
 }
 
 interface FormData {
@@ -183,6 +187,7 @@ export default function EditorPage() {
 	const [subject, setSubject] = useState(() => getDefaultSubject(country));
 	const [isModified, setIsModified] = useState(false);
 	const [copied, setCopied] = useState(false);
+	const [isDownloading, setIsDownloading] = useState(false);
 	const [isAdapted, setIsAdapted] = useState(false);
 	const [originalMdbName, setOriginalMdbName] = useState<string | null>(null);
 
@@ -394,6 +399,29 @@ export default function EditorPage() {
 		await navigator.clipboard.writeText(content);
 		setCopied(true);
 		setTimeout(() => setCopied(false), 2000);
+	};
+
+	const handleDownloadPdf = async () => {
+		if (!mdb) return;
+		setIsDownloading(true);
+		try {
+			await downloadLetterPdf({
+				content,
+				subject,
+				senderName,
+				recipientName: mdb.name,
+				recipientEmail: mdb.email,
+				recipientParty: mdb.party,
+				recipientOffice: mdb.office, // US office address
+				recipientState: mdb.state, // US state
+				country,
+				language,
+			});
+		} catch (err) {
+			console.error("PDF generation failed:", err);
+		} finally {
+			setIsDownloading(false);
+		}
 	};
 
 	const handleBack = () => {
@@ -753,6 +781,44 @@ export default function EditorPage() {
 									/>
 								</svg>
 								{t("editor", "copyButton")}
+							</>
+						)}
+					</Button>
+
+					<Button
+						onClick={handleDownloadPdf}
+						variant="outline"
+						className="w-full gap-2"
+						disabled={isGenerating || !content || !mdb || isDownloading}
+					>
+						{isDownloading ? (
+							<>
+								<svg
+									className="h-4 w-4 animate-spin"
+									viewBox="0 0 24 24"
+									fill="none"
+									aria-hidden="true"
+								>
+									<circle
+										className="opacity-25"
+										cx="12"
+										cy="12"
+										r="10"
+										stroke="currentColor"
+										strokeWidth="4"
+									/>
+									<path
+										className="opacity-75"
+										fill="currentColor"
+										d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+									/>
+								</svg>
+								{t("editor", "downloading")}
+							</>
+						) : (
+							<>
+								<Download className="h-4 w-4" />
+								{t("editor", "downloadPdf")}
 							</>
 						)}
 					</Button>
