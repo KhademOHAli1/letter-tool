@@ -40,6 +40,45 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 | `bun run lint` | Check with Biome |
 | `bun run lint:fix` | Auto-fix lint/format issues |
 | `bun run typecheck` | TypeScript type checking |
+| `bun run test` | Run tests in watch mode |
+| `bun run test:run` | Run tests once |
+| `bun run test:coverage` | Run tests with coverage report |
+
+## Testing
+
+The project uses [Vitest](https://vitest.dev/) with React Testing Library for testing.
+
+### Test Structure
+
+```
+tests/
+├── setup.ts                    # Global test setup
+├── unit/                       # Unit tests (no external deps)
+│   ├── schemas.test.ts         # Zod schema validation
+│   └── prompt-builder.test.ts  # Prompt building utilities
+└── integration/                # Integration tests (mocked deps)
+    └── campaign-api.test.ts    # Campaign CRUD operations
+```
+
+### Running Tests
+
+```bash
+# Run all tests in watch mode
+bun run test
+
+# Run tests once (CI mode)
+bun run test:run
+
+# Run with coverage
+bun run test:coverage
+```
+
+### Writing Tests
+
+- **Unit tests**: Test pure functions without external dependencies
+- **Integration tests**: Test API routes with mocked Supabase client
+- Use `vi.mock()` to mock external dependencies
+- Integration tests in `tests/integration/` mock the database layer
 
 ## Adding UI Components
 

@@ -1,4 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server";
+import {
+	buildPrompt,
+	createPromptVariables,
+	getCampaignPrompt,
+	getCampaignWithDemands,
+} from "@/lib/campaigns";
 import { DEMANDS_CA, type DemandCA } from "@/lib/data/ca/forderungen-ca";
 import { FORDERUNGEN, type Forderung } from "@/lib/data/forderungen";
 import { DEMANDS_FR, type DemandFR } from "@/lib/data/fr/forderungen-fr";
@@ -174,28 +180,106 @@ export async function POST(request: NextRequest) {
 							: "de";
 		const userLanguage: string =
 			typeof rawBody.language === "string" ? rawBody.language : "en";
-		const demands =
-			country === "ca"
-				? DEMANDS_CA
-				: country === "uk"
-					? DEMANDS_UK
-					: country === "fr"
-						? DEMANDS_FR
-						: country === "us"
-							? DEMANDS_US
-							: FORDERUNGEN;
-		const systemPrompt =
-			country === "ca"
-				? LETTER_SYSTEM_PROMPT_CA
-				: country === "uk"
-					? LETTER_SYSTEM_PROMPT_UK
-					: country === "fr"
-						? LETTER_SYSTEM_PROMPT_FR
-						: country === "us"
-							? userLanguage === "es"
-								? LETTER_SYSTEM_PROMPT_US_ES
-								: LETTER_SYSTEM_PROMPT_US
-							: LETTER_SYSTEM_PROMPT;
+
+		// 5.6 Check for campaign-based generation
+		const campaignSlug =
+			typeof rawBody.campaignSlug === "string" ? rawBody.campaignSlug : null;
+		let campaignId: string | null = null;
+		let systemPrompt: string;
+		let demands:
+			| typeof FORDERUNGEN
+			| typeof DEMANDS_CA
+			| typeof DEMANDS_UK
+			| typeof DEMANDS_FR
+			| typeof DEMANDS_US;
+
+		if (campaignSlug) {
+			// Campaign-based generation: fetch campaign and prompt from database
+			const campaign = await getCampaignWithDemands(campaignSlug);
+			if (!campaign) {
+				return NextResponse.json(
+					{ error: "Campaign not found" },
+					{ status: 404 },
+				);
+			}
+			if (campaign.status !== "active") {
+				return NextResponse.json(
+					{ error: "Campaign is not active" },
+					{ status: 400 },
+				);
+			}
+
+			campaignId = campaign.id;
+			// Note: campaign.demands can be used for validation in the future
+
+			// Fetch the campaign prompt
+			const prompt = await getCampaignPrompt(
+				campaign.id,
+				country,
+				userLanguage,
+			);
+			if (prompt) {
+				// Build dynamic prompt with campaign variables
+				const promptVariables = createPromptVariables(
+					campaign,
+					campaign.demands,
+					(rawBody.forderungen as string[]) || [],
+					country,
+					userLanguage,
+				);
+				systemPrompt = buildPrompt(prompt.systemPrompt, promptVariables);
+			} else {
+				// Fall back to legacy prompts if no campaign prompt defined
+				systemPrompt =
+					country === "ca"
+						? LETTER_SYSTEM_PROMPT_CA
+						: country === "uk"
+							? LETTER_SYSTEM_PROMPT_UK
+							: country === "fr"
+								? LETTER_SYSTEM_PROMPT_FR
+								: country === "us"
+									? userLanguage === "es"
+										? LETTER_SYSTEM_PROMPT_US_ES
+										: LETTER_SYSTEM_PROMPT_US
+									: LETTER_SYSTEM_PROMPT;
+			}
+
+			// Use legacy demands for validation (campaign demands handled separately)
+			demands =
+				country === "ca"
+					? DEMANDS_CA
+					: country === "uk"
+						? DEMANDS_UK
+						: country === "fr"
+							? DEMANDS_FR
+							: country === "us"
+								? DEMANDS_US
+								: FORDERUNGEN;
+		} else {
+			// Legacy generation: use static prompts and demands
+			demands =
+				country === "ca"
+					? DEMANDS_CA
+					: country === "uk"
+						? DEMANDS_UK
+						: country === "fr"
+							? DEMANDS_FR
+							: country === "us"
+								? DEMANDS_US
+								: FORDERUNGEN;
+			systemPrompt =
+				country === "ca"
+					? LETTER_SYSTEM_PROMPT_CA
+					: country === "uk"
+						? LETTER_SYSTEM_PROMPT_UK
+						: country === "fr"
+							? LETTER_SYSTEM_PROMPT_FR
+							: country === "us"
+								? userLanguage === "es"
+									? LETTER_SYSTEM_PROMPT_US_ES
+									: LETTER_SYSTEM_PROMPT_US
+								: LETTER_SYSTEM_PROMPT;
+		}
 
 		// 6. Timing-based bot detection (form must be open for at least 2 seconds)
 		const timing = rawBody._timing;
@@ -533,8 +617,10 @@ Bitte erstelle nun den Brief.`;
 												mdb_party: mdb.party || null,
 												wahlkreis_id: null,
 												wahlkreis_name: wahlkreis || null,
+												postal_code: senderPlz || null,
 												forderung_ids: forderungen,
 												user_hash: fingerprint,
+												campaign_id: campaignId,
 											});
 										} catch (err) {
 											console.error("[TRACKING] Failed to track letter:", err);
@@ -606,8 +692,10 @@ Bitte erstelle nun den Brief.`;
 				mdb_party: mdb.party || null,
 				wahlkreis_id: null, // Could add if available
 				wahlkreis_name: wahlkreis || null,
+				postal_code: senderPlz || null,
 				forderung_ids: forderungen,
 				user_hash: fingerprint,
+				campaign_id: campaignId,
 			});
 		} catch (err) {
 			// Don't fail the request if tracking fails

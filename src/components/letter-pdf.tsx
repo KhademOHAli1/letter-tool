@@ -477,8 +477,8 @@ function GermanLetterDocument({
 
 				{/* Body content */}
 				<View style={dinStyles.body}>
-					{paragraphs.map((paragraph, index) => (
-						<Text key={`p-${index}`} style={dinStyles.paragraph}>
+					{paragraphs.map((paragraph) => (
+						<Text key={paragraph} style={dinStyles.paragraph}>
 							{paragraph}
 						</Text>
 					))}
@@ -542,8 +542,8 @@ function BlockLetterDocument({
 					<Text style={blockStyles.recipientTitle}>
 						{strings.title} ({recipientParty})
 					</Text>
-					{address.map((line, i) => (
-						<Text key={`addr-${i}`} style={blockStyles.recipientTitle}>
+					{address.map((line) => (
+						<Text key={line} style={blockStyles.recipientTitle}>
 							{line}
 						</Text>
 					))}
@@ -555,8 +555,8 @@ function BlockLetterDocument({
 
 				{/* Body content */}
 				<View style={blockStyles.body}>
-					{paragraphs.map((paragraph, index) => (
-						<Text key={`p-${index}`} style={blockStyles.paragraph}>
+					{paragraphs.map((paragraph) => (
+						<Text key={paragraph} style={blockStyles.paragraph}>
 							{paragraph}
 						</Text>
 					))}
@@ -620,8 +620,8 @@ function FrenchLetterDocument({
 
 				{/* Body content */}
 				<View style={frenchStyles.body}>
-					{paragraphs.map((paragraph, index) => (
-						<Text key={`p-${index}`} style={frenchStyles.paragraph}>
+					{paragraphs.map((paragraph) => (
+						<Text key={paragraph} style={frenchStyles.paragraph}>
 							{paragraph}
 						</Text>
 					))}

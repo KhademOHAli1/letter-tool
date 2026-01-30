@@ -363,9 +363,9 @@ ${shareUrl}`,
 						{/* Progress indicator */}
 						{isGenerating && (
 							<div className="flex items-center justify-center gap-2 pt-2">
-								{progressSteps.map((_, idx) => (
+								{progressSteps.map((step, idx) => (
 									<div
-										key={idx}
+										key={step}
 										className={`h-1.5 w-8 rounded-full transition-colors ${
 											idx <= progressStep ? "bg-primary" : "bg-muted"
 										}`}

@@ -7,7 +7,7 @@ const cspHeader = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' https://www.bundestag.de https://www.ourcommons.ca https://members-api.parliament.uk https://bioguide.congress.gov data: blob:;
   font-src 'self';
-  connect-src 'self' https://api.openai.com https://api.postcodes.io;
+  connect-src 'self' https://api.openai.com https://api.postcodes.io https://*.supabase.co;
   frame-ancestors 'none';
   form-action 'self';
   base-uri 'self';

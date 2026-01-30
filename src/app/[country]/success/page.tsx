@@ -624,7 +624,7 @@ export default function SuccessPage() {
 						<ul className="space-y-3 text-sm text-muted-foreground">
 							{Array.isArray(whatsNextSteps) &&
 								whatsNextSteps.map((step, index) => (
-									<li key={index} className="flex items-start gap-3">
+									<li key={step} className="flex items-start gap-3">
 										<span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-medium shrink-0">
 											{index + 1}
 										</span>

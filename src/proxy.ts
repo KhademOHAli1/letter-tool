@@ -1,8 +1,12 @@
+import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
 /**
- * Geo-based country routing proxy
- * Redirects users to their country-specific version based on IP location
+ * Next.js Proxy (replaces middleware in Next.js 16+)
+ *
+ * Handles:
+ * 1. Supabase auth session refresh on admin/auth routes
+ * 2. Geo-based country routing based on IP location
  *
  * Routes:
  * - /de → German version (default)
@@ -34,10 +38,72 @@ const EXCLUDED_PATHS = [
 	"/og",
 	"/robots.txt",
 	"/sitemap.xml",
+	"/admin",
+	"/auth",
+	"/campaigns",
+	"/embed",
+	"/c",
 ];
 
-export function proxy(request: NextRequest) {
+// Routes that need auth session refresh
+const AUTH_ROUTES = ["/admin", "/auth", "/api/campaigns"];
+
+/**
+ * Refresh Supabase auth session if on protected routes
+ */
+async function refreshAuthSession(
+	request: NextRequest,
+): Promise<NextResponse | null> {
 	const { pathname } = request.nextUrl;
+
+	// Only process auth routes
+	const needsAuth = AUTH_ROUTES.some((route) => pathname.startsWith(route));
+	if (!needsAuth) {
+		return null;
+	}
+
+	const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+	const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+	// Skip if Supabase is not configured
+	if (!supabaseUrl || !supabaseAnonKey) {
+		return null;
+	}
+
+	let supabaseResponse = NextResponse.next({ request });
+
+	const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+		cookies: {
+			getAll() {
+				return request.cookies.getAll();
+			},
+			setAll(cookiesToSet) {
+				for (const { name, value } of cookiesToSet) {
+					request.cookies.set(name, value);
+				}
+				supabaseResponse = NextResponse.next({ request });
+				for (const { name, value, options } of cookiesToSet) {
+					supabaseResponse.cookies.set(name, value, options);
+				}
+			},
+		},
+	});
+
+	// Refresh session if expired
+	await supabase.auth.getUser();
+
+	return supabaseResponse;
+}
+
+export async function proxy(request: NextRequest) {
+	const { pathname } = request.nextUrl;
+
+	// First, handle auth session refresh for protected routes
+	const authResponse = await refreshAuthSession(request);
+	if (authResponse && AUTH_ROUTES.some((route) => pathname.startsWith(route))) {
+		// For auth routes, return the auth response (with refreshed cookies)
+		return authResponse;
+	}
 
 	// Skip excluded paths
 	if (EXCLUDED_PATHS.some((path) => pathname.startsWith(path))) {
