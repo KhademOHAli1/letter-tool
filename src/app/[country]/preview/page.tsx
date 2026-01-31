@@ -2,8 +2,10 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { EmailSender } from "@/components/email-sender";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { Language } from "@/lib/i18n/translations";
 
 interface LetterData {
 	content: string;
@@ -83,15 +85,12 @@ export default function PreviewPage() {
 		setTimeout(() => setCopied(false), 2000);
 	};
 
-	const handleSendEmail = () => {
-		const mailtoUrl = `mailto:${data.mdb.email}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(data.content)}`;
-		window.location.href = mailtoUrl;
-	};
-
 	const handleNewLetter = () => {
 		sessionStorage.removeItem("letterData");
 		router.push(`/${country}`);
 	};
+
+	const language: Language = country === "de" ? "de" : "en";
 
 	return (
 		<div className="min-h-screen bg-background">
@@ -144,9 +143,16 @@ export default function PreviewPage() {
 
 				{/* Actions */}
 				<div className="space-y-3">
-					<Button onClick={handleSendEmail} size="lg" className="w-full">
-						{t.sendEmail}
-					</Button>
+					<EmailSender
+						to={data.mdb.email}
+						subject={data.subject}
+						body={data.content}
+						language={language}
+					>
+						<Button size="lg" className="w-full">
+							{t.sendEmail}
+						</Button>
+					</EmailSender>
 					<div className="grid grid-cols-2 gap-3">
 						<Button onClick={handleCopy} variant="outline">
 							{copied ? t.copied : t.copy}

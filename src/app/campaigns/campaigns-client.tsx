@@ -1,23 +1,15 @@
 /**
- * Client-side content for campaigns directory
- * Handles filtering and search interactively
- * Phase 6: Frontend Public Campaign Experience
+ * Campaigns Directory - Client Component
+ * Premium design matching the main letter form pages
  */
 
 "use client";
 
-import { Search } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useState, useTransition } from "react";
-import { CampaignPublicCard } from "@/components/campaign-public-card";
-import { Input } from "@/components/ui/input";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
+import { ArrowRight, Megaphone, Vote } from "lucide-react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { FooterSettings } from "@/components/footer-settings";
+import { Progress } from "@/components/ui/progress";
 import type { Campaign, CampaignDemand } from "@/lib/types";
 
 interface CampaignWithStats extends Campaign {
@@ -25,45 +17,38 @@ interface CampaignWithStats extends Campaign {
 	letterCount?: number;
 }
 
-interface CampaignsClientContentProps {
+interface CampaignsPageClientProps {
 	campaigns: CampaignWithStats[];
 	initialCountry?: string;
 	initialSearch?: string;
 }
 
-const COUNTRIES = [
-	{ code: "all", name: "All Countries", flag: "🌍" },
-	{ code: "de", name: "Germany", flag: "🇩🇪" },
-	{ code: "ca", name: "Canada", flag: "🇨🇦" },
-	{ code: "uk", name: "United Kingdom", flag: "🇬🇧" },
-	{ code: "us", name: "United States", flag: "🇺🇸" },
-	{ code: "fr", name: "France", flag: "🇫🇷" },
-];
+const COUNTRY_FLAGS: Record<string, string> = {
+	de: "🇩🇪",
+	ca: "🇨🇦",
+	uk: "🇬🇧",
+	us: "🇺🇸",
+	fr: "🇫🇷",
+};
 
-export function CampaignsClientContent({
+export function CampaignsPageClient({
 	campaigns,
 	initialCountry,
 	initialSearch,
-}: CampaignsClientContentProps) {
-	const router = useRouter();
-	const searchParams = useSearchParams();
-	const [isPending, startTransition] = useTransition();
-
+}: CampaignsPageClientProps) {
 	const [searchQuery, setSearchQuery] = useState(initialSearch || "");
-	const [countryFilter, setCountryFilter] = useState(initialCountry || "all");
 
-	// Filter campaigns client-side for instant feedback
+	// Use the country from the URL path (passed via initialCountry prop)
+	const selectedCountry = initialCountry || "de";
+
+	// Show search only if more than 10 campaigns
+	const showSearch = campaigns.length > 10;
+
 	const filteredCampaigns = useMemo(() => {
 		return campaigns.filter((campaign) => {
-			// Country filter
-			if (
-				countryFilter !== "all" &&
-				!campaign.countryCodes.includes(countryFilter)
-			) {
-				return false;
-			}
+			// Campaigns are already filtered by country on the server
+			// Only apply search filter here
 
-			// Search filter (search in name and description)
 			if (searchQuery.trim()) {
 				const query = searchQuery.toLowerCase();
 				const nameMatch = Object.values(campaign.name).some((n) =>
@@ -79,112 +64,198 @@ export function CampaignsClientContent({
 
 			return true;
 		});
-	}, [campaigns, countryFilter, searchQuery]);
+	}, [campaigns, searchQuery]);
 
-	const handleCountryChange = (value: string) => {
-		setCountryFilter(value);
-		// Update URL params
-		startTransition(() => {
-			const params = new URLSearchParams(searchParams.toString());
-			if (value === "all") {
-				params.delete("country");
-			} else {
-				params.set("country", value);
-			}
-			router.push(`/campaigns?${params.toString()}`, { scroll: false });
-		});
+	const getLocalizedText = (
+		content: Record<string, string> | undefined,
+	): string => {
+		if (!content) return "";
+		return content.en || content.de || Object.values(content)[0] || "";
 	};
 
-	const handleSearchChange = (value: string) => {
-		setSearchQuery(value);
-		// Debounce URL update
-		startTransition(() => {
-			const params = new URLSearchParams(searchParams.toString());
-			if (value.trim()) {
-				params.set("q", value);
-			} else {
-				params.delete("q");
-			}
-			router.push(`/campaigns?${params.toString()}`, { scroll: false });
-		});
-	};
+	// Calculate totals for stats
+	const totalLetters = campaigns.reduce(
+		(sum, c) => sum + (c.letterCount || 0),
+		0,
+	);
 
 	return (
-		<div>
-			{/* Filters */}
-			<div className="flex flex-col sm:flex-row gap-4 mb-8">
-				{/* Search */}
-				<div className="relative flex-1">
-					<Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-					<Input
-						type="search"
-						placeholder="Search campaigns..."
-						value={searchQuery}
-						onChange={(e) => handleSearchChange(e.target.value)}
-						className="pl-10"
-					/>
+		<div className="min-h-screen bg-background overflow-x-hidden">
+			{/* Hero Section - matching country page style */}
+			<header className="relative heritage-gradient heritage-sun safe-area-top overflow-hidden">
+				<div className="container mx-auto max-w-3xl px-6 pt-8 pb-10 md:pt-12 md:pb-14">
+					<div className="text-center space-y-4 md:space-y-6">
+						{/* Badge */}
+						<div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+							<Vote className="h-4 w-4 shrink-0" />
+							<span>Campaigns</span>
+						</div>
+
+						{/* Main Heading */}
+						<h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight">
+							Make Your Voice Heard
+						</h1>
+
+						{/* Subheading */}
+						<p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
+							Join thousands writing to their representatives. Choose a campaign
+							and take action in minutes.
+						</p>
+
+						{/* Stats pill */}
+						{totalLetters > 0 && (
+							<div className="pt-2">
+								<div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+									<span className="font-semibold text-primary">
+										{totalLetters.toLocaleString()}
+									</span>
+									<span>letters sent across all campaigns</span>
+								</div>
+							</div>
+						)}
+					</div>
 				</div>
+			</header>
 
-				{/* Country filter */}
-				<Select value={countryFilter} onValueChange={handleCountryChange}>
-					<SelectTrigger className="w-full sm:w-48">
-						<SelectValue placeholder="Select country" />
-					</SelectTrigger>
-					<SelectContent>
-						{COUNTRIES.map((country) => (
-							<SelectItem key={country.code} value={country.code}>
-								<span className="flex items-center gap-2">
-									<span>{country.flag}</span>
-									<span>{country.name}</span>
-								</span>
-							</SelectItem>
-						))}
-					</SelectContent>
-				</Select>
-			</div>
+			{/* Campaigns Section */}
+			<main className="container mx-auto max-w-2xl px-4 py-10 md:py-12">
+				{/* Search - only if >10 campaigns */}
+				{showSearch && (
+					<div className="mb-8">
+						<input
+							type="text"
+							placeholder="Search campaigns..."
+							value={searchQuery}
+							onChange={(e) => setSearchQuery(e.target.value)}
+							className="
+								w-full h-12 px-4 
+								text-base bg-muted/50 border border-border/50
+								rounded-xl outline-none
+								placeholder:text-muted-foreground/50
+								focus:border-primary/30 focus:ring-2 focus:ring-primary/10
+								transition-all duration-200
+							"
+						/>
+					</div>
+				)}
 
-			{/* Results count */}
-			<div className="mb-4 text-sm text-muted-foreground">
-				{filteredCampaigns.length === 1
-					? "1 campaign"
-					: `${filteredCampaigns.length} campaigns`}
-				{countryFilter !== "all" &&
-					` in ${COUNTRIES.find((c) => c.code === countryFilter)?.name}`}
-				{searchQuery && ` matching "${searchQuery}"`}
-			</div>
+				{filteredCampaigns.length === 0 ? (
+					/* Empty state */
+					<div className="text-center py-16">
+						<div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted/50 mb-6">
+							<Megaphone className="h-7 w-7 text-muted-foreground/50" />
+						</div>
+						<h2 className="text-xl font-medium text-foreground mb-2">
+							No campaigns yet
+						</h2>
+						<p className="text-muted-foreground max-w-sm mx-auto">
+							New campaigns are coming soon. Check back later or visit the main
+							letter tool to write to your representative.
+						</p>
+						<Link
+							href={`/${selectedCountry}`}
+							className="inline-flex items-center gap-2 mt-6 text-primary hover:underline"
+						>
+							Write a letter now
+							<ArrowRight className="h-4 w-4" />
+						</Link>
+					</div>
+				) : (
+					/* Campaign cards */
+					<div className="space-y-4">
+						{filteredCampaigns.map((campaign) => {
+							const name = getLocalizedText(campaign.name);
+							const description = getLocalizedText(campaign.description);
+							const progress = campaign.goalLetters
+								? Math.min(
+										100,
+										Math.round(
+											((campaign.letterCount || 0) / campaign.goalLetters) *
+												100,
+										),
+									)
+								: null;
 
-			{/* Campaign grid */}
-			<div
-				className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${isPending ? "opacity-50" : ""}`}
-			>
-				{filteredCampaigns.map((campaign) => (
-					<CampaignPublicCard
-						key={campaign.id}
-						campaign={campaign}
-						letterCount={campaign.letterCount}
-					/>
-				))}
-			</div>
+							// Use selected country if campaign supports it, otherwise use first available country
+							const targetCountry = campaign.countryCodes.includes(
+								selectedCountry,
+							)
+								? selectedCountry
+								: campaign.countryCodes[0] || "de";
 
-			{/* No results */}
-			{filteredCampaigns.length === 0 && campaigns.length > 0 && (
-				<div className="text-center py-12">
-					<p className="text-muted-foreground">
-						No campaigns match your filters.
-					</p>
-					<button
-						type="button"
-						onClick={() => {
-							setSearchQuery("");
-							setCountryFilter("all");
-							router.push("/campaigns", { scroll: false });
-						}}
-						className="mt-2 text-sm text-primary hover:underline"
-					>
-						Clear filters
-					</button>
+							return (
+								<Link
+									key={campaign.id}
+									href={`/c/${campaign.slug}/${targetCountry}`}
+									className="group block"
+								>
+									<div
+										className="
+											relative p-5 sm:p-6 rounded-xl
+											bg-card border border-border/60
+											transition-all duration-200 ease-out
+											hover:border-primary/30 hover:shadow-md
+											active:scale-[0.99]
+										"
+									>
+										<div className="flex items-start gap-4">
+											{/* Country flags */}
+											<div className="flex flex-col items-center gap-0.5 pt-0.5">
+												{campaign.countryCodes.slice(0, 3).map((code) => (
+													<span key={code} className="text-lg leading-none">
+														{COUNTRY_FLAGS[code] || "🌍"}
+													</span>
+												))}
+												{campaign.countryCodes.length > 3 && (
+													<span className="text-xs text-muted-foreground">
+														+{campaign.countryCodes.length - 3}
+													</span>
+												)}
+											</div>
+
+											{/* Content */}
+											<div className="flex-1 min-w-0">
+												<div className="flex items-start justify-between gap-3">
+													<div className="min-w-0">
+														<h3 className="font-semibold text-foreground group-hover:text-primary transition-colors truncate">
+															{name}
+														</h3>
+														<p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+															{description}
+														</p>
+													</div>
+													<ArrowRight className="h-5 w-5 text-muted-foreground/30 group-hover:text-primary/50 shrink-0 transition-colors mt-0.5" />
+												</div>
+
+												{/* Progress */}
+												{progress !== null && (
+													<div className="mt-4 space-y-1.5">
+														<Progress value={progress} className="h-1.5" />
+														<div className="flex items-center justify-between text-xs text-muted-foreground">
+															<span>
+																{(campaign.letterCount || 0).toLocaleString()}{" "}
+																letters
+															</span>
+															<span>{progress}% of goal</span>
+														</div>
+													</div>
+												)}
+											</div>
+										</div>
+									</div>
+								</Link>
+							);
+						})}
+					</div>
+				)}
+			</main>
+
+			{/* Footer */}
+			<footer className="border-t border-border/50 bg-muted/20">
+				<div className="container mx-auto max-w-4xl px-4 py-8">
+					<FooterSettings />
 				</div>
-			)}
+			</footer>
 		</div>
 	);
 }

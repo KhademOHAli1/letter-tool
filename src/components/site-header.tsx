@@ -41,15 +41,22 @@ export function SiteHeader() {
 		return null;
 	}
 
-	// Check if we're on a country page (show country/language switcher)
-	const isCountryPage =
-		/^\/[a-z]{2}(\/|$)/.test(pathname) || pathname.startsWith("/c/");
+	// Check if we're on a page that should show country/language switcher
+	const showSettings =
+		/^\/[a-z]{2}(\/|$)/.test(pathname) ||
+		pathname.startsWith("/c/") ||
+		pathname.startsWith("/campaigns");
+
+	// Get current country from pathname (default to 'de')
+	const countryMatch = pathname.match(/^\/([a-z]{2})(\/|$)/);
+	const currentCountry = countryMatch ? countryMatch[1] : "de";
 
 	// Navigation items - subtle and minimal
 	const navItems = [
 		{
 			label: language === "de" ? "Kampagnen" : "Campaigns",
-			href: "/campaigns",
+			href: `/${currentCountry}/campaigns`,
+			isActive: pathname.includes("/campaigns"),
 			show: true,
 		},
 	];
@@ -83,8 +90,7 @@ export function SiteHeader() {
 										key={item.href}
 										href={item.href}
 										className={`text-xs font-medium tracking-wide uppercase transition-colors ${
-											pathname === item.href ||
-											pathname.startsWith(`${item.href}/`)
+											item.isActive
 												? "text-foreground"
 												: "text-muted-foreground/60 hover:text-muted-foreground"
 										}`}
@@ -94,7 +100,7 @@ export function SiteHeader() {
 								))}
 
 							{/* Country/Language switcher - only on relevant pages */}
-							{isCountryPage && (
+							{showSettings && (
 								<div className="pl-4 border-l border-border/30">
 									<HeaderSettings />
 								</div>
@@ -103,7 +109,7 @@ export function SiteHeader() {
 
 						{/* Mobile: Settings + Menu Button */}
 						<div className="flex md:hidden items-center gap-2">
-							{isCountryPage && <HeaderSettings />}
+							{showSettings && <HeaderSettings />}
 							<button
 								type="button"
 								onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -131,8 +137,7 @@ export function SiteHeader() {
 										key={item.href}
 										href={item.href}
 										className={`block text-sm transition-colors ${
-											pathname === item.href ||
-											pathname.startsWith(`${item.href}/`)
+											item.isActive
 												? "text-foreground font-medium"
 												: "text-muted-foreground hover:text-foreground"
 										}`}

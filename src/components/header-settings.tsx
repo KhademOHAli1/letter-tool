@@ -95,15 +95,16 @@ export function HeaderSettings() {
 		void setCookie("country", newCountry);
 
 		let newPath: string;
-		if (pathname.startsWith("/de")) {
+		// Check if pathname starts with a country code
+		const countryPrefixMatch = pathname.match(/^\/([a-z]{2})(\/|$)/);
+		if (countryPrefixMatch) {
+			// Replace the country prefix, keep the rest of the path
 			newPath = `/${newCountry}${pathname.slice(3) || ""}`;
-		} else if (pathname.startsWith("/ca")) {
-			newPath = `/${newCountry}${pathname.slice(3) || ""}`;
-		} else if (pathname.startsWith("/uk")) {
-			newPath = `/${newCountry}${pathname.slice(3) || ""}`;
-		} else if (pathname.startsWith("/fr")) {
-			newPath = `/${newCountry}${pathname.slice(3) || ""}`;
+		} else if (pathname === "/campaigns" || pathname.startsWith("/campaigns")) {
+			// Redirect to country-specific campaigns page
+			newPath = `/${newCountry}/campaigns`;
 		} else {
+			// No country prefix, go to country home page
 			newPath = `/${newCountry}`;
 		}
 		setCountryMenuOpen(false);

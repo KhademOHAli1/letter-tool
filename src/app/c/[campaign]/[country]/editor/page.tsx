@@ -10,6 +10,7 @@ import { ArrowRight, Download, Mail } from "lucide-react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { EmailSender } from "@/components/email-sender";
 import { FooterSettings } from "@/components/footer-settings";
 import { downloadLetterPdf } from "@/components/letter-pdf";
 import { Button } from "@/components/ui/button";
@@ -314,9 +315,7 @@ export default function CampaignEditorPage() {
 
 	const handleOpenMail = () => {
 		if (!mdb) return;
-		const mailtoLink = `mailto:${mdb.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
 		markMdBAsEmailed(mdb);
-		window.location.href = mailtoLink;
 	};
 
 	const wordCount = countWords(content);
@@ -415,10 +414,20 @@ export default function CampaignEditorPage() {
 								{language === "de" ? "Weiter" : "Continue"}
 								<ArrowRight className="ml-2 h-4 w-4" />
 							</Button>
-							<Button variant="outline" onClick={handleOpenMail}>
-								<Mail className="mr-2 h-4 w-4" />
-								{language === "de" ? "In E-Mail öffnen" : "Open in email"}
-							</Button>
+							{mdb && (
+								<EmailSender
+									to={mdb.email}
+									subject={subject}
+									body={content}
+									language={language}
+									onSent={handleOpenMail}
+								>
+									<Button variant="outline">
+										<Mail className="mr-2 h-4 w-4" />
+										{language === "de" ? "In E-Mail öffnen" : "Open in email"}
+									</Button>
+								</EmailSender>
+							)}
 							<Button variant="outline" onClick={handleDownloadPDF}>
 								<Download className="mr-2 h-4 w-4" />
 								PDF

@@ -170,6 +170,7 @@ export function EmailSender({
 			copyOnly: string;
 			copied: string;
 			copiedToast: string;
+			copiedToastMobile: string;
 			openingMail: string;
 			openDefault: string;
 			copyFailed: string;
@@ -184,6 +185,8 @@ export function EmailSender({
 			copyOnly: "Nur kopieren",
 			copied: "Brief in Zwischenablage kopiert!",
 			copiedToast: "Der Brief wurde kopiert. Füge ihn mit Strg+V / Cmd+V ein.",
+			copiedToastMobile:
+				'Brief kopiert! Tippe lange in das E-Mail-Textfeld und wähle „Einsetzen".',
 			openingMail: "E-Mail wird geöffnet...",
 			openDefault: "Standard E-Mail-App öffnen",
 			copyFailed: "Kopieren fehlgeschlagen",
@@ -197,6 +200,8 @@ export function EmailSender({
 			copyOnly: "Copy only",
 			copied: "Letter copied to clipboard!",
 			copiedToast: "The letter has been copied. Paste it with Ctrl+V / Cmd+V.",
+			copiedToastMobile:
+				'Letter copied! Tap and hold in the email body, then select "Paste".',
 			openingMail: "Opening email...",
 			openDefault: "Open default email app",
 			copyFailed: "Copy failed",
@@ -210,6 +215,8 @@ export function EmailSender({
 			copyOnly: "Copier uniquement",
 			copied: "Lettre copiée dans le presse-papiers !",
 			copiedToast: "La lettre a été copiée. Collez-la avec Ctrl+V / Cmd+V.",
+			copiedToastMobile:
+				"Lettre copiée ! Appuyez longuement dans le corps de l'e-mail et sélectionnez « Coller ».",
 			openingMail: "Ouverture de l'e-mail...",
 			openDefault: "Ouvrir l'application e-mail par défaut",
 			copyFailed: "Échec de la copie",
@@ -223,6 +230,8 @@ export function EmailSender({
 			copyOnly: "Solo copiar",
 			copied: "¡Carta copiada al portapapeles!",
 			copiedToast: "La carta ha sido copiada. Pégala con Ctrl+V / Cmd+V.",
+			copiedToastMobile:
+				'¡Carta copiada! Mantén presionado en el cuerpo del correo y selecciona "Pegar".',
 			openingMail: "Abriendo correo electrónico...",
 			openDefault: "Abrir aplicación de correo predeterminada",
 			copyFailed: "Error al copiar",
@@ -233,16 +242,28 @@ export function EmailSender({
 	const t = translations[language] || translations.en;
 
 	// Check if mailto URL would be too long
+	// iOS has a very strict limit (~1800 chars for encoded URL)
+	// Android and desktop are more forgiving but we use conservative limits
 	const mailtoUrl = buildMailtoUrl(to, subject, body);
-	const isMailtoTooLong = mailtoUrl.length > 2000;
+	const isIOS =
+		typeof window !== "undefined" &&
+		/iphone|ipad|ipod/i.test(navigator.userAgent);
+	// iOS Mail silently drops body when URL is too long
+	// Use 1800 for iOS (strict limit), 2000 for others
+	const maxMailtoLength = isIOS ? 1800 : 2000;
+	const isMailtoTooLong = mailtoUrl.length > maxMailtoLength;
 
-	const handleCopyToClipboard = async () => {
+	const isMobileDevice =
+		typeof window !== "undefined" &&
+		/android|iphone|ipad|ipod/i.test(navigator.userAgent);
+
+	const handleCopyToClipboard = async (forMobile = false) => {
 		try {
 			await navigator.clipboard.writeText(body);
 			setCopied(true);
 			toast.success(t.copied, {
-				description: t.copiedToast,
-				duration: 5000,
+				description: forMobile ? t.copiedToastMobile : t.copiedToast,
+				duration: 6000,
 			});
 			setTimeout(() => setCopied(false), 3000);
 			return true;
@@ -268,7 +289,7 @@ export function EmailSender({
 			default:
 				// For mailto, check if we need to copy first
 				if (isMailtoTooLong) {
-					await handleCopyToClipboard();
+					await handleCopyToClipboard(isMobileDevice);
 					url = `mailto:${to}?subject=${encodeURIComponent(subject)}`;
 				} else {
 					url = mailtoUrl;
@@ -307,13 +328,10 @@ export function EmailSender({
 		}
 
 		// On mobile, try mailto directly (usually works well)
-		if (
-			typeof window !== "undefined" &&
-			/android|iphone|ipad/i.test(navigator.userAgent)
-		) {
+		if (isMobileDevice) {
 			if (isMailtoTooLong) {
-				// For long emails on mobile, copy first
-				handleCopyToClipboard().then(() => {
+				// For long emails on mobile, copy first and show mobile-specific instructions
+				handleCopyToClipboard(true).then(() => {
 					window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}`;
 					onSent?.();
 				});
@@ -436,7 +454,7 @@ export function EmailSender({
 						<Button
 							variant="ghost"
 							className="justify-center gap-2"
-							onClick={handleCopyToClipboard}
+							onClick={() => handleCopyToClipboard(false)}
 						>
 							{copied ? (
 								<Check className="h-4 w-4 text-green-500" />
