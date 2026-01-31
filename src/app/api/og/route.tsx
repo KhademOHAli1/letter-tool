@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
+import { getCampaignBySlug } from "@/lib/campaigns";
 
 export const runtime = "edge";
 
@@ -125,8 +126,166 @@ export async function GET(request: NextRequest) {
 	const country = (searchParams.get("country") ||
 		"de") as keyof typeof OG_CONTENT;
 	const langParam = searchParams.get("lang") as "de" | "en" | "fr" | null;
+	const campaignSlug = searchParams.get("campaign");
 
-	// Get content for country and language
+	// If campaign slug is provided, generate campaign-specific OG image
+	if (campaignSlug) {
+		const campaign = await getCampaignBySlug(campaignSlug);
+		if (campaign) {
+			const lang = langParam || "en";
+			const campaignName =
+				campaign.name[lang] ||
+				campaign.name.en ||
+				Object.values(campaign.name)[0];
+			const campaignDescription =
+				campaign.description?.[lang] ||
+				campaign.description?.en ||
+				(campaign.description ? Object.values(campaign.description)[0] : "");
+
+			// Get country flags
+			const countryFlags = campaign.countryCodes
+				.map((code) => {
+					const flags: Record<string, string> = {
+						de: "🇩🇪",
+						ca: "🇨🇦",
+						uk: "🇬🇧",
+						us: "🇺🇸",
+						fr: "🇫🇷",
+					};
+					return flags[code] || "";
+				})
+				.join(" ");
+
+			return new ImageResponse(
+				<div
+					style={{
+						height: "100%",
+						width: "100%",
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						justifyContent: "center",
+						backgroundColor: "#0a0a0a",
+						backgroundImage:
+							"radial-gradient(circle at 25% 25%, #10b981 0%, transparent 50%), radial-gradient(circle at 75% 75%, #10b981 0%, transparent 50%)",
+						backgroundSize: "100% 100%",
+						backgroundBlendMode: "overlay",
+					}}
+				>
+					{/* Main content */}
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+							justifyContent: "center",
+							padding: "60px",
+							textAlign: "center",
+						}}
+					>
+						{/* Country flags */}
+						<div
+							style={{
+								fontSize: "48px",
+								marginBottom: "24px",
+							}}
+						>
+							{countryFlags}
+						</div>
+
+						{/* Badge */}
+						<div
+							style={{
+								display: "flex",
+								alignItems: "center",
+								gap: "8px",
+								backgroundColor: "rgba(16, 185, 129, 0.2)",
+								padding: "8px 20px",
+								borderRadius: "50px",
+								marginBottom: "24px",
+							}}
+						>
+							<span
+								style={{
+									fontSize: "18px",
+									color: "#10b981",
+									fontWeight: "600",
+								}}
+							>
+								{lang === "de"
+									? "Jetzt mitmachen"
+									: lang === "fr"
+										? "Participez maintenant"
+										: "Take Action Now"}
+							</span>
+						</div>
+
+						{/* Campaign Title */}
+						<h1
+							style={{
+								fontSize: "64px",
+								fontWeight: "bold",
+								color: "#ffffff",
+								marginBottom: "16px",
+								lineHeight: 1.1,
+								maxWidth: "900px",
+							}}
+						>
+							{campaignName}
+						</h1>
+
+						{/* Description */}
+						{campaignDescription && (
+							<p
+								style={{
+									fontSize: "24px",
+									color: "#a1a1aa",
+									maxWidth: "700px",
+									lineHeight: 1.4,
+								}}
+							>
+								{campaignDescription.length > 120
+									? `${campaignDescription.slice(0, 120)}...`
+									: campaignDescription}
+							</p>
+						)}
+
+						{/* CTA hint */}
+						<div
+							style={{
+								display: "flex",
+								alignItems: "center",
+								marginTop: "40px",
+								padding: "14px 28px",
+								backgroundColor: "#10b981",
+								borderRadius: "12px",
+							}}
+						>
+							<span
+								style={{
+									fontSize: "22px",
+									fontWeight: "600",
+									color: "#ffffff",
+								}}
+							>
+								{lang === "de"
+									? "Brief schreiben →"
+									: lang === "fr"
+										? "Écrire une lettre →"
+										: "Write a letter →"}
+							</span>
+						</div>
+					</div>
+				</div>,
+				{
+					width: 1200,
+					height: 630,
+				},
+			);
+		}
+	}
+
+	// Legacy: country-specific OG image for original Iran campaign
 	const countryContent = OG_CONTENT[country] || OG_CONTENT.de;
 	const defaultLang = DEFAULT_LANG[country] || "en";
 	const lang =

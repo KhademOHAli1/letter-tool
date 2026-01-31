@@ -1,6 +1,15 @@
 "use client";
 
-import { ChevronUp, Github, Globe, Instagram, Moon, Sun } from "lucide-react";
+import {
+	ChevronUp,
+	Github,
+	Globe,
+	Instagram,
+	LogIn,
+	Moon,
+	Sun,
+} from "lucide-react";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Flag } from "@/components/flags";
@@ -287,6 +296,15 @@ export function FooterSettings() {
 				>
 					<Instagram className="h-3.5 w-3.5" />
 				</a>
+				<Link
+					href="/auth/sign-in"
+					className="text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors"
+					aria-label={
+						language === "de" ? "Organisator Login" : "Organizer Login"
+					}
+				>
+					<LogIn className="h-3.5 w-3.5" />
+				</Link>
 			</div>
 		</div>
 	);

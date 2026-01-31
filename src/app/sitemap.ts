@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
+import { listActiveCampaigns } from "@/lib/campaigns";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const baseUrl =
 		process.env.NEXT_PUBLIC_BASE_URL ?? "https://stimme-fuer-iran.de";
 	const lastModified = new Date();
@@ -79,6 +80,53 @@ export default function sitemap(): MetadataRoute.Sitemap {
 				priority: 0.4,
 			});
 		}
+	}
+
+	// Campaigns directory page
+	urls.push({
+		url: `${baseUrl}/campaigns`,
+		lastModified,
+		changeFrequency: "daily",
+		priority: 0.9,
+	});
+
+	// Dynamic campaign pages
+	try {
+		const campaigns = await listActiveCampaigns();
+		for (const campaign of campaigns) {
+			// Campaign landing page
+			urls.push({
+				url: `${baseUrl}/c/${campaign.slug}`,
+				lastModified: campaign.updatedAt
+					? new Date(campaign.updatedAt)
+					: lastModified,
+				changeFrequency: "weekly",
+				priority: 0.8,
+			});
+
+			// Campaign country pages
+			for (const country of campaign.countryCodes) {
+				urls.push({
+					url: `${baseUrl}/c/${campaign.slug}/${country}`,
+					lastModified: campaign.updatedAt
+						? new Date(campaign.updatedAt)
+						: lastModified,
+					changeFrequency: "weekly",
+					priority: 0.7,
+				});
+
+				// Campaign editor page
+				urls.push({
+					url: `${baseUrl}/c/${campaign.slug}/${country}/editor`,
+					lastModified,
+					changeFrequency: "weekly",
+					priority: 0.6,
+				});
+			}
+		}
+	} catch (error) {
+		// If campaigns fetch fails, continue without them
+		console.error("Failed to fetch campaigns for sitemap:", error);
 	}
 
 	return urls;

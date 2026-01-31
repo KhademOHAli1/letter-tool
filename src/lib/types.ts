@@ -79,3 +79,166 @@ export interface Wahlkreis {
 	name: string;
 	plzRanges: string[]; // Postal code ranges covered
 }
+
+// ============================================================================
+// Campaign Platform Types (Phase 1, Epic 1.2)
+// ============================================================================
+
+/**
+ * Campaign status enum matching database enum
+ */
+export type CampaignStatus = "draft" | "active" | "paused" | "completed";
+
+/**
+ * Multi-language text stored as JSONB in database
+ * Keys are language codes (en, de, fr, es, fa)
+ */
+export type MultiLangText = Record<string, string>;
+
+/**
+ * Campaign entity - the core unit of the multi-campaign platform
+ */
+export interface Campaign {
+	id: string;
+	slug: string;
+	name: MultiLangText;
+	description: MultiLangText;
+	status: CampaignStatus;
+	causeContext: string | null;
+	countryCodes: string[];
+	goalLetters: number | null;
+	startDate: string | null; // ISO date string
+	endDate: string | null; // ISO date string
+	createdBy: string | null;
+	createdAt: string; // ISO timestamp
+	updatedAt: string; // ISO timestamp
+}
+
+/**
+ * Campaign demand - a political ask/demand for a campaign
+ */
+export interface CampaignDemand {
+	id: string;
+	campaignId: string;
+	title: MultiLangText;
+	description: MultiLangText;
+	briefText: MultiLangText;
+	sortOrder: number;
+	completed: boolean;
+	completedDate: string | null; // ISO date string
+	createdAt: string;
+	updatedAt: string;
+}
+
+/**
+ * Campaign prompt - LLM system prompt for a specific campaign/country/language
+ */
+export interface CampaignPrompt {
+	id: string;
+	campaignId: string;
+	countryCode: string;
+	language: string;
+	systemPrompt: string;
+	version: number;
+	isActive: boolean;
+	description: string | null;
+	createdAt: string;
+	updatedAt: string;
+}
+
+/**
+ * Campaign with its demands - used for fetching campaign with related data
+ */
+export interface CampaignWithDemands extends Campaign {
+	demands: CampaignDemand[];
+}
+
+/**
+ * Campaign with full related data
+ */
+export interface CampaignFull extends CampaignWithDemands {
+	prompts: CampaignPrompt[];
+}
+
+/**
+ * Campaign stats from the campaign_stats view
+ */
+export interface CampaignStats {
+	campaignId: string;
+	totalLetters: number;
+	uniqueRepresentatives: number;
+	countriesActive: number;
+	firstLetterAt: string | null;
+	lastLetterAt: string | null;
+}
+
+/**
+ * Input for creating a new campaign
+ */
+export interface CreateCampaignInput {
+	slug: string;
+	name: MultiLangText;
+	description: MultiLangText;
+	status?: CampaignStatus;
+	causeContext?: string;
+	countryCodes: string[];
+	goalLetters?: number;
+	startDate?: string;
+	endDate?: string;
+}
+
+/**
+ * Input for updating an existing campaign
+ */
+export interface UpdateCampaignInput {
+	slug?: string;
+	name?: MultiLangText;
+	description?: MultiLangText;
+	status?: CampaignStatus;
+	causeContext?: string | null;
+	countryCodes?: string[];
+	goalLetters?: number | null;
+	startDate?: string | null;
+	endDate?: string | null;
+}
+
+/**
+ * Input for creating a campaign demand
+ */
+export interface CreateDemandInput {
+	title: MultiLangText;
+	description: MultiLangText;
+	briefText: MultiLangText;
+	sortOrder?: number;
+}
+
+/**
+ * Input for updating a campaign demand
+ */
+export interface UpdateDemandInput {
+	title?: MultiLangText;
+	description?: MultiLangText;
+	briefText?: MultiLangText;
+	sortOrder?: number;
+	completed?: boolean;
+	completedDate?: string | null;
+}
+
+/**
+ * Input for creating a campaign prompt
+ */
+export interface CreatePromptInput {
+	countryCode: string;
+	language: string;
+	systemPrompt: string;
+	description?: string;
+}
+
+/**
+ * Input for updating a campaign prompt
+ */
+export interface UpdatePromptInput {
+	systemPrompt?: string;
+	description?: string;
+	isActive?: boolean;
+}

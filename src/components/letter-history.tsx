@@ -10,6 +10,7 @@ import {
 	Trash2,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { EmailSender } from "@/components/email-sender";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/i18n/context";
 import { t } from "@/lib/i18n/translations";
@@ -139,18 +140,22 @@ function LetterCard({
 					{/* Actions */}
 					<div className="flex items-center gap-2">
 						{!letter.emailSent && (
-							<Button
-								size="sm"
-								variant="secondary"
-								className="flex-1"
-								onClick={(e) => {
-									e.stopPropagation();
-									window.location.href = `mailto:${encodeURIComponent(letter.mdbEmail)}?subject=${encodeURIComponent(letter.subject)}&body=${encodeURIComponent(letter.content)}`;
-								}}
+							<EmailSender
+								to={letter.mdbEmail}
+								subject={letter.subject}
+								body={letter.content}
+								language={language}
 							>
-								<Mail className="h-4 w-4 mr-1.5" />
-								{t("common", "send", language)}
-							</Button>
+								<Button
+									size="sm"
+									variant="secondary"
+									className="flex-1"
+									onClick={(e) => e.stopPropagation()}
+								>
+									<Mail className="h-4 w-4 mr-1.5" />
+									{t("common", "send", language)}
+								</Button>
+							</EmailSender>
 						)}
 						<Button
 							size="sm"

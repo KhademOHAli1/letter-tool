@@ -162,7 +162,12 @@ function WhyBox({
 	);
 }
 
-export function LetterForm() {
+interface LetterFormProps {
+	/** Optional campaign slug for campaign-aware letter generation */
+	campaignSlug?: string;
+}
+
+export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const { t, language } = useLanguage();
@@ -602,6 +607,7 @@ export function LetterForm() {
 				personalNote,
 				language, // Store selected language for letter generation
 				country, // Store country for API route
+				campaignSlug, // Store campaign slug if present
 				_timing: timeSinceRender,
 			}),
 		);
@@ -609,7 +615,12 @@ export function LetterForm() {
 		// Clear draft on successful submission
 		clearFormDraft();
 
-		router.push(`/${country}/editor`);
+		// Navigate to editor - use campaign route if campaign provided
+		if (campaignSlug) {
+			router.push(`/c/${campaignSlug}/${country}/editor`);
+		} else {
+			router.push(`/${country}/editor`);
+		}
 	}
 
 	// Helper to get representative name

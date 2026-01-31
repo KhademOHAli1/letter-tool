@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SiteHeader } from "@/components/site-header";
 import { Toaster } from "@/components/ui/sonner";
 import { LanguageProvider } from "@/lib/i18n/context";
 import "./globals.css";
@@ -78,7 +79,10 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden w-full`}
 			>
-				<LanguageProvider>{children}</LanguageProvider>
+				<LanguageProvider>
+					<SiteHeader />
+					{children}
+				</LanguageProvider>
 				<Toaster position="top-center" richColors />
 				<Analytics />
 				<SpeedInsights />

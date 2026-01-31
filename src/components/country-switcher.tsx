@@ -38,6 +38,12 @@ export function CountrySwitcher() {
 		let newPath: string;
 		if (countryPrefixMatch) {
 			newPath = `/${newCountry}${pathname.slice(3)}`;
+		} else if (pathname === "/campaigns" || pathname.startsWith("/campaigns")) {
+			// Stay on campaigns page, update country query param
+			const url = new URL(window.location.href);
+			url.searchParams.set("country", newCountry);
+			router.push(url.pathname + url.search);
+			return;
 		} else {
 			newPath = `/${newCountry}`;
 		}

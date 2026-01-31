@@ -4,7 +4,6 @@ import { Clock, Vote } from "lucide-react";
 import { notFound, useParams } from "next/navigation";
 import { CampaignGoal } from "@/components/campaign-goal";
 import { FooterSettings } from "@/components/footer-settings";
-import { HeaderSettings } from "@/components/header-settings";
 import { ImpactStats } from "@/components/impact-stats";
 import { LetterForm } from "@/components/letter-form";
 import { LetterHistory } from "@/components/letter-history";
@@ -84,12 +83,7 @@ export default function CountryHome() {
 		<div className="min-h-screen bg-background overflow-x-hidden">
 			{/* Hero Section - with subtle heritage gradient */}
 			<header className="relative heritage-gradient heritage-sun safe-area-top overflow-hidden">
-				{/* Desktop Settings - top right corner */}
-				<div className="absolute top-4 right-4 z-10">
-					<HeaderSettings />
-				</div>
-
-				<div className="container mx-auto max-w-3xl px-6 pt-12 pb-10 md:pt-16 md:pb-14">
+				<div className="container mx-auto max-w-3xl px-6 pt-8 pb-10 md:pt-12 md:pb-14">
 					<div className="text-center space-y-4 md:space-y-6">
 						{/* Badge */}
 						<div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">

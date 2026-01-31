@@ -11,7 +11,12 @@ interface LetterStats {
 	top_wahlkreise: { name: string; count: number }[];
 }
 
-export function ImpactStats() {
+interface ImpactStatsProps {
+	/** Optional campaign ID to filter stats */
+	campaignId?: string;
+}
+
+export function ImpactStats({ campaignId }: ImpactStatsProps = {}) {
 	const { language } = useLanguage();
 	const [stats, setStats] = useState<LetterStats | null>(null);
 	const [loading, setLoading] = useState(true);
@@ -19,7 +24,11 @@ export function ImpactStats() {
 	useEffect(() => {
 		async function fetchStats() {
 			try {
-				const res = await fetch("/api/stats");
+				// Build URL with optional campaign filter
+				const url = campaignId
+					? `/api/stats?campaignId=${campaignId}`
+					: "/api/stats";
+				const res = await fetch(url);
 				if (res.ok) {
 					const data = await res.json();
 					setStats(data);
@@ -31,7 +40,7 @@ export function ImpactStats() {
 			}
 		}
 		fetchStats();
-	}, []);
+	}, [campaignId]);
 
 	// Don't show anything if no stats after loading
 	if (!loading && (!stats || stats.total_letters === 0)) {

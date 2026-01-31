@@ -14,9 +14,11 @@ export interface LetterGeneration {
 	mdb_party: string | null;
 	wahlkreis_id: string | null;
 	wahlkreis_name: string | null;
+	postal_code: string | null; // For geographic heat maps
 	forderung_ids: string[];
 	created_at?: string;
 	user_hash?: string | null;
+	campaign_id?: string | null; // FK to campaigns table
 }
 
 export interface LetterStats {
@@ -80,8 +82,10 @@ export async function trackLetterGeneration(
 			mdb_party: data.mdb_party,
 			wahlkreis_id: data.wahlkreis_id,
 			wahlkreis_name: data.wahlkreis_name,
+			postal_code: data.postal_code || null,
 			forderung_ids: data.forderung_ids,
 			user_hash: data.user_hash,
+			campaign_id: data.campaign_id || null,
 		});
 
 		if (error) {
