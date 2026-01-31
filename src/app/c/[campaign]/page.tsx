@@ -10,7 +10,6 @@ import { ArrowRight, Target, Users } from "lucide-react";
 import Link from "next/link";
 import { CampaignHeader } from "@/components/campaign-header";
 import { FooterSettings } from "@/components/footer-settings";
-import { HeaderSettings } from "@/components/header-settings";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCampaign } from "@/lib/campaigns/context";
@@ -67,11 +66,6 @@ export default function CampaignLandingPage() {
 		<div className="min-h-screen bg-background overflow-x-hidden">
 			{/* Header with campaign branding */}
 			<header className="relative heritage-gradient heritage-sun safe-area-top overflow-hidden">
-				{/* Settings */}
-				<div className="absolute top-4 right-4 z-10">
-					<HeaderSettings />
-				</div>
-
 				<CampaignHeader
 					name={campaignName}
 					description={campaignDescription}
