@@ -49,11 +49,11 @@ export function SiteHeader() {
 						: "bg-transparent"
 				}`}
 			>
-				<div className="flex h-12 items-center justify-between px-4 md:px-6">
-					{/* Logo / Home link - very subtle */}
+				<div className="flex h-12 items-center justify-end px-4 md:px-6 md:justify-between">
+					{/* Logo / Home link - hidden on mobile, shown on desktop */}
 					<Link
 						href="/"
-						className="text-sm font-medium text-muted-foreground/70 hover:text-foreground transition-colors"
+						className="hidden md:block text-sm font-medium text-muted-foreground/70 hover:text-foreground transition-colors"
 					>
 						{language === "de" ? "Stimme für Iran" : "Voice for Iran"}
 					</Link>
