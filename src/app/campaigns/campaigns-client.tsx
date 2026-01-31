@@ -5,7 +5,7 @@
 
 "use client";
 
-import { ArrowRight, Megaphone, Vote } from "lucide-react";
+import { ArrowRight, Megaphone, Users, Vote } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { FooterSettings } from "@/components/footer-settings";
@@ -23,12 +23,13 @@ interface CampaignsPageClientProps {
 	initialSearch?: string;
 }
 
-const COUNTRY_FLAGS: Record<string, string> = {
-	de: "🇩🇪",
-	ca: "🇨🇦",
-	uk: "🇬🇧",
-	us: "🇺🇸",
-	fr: "🇫🇷",
+// Country labels for elegant display
+const COUNTRY_LABELS: Record<string, string> = {
+	de: "Germany",
+	ca: "Canada",
+	uk: "United Kingdom",
+	us: "United States",
+	fr: "France",
 };
 
 export function CampaignsPageClient({
@@ -97,7 +98,7 @@ export function CampaignsPageClient({
 						</h1>
 
 						{/* Subheading */}
-						<p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
+						<p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed break-normal">
 							Join thousands writing to their representatives. Choose a campaign
 							and take action in minutes.
 						</p>
@@ -191,54 +192,78 @@ export function CampaignsPageClient({
 								>
 									<div
 										className="
-											relative p-5 sm:p-6 rounded-xl
-											bg-card border border-border/60
-											transition-all duration-200 ease-out
-											hover:border-primary/30 hover:shadow-md
-											active:scale-[0.99]
+											relative p-6 rounded-2xl
+											bg-linear-to-br from-card to-card/80
+											border border-border/40
+											shadow-sm
+											transition-all duration-300 ease-out
+											hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5
+											hover:-translate-y-0.5
+											active:scale-[0.995]
 										"
 									>
-										<div className="flex items-start gap-4">
-											{/* Country flags */}
-											<div className="flex flex-col items-center gap-0.5 pt-0.5">
-												{campaign.countryCodes.slice(0, 3).map((code) => (
-													<span key={code} className="text-lg leading-none">
-														{COUNTRY_FLAGS[code] || "🌍"}
-													</span>
-												))}
-												{campaign.countryCodes.length > 3 && (
-													<span className="text-xs text-muted-foreground">
-														+{campaign.countryCodes.length - 3}
-													</span>
-												)}
+										{/* Subtle gradient overlay on hover */}
+										<div className="absolute inset-0 rounded-2xl bg-linear-to-br from-primary/2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+										<div className="relative flex flex-col gap-4">
+											{/* Header: Title and Arrow */}
+											<div className="flex items-start justify-between gap-4">
+												<div className="flex-1 min-w-0">
+													<h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-200 line-clamp-1">
+														{name}
+													</h3>
+													<p className="text-sm text-muted-foreground/80 mt-1.5 line-clamp-2 leading-relaxed">
+														{description}
+													</p>
+												</div>
+												<div className="shrink-0 w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-200">
+													<ArrowRight className="h-4 w-4 text-muted-foreground/50 group-hover:text-primary transition-colors duration-200" />
+												</div>
 											</div>
 
-											{/* Content */}
-											<div className="flex-1 min-w-0">
-												<div className="flex items-start justify-between gap-3">
-													<div className="min-w-0">
-														<h3 className="font-semibold text-foreground group-hover:text-primary transition-colors truncate">
-															{name}
-														</h3>
-														<p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-															{description}
-														</p>
-													</div>
-													<ArrowRight className="h-5 w-5 text-muted-foreground/30 group-hover:text-primary/50 shrink-0 transition-colors mt-0.5" />
-												</div>
-
-												{/* Progress */}
-												{progress !== null && (
-													<div className="mt-4 space-y-1.5">
-														<Progress value={progress} className="h-1.5" />
-														<div className="flex items-center justify-between text-xs text-muted-foreground">
+											{/* Progress section */}
+											{progress !== null && (
+												<div className="space-y-2">
+													<Progress
+														value={progress}
+														className="h-1 bg-muted/50"
+													/>
+													<div className="flex items-center justify-between">
+														<div className="flex items-center gap-1.5 text-xs text-muted-foreground/70">
+															<Users className="h-3 w-3" />
 															<span>
 																{(campaign.letterCount || 0).toLocaleString()}{" "}
 																letters
 															</span>
-															<span>{progress}% of goal</span>
 														</div>
+														<span className="text-xs font-medium text-muted-foreground/70">
+															{progress}%
+														</span>
 													</div>
+												</div>
+											)}
+
+											{/* Footer: Country tags */}
+											<div className="flex items-center gap-2 pt-1">
+												{campaign.countryCodes.slice(0, 3).map((code) => (
+													<span
+														key={code}
+														className="
+															inline-flex px-2.5 py-1 
+															text-[11px] font-medium uppercase tracking-wider
+															text-muted-foreground/60
+															bg-muted/40 rounded-md
+															border border-border/30
+														"
+														title={COUNTRY_LABELS[code] || code.toUpperCase()}
+													>
+														{code}
+													</span>
+												))}
+												{campaign.countryCodes.length > 3 && (
+													<span className="text-[11px] text-muted-foreground/50">
+														+{campaign.countryCodes.length - 3} more
+													</span>
 												)}
 											</div>
 										</div>
