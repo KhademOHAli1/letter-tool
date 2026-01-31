@@ -24,6 +24,7 @@ import {
 	signUp as authSignUp,
 	getCurrentUser,
 	getSupabaseBrowserClient,
+	isSupabaseConfigured,
 	onAuthStateChange,
 } from "@/lib/auth/client";
 import type { UserProfile, UserRole } from "@/lib/auth/types";
@@ -34,6 +35,7 @@ interface AuthContextState {
 	profile: UserProfile | null;
 	isLoading: boolean;
 	isAuthenticated: boolean;
+	configError: string | null;
 	signIn: (
 		email: string,
 		password: string,
@@ -58,6 +60,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 	const [user, setUser] = useState<User | null>(null);
 	const [profile, setProfile] = useState<UserProfile | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const [configError, setConfigError] = useState<string | null>(null);
+
+	// Check if Supabase is configured
+	const supabaseConfigured = isSupabaseConfigured();
 
 	// Fetch user profile from database with retry support
 	const fetchProfile = useCallback(
@@ -66,6 +72,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 			retries = 3,
 			delay = 500,
 		): Promise<UserProfile | null> => {
+			if (!supabaseConfigured) {
+				return null;
+			}
+
 			const supabase = getSupabaseBrowserClient();
 
 			const { data, error } = await supabase
@@ -115,7 +125,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
 			return userProfile;
 		},
-		[],
+		[supabaseConfigured],
 	);
 
 	// Refresh profile data
@@ -128,6 +138,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
 	// Initialize auth state on mount
 	useEffect(() => {
+		// If Supabase is not configured, just mark loading as done
+		if (!supabaseConfigured) {
+			setConfigError(
+				"Authentication is not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY environment variables.",
+			);
+			setIsLoading(false);
+			return;
+		}
+
 		const initAuth = async () => {
 			try {
 				const currentUser = await getCurrentUser();
@@ -159,7 +178,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 		});
 
 		return unsubscribe;
-	}, [fetchProfile]);
+	}, [fetchProfile, supabaseConfigured]);
 
 	// Auth methods
 	const signIn = useCallback(
@@ -209,6 +228,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 			profile,
 			isLoading,
 			isAuthenticated: !!user,
+			configError,
 			signIn,
 			signUp,
 			signOut,
@@ -219,6 +239,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 			user,
 			profile,
 			isLoading,
+			configError,
 			signIn,
 			signUp,
 			signOut,

@@ -46,7 +46,12 @@ interface SignInProps {
 export function SignIn({ redirectTo }: SignInProps) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const { signIn, signInWithGoogle, isLoading: authLoading } = useAuth();
+	const {
+		signIn,
+		signInWithGoogle,
+		isLoading: authLoading,
+		configError,
+	} = useAuth();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -89,6 +94,41 @@ export function SignIn({ redirectTo }: SignInProps) {
 	};
 
 	const isLoading = isSubmitting || isGoogleLoading || authLoading;
+
+	// Show configuration error if Supabase is not set up
+	if (configError) {
+		return (
+			<Card className="w-full max-w-md">
+				<CardHeader className="space-y-1">
+					<CardTitle className="text-2xl font-bold">
+						Authentication Unavailable
+					</CardTitle>
+					<CardDescription>
+						Authentication is currently not configured for this deployment.
+					</CardDescription>
+				</CardHeader>
+				<CardContent>
+					<div className="rounded-md bg-yellow-50 p-4 text-sm text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300">
+						<p className="font-medium">Configuration Required</p>
+						<p className="mt-1 text-yellow-700 dark:text-yellow-400">
+							The administrator needs to configure Supabase authentication
+							environment variables (NEXT_PUBLIC_SUPABASE_URL and
+							NEXT_PUBLIC_SUPABASE_ANON_KEY) for sign-in to work.
+						</p>
+					</div>
+				</CardContent>
+				<CardFooter>
+					<Button
+						variant="outline"
+						className="w-full"
+						onClick={() => router.push("/")}
+					>
+						Return to Home
+					</Button>
+				</CardFooter>
+			</Card>
+		);
+	}
 
 	return (
 		<Card className="w-full max-w-md">

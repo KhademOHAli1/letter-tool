@@ -16,10 +16,28 @@ import { clientEnv } from "../env";
 let browserClient: SupabaseClient | null = null;
 
 /**
+ * Check if Supabase is configured.
+ * Returns true if both URL and anon key are set.
+ */
+export function isSupabaseConfigured(): boolean {
+	return Boolean(
+		clientEnv.NEXT_PUBLIC_SUPABASE_URL &&
+			clientEnv.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+	);
+}
+
+/**
  * Get the Supabase browser client (singleton).
  * Use this for client-side auth operations.
+ * Throws if Supabase is not configured.
  */
 export function getSupabaseBrowserClient(): SupabaseClient {
+	if (!isSupabaseConfigured()) {
+		throw new Error(
+			"Supabase is not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY environment variables.",
+		);
+	}
+
 	if (browserClient) {
 		return browserClient;
 	}
