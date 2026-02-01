@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { Toaster } from "@/components/ui/sonner";
+import { clientEnv } from "@/lib/env";
 import { LanguageProvider } from "@/lib/i18n/context";
 import "./globals.css";
 
@@ -18,6 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(clientEnv.NEXT_PUBLIC_BASE_URL),
 	title: {
 		default: "Stimme für Iran | Voice for Iran",
 		template: "%s",

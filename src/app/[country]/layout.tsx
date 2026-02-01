@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { clientEnv } from "@/lib/env";
 import { isValidCountry } from "@/lib/country-config";
+import { clientEnv } from "@/lib/env";
 import { CountryLanguageWrapper } from "./country-language-init";
 
 interface CountryLayoutProps {
@@ -224,12 +224,12 @@ export default async function CountryLayout({
 	params,
 }: CountryLayoutProps) {
 	const { country } = await params;
-	
+
 	// Validate country code - reject invalid ones (like 'qr', 'admin', etc.)
 	if (!isValidCountry(country)) {
 		notFound();
 	}
-	
+
 	const defaultLanguage = country === "de" ? "de" : "en";
 	const availableLanguages = COUNTRY_LANGUAGES[country] ?? ["en"];
 

@@ -100,7 +100,11 @@ export async function proxy(request: NextRequest) {
 	const { pathname } = request.nextUrl;
 
 	// Skip excluded paths FIRST before any other logic
-	if (EXCLUDED_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`))) {
+	if (
+		EXCLUDED_PATHS.some(
+			(path) => pathname === path || pathname.startsWith(`${path}/`),
+		)
+	) {
 		return NextResponse.next();
 	}
 
