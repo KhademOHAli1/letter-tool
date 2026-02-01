@@ -45,3 +45,6 @@ next-env.d.ts
 # Large data files (source data for PLZ mapping, not needed at runtime)
 data/geo/*.geojson
 data/geo/*.geojson.br
+
+# Generated QR codes (regenerate with bun scripts/generate-qr-codes.ts)
+qr-codes/
