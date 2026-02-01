@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 import { listActiveCampaigns } from "@/lib/campaigns";
+import { clientEnv } from "@/lib/env";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const baseUrl =
-		process.env.NEXT_PUBLIC_BASE_URL ?? "https://stimme-fuer-iran.de";
+	const baseUrl = clientEnv.NEXT_PUBLIC_BASE_URL;
 	const lastModified = new Date();
 
 	// All supported countries

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { getCampaignStats, getCampaignWithDemands } from "@/lib/campaigns";
+import { clientEnv } from "@/lib/env";
 import type { Language } from "@/lib/i18n/translations";
 import type { CampaignStats } from "@/lib/types";
 import { CampaignLayoutClient } from "./campaign-layout-client";
@@ -92,8 +93,7 @@ export async function generateMetadata({
 		campaignData.description.en ??
 		Object.values(campaignData.description)[0];
 
-	const baseUrl =
-		process.env.NEXT_PUBLIC_BASE_URL ?? "https://stimme-fuer-iran.de";
+	const baseUrl = clientEnv.NEXT_PUBLIC_BASE_URL;
 
 	return {
 		title: name,
@@ -166,6 +166,8 @@ export default async function CampaignLayout({
 			? langCookie
 			: defaultLanguage;
 
+	const baseUrl = clientEnv.NEXT_PUBLIC_BASE_URL;
+
 	return (
 		<>
 			{/* JSON-LD structured data for SEO */}
@@ -186,7 +188,7 @@ export default async function CampaignLayout({
 							(campaign.description
 								? Object.values(campaign.description)[0]
 								: ""),
-						url: `${process.env.NEXT_PUBLIC_BASE_URL ?? "https://stimme-fuer-iran.de"}/c/${campaignSlug}`,
+						url: `${baseUrl}/c/${campaignSlug}`,
 						mainEntity: {
 							"@type": "Campaign",
 							name:
@@ -209,7 +211,7 @@ export default async function CampaignLayout({
 						potentialAction: {
 							"@type": "WriteAction",
 							name: "Write a letter",
-							target: `${process.env.NEXT_PUBLIC_BASE_URL ?? "https://stimme-fuer-iran.de"}/c/${campaignSlug}/${campaign.countryCodes[0]}/editor`,
+							target: `${baseUrl}/c/${campaignSlug}/${campaign.countryCodes[0]}/editor`,
 						},
 					}),
 				}}

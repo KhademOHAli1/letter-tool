@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { getCampaignWithDemands } from "@/lib/campaigns";
 import { getCountryConfig, isValidCountry } from "@/lib/country-config";
+import { clientEnv } from "@/lib/env";
 import type { Language } from "@/lib/i18n/translations";
 import { CountryLayoutClient } from "./country-layout-client";
 
@@ -79,8 +80,7 @@ export async function generateMetadata({
 		campaignData.description.en ??
 		Object.values(campaignData.description)[0];
 
-	const baseUrl =
-		process.env.NEXT_PUBLIC_BASE_URL ?? "https://stimme-fuer-iran.de";
+	const baseUrl = clientEnv.NEXT_PUBLIC_BASE_URL;
 
 	return {
 		title,

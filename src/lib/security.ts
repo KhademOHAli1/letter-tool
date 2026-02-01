@@ -20,8 +20,9 @@ export function validateOrigin(request: Request): {
 	// Allowed origins
 	const allowedOrigins = [
 		process.env.NEXT_PUBLIC_APP_URL,
+		process.env.NEXT_PUBLIC_BASE_URL,
 		"https://letter-tool.vercel.app",
-		// Add your custom domain here
+		// Add your custom domains here if needed
 	].filter(Boolean);
 
 	// Also allow localhost in development

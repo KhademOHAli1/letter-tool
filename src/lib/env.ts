@@ -30,7 +30,12 @@ export const serverEnv = {
 // Client-side env vars (prefixed with NEXT_PUBLIC_)
 export const clientEnv = {
 	NEXT_PUBLIC_APP_URL:
-		process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+		process.env.NEXT_PUBLIC_APP_URL ||
+		(typeof window !== "undefined"
+			? window.location.origin
+			: "https://letter-tool.vercel.app"),
+	NEXT_PUBLIC_BASE_URL:
+		process.env.NEXT_PUBLIC_BASE_URL || "https://letter-tool.vercel.app",
 	// Supabase public client configuration
 	NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || "",
 	NEXT_PUBLIC_SUPABASE_ANON_KEY:

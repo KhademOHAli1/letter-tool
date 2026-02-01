@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
+import { clientEnv } from "@/lib/env";
 import { CountryLanguageWrapper } from "./country-language-init";
 
 interface CountryLayoutProps {
@@ -153,8 +154,7 @@ export async function generateMetadata({
 	const seo = countrySeo[lang as keyof typeof countrySeo] ?? countrySeo.en;
 
 	const locale = OG_LOCALES[country]?.[lang] ?? "en_US";
-	const baseUrl =
-		process.env.NEXT_PUBLIC_BASE_URL ?? "https://stimme-fuer-iran.de";
+	const baseUrl = clientEnv.NEXT_PUBLIC_BASE_URL;
 
 	return {
 		title: seo.title,

@@ -357,10 +357,10 @@ function getStrings(language: "de" | "en" | "fr" | "es", country: string) {
 	};
 
 	const generatedBy: Record<string, string> = {
-		de: "Erstellt mit stimme-fuer-iran.de",
-		en: "Generated with voiceforiran.org",
-		fr: "Créé avec voixpourliran.fr",
-		es: "Generado con voiceforiran.org",
+		de: "Erstellt mit letter-tool.vercel.app",
+		en: "Generated with letter-tool.vercel.app",
+		fr: "Créé avec letter-tool.vercel.app",
+		es: "Generado con letter-tool.vercel.app",
 	};
 
 	return {

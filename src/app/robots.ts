@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
+import { clientEnv } from "@/lib/env";
 
 export default function robots(): MetadataRoute.Robots {
-	const baseUrl =
-		process.env.NEXT_PUBLIC_BASE_URL ?? "https://stimme-fuer-iran.de";
+	const baseUrl = clientEnv.NEXT_PUBLIC_BASE_URL;
 
 	return {
 		rules: [

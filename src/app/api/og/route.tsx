@@ -13,14 +13,14 @@ const OG_CONTENT = {
 			subtitle:
 				"Schreib deinem Bundestagsabgeordneten für Menschenrechte im Iran",
 			cta: "In 5 Minuten deinen Brief schreiben →",
-			domain: "stimme-fuer-iran.de",
+			domain: "letter-tool.vercel.app",
 		},
 		en: {
 			badge: "Your Voice Matters",
 			title: "Voice for Iran",
 			subtitle: "Write to your German MP for human rights in Iran",
 			cta: "Write your letter in 5 minutes →",
-			domain: "stimme-fuer-iran.de",
+			domain: "letter-tool.vercel.app",
 		},
 		fr: {
 			badge: "Votre voix compte",
@@ -28,7 +28,7 @@ const OG_CONTENT = {
 			subtitle:
 				"Écrivez à votre député allemand pour les droits humains en Iran",
 			cta: "Écrivez votre lettre en 5 minutes →",
-			domain: "stimme-fuer-iran.de",
+			domain: "letter-tool.vercel.app",
 		},
 	},
 	ca: {
@@ -37,21 +37,21 @@ const OG_CONTENT = {
 			title: "Stimme für Iran",
 			subtitle: "Schreib deinem kanadischen Abgeordneten",
 			cta: "In 5 Minuten deinen Brief schreiben →",
-			domain: "voiceforiran.ca",
+			domain: "letter-tool.vercel.app",
 		},
 		en: {
 			badge: "Your Voice Matters",
 			title: "Voice for Iran",
 			subtitle: "Write to your Member of Parliament for human rights in Iran",
 			cta: "Write your letter in 5 minutes →",
-			domain: "voiceforiran.ca",
+			domain: "letter-tool.vercel.app",
 		},
 		fr: {
 			badge: "Votre voix compte",
 			title: "Voix pour l'Iran",
 			subtitle: "Écrivez à votre député(e) pour les droits humains en Iran",
 			cta: "Écrivez votre lettre en 5 minutes →",
-			domain: "voiceforiran.ca",
+			domain: "letter-tool.vercel.app",
 		},
 	},
 	uk: {
@@ -60,21 +60,21 @@ const OG_CONTENT = {
 			title: "Stimme für Iran",
 			subtitle: "Schreib deinem britischen Abgeordneten",
 			cta: "In 5 Minuten deinen Brief schreiben →",
-			domain: "voiceforiran.uk",
+			domain: "letter-tool.vercel.app",
 		},
 		en: {
 			badge: "Your Voice Matters",
 			title: "Voice for Iran",
 			subtitle: "Write to your Member of Parliament for human rights in Iran",
 			cta: "Write your letter in 5 minutes →",
-			domain: "voiceforiran.uk",
+			domain: "letter-tool.vercel.app",
 		},
 		fr: {
 			badge: "Votre voix compte",
 			title: "Voix pour l'Iran",
 			subtitle: "Écrivez à votre député britannique",
 			cta: "Écrivez votre lettre en 5 minutes →",
-			domain: "voiceforiran.uk",
+			domain: "letter-tool.vercel.app",
 		},
 	},
 	fr: {
@@ -83,21 +83,21 @@ const OG_CONTENT = {
 			title: "Stimme für Iran",
 			subtitle: "Schreib deinem französischen Abgeordneten",
 			cta: "In 5 Minuten deinen Brief schreiben →",
-			domain: "voixpourliran.fr",
+			domain: "letter-tool.vercel.app",
 		},
 		en: {
 			badge: "Your Voice Matters",
 			title: "Voice for Iran",
 			subtitle: "Write to your French Deputy for human rights in Iran",
 			cta: "Write your letter in 5 minutes →",
-			domain: "voixpourliran.fr",
+			domain: "letter-tool.vercel.app",
 		},
 		fr: {
 			badge: "Votre voix compte",
 			title: "Voix pour l'Iran",
 			subtitle: "Écrivez à votre député(e) pour les droits humains en Iran",
 			cta: "Écrivez votre lettre en 5 minutes →",
-			domain: "voixpourliran.fr",
+			domain: "letter-tool.vercel.app",
 		},
 	},
 	us: {
@@ -107,7 +107,7 @@ const OG_CONTENT = {
 			subtitle:
 				"Write to your Representative or Senator for human rights in Iran",
 			cta: "Write your letter in 5 minutes →",
-			domain: "voiceforiran.us",
+			domain: "letter-tool.vercel.app",
 		},
 	},
 } as const;
