@@ -43,6 +43,7 @@ const EXCLUDED_PATHS = [
 	"/campaigns",
 	"/embed",
 	"/c",
+	"/qr",
 ];
 
 // Routes that need auth session refresh
@@ -98,16 +99,16 @@ async function refreshAuthSession(
 export async function proxy(request: NextRequest) {
 	const { pathname } = request.nextUrl;
 
+	// Skip excluded paths FIRST before any other logic
+	if (EXCLUDED_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`))) {
+		return NextResponse.next();
+	}
+
 	// First, handle auth session refresh for protected routes
 	const authResponse = await refreshAuthSession(request);
 	if (authResponse && AUTH_ROUTES.some((route) => pathname.startsWith(route))) {
 		// For auth routes, return the auth response (with refreshed cookies)
 		return authResponse;
-	}
-
-	// Skip excluded paths
-	if (EXCLUDED_PATHS.some((path) => pathname.startsWith(path))) {
-		return NextResponse.next();
 	}
 
 	// Skip if already on a country route
