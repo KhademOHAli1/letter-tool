@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
-interface QRCodeProps {
+export interface QRCodeProps {
 	value: string;
 	size?: number;
 	includeMargin?: boolean;

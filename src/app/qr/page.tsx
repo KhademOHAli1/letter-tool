@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { QRCodeDisplay } from "@/components/qr-code";
+import { QRCodeDisplay } from "@/components";
 
 export const metadata: Metadata = {
 	title: "QR Code - Letter Tool",
