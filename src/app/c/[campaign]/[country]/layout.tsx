@@ -103,6 +103,12 @@ export async function generateMetadata({
 			card: "summary_large_image",
 			title,
 			description,
+			images: [
+				{
+					url: `/api/og?campaign=${campaignSlug}&country=${country}&lang=${lang}`,
+					alt: title,
+				},
+			],
 		},
 	};
 }

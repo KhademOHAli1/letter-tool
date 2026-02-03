@@ -6,17 +6,24 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { TargetTableEditor } from "@/components/admin/targets/target-table-editor";
+import { Flag } from "@/components/flags";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { getSupabaseBrowserClient } from "@/lib/auth/client";
+import type { TargetUploadRow } from "@/lib/campaign-targets";
+import type { CountryCode } from "@/lib/country-config";
 
 export interface BasicInfoData {
 	name: Record<string, string>;
 	description: Record<string, string>;
 	slug: string;
 	countryCodes: string[];
+	useCustomTargets: boolean;
+	customTargets: TargetUploadRow[];
 }
 
 interface StepBasicInfoProps {
@@ -25,12 +32,12 @@ interface StepBasicInfoProps {
 	onValidityChange: (valid: boolean) => void;
 }
 
-const COUNTRIES = [
-	{ code: "de", name: "Germany", flag: "🇩🇪" },
-	{ code: "ca", name: "Canada", flag: "🇨🇦" },
-	{ code: "uk", name: "United Kingdom", flag: "🇬🇧" },
-	{ code: "us", name: "United States", flag: "🇺🇸" },
-	{ code: "fr", name: "France", flag: "🇫🇷" },
+const TARGET_AUDIENCES: { code: CountryCode; label: string }[] = [
+	{ code: "de", label: "German Bundestag" },
+	{ code: "uk", label: "UK House of Commons" },
+	{ code: "us", label: "US Congress" },
+	{ code: "fr", label: "French National Assembly" },
+	{ code: "ca", label: "Canadian Parliament" },
 ];
 
 const LANGUAGES = ["en", "de"];
@@ -50,6 +57,9 @@ export function StepBasicInfo({
 }: StepBasicInfoProps) {
 	const [slugTouched, setSlugTouched] = useState(false);
 	const [slugError, setSlugError] = useState<string | null>(null);
+
+	const customTargets = data.customTargets ?? [];
+	const useCustomTargets = data.useCustomTargets ?? false;
 
 	// Auto-generate slug from English name if not manually edited
 	useEffect(() => {
@@ -96,13 +106,22 @@ export function StepBasicInfo({
 			Object.values(data.name).some((n) => n.trim().length > 0) &&
 			data.slug.length >= 3 &&
 			!slugError &&
-			data.countryCodes.length > 0;
+			data.countryCodes.length > 0 &&
+			(!useCustomTargets || customTargets.length > 0);
 
 		if (prevValidRef.current !== isValid) {
 			prevValidRef.current = isValid;
 			onValidityChange(isValid);
 		}
-	}, [data.name, data.slug, data.countryCodes, slugError, onValidityChange]);
+	}, [
+		data.name,
+		data.slug,
+		data.countryCodes,
+		useCustomTargets,
+		customTargets.length,
+		slugError,
+		onValidityChange,
+	]);
 
 	const handleNameChange = (lang: string, value: string) => {
 		onChange({
@@ -134,6 +153,14 @@ export function StepBasicInfo({
 		onChange({
 			...data,
 			countryCodes: newCodes,
+		});
+	};
+
+	const handleAudienceApply = (rows: TargetUploadRow[]) => {
+		onChange({
+			...data,
+			useCustomTargets: true,
+			customTargets: rows,
 		});
 	};
 
@@ -206,38 +233,92 @@ export function StepBasicInfo({
 				))}
 			</div>
 
-			{/* Countries */}
+			{/* Target Audience */}
 			<div className="space-y-4">
-				<Label className="text-base font-medium">Target Countries *</Label>
+				<Label className="text-base font-medium">Target Audience *</Label>
 				<p className="text-sm text-muted-foreground">
-					Select which countries this campaign will target
+					Select which audience this campaign will target
 				</p>
-				<div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-					{COUNTRIES.map((country) => (
+				<div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+					{TARGET_AUDIENCES.map((audience) => (
 						<div
-							key={country.code}
+							key={audience.code}
 							className="flex cursor-pointer items-center gap-3 rounded-lg border p-3 hover:bg-muted/50"
 						>
 							<Checkbox
-								id={`country-${country.code}`}
-								checked={data.countryCodes.includes(country.code)}
+								id={`audience-${audience.code}`}
+								checked={data.countryCodes.includes(audience.code)}
 								onCheckedChange={(checked) =>
-									handleCountryToggle(country.code, checked as boolean)
+									handleCountryToggle(audience.code, checked as boolean)
 								}
 							/>
 							<label
-								htmlFor={`country-${country.code}`}
+								htmlFor={`audience-${audience.code}`}
 								className="flex cursor-pointer items-center gap-2"
 							>
-								<span className="text-lg">{country.flag}</span>
-								<span className="text-sm font-medium">{country.name}</span>
+								<Flag country={audience.code} className="h-4 w-6" />
+								<span className="text-sm font-medium">{audience.label}</span>
 							</label>
 						</div>
 					))}
 				</div>
 				{data.countryCodes.length === 0 && (
 					<p className="text-sm text-destructive">
-						Please select at least one country
+						Please select at least one audience
+					</p>
+				)}
+			</div>
+
+			{/* Custom Audience */}
+			<div className="space-y-4">
+				<Label className="text-base font-medium">Custom Audience</Label>
+				<p className="text-sm text-muted-foreground">
+					Upload a target list to route supporters to the nearest recipient
+				</p>
+
+				<div className="flex items-start gap-3">
+					<Checkbox
+						id="custom-audience"
+						checked={useCustomTargets}
+						onCheckedChange={(checked) =>
+							onChange({ ...data, useCustomTargets: checked as boolean })
+						}
+					/>
+					<label htmlFor="custom-audience" className="space-y-1 cursor-pointer">
+						<p className="text-sm font-medium">Enable custom audience list</p>
+						<p className="text-xs text-muted-foreground">
+							Supporters can find the nearest target by postal code or search.
+						</p>
+					</label>
+				</div>
+
+				{useCustomTargets ? (
+					<>
+						{customTargets.length > 0 && (
+							<div className="flex items-center justify-between rounded-lg border bg-muted/30 p-3">
+								<p className="text-sm">
+									<span className="font-medium">{customTargets.length}</span>{" "}
+									targets loaded
+								</p>
+								<Button
+									variant="ghost"
+									size="sm"
+									onClick={() => onChange({ ...data, customTargets: [] })}
+								>
+									Clear and re-import
+								</Button>
+							</div>
+						)}
+
+						<TargetTableEditor
+							mode="wizard"
+							variant="inline"
+							onApply={handleAudienceApply}
+						/>
+					</>
+				) : (
+					<p className="text-xs text-muted-foreground">
+						Enable custom audience to upload a target list.
 					</p>
 				)}
 			</div>

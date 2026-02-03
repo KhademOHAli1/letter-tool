@@ -2,10 +2,12 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { cookies } from "next/headers";
 import { SiteHeader } from "@/components/site-header";
 import { Toaster } from "@/components/ui/sonner";
 import { clientEnv } from "@/lib/env";
 import { LanguageProvider } from "@/lib/i18n/context";
+import type { Language } from "@/lib/i18n/translations";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,7 +23,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
 	metadataBase: new URL(clientEnv.NEXT_PUBLIC_BASE_URL),
 	title: {
-		default: "Stimme für Iran | Voice for Iran",
+		default: "Stimme für Iran",
 		template: "%s",
 	},
 	description:
@@ -41,24 +43,30 @@ export const metadata: Metadata = {
 		apple: "/favicon.svg",
 	},
 	openGraph: {
-		title: "Stimme für Iran | Voice for Iran",
+		title: "Stimme für Iran",
 		description:
 			"Advocate for human rights in Iran. Write a personal letter to your Member of Parliament.",
 		type: "website",
 		locale: "de_DE",
 		images: [
 			{
-				url: "/api/og",
+				url: "/api/og?country=de&lang=de",
 				width: 1200,
 				height: 630,
-				alt: "Voice for Iran - Write to Your Representative",
+				alt: "Stimme für Iran",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Stimme für Iran | Voice for Iran",
+		title: "Stimme für Iran",
 		description: "Write to your representative for human rights in Iran",
+		images: [
+			{
+				url: "/api/og?country=de&lang=de",
+				alt: "Stimme für Iran",
+			},
+		],
 	},
 };
 
@@ -71,13 +79,25 @@ export const viewport = {
 	viewportFit: "cover" as const,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	// Get language from cookie for initial HTML lang attribute
+	const cookieStore = await cookies();
+	const langCookie = cookieStore.get("language")?.value as Language | undefined;
+	const htmlLang =
+		langCookie && ["de", "en", "fr", "es"].includes(langCookie)
+			? langCookie
+			: "de";
+
 	return (
-		<html lang="de" suppressHydrationWarning className="overflow-x-hidden">
+		<html
+			lang={htmlLang}
+			suppressHydrationWarning
+			className="overflow-x-hidden"
+		>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden w-full`}
 			>

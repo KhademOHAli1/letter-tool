@@ -6,7 +6,8 @@
 
 import { AlertTriangle, Loader2, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { TargetTableEditor } from "@/components/admin/targets/target-table-editor";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -27,7 +28,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { getSupabaseBrowserClient } from "@/lib/auth/client";
-import type { Campaign } from "@/lib/types";
+import type { Campaign, CampaignTarget } from "@/lib/types";
 
 interface SettingsTabProps {
 	campaign: Campaign;
@@ -52,8 +53,82 @@ export function SettingsTab({
 	const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 	const [deleteConfirmation, setDeleteConfirmation] = useState("");
 	const [isDeleting, setIsDeleting] = useState(false);
+	const [targets, setTargets] = useState<CampaignTarget[]>([]);
+	const [isLoadingTargets, setIsLoadingTargets] = useState(false);
+	const [isEditorOpen, setIsEditorOpen] = useState(false);
+	const [saveSummary, setSaveSummary] = useState<string | null>(null);
 
 	const countryCodes = campaign.countryCodes;
+	const useCustomTargets = Boolean(campaign.useCustomTargets);
+
+	const previewTargets = useMemo(() => targets.slice(0, 5), [targets]);
+
+	const fetchTargets = useCallback(async () => {
+		setIsLoadingTargets(true);
+		try {
+			const supabase = getSupabaseBrowserClient();
+			const { data, error } = await supabase
+				.from("campaign_targets")
+				.select("*")
+				.eq("campaign_id", campaign.id)
+				.order("name", { ascending: true });
+
+			if (error) throw error;
+
+			const mapped = (data || []).map((row) => ({
+				id: row.id as string,
+				campaignId: row.campaign_id as string,
+				name: row.name as string,
+				email: row.email as string,
+				postalCode: row.postal_code as string,
+				city: (row.city as string | null) ?? null,
+				region: (row.region as string | null) ?? null,
+				countryCode: (row.country_code as string | null) ?? null,
+				category: (row.category as string | null) ?? null,
+				imageUrl: (row.image_url as string | null) ?? null,
+				latitude: (row.latitude as number | null) ?? null,
+				longitude: (row.longitude as number | null) ?? null,
+				createdAt: row.created_at as string,
+				updatedAt: row.updated_at as string,
+			}));
+
+			setTargets(mapped);
+		} catch (error) {
+			console.error("Error fetching campaign targets:", error);
+		} finally {
+			setIsLoadingTargets(false);
+		}
+	}, [campaign.id]);
+
+	useEffect(() => {
+		if (campaign.id) {
+			fetchTargets();
+		}
+	}, [campaign.id, fetchTargets]);
+
+	const handleClearTargets = async () => {
+		setSaveSummary(null);
+		try {
+			const supabase = getSupabaseBrowserClient();
+			const { error } = await supabase
+				.from("campaign_targets")
+				.delete()
+				.eq("campaign_id", campaign.id);
+
+			if (error) throw error;
+
+			setTargets([]);
+			onChange({ useCustomTargets: false });
+			setSaveSummary("Target list cleared.");
+		} catch (error) {
+			console.error("Error clearing targets:", error);
+			setSaveSummary(
+				`Failed to clear targets. ${
+					error instanceof Error ? error.message : ""
+				}`.trim(),
+			);
+		}
+	};
 
 	const handleCountryToggle = (code: string, checked: boolean) => {
 		const newCodes = checked
@@ -207,6 +282,108 @@ export function SettingsTab({
 							At least one country must be selected
 						</p>
 					)}
+				</CardContent>
+			</Card>
+
+			{/* Custom Audience */}
+			<Card>
+				<CardHeader>
+					<CardTitle>Custom Audience</CardTitle>
+					<CardDescription>
+						Upload a target list to route supporters to the nearest recipient
+					</CardDescription>
+				</CardHeader>
+				<CardContent className="space-y-4">
+					<div className="flex items-start gap-3">
+						<Checkbox
+							id="custom-targets"
+							checked={useCustomTargets}
+							onCheckedChange={(checked) =>
+								onChange({ useCustomTargets: checked as boolean })
+							}
+						/>
+						<label
+							htmlFor="custom-targets"
+							className="space-y-1 cursor-pointer"
+						>
+							<p className="text-sm font-medium">Enable custom audience list</p>
+							<p className="text-xs text-muted-foreground">
+								Supporters can find the nearest target by postal code or search.
+							</p>
+						</label>
+					</div>
+
+					<div className="rounded-lg border p-4 space-y-4">
+						<div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+							<div>
+								<p className="text-sm font-medium">Audience table</p>
+								<p className="text-xs text-muted-foreground">
+									{isLoadingTargets
+										? "Loading targets..."
+										: `${targets.length} targets`}
+								</p>
+							</div>
+							<div className="flex flex-wrap gap-2">
+								{targets.length > 0 && (
+									<Button
+										variant="ghost"
+										size="sm"
+										onClick={handleClearTargets}
+									>
+										Clear list
+									</Button>
+								)}
+								<Button
+									variant="outline"
+									size="sm"
+									onClick={() => setIsEditorOpen(true)}
+								>
+									Open Table Editor
+								</Button>
+							</div>
+						</div>
+
+						{saveSummary && (
+							<p
+								className={`text-sm ${saveSummary.startsWith("Failed") ? "text-destructive" : "text-emerald-600"}`}
+							>
+								{saveSummary}
+							</p>
+						)}
+
+						{previewTargets.length > 0 && (
+							<div className="rounded-md bg-muted/40 p-3 text-xs text-muted-foreground space-y-1">
+								<p className="font-medium text-foreground">Preview</p>
+								{previewTargets.map((target) => (
+									<div key={target.id} className="flex justify-between gap-2">
+										<span className="truncate">{target.name}</span>
+										<span className="shrink-0">{target.postalCode}</span>
+									</div>
+								))}
+								{targets.length > previewTargets.length && (
+									<p>…and {targets.length - previewTargets.length} more</p>
+								)}
+							</div>
+						)}
+					</div>
+
+					{!useCustomTargets && (
+						<p className="text-xs text-muted-foreground">
+							Enable custom audience to use this list on the campaign form.
+						</p>
+					)}
+
+					<TargetTableEditor
+						mode="database"
+						open={isEditorOpen}
+						onOpenChange={setIsEditorOpen}
+						campaignId={campaign.id}
+						onSaved={(rows) => {
+							setSaveSummary(`Saved ${rows.length} targets.`);
+							onChange({ useCustomTargets: true });
+							fetchTargets();
+						}}
+					/>
 				</CardContent>
 			</Card>
 

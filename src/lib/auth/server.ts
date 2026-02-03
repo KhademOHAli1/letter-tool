@@ -76,6 +76,13 @@ export async function getSession(): Promise<AuthSession> {
 					avatarUrl: profile.avatar_url,
 					role: profile.role as UserRole,
 					email: profile.email,
+					accountStatus: profile.account_status ?? "pending",
+					planTier: profile.plan_tier ?? "free",
+					organizationName: profile.organization_name,
+					organizationWebsite: profile.organization_website,
+					monthlyLetterQuota: profile.monthly_letter_quota ?? 100,
+					monthlyLettersUsed: profile.monthly_letters_used ?? 0,
+					maxCampaigns: profile.max_campaigns ?? 3,
 					createdAt: profile.created_at,
 					updatedAt: profile.updated_at,
 				}
@@ -121,6 +128,7 @@ export async function requireRole(requiredRole: UserRole): Promise<AuthUser> {
 		user: 1,
 		organizer: 2,
 		admin: 3,
+		super_admin: 4,
 	};
 
 	const userRoleLevel = roleHierarchy[user.profile?.role ?? "user"];

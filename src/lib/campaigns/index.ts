@@ -44,8 +44,10 @@ export {
 	getCampaignDemands,
 	getCampaignPrompt,
 	getCampaignStats,
+	getCampaignTargetById,
 	getCampaignWithDemands,
 	listActiveCampaigns,
 	listCampaignsByOrganizer,
+	listCampaignTargets,
 	listPromptVersions,
 } from "./queries";

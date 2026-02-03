@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { getCampaignStats, getCampaignWithDemands } from "@/lib/campaigns";
+import {
+	getCampaignStats,
+	getCampaignWithDemands,
+	listCampaignTargets,
+} from "@/lib/campaigns";
 import { clientEnv } from "@/lib/env";
 import type { Language } from "@/lib/i18n/translations";
-import type { CampaignStats } from "@/lib/types";
+import type { CampaignStats, CampaignTarget } from "@/lib/types";
 import { CampaignLayoutClient } from "./campaign-layout-client";
 
 interface CampaignLayoutProps {
@@ -116,6 +120,12 @@ export async function generateMetadata({
 			card: "summary_large_image",
 			title: name,
 			description,
+			images: [
+				{
+					url: `/api/og?campaign=${campaignSlug}&lang=${lang}`,
+					alt: name,
+				},
+			],
 		},
 	};
 }
@@ -151,6 +161,16 @@ export default async function CampaignLayout({
 		stats = await getCampaignStats(campaign.id);
 	} catch (e) {
 		console.warn("Failed to fetch campaign stats:", e);
+	}
+
+	// Fetch custom targets if enabled (optional)
+	let targets: CampaignTarget[] = [];
+	if (campaign.useCustomTargets) {
+		try {
+			targets = await listCampaignTargets(campaign.id);
+		} catch (e) {
+			console.warn("Failed to fetch campaign targets:", e);
+		}
 	}
 
 	// Get language settings from cookie
@@ -219,6 +239,7 @@ export default async function CampaignLayout({
 			<CampaignLayoutClient
 				campaign={campaign}
 				demands={demands}
+				targets={targets}
 				stats={stats ?? undefined}
 				defaultLanguage={defaultLanguage}
 				availableLanguages={availableLanguages}

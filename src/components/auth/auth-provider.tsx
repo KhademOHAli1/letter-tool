@@ -119,6 +119,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
 				avatarUrl: data.avatar_url,
 				role: data.role as UserRole,
 				email: data.email,
+				accountStatus: data.account_status ?? "pending",
+				planTier: data.plan_tier ?? "free",
+				organizationName: data.organization_name,
+				organizationWebsite: data.organization_website,
+				monthlyLetterQuota: data.monthly_letter_quota ?? 100,
+				monthlyLettersUsed: data.monthly_letters_used ?? 0,
+				maxCampaigns: data.max_campaigns ?? 3,
 				createdAt: data.created_at,
 				updatedAt: data.updated_at,
 			};

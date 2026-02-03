@@ -23,90 +23,90 @@ const COUNTRY_LANGUAGES: Record<string, ("de" | "en" | "fr")[]> = {
 const SEO_CONTENT = {
 	de: {
 		de: {
-			title: "Stimme für Iran | Schreib deinem MdB",
+			title: "Stimme für Iran",
 			description:
 				"Setze dich für Menschenrechte im Iran ein. Schreibe einen persönlichen Brief an deinen Bundestagsabgeordneten – schnell, einfach und wirkungsvoll.",
-			ogAlt: "Stimme für Iran - Schreib deinem Bundestagsabgeordneten",
+			ogAlt: "Stimme für Iran",
 		},
 		en: {
-			title: "Voice for Iran | Write to Your German MP",
+			title: "Voice for Iran",
 			description:
 				"Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
-			ogAlt: "Voice for Iran - Write to Your German MP",
+			ogAlt: "Voice for Iran",
 		},
 		fr: {
-			title: "Voix pour l'Iran | Écrivez à votre député allemand",
+			title: "Voix pour l'Iran",
 			description:
 				"Défendez les droits humains en Iran. Écrivez une lettre personnelle à votre député – rapide, simple et efficace.",
-			ogAlt: "Voix pour l'Iran - Écrivez à votre député allemand",
+			ogAlt: "Voix pour l'Iran",
 		},
 	},
 	ca: {
 		de: {
-			title: "Stimme für Iran | Kanada",
+			title: "Stimme für Iran",
 			description:
 				"Setze dich für Menschenrechte im Iran ein. Schreibe deinem kanadischen Abgeordneten.",
-			ogAlt: "Stimme für Iran - Kanada",
+			ogAlt: "Stimme für Iran",
 		},
 		en: {
-			title: "Voice for Iran | Write to Your Canadian MP",
+			title: "Voice for Iran",
 			description:
 				"Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
-			ogAlt: "Voice for Iran - Write to Your Canadian MP",
+			ogAlt: "Voice for Iran",
 		},
 		fr: {
-			title: "Voix pour l'Iran | Écrivez à votre député(e) canadien(ne)",
+			title: "Voix pour l'Iran",
 			description:
 				"Défendez les droits humains en Iran. Écrivez une lettre personnelle à votre député(e) – rapide, simple et efficace.",
-			ogAlt: "Voix pour l'Iran - Écrivez à votre député(e) canadien(ne)",
+			ogAlt: "Voix pour l'Iran",
 		},
 	},
 	uk: {
 		de: {
-			title: "Stimme für Iran | Großbritannien",
+			title: "Stimme für Iran",
 			description:
 				"Setze dich für Menschenrechte im Iran ein. Schreibe deinem britischen Abgeordneten.",
-			ogAlt: "Stimme für Iran - Großbritannien",
+			ogAlt: "Stimme für Iran",
 		},
 		en: {
-			title: "Voice for Iran | Write to Your UK MP",
+			title: "Voice for Iran",
 			description:
 				"Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
-			ogAlt: "Voice for Iran - Write to Your UK MP",
+			ogAlt: "Voice for Iran",
 		},
 		fr: {
-			title: "Voix pour l'Iran | Royaume-Uni",
+			title: "Voix pour l'Iran",
 			description:
 				"Défendez les droits humains en Iran. Écrivez à votre député britannique.",
-			ogAlt: "Voix pour l'Iran - Royaume-Uni",
+			ogAlt: "Voix pour l'Iran",
 		},
 	},
 	fr: {
 		de: {
-			title: "Stimme für Iran | Frankreich",
+			title: "Stimme für Iran",
 			description:
 				"Setze dich für Menschenrechte im Iran ein. Schreibe deinem französischen Abgeordneten.",
-			ogAlt: "Stimme für Iran - Frankreich",
+			ogAlt: "Stimme für Iran",
 		},
 		en: {
-			title: "Voice for Iran | Write to Your French Deputy",
+			title: "Voice for Iran",
 			description:
 				"Advocate for human rights in Iran. Write a personal letter to your Member of Parliament – quick, easy and effective.",
-			ogAlt: "Voice for Iran - Write to Your French Deputy",
+			ogAlt: "Voice for Iran",
 		},
 		fr: {
-			title: "Voix pour l'Iran | Écrivez à votre député(e)",
+			title: "Voix pour l'Iran",
 			description:
 				"Défendez les droits humains en Iran. Écrivez une lettre personnelle à votre député(e) – rapide, simple et efficace.",
-			ogAlt: "Voix pour l'Iran - Écrivez à votre député(e)",
+			ogAlt: "Voix pour l'Iran",
 		},
 	},
 	us: {
 		en: {
-			title: "Voice for Iran | Write to Your Representative",
+			title: "Voice for Iran",
 			description:
 				"Advocate for human rights in Iran. Write a personal letter to your Representative or Senator – quick, easy and effective.",
-			ogAlt: "Voice for Iran - Write to Your US Representative",
+			ogAlt: "Voice for Iran",
 		},
 	},
 } as const;
@@ -205,6 +205,12 @@ export async function generateMetadata({
 			card: "summary_large_image",
 			title: seo.title,
 			description: seo.description,
+			images: [
+				{
+					url: `/api/og?country=${country}&lang=${lang}`,
+					alt: seo.ogAlt,
+				},
+			],
 		},
 		alternates: {
 			canonical: `${baseUrl}/${country}`,

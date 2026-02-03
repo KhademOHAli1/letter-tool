@@ -62,7 +62,14 @@ export default function EditCampaignPage() {
 			return;
 		}
 
-		setCampaign(campaignData as Campaign);
+		const normalizedCampaign = {
+			...(campaignData as Campaign),
+			useCustomTargets:
+				(campaignData as { useCustomTargets?: boolean }).useCustomTargets ??
+				(campaignData as { use_custom_targets?: boolean }).use_custom_targets ??
+				false,
+		};
+		setCampaign(normalizedCampaign);
 
 		// Fetch demands
 		const { data: demandsData } = await supabase
@@ -112,6 +119,7 @@ export default function EditCampaignPage() {
 					start_date: campaign.startDate,
 					end_date: campaign.endDate,
 					status: campaign.status,
+					use_custom_targets: campaign.useCustomTargets,
 				})
 				.eq("id", campaign.id);
 

@@ -106,12 +106,33 @@ export interface Campaign {
 	status: CampaignStatus;
 	causeContext: string | null;
 	countryCodes: string[];
+	useCustomTargets: boolean;
 	goalLetters: number | null;
 	startDate: string | null; // ISO date string
 	endDate: string | null; // ISO date string
 	createdBy: string | null;
 	createdAt: string; // ISO timestamp
 	updatedAt: string; // ISO timestamp
+}
+
+/**
+ * Campaign target - custom recipient for campaign outreach
+ */
+export interface CampaignTarget {
+	id: string;
+	campaignId: string;
+	name: string;
+	email: string;
+	postalCode: string;
+	city?: string | null;
+	region?: string | null;
+	countryCode?: string | null;
+	category?: string | null;
+	imageUrl?: string | null;
+	latitude?: number | null;
+	longitude?: number | null;
+	createdAt: string;
+	updatedAt: string;
 }
 
 /**
@@ -182,6 +203,7 @@ export interface CreateCampaignInput {
 	status?: CampaignStatus;
 	causeContext?: string;
 	countryCodes: string[];
+	useCustomTargets?: boolean;
 	goalLetters?: number;
 	startDate?: string;
 	endDate?: string;
@@ -197,6 +219,7 @@ export interface UpdateCampaignInput {
 	status?: CampaignStatus;
 	causeContext?: string | null;
 	countryCodes?: string[];
+	useCustomTargets?: boolean;
 	goalLetters?: number | null;
 	startDate?: string | null;
 	endDate?: string | null;
@@ -241,4 +264,174 @@ export interface UpdatePromptInput {
 	systemPrompt?: string;
 	description?: string;
 	isActive?: boolean;
+}
+
+// ============================================================================
+// Super Admin / SaaS Platform Types
+// ============================================================================
+
+/**
+ * User role enum matching database enum
+ */
+export type UserRole = "user" | "organizer" | "admin" | "super_admin";
+
+/**
+ * Account status enum for SaaS platform
+ */
+export type AccountStatus =
+	| "pending"
+	| "active"
+	| "trial"
+	| "suspended"
+	| "deactivated";
+
+/**
+ * Plan tier enum for subscription/quota management
+ */
+export type PlanTier =
+	| "free"
+	| "starter"
+	| "professional"
+	| "enterprise"
+	| "unlimited";
+
+/**
+ * Extended user profile with SaaS platform fields
+ */
+export interface UserProfile {
+	id: string;
+	displayName: string | null;
+	avatarUrl: string | null;
+	email: string | null;
+	role: UserRole;
+	accountStatus: AccountStatus;
+	planTier: PlanTier;
+	organizationName: string | null;
+	organizationWebsite: string | null;
+	bio: string | null;
+	monthlyLetterQuota: number;
+	monthlyLettersUsed: number;
+	maxCampaigns: number;
+	quotaResetAt: string | null;
+	approvedAt: string | null;
+	approvedBy: string | null;
+	suspendedAt: string | null;
+	suspendedReason: string | null;
+	createdAt: string;
+	updatedAt: string;
+}
+
+/**
+ * Campaigner application status
+ */
+export type ApplicationStatus =
+	| "pending"
+	| "approved"
+	| "rejected"
+	| "withdrawn";
+
+/**
+ * Social link for application
+ */
+export interface SocialLink {
+	platform: string;
+	url: string;
+}
+
+/**
+ * Campaigner application entity
+ */
+export interface CampaignerApplication {
+	id: string;
+	email: string;
+	name: string;
+	organizationName: string | null;
+	organizationWebsite: string | null;
+	organizationDescription: string | null;
+	socialLinks: SocialLink[];
+	referralSource: string | null;
+	intendedUse: string;
+	expectedVolume: string | null;
+	status: ApplicationStatus;
+	reviewedAt: string | null;
+	reviewedBy: string | null;
+	reviewNotes: string | null;
+	rejectionReason: string | null;
+	userId: string | null;
+	termsAcceptedAt: string;
+	termsVersion: string;
+	createdAt: string;
+	updatedAt: string;
+}
+
+/**
+ * Activity log entry
+ */
+export interface ActivityLog {
+	id: string;
+	actorId: string | null;
+	actorEmail: string | null;
+	actorRole: UserRole | null;
+	action: string;
+	resourceType: string | null;
+	resourceId: string | null;
+	details: Record<string, unknown>;
+	ipAddress: string | null;
+	userAgent: string | null;
+	createdAt: string;
+}
+
+/**
+ * Platform setting entry
+ */
+export interface PlatformSetting {
+	key: string;
+	value: unknown;
+	description: string | null;
+	updatedAt: string;
+	updatedBy: string | null;
+}
+
+/**
+ * Input for submitting a campaigner application
+ */
+export interface CreateApplicationInput {
+	email: string;
+	name: string;
+	organizationName?: string;
+	organizationWebsite?: string;
+	organizationDescription?: string;
+	socialLinks?: SocialLink[];
+	referralSource?: string;
+	intendedUse: string;
+	expectedVolume?: string;
+}
+
+/**
+ * Input for reviewing an application
+ */
+export interface ReviewApplicationInput {
+	applicationId: string;
+	action: "approve" | "reject";
+	notes?: string;
+	reason?: string; // Required for rejection
+}
+
+/**
+ * Input for updating account status
+ */
+export interface UpdateAccountStatusInput {
+	userId: string;
+	action: "suspend" | "reactivate" | "deactivate";
+	reason?: string; // Required for suspend
+}
+
+/**
+ * Input for updating account quotas
+ */
+export interface UpdateAccountQuotasInput {
+	userId: string;
+	monthlyLetterQuota?: number;
+	maxCampaigns?: number;
+	planTier?: PlanTier;
 }

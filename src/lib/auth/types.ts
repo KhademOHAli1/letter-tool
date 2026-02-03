@@ -4,7 +4,23 @@
  */
 
 // User roles matching the database enum
-export type UserRole = "user" | "organizer" | "admin";
+export type UserRole = "user" | "organizer" | "admin" | "super_admin";
+
+// Account status matching database enum
+export type AccountStatus =
+	| "pending"
+	| "active"
+	| "trial"
+	| "suspended"
+	| "deactivated";
+
+// Plan tier matching database enum
+export type PlanTier =
+	| "free"
+	| "starter"
+	| "professional"
+	| "enterprise"
+	| "unlimited";
 
 // User profile from database
 export interface UserProfile {
@@ -13,6 +29,13 @@ export interface UserProfile {
 	avatarUrl: string | null;
 	role: UserRole;
 	email: string | null;
+	accountStatus: AccountStatus;
+	planTier: PlanTier;
+	organizationName: string | null;
+	organizationWebsite: string | null;
+	monthlyLetterQuota: number;
+	monthlyLettersUsed: number;
+	maxCampaigns: number;
 	createdAt: string;
 	updatedAt: string;
 }

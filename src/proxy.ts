@@ -39,7 +39,9 @@ const EXCLUDED_PATHS = [
 	"/robots.txt",
 	"/sitemap.xml",
 	"/admin",
+	"/superadmin",
 	"/auth",
+	"/apply",
 	"/campaigns",
 	"/embed",
 	"/c",
@@ -47,7 +49,13 @@ const EXCLUDED_PATHS = [
 ];
 
 // Routes that need auth session refresh
-const AUTH_ROUTES = ["/admin", "/auth", "/api/campaigns"];
+const AUTH_ROUTES = [
+	"/admin",
+	"/superadmin",
+	"/auth",
+	"/api/campaigns",
+	"/api/superadmin",
+];
 
 /**
  * Refresh Supabase auth session if on protected routes

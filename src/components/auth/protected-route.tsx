@@ -47,6 +47,7 @@ export function ProtectedRoute({
 				user: 1,
 				organizer: 2,
 				admin: 3,
+				super_admin: 4,
 			};
 
 			const userRoleLevel = roleHierarchy[profile.role];
@@ -82,6 +83,7 @@ export function ProtectedRoute({
 			user: 1,
 			organizer: 2,
 			admin: 3,
+			super_admin: 4,
 		};
 
 		if (roleHierarchy[profile.role] < roleHierarchy[requiredRole]) {

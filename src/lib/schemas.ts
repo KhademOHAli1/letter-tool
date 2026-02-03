@@ -159,6 +159,7 @@ export const campaignSchema = z.object({
 	countryCodes: z
 		.array(z.enum(COUNTRY_CODES))
 		.min(1, "At least one country is required"),
+	useCustomTargets: z.boolean(),
 	goalLetters: z.number().int().positive().nullable(),
 	startDate: z.string().nullable(),
 	endDate: z.string().nullable(),
@@ -179,6 +180,7 @@ export const createCampaignSchema = z.object({
 	countryCodes: z
 		.array(z.enum(COUNTRY_CODES))
 		.min(1, "At least one country is required"),
+	useCustomTargets: z.boolean().optional(),
 	goalLetters: z.number().int().positive().optional(),
 	startDate: z.string().optional(),
 	endDate: z.string().optional(),
@@ -194,6 +196,7 @@ export const updateCampaignSchema = z.object({
 	status: z.enum(CAMPAIGN_STATUSES).optional(),
 	causeContext: z.string().max(5000).nullable().optional(),
 	countryCodes: z.array(z.enum(COUNTRY_CODES)).min(1).optional(),
+	useCustomTargets: z.boolean().optional(),
 	goalLetters: z.number().int().positive().nullable().optional(),
 	startDate: z.string().nullable().optional(),
 	endDate: z.string().nullable().optional(),
@@ -252,3 +255,131 @@ export type UpdateDemandSchema = z.infer<typeof updateDemandSchema>;
 export type CampaignPromptSchema = z.infer<typeof campaignPromptSchema>;
 export type CreatePromptSchema = z.infer<typeof createPromptSchema>;
 export type UpdatePromptSchema = z.infer<typeof updatePromptSchema>;
+
+// ============================================================================
+// Super Admin / SaaS Platform Schemas
+// ============================================================================
+
+/**
+ * User role enum
+ */
+export const userRoleSchema = z.enum([
+	"user",
+	"organizer",
+	"admin",
+	"super_admin",
+]);
+
+/**
+ * Account status enum
+ */
+export const accountStatusSchema = z.enum([
+	"pending",
+	"active",
+	"trial",
+	"suspended",
+	"deactivated",
+]);
+
+/**
+ * Plan tier enum
+ */
+export const planTierSchema = z.enum([
+	"free",
+	"starter",
+	"professional",
+	"enterprise",
+	"unlimited",
+]);
+
+/**
+ * Application status enum
+ */
+export const applicationStatusSchema = z.enum([
+	"pending",
+	"approved",
+	"rejected",
+	"withdrawn",
+]);
+
+/**
+ * Social link schema
+ */
+export const socialLinkSchema = z.object({
+	platform: z.string().min(1).max(50),
+	url: z.string().url(),
+});
+
+/**
+ * Schema for submitting a campaigner application
+ */
+export const createApplicationSchema = z.object({
+	email: z.string().email("Please enter a valid email address"),
+	name: z.string().min(2, "Name must be at least 2 characters").max(100),
+	organizationName: z.string().max(200).optional(),
+	organizationWebsite: z.string().url().optional().or(z.literal("")),
+	organizationDescription: z.string().max(2000).optional(),
+	socialLinks: z.array(socialLinkSchema).max(5).optional(),
+	referralSource: z.string().max(200).optional(),
+	intendedUse: z
+		.string()
+		.min(50, "Please describe your intended use in at least 50 characters")
+		.max(2000),
+	expectedVolume: z.string().max(100).optional(),
+	termsAccepted: z.literal(true, "You must accept the terms to apply"),
+});
+
+/**
+ * Schema for reviewing an application (approve/reject)
+ */
+export const reviewApplicationSchema = z.object({
+	applicationId: z.string().uuid(),
+	action: z.enum(["approve", "reject"]),
+	notes: z.string().max(2000).optional(),
+	reason: z.string().max(1000).optional(),
+});
+
+/**
+ * Schema for updating account status
+ */
+export const updateAccountStatusSchema = z.object({
+	userId: z.string().uuid(),
+	action: z.enum(["suspend", "reactivate", "deactivate"]),
+	reason: z.string().max(1000).optional(),
+});
+
+/**
+ * Schema for updating account quotas
+ */
+export const updateAccountQuotasSchema = z.object({
+	userId: z.string().uuid(),
+	monthlyLetterQuota: z.number().int().min(0).max(1000000).optional(),
+	maxCampaigns: z.number().int().min(0).max(100).optional(),
+	planTier: planTierSchema.optional(),
+});
+
+/**
+ * Schema for updating platform settings
+ */
+export const updatePlatformSettingSchema = z.object({
+	key: z.string().min(1).max(100),
+	value: z.unknown(),
+});
+
+// Inferred types
+export type UserRoleSchema = z.infer<typeof userRoleSchema>;
+export type AccountStatusSchema = z.infer<typeof accountStatusSchema>;
+export type PlanTierSchema = z.infer<typeof planTierSchema>;
+export type ApplicationStatusSchema = z.infer<typeof applicationStatusSchema>;
+export type SocialLinkSchema = z.infer<typeof socialLinkSchema>;
+export type CreateApplicationSchema = z.infer<typeof createApplicationSchema>;
+export type ReviewApplicationSchema = z.infer<typeof reviewApplicationSchema>;
+export type UpdateAccountStatusSchema = z.infer<
+	typeof updateAccountStatusSchema
+>;
+export type UpdateAccountQuotasSchema = z.infer<
+	typeof updateAccountQuotasSchema
+>;
+export type UpdatePlatformSettingSchema = z.infer<
+	typeof updatePlatformSettingSchema
+>;

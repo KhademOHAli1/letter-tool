@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { VoiceInput } from "@/components/voice-input";
+import { useCampaignOptional } from "@/lib/campaigns/context";
 import { DEMANDS_CA } from "@/lib/data/ca/forderungen-ca";
 import {
 	findMPByPostalCode,
@@ -57,9 +58,22 @@ import {
 	getFormDraft,
 	saveFormDraft,
 } from "@/lib/letter-cache";
+import type { CampaignTarget } from "@/lib/types";
+
+type CustomTarget = CampaignTarget & {
+	kind: "custom-target";
+	party: string;
+};
 
 // Unified representative type for all countries
-type Representative = MdB | MP | UKMP | Depute | USRepresentative | Senator;
+type Representative =
+	| MdB
+	| MP
+	| UKMP
+	| Depute
+	| USRepresentative
+	| Senator
+	| CustomTarget;
 type District = Wahlkreis | Riding | { name: string };
 
 // German party colors
@@ -106,6 +120,171 @@ const US_PARTY_COLORS: Record<string, string> = {
 	Independent: "bg-gray-500 text-white",
 	Libertarian: "bg-yellow-500 text-black",
 };
+
+const CUSTOM_TARGET_BADGE =
+	"bg-slate-200 text-slate-900 dark:bg-slate-800 dark:text-slate-100";
+
+function isCustomTarget(rep: Representative): rep is CustomTarget {
+	return "kind" in rep && rep.kind === "custom-target";
+}
+
+function normalizePostalCode(value: string): string {
+	return value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+}
+
+function commonPrefixLength(a: string, b: string): number {
+	const max = Math.min(a.length, b.length);
+	let count = 0;
+	for (let i = 0; i < max; i += 1) {
+		if (a[i] !== b[i]) break;
+		count += 1;
+	}
+	return count;
+}
+
+/**
+ * Calculate Haversine distance between two points in kilometers
+ * Returns null if either point has missing coordinates
+ */
+function haversineDistance(
+	lat1: number | null | undefined,
+	lon1: number | null | undefined,
+	lat2: number | null | undefined,
+	lon2: number | null | undefined,
+): number | null {
+	if (lat1 == null || lon1 == null || lat2 == null || lon2 == null) {
+		return null;
+	}
+
+	const R = 6371; // Earth's radius in km
+	const dLat = ((lat2 - lat1) * Math.PI) / 180;
+	const dLon = ((lon2 - lon1) * Math.PI) / 180;
+	const a =
+		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		Math.cos((lat1 * Math.PI) / 180) *
+			Math.cos((lat2 * Math.PI) / 180) *
+			Math.sin(dLon / 2) *
+			Math.sin(dLon / 2);
+	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	return R * c;
+}
+
+function buildTargetLocation(target: CustomTarget): string {
+	const parts = [target.city, target.region].filter(Boolean);
+	if (parts.length > 0) return parts.join(", ");
+	if (target.postalCode) return target.postalCode;
+	return "Target";
+}
+
+function findNearestTargets(
+	targets: CustomTarget[],
+	postalCode: string,
+	limit = 8,
+	userCoords?: { lat: number; lng: number } | null,
+): CustomTarget[] {
+	const normalizedUser = normalizePostalCode(postalCode);
+	if (!normalizedUser) return [];
+
+	const userNumeric = /^\d+$/.test(normalizedUser)
+		? Number.parseInt(normalizedUser, 10)
+		: null;
+
+	// Check if targets have geo coordinates
+	const targetsWithGeo = targets.filter(
+		(t) => t.latitude != null && t.longitude != null,
+	);
+	const hasGeoData = targetsWithGeo.length > 0 && userCoords != null;
+
+	const scored = targets
+		.map((target) => {
+			const normalizedTarget = normalizePostalCode(target.postalCode);
+			if (!normalizedTarget) return null;
+
+			const isExact = normalizedTarget === normalizedUser;
+
+			// Calculate geo distance if we have user coords and target coords
+			const geoDistanceKm =
+				hasGeoData && target.latitude != null && target.longitude != null
+					? haversineDistance(
+							userCoords.lat,
+							userCoords.lng,
+							target.latitude,
+							target.longitude,
+						)
+					: null;
+
+			// Fallback to postal code distance
+			const targetNumeric = /^\d+$/.test(normalizedTarget)
+				? Number.parseInt(normalizedTarget, 10)
+				: null;
+			const isNumericPair = userNumeric !== null && targetNumeric !== null;
+			const postalDistance = isNumericPair
+				? Math.abs(targetNumeric - userNumeric)
+				: Number.POSITIVE_INFINITY;
+			const prefixScore = commonPrefixLength(normalizedUser, normalizedTarget);
+
+			return {
+				target,
+				isExact,
+				hasGeo: geoDistanceKm !== null,
+				geoDistanceKm: geoDistanceKm ?? Number.POSITIVE_INFINITY,
+				isNumericPair,
+				postalDistance,
+				prefixScore,
+			};
+		})
+		.filter((entry): entry is NonNullable<typeof entry> => entry !== null);
+
+	return scored
+		.sort((a, b) => {
+			// Exact postal code matches come first
+			if (a.isExact !== b.isExact) return a.isExact ? -1 : 1;
+
+			// If both have geo data, sort by geo distance
+			if (a.hasGeo && b.hasGeo) {
+				if (a.geoDistanceKm !== b.geoDistanceKm) {
+					return a.geoDistanceKm - b.geoDistanceKm;
+				}
+			}
+
+			// Fall back to postal code prefix matching
+			if (a.prefixScore !== b.prefixScore) return b.prefixScore - a.prefixScore;
+
+			// Fall back to numeric postal code distance
+			if (a.isNumericPair !== b.isNumericPair) return a.isNumericPair ? -1 : 1;
+			if (a.isNumericPair && b.isNumericPair) {
+				if (a.postalDistance !== b.postalDistance) {
+					return a.postalDistance - b.postalDistance;
+				}
+			}
+
+			return a.target.name.localeCompare(b.target.name);
+		})
+		.slice(0, limit)
+		.map((entry) => entry.target);
+}
+
+function searchTargets(targets: CustomTarget[], query: string): CustomTarget[] {
+	const normalized = query.trim().toLowerCase();
+	if (normalized.length < 2) return [];
+
+	return targets
+		.filter((target) => {
+			const haystack = [
+				target.name,
+				target.email,
+				target.city,
+				target.region,
+				target.postalCode,
+				target.category,
+			]
+				.filter(Boolean)
+				.join(" ")
+				.toLowerCase();
+			return haystack.includes(normalized);
+		})
+		.slice(0, 10);
+}
 
 // Validate personal story: just check it's not empty
 function validatePersonalNote(
@@ -171,6 +350,7 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const { t, language } = useLanguage();
+	const campaignContext = useCampaignOptional();
 	const [error, setError] = useState<string | null>(null);
 
 	// Detect country from URL path
@@ -186,6 +366,9 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 	const isUK = country === "uk";
 	const isFrance = country === "fr";
 	const isUS = country === "us";
+	const customTargetsEnabled = Boolean(
+		campaignContext?.campaign.useCustomTargets,
+	);
 
 	// Country-specific demands list
 	const demands = isCanada
@@ -217,9 +400,79 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 	const [hasDraft, setHasDraft] = useState(false);
 	const [draftRestored, setDraftRestored] = useState(false);
 	const [isLookingUpPostcode, setIsLookingUpPostcode] = useState(false);
+	const [targetSearch, setTargetSearch] = useState("");
+	const [userCoords, setUserCoords] = useState<{
+		lat: number;
+		lng: number;
+	} | null>(null);
+
+	// Request user geolocation when custom targets are enabled
+	// This enables more accurate "nearest target" calculations
+	useEffect(() => {
+		if (!customTargetsEnabled) return;
+		if (userCoords) return; // Already have coords
+
+		// Check if any targets have geo coordinates
+		const hasGeoTargets = (campaignContext?.targets ?? []).some(
+			(t) => t.latitude != null && t.longitude != null,
+		);
+		if (!hasGeoTargets) return;
+
+		// Request geolocation (browser will prompt user for permission)
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(
+				(position) => {
+					setUserCoords({
+						lat: position.coords.latitude,
+						lng: position.coords.longitude,
+					});
+				},
+				() => {
+					// User denied or error - we'll fall back to postal code matching
+				},
+				{ enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 },
+			);
+		}
+	}, [customTargetsEnabled, campaignContext?.targets, userCoords]);
 
 	// Auto-save draft debounced
 	const saveTimeout = useRef<NodeJS.Timeout | null>(null);
+
+	const customTargets = useMemo<CustomTarget[]>(() => {
+		if (!customTargetsEnabled) return [];
+		const targets = campaignContext?.targets ?? [];
+		const fallbackLabel =
+			language === "de" ? "Ziel" : language === "fr" ? "Cible" : "Target";
+		return targets.map((target) => ({
+			...target,
+			kind: "custom-target" as const,
+			party: target.category || fallbackLabel,
+		}));
+	}, [campaignContext?.targets, customTargetsEnabled, language]);
+
+	const hasSearchQuery = targetSearch.trim().length >= 2;
+
+	const searchResults = useMemo(
+		() =>
+			customTargetsEnabled && hasSearchQuery
+				? searchTargets(customTargets, targetSearch)
+				: [],
+		[customTargetsEnabled, customTargets, hasSearchQuery, targetSearch],
+	);
+
+	const nearestTargets = useMemo(
+		() =>
+			customTargetsEnabled && postalCode.trim()
+				? findNearestTargets(customTargets, postalCode, 8, userCoords)
+				: [],
+		[customTargetsEnabled, customTargets, postalCode, userCoords],
+	);
+
+	const displayRepresentatives = customTargetsEnabled
+		? hasSearchQuery
+			? searchResults
+			: nearestTargets
+		: representatives;
 
 	// Auto-save form state (debounced)
 	const autoSaveDraft = useCallback(() => {
@@ -272,6 +525,27 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 		setPostalCode(draft.plz);
 		setPersonalNote(draft.personalNote);
 		setSelectedDemands(draft.selectedForderungen);
+
+		if (customTargetsEnabled) {
+			const target =
+				draft.selectedMdBId &&
+				customTargets.find((item) => item.id === draft.selectedMdBId);
+			if (target) {
+				setSelectedRep(target);
+				setDistrict({ name: buildTargetLocation(target) });
+			} else if (draft.plz) {
+				const nearest = findNearestTargets(customTargets, draft.plz, 1);
+				if (nearest.length === 1) {
+					setSelectedRep(nearest[0]);
+					setDistrict({ name: buildTargetLocation(nearest[0]) });
+				}
+			}
+
+			setHasDraft(false);
+			setDraftRestored(true);
+			setTimeout(() => setDraftRestored(false), 3000);
+			return;
+		}
 
 		// Trigger postal code lookup based on country
 		if (isCanada) {
@@ -364,7 +638,7 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 		setHasDraft(false);
 		setDraftRestored(true);
 		setTimeout(() => setDraftRestored(false), 3000);
-	}, [isCanada, isUK, isFrance, isUS]);
+	}, [customTargetsEnabled, customTargets, isCanada, isUK, isFrance, isUS]);
 
 	// Dismiss draft handler
 	const dismissDraft = useCallback(() => {
@@ -390,6 +664,24 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 				setPersonalNote(template.personalNote);
 				setSelectedDemands(template.forderungen);
 				setIsReusingTemplate(true);
+
+				if (customTargetsEnabled) {
+					if (template.senderPlz) {
+						const nearest = findNearestTargets(
+							customTargets,
+							template.senderPlz,
+							1,
+						);
+						if (nearest.length === 1) {
+							setSelectedRep(nearest[0]);
+							setDistrict({ name: buildTargetLocation(nearest[0]) });
+						}
+					}
+
+					// Clear the template after using it
+					sessionStorage.removeItem("reuseTemplate");
+					return;
+				}
 
 				// Trigger postal code lookup based on country
 				if (isCanada) {
@@ -455,7 +747,7 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 				// Ignore parse errors
 			}
 		}
-	}, [isCanada, isFrance, isUS]);
+	}, [customTargetsEnabled, customTargets, isCanada, isFrance, isUS]);
 
 	// Postal code input → find district/representative
 	const handlePostalCodeChange = async (value: string) => {
@@ -463,6 +755,10 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 		setDistrict(null);
 		setRepresentatives([]);
 		setSelectedRep(null);
+
+		if (customTargetsEnabled) {
+			return;
+		}
 
 		if (isCanada) {
 			// Canadian FSA: 3 alphanumeric chars (e.g., M5V, K1A)
@@ -551,6 +847,32 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 		}
 	};
 
+	useEffect(() => {
+		if (!customTargetsEnabled) return;
+
+		if (displayRepresentatives.length === 1) {
+			setSelectedRep(displayRepresentatives[0]);
+			return;
+		}
+
+		if (
+			selectedRep &&
+			!displayRepresentatives.some((rep) => rep.id === selectedRep.id)
+		) {
+			setSelectedRep(null);
+		}
+	}, [customTargetsEnabled, displayRepresentatives, selectedRep]);
+
+	useEffect(() => {
+		if (!customTargetsEnabled) return;
+
+		if (selectedRep && isCustomTarget(selectedRep)) {
+			setDistrict({ name: buildTargetLocation(selectedRep) });
+		} else if (!selectedRep) {
+			setDistrict(null);
+		}
+	}, [customTargetsEnabled, selectedRep]);
+
 	// Toggle demand selection
 	const toggleDemand = (id: string) => {
 		setSelectedDemands((prev) =>
@@ -579,11 +901,17 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 
 		if (!selectedRep || selectedDemands.length === 0) {
 			setError(
-				language === "de"
-					? "Bitte wähle einen MdB und mindestens eine Forderung"
-					: isUS
-						? "Please select a representative and at least one demand"
-						: "Please select an MP and at least one demand",
+				customTargetsEnabled
+					? language === "de"
+						? "Bitte wähle ein Ziel und mindestens eine Forderung"
+						: language === "fr"
+							? "Veuillez sélectionner une cible et au moins une demande"
+							: "Please select a target and at least one demand"
+					: language === "de"
+						? "Bitte wähle einen MdB und mindestens eine Forderung"
+						: isUS
+							? "Please select a representative and at least one demand"
+							: "Please select an MP and at least one demand",
 			);
 			return;
 		}
@@ -632,6 +960,9 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 	// Helper to get party badge style - returns Tailwind classes
 	const getPartyBadge = (rep: Representative): string => {
 		// Both types use 'party' field
+		if (isCustomTarget(rep)) {
+			return CUSTOM_TARGET_BADGE;
+		}
 		if (isCanada) {
 			return CA_PARTY_COLORS[rep.party] || "bg-gray-500 text-white";
 		}
@@ -657,13 +988,16 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 	// Helper to get representative image URL (French députés don't have images)
 	const getRepImageUrl = (rep: Representative): string | null => {
 		if ("imageUrl" in rep) {
-			return rep.imageUrl;
+			return rep.imageUrl ?? null;
 		}
 		return null;
 	};
 
 	// Helper to get circonscription display for French députés and US representatives
 	const getCirconscriptionDisplay = (rep: Representative): string | null => {
+		if (isCustomTarget(rep)) {
+			return buildTargetLocation(rep);
+		}
 		if ("constituency" in rep && typeof rep.constituency === "number") {
 			const ordinal = rep.constituency === 1 ? "1ère" : `${rep.constituency}e`;
 			return `${ordinal} circ.`;
@@ -712,7 +1046,7 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 						: isUS
 							? "Please enter your ZIP code"
 							: "Please enter your postal code";
-		} else if (!district) {
+		} else if (!customTargetsEnabled && !district) {
 			errors.postalCode =
 				language === "de"
 					? "Kein Wahlkreis für diese PLZ gefunden"
@@ -724,8 +1058,13 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 		}
 
 		if (!selectedRep) {
-			errors.representative =
-				language === "de"
+			errors.representative = customTargetsEnabled
+				? language === "de"
+					? "Bitte wähle ein Ziel aus"
+					: language === "fr"
+						? "Veuillez sélectionner une cible"
+						: "Please select a target"
+				: language === "de"
 					? "Bitte wähle eine*n Abgeordnete*n aus"
 					: language === "fr"
 						? "Veuillez sélectionner un(e) député(e)"
@@ -768,6 +1107,7 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 		consentGiven,
 		language,
 		isUS,
+		customTargetsEnabled,
 		t,
 	]);
 
@@ -893,11 +1233,17 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 						/>
 					</svg>
 					<span>
-						{language === "de"
-							? "Deine vorherigen Eingaben wurden übernommen. Wähle nur noch eine*n neue*n Abgeordnete*n aus."
-							: language === "fr"
-								? "Vos entrées précédentes ont été chargées. Sélectionnez simplement un(e) nouveau/nouvelle député(e)."
-								: "Your previous inputs have been loaded. Just select a new MP."}
+						{customTargetsEnabled
+							? language === "de"
+								? "Deine vorherigen Eingaben wurden übernommen. Wähle nur noch ein neues Ziel aus."
+								: language === "fr"
+									? "Vos entrées précédentes ont été chargées. Sélectionnez simplement une nouvelle cible."
+									: "Your previous inputs have been loaded. Just select a new target."
+							: language === "de"
+								? "Deine vorherigen Eingaben wurden übernommen. Wähle nur noch eine*n neue*n Abgeordnete*n aus."
+								: language === "fr"
+									? "Vos entrées précédentes ont été chargées. Sélectionnez simplement un(e) nouveau/nouvelle député(e)."
+									: "Your previous inputs have been loaded. Just select a new MP."}
 					</span>
 				</div>
 			)}
@@ -1013,7 +1359,11 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 					>
 						2
 					</span>
-					<h3 className="font-medium">{t("form", "step2.title")}</h3>
+					<h3 className="font-medium">
+						{customTargetsEnabled
+							? t("form", "step2.targetTitle")
+							: t("form", "step2.title")}
+					</h3>
 					{showValidationErrors &&
 						(validationErrors.postalCode ||
 							validationErrors.representative) && (
@@ -1074,111 +1424,158 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 						/>
 						{showValidationErrors &&
 							validationErrors.postalCode &&
-							!district && (
+							(!district || customTargetsEnabled) && (
 								<p className="text-xs text-destructive flex items-center gap-1">
 									<span>⚠️</span> {validationErrors.postalCode}
 								</p>
 							)}
-						{isLookingUpPostcode && (
-							<p className="text-sm text-muted-foreground">
-								🔍 Looking up your constituency...
-							</p>
-						)}
-						{!isCanada &&
-							!isUK &&
-							!isUS &&
-							postalCode.length === 5 &&
-							!district && (
-								<p className="text-sm text-destructive">
-									{t("form", "step2.wahlkreisNotFound")}
-								</p>
-							)}
-						{isUS && postalCode.length === 5 && !district && (
-							<p className="text-sm text-destructive">
-								No congressional district found for this ZIP code
-							</p>
-						)}
-						{isCanada && postalCode.length >= 3 && !district && (
-							<p className="text-sm text-destructive">
-								{language === "de"
-									? "Kein Wahlkreis gefunden"
-									: "No riding found for this postal code"}
-							</p>
-						)}
-						{isUK &&
-							!isLookingUpPostcode &&
-							postalCode.length >= 5 &&
-							!district && (
-								<p className="text-sm text-destructive">
-									No constituency found for this postcode
-								</p>
-							)}
-						{district && (
-							<p className="text-sm text-muted-foreground">
-								📍{" "}
-								{isCanada
-									? language === "de"
-										? "Wahlkreis"
-										: "Riding"
-									: isUK
-										? "Constituency"
-										: isUS
-											? "Congressional District"
-											: t("form", "step2.wahlkreisFound")}
-								: {district.name}
-							</p>
+						{customTargetsEnabled ? (
+							<>
+								{postalCode.trim() &&
+									!hasSearchQuery &&
+									nearestTargets.length === 0 && (
+										<p className="text-sm text-destructive">
+											{t("form", "step2.targetNearestNotFound")}
+										</p>
+									)}
+								{postalCode.trim() &&
+									!hasSearchQuery &&
+									nearestTargets.length > 0 && (
+										<p className="text-sm text-muted-foreground">
+											📍 {t("form", "step2.targetNearestFound")}
+										</p>
+									)}
+							</>
+						) : (
+							<>
+								{isLookingUpPostcode && (
+									<p className="text-sm text-muted-foreground">
+										🔍 Looking up your constituency...
+									</p>
+								)}
+								{!isCanada &&
+									!isUK &&
+									!isUS &&
+									postalCode.length === 5 &&
+									!district && (
+										<p className="text-sm text-destructive">
+											{t("form", "step2.wahlkreisNotFound")}
+										</p>
+									)}
+								{isUS && postalCode.length === 5 && !district && (
+									<p className="text-sm text-destructive">
+										No congressional district found for this ZIP code
+									</p>
+								)}
+								{isCanada && postalCode.length >= 3 && !district && (
+									<p className="text-sm text-destructive">
+										{language === "de"
+											? "Kein Wahlkreis gefunden"
+											: "No riding found for this postal code"}
+									</p>
+								)}
+								{isUK &&
+									!isLookingUpPostcode &&
+									postalCode.length >= 5 &&
+									!district && (
+										<p className="text-sm text-destructive">
+											No constituency found for this postcode
+										</p>
+									)}
+								{district && (
+									<p className="text-sm text-muted-foreground">
+										📍{" "}
+										{isCanada
+											? language === "de"
+												? "Wahlkreis"
+												: "Riding"
+											: isUK
+												? "Constituency"
+												: isUS
+													? "Congressional District"
+													: t("form", "step2.wahlkreisFound")}
+										: {district.name}
+									</p>
+								)}
+							</>
 						)}
 					</div>
 
-					{district && representatives.length === 0 && (
-						<div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800">
-							<p className="text-sm font-medium">
-								{language === "de"
-									? isCanada
-										? "Kein/e Abgeordnete/r gefunden"
-										: "Keine MdBs gefunden"
-									: isUS
-										? "No representatives found"
-										: "No MPs found"}
-							</p>
-							<p className="text-xs mt-1">
-								{language === "de"
-									? "Für diesen Wahlkreis sind derzeit keine Daten verfügbar."
-									: isUS
-										? "No data available for this ZIP code."
-										: "No data available for this constituency."}
-							</p>
+					{customTargetsEnabled && (
+						<div className="space-y-2">
+							<Label htmlFor="targetSearch" className="text-sm">
+								{t("form", "step2.targetSearchLabel")}
+							</Label>
+							<Input
+								id="targetSearch"
+								placeholder={t("form", "step2.targetSearchPlaceholder")}
+								value={targetSearch}
+								onChange={(e) => setTargetSearch(e.target.value)}
+								className="max-w-sm"
+							/>
+							{hasSearchQuery && searchResults.length === 0 && (
+								<p className="text-sm text-destructive">
+									{t("form", "step2.targetNoResults")}
+								</p>
+							)}
 						</div>
 					)}
 
-					{representatives.length > 0 && (
+					{!customTargetsEnabled &&
+						district &&
+						representatives.length === 0 && (
+							<div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800">
+								<p className="text-sm font-medium">
+									{language === "de"
+										? isCanada
+											? "Kein/e Abgeordnete/r gefunden"
+											: "Keine MdBs gefunden"
+										: isUS
+											? "No representatives found"
+											: "No MPs found"}
+								</p>
+								<p className="text-xs mt-1">
+									{language === "de"
+										? "Für diesen Wahlkreis sind derzeit keine Daten verfügbar."
+										: isUS
+											? "No data available for this ZIP code."
+											: "No data available for this constituency."}
+								</p>
+							</div>
+						)}
+
+					{displayRepresentatives.length > 0 && (
 						<div className="space-y-3">
 							{/* Help text for France - explain how to find circonscription */}
-							{isFrance && representatives.length > 1 && (
-								<div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200">
-									<p className="text-sm">
-										{language === "fr"
-											? "Plusieurs député(e)s trouvé(e)s pour votre département. Sélectionnez celui/celle de votre circonscription."
-											: language === "de"
-												? "Mehrere Abgeordnete in Ihrem Département gefunden. Wählen Sie den Ihrer circonscription."
-												: "Multiple deputies found for your département. Select the one for your constituency."}
-									</p>
-									<a
-										href="https://www.nosdeputes.fr/circonscription"
-										target="_blank"
-										rel="noopener noreferrer"
-										className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:underline mt-1"
-									>
-										{language === "fr"
-											? "→ Trouver ma circonscription"
-											: language === "de"
-												? "→ Meine circonscription finden"
-												: "→ Find my constituency"}
-									</a>
-								</div>
-							)}
+							{!customTargetsEnabled &&
+								isFrance &&
+								displayRepresentatives.length > 1 && (
+									<div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200">
+										<p className="text-sm">
+											{language === "fr"
+												? "Plusieurs député(e)s trouvé(e)s pour votre département. Sélectionnez celui/celle de votre circonscription."
+												: language === "de"
+													? "Mehrere Abgeordnete in Ihrem Département gefunden. Wählen Sie den Ihrer circonscription."
+													: "Multiple deputies found for your département. Select the one for your constituency."}
+										</p>
+										<a
+											href="https://www.nosdeputes.fr/circonscription"
+											target="_blank"
+											rel="noopener noreferrer"
+											className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:underline mt-1"
+										>
+											{language === "fr"
+												? "→ Trouver ma circonscription"
+												: language === "de"
+													? "→ Meine circonscription finden"
+													: "→ Find my constituency"}
+										</a>
+									</div>
+								)}
 							<Label className="text-sm font-medium">
-								{t("form", "step2.selectLabel")}{" "}
+								{customTargetsEnabled
+									? t("form", "step2.targetSelectLabel")
+									: t("form", "step2.selectLabel")}{" "}
 								<span className="text-destructive">*</span>
 							</Label>
 							{/* Inline expandable representative selector */}
@@ -1245,7 +1642,9 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 											</div>
 										) : (
 											<span className="text-muted-foreground">
-												{t("form", "step2.selectPlaceholder")}
+												{customTargetsEnabled
+													? t("form", "step2.targetSelectPlaceholder")
+													: t("form", "step2.selectPlaceholder")}
 											</span>
 										)}
 										<ChevronDown className="h-4 w-4 text-muted-foreground shrink-0" />
@@ -1257,7 +1656,11 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 									<div
 										className="divide-y divide-border"
 										role="listbox"
-										aria-label={t("form", "step2.selectLabel")}
+										aria-label={
+											customTargetsEnabled
+												? t("form", "step2.targetSelectLabel")
+												: t("form", "step2.selectLabel")
+										}
 										onKeyDown={(e) => {
 											if (e.key === "Escape") {
 												setRepSelectorOpen(false);
@@ -1276,7 +1679,7 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 											}
 										}}
 									>
-										{representatives.map((rep) => (
+										{displayRepresentatives.map((rep) => (
 											<button
 												key={rep.id}
 												type="button"
@@ -1345,7 +1748,11 @@ export function LetterForm({ campaignSlug }: LetterFormProps = {}) {
 
 					<WhyBox
 						title={t("form", "step2.whyTitle")}
-						text={t("form", "step2.whyText")}
+						text={
+							customTargetsEnabled
+								? t("form", "step2.targetWhyText")
+								: t("form", "step2.whyText")
+						}
 					/>
 				</div>
 			</div>

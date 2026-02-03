@@ -89,6 +89,14 @@ export function LanguageProvider({
 		void setCookie(COOKIE_LANGUAGE, lang);
 	}, []);
 
+	// Update the HTML lang attribute when language changes
+	// This improves accessibility and SEO for client-side navigation
+	useEffect(() => {
+		if (typeof document !== "undefined") {
+			document.documentElement.lang = language;
+		}
+	}, [language]);
+
 	// Translation helper bound to current language
 	const t = useCallback(
 		(

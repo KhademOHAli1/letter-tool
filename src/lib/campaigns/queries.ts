@@ -10,6 +10,7 @@ import type {
 	CampaignDemand,
 	CampaignPrompt,
 	CampaignStats,
+	CampaignTarget,
 	CampaignWithDemands,
 } from "../types";
 
@@ -19,6 +20,7 @@ export const CACHE_TAGS = {
 	campaign: (slug: string) => `campaign:${slug}`,
 	campaignDemands: (campaignId: string) => `campaign-demands:${campaignId}`,
 	campaignPrompts: (campaignId: string) => `campaign-prompts:${campaignId}`,
+	campaignTargets: (campaignId: string) => `campaign-targets:${campaignId}`,
 } as const;
 
 /**
@@ -49,6 +51,10 @@ function transformCampaign(row: Record<string, unknown>): Campaign {
 		status: row.status as Campaign["status"],
 		causeContext: row.cause_context as string | null,
 		countryCodes: row.country_codes as string[],
+		useCustomTargets:
+			(row.use_custom_targets as boolean) ??
+			(row.useCustomTargets as boolean) ??
+			false,
 		goalLetters: row.goal_letters as number | null,
 		startDate: row.start_date as string | null,
 		endDate: row.end_date as string | null,
@@ -89,6 +95,28 @@ function transformPrompt(row: Record<string, unknown>): CampaignPrompt {
 		version: row.version as number,
 		isActive: row.is_active as boolean,
 		description: row.description as string | null,
+		createdAt: row.created_at as string,
+		updatedAt: row.updated_at as string,
+	};
+}
+
+/**
+ * Transform database row to CampaignTarget type
+ */
+function transformTarget(row: Record<string, unknown>): CampaignTarget {
+	return {
+		id: row.id as string,
+		campaignId: row.campaign_id as string,
+		name: row.name as string,
+		email: row.email as string,
+		postalCode: row.postal_code as string,
+		city: (row.city as string | null) ?? null,
+		region: (row.region as string | null) ?? null,
+		countryCode: (row.country_code as string | null) ?? null,
+		category: (row.category as string | null) ?? null,
+		imageUrl: (row.image_url as string | null) ?? null,
+		latitude: (row.latitude as number | null) ?? null,
+		longitude: (row.longitude as number | null) ?? null,
 		createdAt: row.created_at as string,
 		updatedAt: row.updated_at as string,
 	};
@@ -450,3 +478,65 @@ export const getCampaignStats = unstable_cache(
 	["campaign-stats"],
 	{ revalidate: 300, tags: [CACHE_TAGS.campaigns] },
 );
+
+/**
+ * List targets for a campaign
+ * Not cached to keep admin updates visible quickly
+ */
+export async function listCampaignTargets(
+	campaignId: string,
+): Promise<CampaignTarget[]> {
+	const supabase = createServerSupabaseClient();
+
+	const { data, error } = await supabase
+		.from("campaign_targets")
+		.select("*")
+		.eq("campaign_id", campaignId)
+		.order("name", { ascending: true });
+
+	if (error) {
+		if (isTableNotFoundError(error)) {
+			console.warn(
+				"[CAMPAIGNS] Campaign targets table not found - migrations may not be applied",
+			);
+			return [];
+		}
+		console.error("[CAMPAIGNS] Error listing campaign targets:", error);
+		throw new Error(`Failed to list campaign targets: ${error.message}`);
+	}
+
+	return (data || []).map(transformTarget);
+}
+
+/**
+ * Get a single target for a campaign by ID
+ */
+export async function getCampaignTargetById(
+	campaignId: string,
+	targetId: string,
+): Promise<CampaignTarget | null> {
+	const supabase = createServerSupabaseClient();
+
+	const { data, error } = await supabase
+		.from("campaign_targets")
+		.select("*")
+		.eq("campaign_id", campaignId)
+		.eq("id", targetId)
+		.single();
+
+	if (error) {
+		if (error.code === "PGRST116") {
+			return null;
+		}
+		if (isTableNotFoundError(error)) {
+			console.warn(
+				"[CAMPAIGNS] Campaign targets table not found - migrations may not be applied",
+			);
+			return null;
+		}
+		console.error("[CAMPAIGNS] Error fetching campaign target:", error);
+		throw new Error(`Failed to fetch campaign target: ${error.message}`);
+	}
+
+	return transformTarget(data);
+}

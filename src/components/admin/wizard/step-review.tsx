@@ -7,18 +7,19 @@
 
 import { AlertCircle, Check, Edit2 } from "lucide-react";
 import type { CampaignWizardData } from "@/app/admin/campaigns/new/page";
+import { Flag } from "@/components/flags";
 import { Badge } from "@/components/ui/badge";
 
 interface StepReviewProps {
 	data: CampaignWizardData;
 }
 
-const COUNTRY_NAMES: Record<string, string> = {
-	de: "Germany 🇩🇪",
-	ca: "Canada 🇨🇦",
-	uk: "United Kingdom 🇬🇧",
-	us: "United States 🇺🇸",
-	fr: "France 🇫🇷",
+const AUDIENCE_LABELS: Record<string, string> = {
+	de: "German Bundestag",
+	uk: "UK House of Commons",
+	us: "US Congress",
+	fr: "French National Assembly",
+	ca: "Canadian Parliament",
 };
 
 export function StepReview({ data }: StepReviewProps) {
@@ -74,15 +75,29 @@ export function StepReview({ data }: StepReviewProps) {
 						<p className="text-sm">{primaryDescription}</p>
 					</div>
 					<div>
-						<p className="text-sm text-muted-foreground">Target Countries</p>
+						<p className="text-sm text-muted-foreground">Target Audience</p>
 						<div className="flex flex-wrap gap-1 mt-1">
-							{data.basicInfo.countryCodes.map((code) => (
-								<Badge key={code} variant="secondary">
-									{COUNTRY_NAMES[code] || code.toUpperCase()}
-								</Badge>
-							))}
+							{data.basicInfo.countryCodes.map((code) => {
+								const label = AUDIENCE_LABELS[code] || code.toUpperCase();
+								return (
+									<Badge key={code} variant="secondary">
+										<span className="flex items-center gap-1">
+											{label}
+											<Flag country={code} className="h-3 w-4" />
+										</span>
+									</Badge>
+								);
+							})}
 						</div>
 					</div>
+					{data.basicInfo.useCustomTargets && (
+						<div>
+							<p className="text-sm text-muted-foreground">Custom Audience</p>
+							<p className="text-sm">
+								{data.basicInfo.customTargets.length} targets loaded
+							</p>
+						</div>
+					)}
 				</div>
 			</section>
 

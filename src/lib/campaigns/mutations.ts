@@ -66,6 +66,7 @@ export async function createCampaign(
 		status: data.status || "draft",
 		cause_context: data.causeContext || null,
 		country_codes: data.countryCodes,
+		use_custom_targets: data.useCustomTargets ?? false,
 		goal_letters: data.goalLetters || null,
 		start_date: data.startDate || null,
 		end_date: data.endDate || null,
@@ -96,6 +97,10 @@ export async function createCampaign(
 		status: result.status,
 		causeContext: result.cause_context,
 		countryCodes: result.country_codes,
+		useCustomTargets:
+			(result.use_custom_targets as boolean | undefined) ??
+			(result.useCustomTargets as boolean | undefined) ??
+			false,
 		goalLetters: result.goal_letters,
 		startDate: result.start_date,
 		endDate: result.end_date,
@@ -124,6 +129,8 @@ export async function updateCampaign(
 		updateData.cause_context = data.causeContext;
 	if (data.countryCodes !== undefined)
 		updateData.country_codes = data.countryCodes;
+	if (data.useCustomTargets !== undefined)
+		updateData.use_custom_targets = data.useCustomTargets;
 	if (data.goalLetters !== undefined)
 		updateData.goal_letters = data.goalLetters;
 	if (data.startDate !== undefined) updateData.start_date = data.startDate;
@@ -154,6 +161,10 @@ export async function updateCampaign(
 		status: result.status,
 		causeContext: result.cause_context,
 		countryCodes: result.country_codes,
+		useCustomTargets:
+			(result.use_custom_targets as boolean | undefined) ??
+			(result.useCustomTargets as boolean | undefined) ??
+			false,
 		goalLetters: result.goal_letters,
 		startDate: result.start_date,
 		endDate: result.end_date,

@@ -7,7 +7,12 @@
  */
 
 import { createContext, type ReactNode, useContext, useMemo } from "react";
-import type { Campaign, CampaignDemand, CampaignStats } from "../types";
+import type {
+	Campaign,
+	CampaignDemand,
+	CampaignStats,
+	CampaignTarget,
+} from "../types";
 
 // Type for localized text helper
 type GetLocalizedText = (
@@ -20,6 +25,8 @@ interface CampaignContextType {
 	campaign: Campaign;
 	/** Campaign demands */
 	demands: CampaignDemand[];
+	/** Campaign targets (custom recipient list) */
+	targets: CampaignTarget[];
 	/** Campaign statistics (optional, may not be loaded) */
 	stats?: CampaignStats;
 	/** Helper to get localized text based on current language */
@@ -36,6 +43,8 @@ interface CampaignProviderProps {
 	campaign: Campaign;
 	/** Campaign demands (from server component) */
 	demands: CampaignDemand[];
+	/** Campaign targets (from server component) */
+	targets: CampaignTarget[];
 	/** Optional campaign stats */
 	stats?: CampaignStats;
 	/** Current language for localization */
@@ -50,6 +59,7 @@ export function CampaignProvider({
 	children,
 	campaign,
 	demands,
+	targets,
 	stats,
 	language,
 }: CampaignProviderProps) {
@@ -74,11 +84,12 @@ export function CampaignProvider({
 		() => ({
 			campaign,
 			demands,
+			targets,
 			stats,
 			getLocalizedText,
 			isLegacy,
 		}),
-		[campaign, demands, stats, getLocalizedText, isLegacy],
+		[campaign, demands, targets, stats, getLocalizedText, isLegacy],
 	);
 
 	return (

@@ -22,7 +22,14 @@ export type Permission =
 	| "prompt:update"
 	| "prompt:delete"
 	| "user:manage"
-	| "admin:access";
+	| "admin:access"
+	// Super admin permissions
+	| "superadmin:access"
+	| "application:review"
+	| "account:suspend"
+	| "account:reactivate"
+	| "settings:manage"
+	| "logs:view";
 
 // Role to permission mapping
 const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
@@ -58,6 +65,30 @@ const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
 		"user:manage",
 		"admin:access",
 	],
+	super_admin: [
+		// All campaign permissions
+		"campaign:create",
+		"campaign:read",
+		"campaign:update",
+		"campaign:delete",
+		"campaign:publish",
+		"demand:create",
+		"demand:update",
+		"demand:delete",
+		"prompt:create",
+		"prompt:update",
+		"prompt:delete",
+		// Admin permissions
+		"user:manage",
+		"admin:access",
+		// Super admin specific permissions
+		"superadmin:access",
+		"application:review",
+		"account:suspend",
+		"account:reactivate",
+		"settings:manage",
+		"logs:view",
+	],
 };
 
 /**
@@ -78,7 +109,7 @@ export function hasPermission(
 }
 
 /**
- * Check if a user can access a campaign (either as owner or admin).
+ * Check if a user can access a campaign (either as owner, admin, or super_admin).
  */
 export function canAccessCampaign(
 	user: AuthUser | null,
@@ -88,8 +119,8 @@ export function canAccessCampaign(
 		return false;
 	}
 
-	// Admins can access any campaign
-	if (user.profile?.role === "admin") {
+	// Super admins and admins can access any campaign
+	if (user.profile?.role === "admin" || user.profile?.role === "super_admin") {
 		return true;
 	}
 
@@ -140,7 +171,15 @@ export function canDeleteCampaign(
  * Check if user is an admin.
  */
 export function isAdmin(user: AuthUser | null): boolean {
-	return user?.profile?.role === "admin";
+	const role = user?.profile?.role;
+	return role === "admin" || role === "super_admin";
+}
+
+/**
+ * Check if user is a super admin.
+ */
+export function isSuperAdmin(user: AuthUser | null): boolean {
+	return user?.profile?.role === "super_admin";
 }
 
 /**
@@ -148,7 +187,7 @@ export function isAdmin(user: AuthUser | null): boolean {
  */
 export function isOrganizer(user: AuthUser | null): boolean {
 	const role = user?.profile?.role;
-	return role === "organizer" || role === "admin";
+	return role === "organizer" || role === "admin" || role === "super_admin";
 }
 
 /**

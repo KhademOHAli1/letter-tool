@@ -230,6 +230,60 @@ export const translations = {
 				fr: "Sélectionner un(e) député(e)...",
 				es: "Seleccionar representante...",
 			},
+			targetTitle: {
+				de: "Dein Ziel",
+				en: "Your Target",
+				fr: "Votre cible",
+				es: "Tu objetivo",
+			},
+			targetWhyText: {
+				de: "Wir verwenden deine PLZ, um das nächstgelegene Ziel aus der Kampagnenliste zu finden. Deine PLZ wird nur lokal im Browser verarbeitet und nicht an unsere Server gesendet.",
+				en: "We use your postal code to find the nearest target from the campaign list. Your postal code is processed locally in your browser and is not sent to our servers.",
+				fr: "Nous utilisons votre code postal pour trouver la cible la plus proche dans la liste de la campagne. Votre code postal est traité localement dans votre navigateur et n'est pas envoyé à nos serveurs.",
+				es: "Usamos tu código postal para encontrar el objetivo más cercano en la lista de la campaña. Tu código postal se procesa localmente en tu navegador y no se envía a nuestros servidores.",
+			},
+			targetSelectLabel: {
+				de: "Wähle ein Ziel",
+				en: "Select a target",
+				fr: "Sélectionnez une cible",
+				es: "Selecciona un objetivo",
+			},
+			targetSelectPlaceholder: {
+				de: "Ziel auswählen...",
+				en: "Select target...",
+				fr: "Sélectionner une cible...",
+				es: "Seleccionar objetivo...",
+			},
+			targetSearchLabel: {
+				de: "Ziel suchen",
+				en: "Search target",
+				fr: "Rechercher une cible",
+				es: "Buscar objetivo",
+			},
+			targetSearchPlaceholder: {
+				de: "Nach Name oder PLZ suchen...",
+				en: "Search by name or postal code...",
+				fr: "Rechercher par nom ou code postal...",
+				es: "Buscar por nombre o código postal...",
+			},
+			targetNearestFound: {
+				de: "Nächste Ziele gefunden",
+				en: "Nearest targets found",
+				fr: "Cibles les plus proches trouvées",
+				es: "Objetivos más cercanos encontrados",
+			},
+			targetNearestNotFound: {
+				de: "Keine Ziele in der Nähe dieser PLZ gefunden",
+				en: "No targets found near this postal code",
+				fr: "Aucune cible trouvée près de ce code postal",
+				es: "No se encontraron objetivos cerca de este código postal",
+			},
+			targetNoResults: {
+				de: "Keine Ziele passend zur Suche gefunden",
+				en: "No targets match your search",
+				fr: "Aucune cible ne correspond à votre recherche",
+				es: "Ningún objetivo coincide con tu búsqueda",
+			},
 		},
 
 		// Step 3: Personal Story

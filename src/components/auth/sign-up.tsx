@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import * as React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -72,6 +73,12 @@ export function SignUp({ redirectTo }: SignUpProps) {
 	const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [showVerification, setShowVerification] = useState(false);
+	const [mounted, setMounted] = useState(false);
+
+	// Prevent hydration mismatch by only rendering form after mount
+	React.useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	const redirect = redirectTo || searchParams.get("redirect") || "/admin";
 
@@ -118,6 +125,23 @@ export function SignUp({ redirectTo }: SignUpProps) {
 	};
 
 	const isLoading = isSubmitting || isGoogleLoading || authLoading;
+
+	// Prevent hydration mismatch - show loading until mounted
+	if (!mounted) {
+		return (
+			<Card className="w-full max-w-md">
+				<CardHeader className="space-y-1">
+					<CardTitle className="text-2xl font-bold">Create Account</CardTitle>
+					<CardDescription>
+						Sign up to create and manage campaigns
+					</CardDescription>
+				</CardHeader>
+				<CardContent className="flex items-center justify-center py-8">
+					<Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+				</CardContent>
+			</Card>
+		);
+	}
 
 	// Show configuration error if Supabase is not set up
 	if (configError) {

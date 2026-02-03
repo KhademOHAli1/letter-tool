@@ -3,6 +3,7 @@ import {
 	buildPrompt,
 	createPromptVariables,
 	getCampaignPrompt,
+	getCampaignTargetById,
 	getCampaignWithDemands,
 } from "@/lib/campaigns";
 import { DEMANDS_CA, type DemandCA } from "@/lib/data/ca/forderungen-ca";
@@ -185,6 +186,9 @@ export async function POST(request: NextRequest) {
 		const campaignSlug =
 			typeof rawBody.campaignSlug === "string" ? rawBody.campaignSlug : null;
 		let campaignId: string | null = null;
+		let campaignData: Awaited<
+			ReturnType<typeof getCampaignWithDemands>
+		> | null = null;
 		let systemPrompt: string;
 		let demands:
 			| typeof FORDERUNGEN
@@ -195,34 +199,34 @@ export async function POST(request: NextRequest) {
 
 		if (campaignSlug) {
 			// Campaign-based generation: fetch campaign and prompt from database
-			const campaign = await getCampaignWithDemands(campaignSlug);
-			if (!campaign) {
+			campaignData = await getCampaignWithDemands(campaignSlug);
+			if (!campaignData) {
 				return NextResponse.json(
 					{ error: "Campaign not found" },
 					{ status: 404 },
 				);
 			}
-			if (campaign.status !== "active") {
+			if (campaignData.status !== "active") {
 				return NextResponse.json(
 					{ error: "Campaign is not active" },
 					{ status: 400 },
 				);
 			}
 
-			campaignId = campaign.id;
+			campaignId = campaignData.id;
 			// Note: campaign.demands can be used for validation in the future
 
 			// Fetch the campaign prompt
 			const prompt = await getCampaignPrompt(
-				campaign.id,
+				campaignData.id,
 				country,
 				userLanguage,
 			);
 			if (prompt) {
 				// Build dynamic prompt with campaign variables
 				const promptVariables = createPromptVariables(
-					campaign,
-					campaign.demands,
+					campaignData,
+					campaignData.demands,
 					(rawBody.forderungen as string[]) || [],
 					country,
 					userLanguage,
@@ -315,14 +319,54 @@ export async function POST(request: NextRequest) {
 			validDemandIds,
 		);
 
-		// 9. Validate MdB/MP
-		if (!validateMdB(rawBody.mdb)) {
-			return NextResponse.json(
-				{ error: "Ungültige MdB-Daten" },
-				{ status: 400 },
-			);
+		// 9. Validate recipient (representative or custom target)
+		let mdb: {
+			id: string;
+			name: string;
+			email: string;
+			party: string;
+		};
+
+		if (campaignData?.useCustomTargets) {
+			const mdbInput = rawBody.mdb as Record<string, unknown> | undefined;
+			const targetId =
+				typeof mdbInput?.id === "string" ? (mdbInput.id as string) : null;
+
+			if (!targetId) {
+				return NextResponse.json(
+					{ error: "Ungültige Ziel-Daten" },
+					{ status: 400 },
+				);
+			}
+
+			const target = await getCampaignTargetById(campaignData.id, targetId);
+			if (!target) {
+				return NextResponse.json(
+					{ error: "Ziel nicht gefunden" },
+					{ status: 400 },
+				);
+			}
+
+			mdb = {
+				id: target.id,
+				name: target.name,
+				email: target.email,
+				party: target.category || "Target",
+			};
+		} else {
+			if (!validateMdB(rawBody.mdb)) {
+				return NextResponse.json(
+					{ error: "Ungültige MdB-Daten" },
+					{ status: 400 },
+				);
+			}
+			mdb = rawBody.mdb as {
+				id: string;
+				name: string;
+				email: string;
+				party: string;
+			};
 		}
-		const mdb = rawBody.mdb;
 
 		// 10. Check required fields - personalNote is now REQUIRED
 		if (!senderName || forderungen.length === 0) {

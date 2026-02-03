@@ -61,6 +61,8 @@ const DEFAULT_DATA: CampaignWizardData = {
 		description: { en: "", de: "" },
 		slug: "",
 		countryCodes: ["de"],
+		useCustomTargets: false,
+		customTargets: [],
 	},
 	details: {
 		causeContext: "",
@@ -97,8 +99,27 @@ export default function NewCampaignPage() {
 		const saved = localStorage.getItem(STORAGE_KEY);
 		if (saved) {
 			try {
-				const parsed = JSON.parse(saved);
-				setData(parsed);
+				const parsed = JSON.parse(saved) as Partial<CampaignWizardData>;
+				const merged: CampaignWizardData = {
+					...DEFAULT_DATA,
+					...parsed,
+					basicInfo: {
+						...DEFAULT_DATA.basicInfo,
+						...(parsed.basicInfo || {}),
+						useCustomTargets: parsed.basicInfo?.useCustomTargets ?? false,
+						customTargets: parsed.basicInfo?.customTargets ?? [],
+					},
+					details: {
+						...DEFAULT_DATA.details,
+						...(parsed.details || {}),
+					},
+					demands: parsed.demands || DEFAULT_DATA.demands,
+					prompts: {
+						...DEFAULT_DATA.prompts,
+						...(parsed.prompts || {}),
+					},
+				};
+				setData(merged);
 			} catch (e) {
 				console.error("Failed to parse saved draft:", e);
 			}
@@ -185,6 +206,7 @@ export default function NewCampaignPage() {
 					name: data.basicInfo.name,
 					description: data.basicInfo.description,
 					country_codes: data.basicInfo.countryCodes,
+					use_custom_targets: data.basicInfo.useCustomTargets,
 					cause_context: data.details.causeContext,
 					goal_letters: data.details.goalLetters,
 					start_date: data.details.startDate,
@@ -211,6 +233,31 @@ export default function NewCampaignPage() {
 				.insert(demandInserts);
 
 			if (demandsError) throw demandsError;
+
+			if (data.basicInfo.customTargets.length > 0) {
+				const inserts = data.basicInfo.customTargets.map((row) => ({
+					campaign_id: campaign.id,
+					name: row.name,
+					email: row.email,
+					postal_code: row.postal_code,
+					city: row.city || null,
+					region: row.region || null,
+					country_code: row.country_code || null,
+					category: row.category || null,
+					image_url: row.image_url || null,
+					latitude: row.latitude ? Number.parseFloat(row.latitude) : null,
+					longitude: row.longitude ? Number.parseFloat(row.longitude) : null,
+				}));
+
+				const chunkSize = 500;
+				for (let i = 0; i < inserts.length; i += chunkSize) {
+					const chunk = inserts.slice(i, i + chunkSize);
+					const { error } = await supabase
+						.from("campaign_targets")
+						.insert(chunk);
+					if (error) throw error;
+				}
+			}
 
 			// Create the prompt if custom
 			if (!data.prompts.useDefaultTemplate && data.prompts.customPrompt) {
