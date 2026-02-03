@@ -7,6 +7,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Turnstile } from "@/components/turnstile";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -29,6 +30,7 @@ type FormState = "idle" | "submitting" | "success" | "error";
 export function ApplyForm() {
 	const [formState, setFormState] = useState<FormState>("idle");
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
 	const {
 		register,
@@ -61,7 +63,7 @@ export function ApplyForm() {
 			const response = await fetch("/api/applications", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(data),
+				body: JSON.stringify({ ...data, turnstileToken }),
 			});
 
 			if (!response.ok) {
@@ -304,6 +306,13 @@ export function ApplyForm() {
 							<p className="text-sm text-destructive">{errorMessage}</p>
 						</div>
 					)}
+
+					{/* Turnstile CAPTCHA */}
+					<Turnstile
+						onVerify={setTurnstileToken}
+						onExpire={() => setTurnstileToken(null)}
+						className="flex justify-center"
+					/>
 
 					{/* Submit */}
 					<Button

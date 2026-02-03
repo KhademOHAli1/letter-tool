@@ -25,6 +25,9 @@ export const serverEnv = {
 
 	// Future: Database connection
 	DATABASE_URL: process.env.DATABASE_URL,
+
+	// Cloudflare Turnstile (CAPTCHA) - server-side secret
+	TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY || "",
 } as const;
 
 // Client-side env vars (prefixed with NEXT_PUBLIC_)
@@ -40,6 +43,9 @@ export const clientEnv = {
 	NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || "",
 	NEXT_PUBLIC_SUPABASE_ANON_KEY:
 		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
+	// Cloudflare Turnstile (CAPTCHA alternative)
+	NEXT_PUBLIC_TURNSTILE_SITE_KEY:
+		process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "",
 } as const;
 
 /**

@@ -4,6 +4,8 @@
  * Phase 2, Epic 2.3, Tasks 2.3.1, 2.3.3
  */
 import { type NextRequest, NextResponse } from "next/server";
+import { hasPermission } from "@/lib/auth/permissions";
+import { getSession } from "@/lib/auth/server";
 import {
 	createCampaign,
 	getCampaignStats,
@@ -80,11 +82,16 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
 	try {
-		// TODO: Add authentication check in Phase 4
-		// const session = await getSession(request);
-		// if (!session) {
-		//   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-		// }
+		// Authentication check
+		const session = await getSession();
+		if (!session.isAuthenticated || !session.user) {
+			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+		}
+
+		// Check permission
+		if (!hasPermission(session.user, "campaign:create")) {
+			return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+		}
 
 		// Parse and validate request body
 		let body: unknown;
@@ -105,9 +112,8 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		// Create the campaign
-		// TODO: Pass userId when auth is implemented
-		const campaign = await createCampaign(parseResult.data);
+		// Create the campaign with authenticated user as owner
+		const campaign = await createCampaign(parseResult.data, session.user.id);
 
 		return NextResponse.json({ campaign }, { status: 201 });
 	} catch (error) {

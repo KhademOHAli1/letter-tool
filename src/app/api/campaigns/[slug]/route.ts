@@ -4,6 +4,8 @@
  * Phase 2, Epic 2.3, Tasks 2.3.2, 2.3.4
  */
 import { type NextRequest, NextResponse } from "next/server";
+import { canEditCampaign } from "@/lib/auth/permissions";
+import { getSession } from "@/lib/auth/server";
 import {
 	getCampaignBySlug,
 	getCampaignStats,
@@ -98,23 +100,24 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 	try {
 		const { slug } = await params;
 
-		// TODO: Add authentication and ownership check in Phase 4
-		// const session = await getSession(request);
-		// if (!session) {
-		//   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-		// }
-		// const campaign = await getCampaignBySlug(slug);
-		// if (!campaign || campaign.createdBy !== session.userId) {
-		//   return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-		// }
+		// Authentication check
+		const session = await getSession();
+		if (!session.isAuthenticated || !session.user) {
+			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+		}
 
-		// Get current campaign to get ID
+		// Get current campaign to check ownership
 		const current = await getCampaignBySlug(slug);
 		if (!current) {
 			return NextResponse.json(
 				{ error: "Campaign not found" },
 				{ status: 404 },
 			);
+		}
+
+		// Check ownership/permission
+		if (!canEditCampaign(session.user, current.createdBy)) {
+			return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 		}
 
 		// Parse and validate request body

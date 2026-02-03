@@ -1,13 +1,18 @@
 import type { NextConfig } from "next";
 
-// Content Security Policy - strict but allows necessary resources
+// Check if running in production
+const isProduction = process.env.NODE_ENV === "production";
+
+// Content Security Policy - stricter in production
+// In dev, we need unsafe-eval for hot reload
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval';
+  script-src 'self' 'unsafe-inline'${isProduction ? "" : " 'unsafe-eval'"} https://challenges.cloudflare.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' https://www.bundestag.de https://www.ourcommons.ca https://members-api.parliament.uk https://bioguide.congress.gov data: blob:;
   font-src 'self';
-  connect-src 'self' https://api.openai.com https://api.postcodes.io https://*.supabase.co;
+  connect-src 'self' https://api.openai.com https://api.postcodes.io https://*.supabase.co https://challenges.cloudflare.com;
+  frame-src 'self' https://challenges.cloudflare.com;
   frame-ancestors 'none';
   form-action 'self';
   base-uri 'self';

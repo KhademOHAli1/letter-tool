@@ -5,8 +5,10 @@
  */
 
 import { type NextRequest, NextResponse } from "next/server";
+import { verifyTurnstileToken } from "@/components/turnstile";
 import { isSuperAdmin } from "@/lib/auth/permissions";
 import { getSession } from "@/lib/auth/server";
+import { getClientIP } from "@/lib/rate-limit";
 import { createApplicationSchema } from "@/lib/schemas";
 import { createServerSupabaseClient } from "@/lib/supabase";
 
@@ -16,7 +18,22 @@ import { createServerSupabaseClient } from "@/lib/supabase";
 export async function POST(request: NextRequest) {
 	try {
 		const body = await request.json();
-		const parsed = createApplicationSchema.safeParse(body);
+		const { turnstileToken, ...applicationData } = body;
+
+		// Verify Turnstile token (CAPTCHA)
+		const clientIP = getClientIP(request);
+		const turnstileResult = await verifyTurnstileToken(
+			turnstileToken,
+			clientIP,
+		);
+		if (!turnstileResult.success) {
+			return NextResponse.json(
+				{ error: turnstileResult.error || "CAPTCHA verification failed" },
+				{ status: 400 },
+			);
+		}
+
+		const parsed = createApplicationSchema.safeParse(applicationData);
 
 		if (!parsed.success) {
 			return NextResponse.json(
