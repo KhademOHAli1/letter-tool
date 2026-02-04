@@ -39,11 +39,11 @@ async function getSettings(): Promise<PlatformSetting[]> {
 	}));
 }
 
-export default async function SettingsPage() {
+export default async function PlatformSettingsPage() {
 	const user = await getUser();
 
 	if (!user || !isSuperAdmin(user)) {
-		redirect("/");
+		redirect("/admin");
 	}
 
 	const settings = await getSettings();

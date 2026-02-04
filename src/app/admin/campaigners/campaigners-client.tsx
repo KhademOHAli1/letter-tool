@@ -195,7 +195,7 @@ export function CampaignersClient({
 		if (status !== "all") {
 			params.set("status", status);
 		}
-		router.push(`/superadmin/campaigners?${params.toString()}`);
+		router.push(`/admin/campaigners?${params.toString()}`);
 	};
 
 	const filteredCampaigners = campaigners.filter((c) => {

@@ -39,7 +39,6 @@ const EXCLUDED_PATHS = [
 	"/robots.txt",
 	"/sitemap.xml",
 	"/admin",
-	"/superadmin",
 	"/auth",
 	"/apply",
 	"/campaigns",
@@ -51,10 +50,9 @@ const EXCLUDED_PATHS = [
 // Routes that need auth session refresh
 const AUTH_ROUTES = [
 	"/admin",
-	"/superadmin",
 	"/auth",
 	"/api/campaigns",
-	"/api/superadmin",
+	"/api/superadmin", // API routes still exist under /api/superadmin
 ];
 
 /**

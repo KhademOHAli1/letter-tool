@@ -1,5 +1,5 @@
 /**
- * Super Admin Dashboard Client Component
+ * Platform Dashboard Client Component
  */
 
 "use client";
@@ -53,7 +53,7 @@ interface DashboardStats {
 	}>;
 }
 
-interface SuperAdminDashboardClientProps {
+interface PlatformDashboardClientProps {
 	stats: DashboardStats;
 }
 
@@ -103,9 +103,9 @@ function formatAction(
 	return label;
 }
 
-export function SuperAdminDashboardClient({
+export function PlatformDashboardClient({
 	stats,
-}: SuperAdminDashboardClientProps) {
+}: PlatformDashboardClientProps) {
 	return (
 		<div className="space-y-6">
 			<div>
@@ -127,7 +127,7 @@ export function SuperAdminDashboardClient({
 							</span>
 						</div>
 						<Button asChild size="sm">
-							<Link href="/superadmin/applications">
+							<Link href="/admin/applications">
 								Review Now
 								<ArrowRight className="ml-2 h-4 w-4" />
 							</Link>
@@ -210,7 +210,7 @@ export function SuperAdminDashboardClient({
 					</CardHeader>
 					<CardContent className="grid gap-2">
 						<Button variant="outline" className="justify-start" asChild>
-							<Link href="/superadmin/applications">
+							<Link href="/admin/applications">
 								<ClipboardList className="mr-2 h-4 w-4" />
 								Review Applications
 								{stats.applications.pending > 0 && (
@@ -221,19 +221,19 @@ export function SuperAdminDashboardClient({
 							</Link>
 						</Button>
 						<Button variant="outline" className="justify-start" asChild>
-							<Link href="/superadmin/campaigners">
+							<Link href="/admin/campaigners">
 								<Users className="mr-2 h-4 w-4" />
 								Manage Campaigners
 							</Link>
 						</Button>
 						<Button variant="outline" className="justify-start" asChild>
-							<Link href="/superadmin/activity">
+							<Link href="/admin/activity">
 								<AlertCircle className="mr-2 h-4 w-4" />
 								View Activity Logs
 							</Link>
 						</Button>
 						<Button variant="outline" className="justify-start" asChild>
-							<Link href="/superadmin/settings">
+							<Link href="/admin/platform-settings">
 								<Settings className="mr-2 h-4 w-4" />
 								Platform Settings
 							</Link>
@@ -276,7 +276,7 @@ export function SuperAdminDashboardClient({
 						)}
 						{stats.recentActivity.length > 5 && (
 							<Button variant="link" className="mt-4 px-0" asChild>
-								<Link href="/superadmin/activity">View all activity</Link>
+								<Link href="/admin/activity">View all activity</Link>
 							</Button>
 						)}
 					</CardContent>

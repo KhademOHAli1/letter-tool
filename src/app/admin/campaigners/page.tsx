@@ -59,8 +59,7 @@ async function getCampaigners(status?: string): Promise<CampaignerWithStats[]> {
 		return [];
 	}
 
-	// Get emails from auth.users (need to use service role)
-	// For now, we'll fetch campaign counts
+	// Get campaign counts per user
 	type ProfileRow = {
 		id: string;
 		display_name: string | null;
@@ -115,7 +114,7 @@ export default async function CampaignersPage({ searchParams }: PageProps) {
 	const user = await getUser();
 
 	if (!user || !isSuperAdmin(user)) {
-		redirect("/");
+		redirect("/admin");
 	}
 
 	const { status } = await searchParams;

@@ -1,5 +1,5 @@
 /**
- * Applications Queue Page
+ * Applications Queue Page (Super Admin only)
  * Review and process campaigner applications
  */
 
@@ -42,7 +42,7 @@ export default async function ApplicationsPage({ searchParams }: PageProps) {
 	const user = await getUser();
 
 	if (!user || !isSuperAdmin(user)) {
-		redirect("/");
+		redirect("/admin");
 	}
 
 	const { status } = await searchParams;

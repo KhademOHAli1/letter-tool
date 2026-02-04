@@ -1,13 +1,13 @@
 /**
- * Super Admin Dashboard
- * Overview of platform status and quick actions
+ * Platform Dashboard Page
+ * Overview of platform status and quick actions (Super Admin only)
  */
 
 import { redirect } from "next/navigation";
 import { isSuperAdmin } from "@/lib/auth/permissions";
 import { getUser } from "@/lib/auth/server";
 import { createServerSupabaseClient } from "@/lib/supabase";
-import { SuperAdminDashboardClient } from "./dashboard-client";
+import { PlatformDashboardClient } from "./platform-client";
 
 async function getDashboardStats() {
 	const supabase = createServerSupabaseClient();
@@ -79,14 +79,14 @@ async function getDashboardStats() {
 	};
 }
 
-export default async function SuperAdminDashboardPage() {
+export default async function PlatformDashboardPage() {
 	const user = await getUser();
 
 	if (!user || !isSuperAdmin(user)) {
-		redirect("/");
+		redirect("/admin");
 	}
 
 	const stats = await getDashboardStats();
 
-	return <SuperAdminDashboardClient stats={stats} />;
+	return <PlatformDashboardClient stats={stats} />;
 }

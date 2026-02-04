@@ -138,7 +138,7 @@ export function ActivityLogsClient({
 		if (type !== "all") {
 			params.set("type", type);
 		}
-		router.push(`/superadmin/activity?${params.toString()}`);
+		router.push(`/admin/activity?${params.toString()}`);
 	};
 
 	return (

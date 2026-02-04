@@ -111,7 +111,7 @@ export function ApplicationsClient({
 		if (status !== "all") {
 			params.set("status", status);
 		}
-		router.push(`/superadmin/applications?${params.toString()}`);
+		router.push(`/admin/applications?${params.toString()}`);
 	};
 
 	const handleView = (app: CampaignerApplication) => {
@@ -332,6 +332,9 @@ export function ApplicationsClient({
 									<Mail className="h-5 w-5 text-muted-foreground mt-0.5" />
 									<div>
 										<div className="font-medium">{selectedApp.name}</div>
+										<div className="text-sm text-muted-foreground">
+											{selectedApp.email}
+										</div>
 									</div>
 								</div>
 

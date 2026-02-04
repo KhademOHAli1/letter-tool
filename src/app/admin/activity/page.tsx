@@ -70,7 +70,7 @@ export default async function ActivityPage({ searchParams }: PageProps) {
 	const user = await getUser();
 
 	if (!user || !isSuperAdmin(user)) {
-		redirect("/");
+		redirect("/admin");
 	}
 
 	const { type } = await searchParams;
