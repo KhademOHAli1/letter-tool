@@ -10,11 +10,13 @@ import {
 	Building2,
 	CheckCircle2,
 	Clock,
+	Key,
 	Loader2,
 	Megaphone,
 	MoreHorizontal,
 	Pause,
 	Play,
+	Plus,
 	Search,
 	Settings,
 	Users,
@@ -173,6 +175,21 @@ export function CampaignersClient({
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
+	// Create user dialog state
+	const [createUserDialogOpen, setCreateUserDialogOpen] = useState(false);
+	const [newUserForm, setNewUserForm] = useState({
+		email: "",
+		displayName: "",
+		organizationName: "",
+		role: "organizer" as "user" | "organizer" | "super_admin",
+		sendInvite: true,
+	});
+	const [createUserError, setCreateUserError] = useState<string | null>(null);
+
+	// Password reset state
+	const [resetPasswordDialogOpen, setResetPasswordDialogOpen] = useState(false);
+	const [resetPasswordSuccess, setResetPasswordSuccess] = useState(false);
+
 	const handleStatusChange = (status: string) => {
 		const params = new URLSearchParams();
 		if (status !== "all") {
@@ -252,6 +269,81 @@ export function CampaignersClient({
 		}
 	};
 
+	const handleCreateUser = async () => {
+		setIsSubmitting(true);
+		setCreateUserError(null);
+
+		try {
+			const response = await fetch("/api/superadmin/accounts/create", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(newUserForm),
+			});
+
+			const data = await response.json();
+
+			if (!response.ok) {
+				throw new Error(data.error || "Failed to create user");
+			}
+
+			setCreateUserDialogOpen(false);
+			setNewUserForm({
+				email: "",
+				displayName: "",
+				organizationName: "",
+				role: "organizer",
+				sendInvite: true,
+			});
+			router.refresh();
+		} catch (error) {
+			console.error("Error creating user:", error);
+			setCreateUserError(
+				error instanceof Error ? error.message : "Failed to create user",
+			);
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
+
+	const handleSendPasswordReset = async () => {
+		if (!selectedCampaigner) return;
+
+		setIsSubmitting(true);
+		setResetPasswordSuccess(false);
+
+		try {
+			const response = await fetch(
+				`/api/superadmin/accounts/${selectedCampaigner.id}/send-reset`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+				},
+			);
+
+			const data = await response.json();
+
+			if (!response.ok) {
+				throw new Error(data.error || "Failed to send password reset email");
+			}
+
+			setResetPasswordSuccess(true);
+			// Close dialog after 2 seconds
+			setTimeout(() => {
+				setResetPasswordDialogOpen(false);
+				setResetPasswordSuccess(false);
+			}, 2000);
+		} catch (error) {
+			console.error("Error sending password reset:", error);
+			alert(
+				error instanceof Error
+					? error.message
+					: "Failed to send password reset",
+			);
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
+
 	return (
 		<div className="space-y-6">
 			<div className="flex items-center justify-between">
@@ -261,6 +353,10 @@ export function CampaignersClient({
 						Manage platform users and their accounts
 					</p>
 				</div>
+				<Button onClick={() => setCreateUserDialogOpen(true)}>
+					<Plus className="mr-2 h-4 w-4" />
+					Create User
+				</Button>
 			</div>
 
 			{/* Filters */}
@@ -398,6 +494,16 @@ export function CampaignersClient({
 														>
 															<Settings className="mr-2 h-4 w-4" />
 															Edit Quotas
+														</DropdownMenuItem>
+														<DropdownMenuItem
+															onClick={() => {
+																setSelectedCampaigner(campaigner);
+																setResetPasswordDialogOpen(true);
+																setResetPasswordSuccess(false);
+															}}
+														>
+															<Key className="mr-2 h-4 w-4" />
+															Send Password Reset
 														</DropdownMenuItem>
 														<DropdownMenuSeparator />
 														{campaigner.accountStatus === "suspended" ? (
@@ -542,6 +648,197 @@ export function CampaignersClient({
 							{actionType === "reactivate" && "Reactivate"}
 							{actionType === "quotas" && "Save Changes"}
 						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+
+			{/* Create User Dialog */}
+			<Dialog
+				open={createUserDialogOpen}
+				onOpenChange={setCreateUserDialogOpen}
+			>
+				<DialogContent className="max-w-md">
+					<DialogHeader>
+						<DialogTitle>Create New User</DialogTitle>
+						<DialogDescription>
+							Create a new campaigner account. An invitation email will be sent
+							to set up their password.
+						</DialogDescription>
+					</DialogHeader>
+
+					<div className="space-y-4">
+						{createUserError && (
+							<div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+								{createUserError}
+							</div>
+						)}
+
+						<div className="space-y-2">
+							<Label htmlFor="new-user-email">Email *</Label>
+							<Input
+								id="new-user-email"
+								type="email"
+								placeholder="user@example.com"
+								value={newUserForm.email}
+								onChange={(e) =>
+									setNewUserForm((prev) => ({ ...prev, email: e.target.value }))
+								}
+							/>
+						</div>
+
+						<div className="space-y-2">
+							<Label htmlFor="new-user-name">Display Name *</Label>
+							<Input
+								id="new-user-name"
+								type="text"
+								placeholder="John Doe"
+								value={newUserForm.displayName}
+								onChange={(e) =>
+									setNewUserForm((prev) => ({
+										...prev,
+										displayName: e.target.value,
+									}))
+								}
+							/>
+						</div>
+
+						<div className="space-y-2">
+							<Label htmlFor="new-user-org">Organization Name</Label>
+							<Input
+								id="new-user-org"
+								type="text"
+								placeholder="Acme Inc."
+								value={newUserForm.organizationName}
+								onChange={(e) =>
+									setNewUserForm((prev) => ({
+										...prev,
+										organizationName: e.target.value,
+									}))
+								}
+							/>
+						</div>
+
+						<div className="space-y-2">
+							<Label htmlFor="new-user-role">Role</Label>
+							<Select
+								value={newUserForm.role}
+								onValueChange={(value: "user" | "organizer" | "super_admin") =>
+									setNewUserForm((prev) => ({ ...prev, role: value }))
+								}
+							>
+								<SelectTrigger id="new-user-role">
+									<SelectValue />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="organizer">Organizer</SelectItem>
+									<SelectItem value="user">User</SelectItem>
+									<SelectItem value="super_admin">Super Admin</SelectItem>
+								</SelectContent>
+							</Select>
+						</div>
+
+						<div className="flex items-center gap-2">
+							<input
+								type="checkbox"
+								id="send-invite"
+								checked={newUserForm.sendInvite}
+								onChange={(e) =>
+									setNewUserForm((prev) => ({
+										...prev,
+										sendInvite: e.target.checked,
+									}))
+								}
+								className="h-4 w-4 rounded border-gray-300"
+							/>
+							<Label htmlFor="send-invite" className="text-sm font-normal">
+								Send invitation email to set up password
+							</Label>
+						</div>
+					</div>
+
+					<DialogFooter>
+						<Button
+							variant="outline"
+							onClick={() => {
+								setCreateUserDialogOpen(false);
+								setCreateUserError(null);
+							}}
+							disabled={isSubmitting}
+						>
+							Cancel
+						</Button>
+						<Button
+							onClick={handleCreateUser}
+							disabled={
+								isSubmitting || !newUserForm.email || !newUserForm.displayName
+							}
+						>
+							{isSubmitting && (
+								<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+							)}
+							Create User
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+
+			{/* Password Reset Dialog */}
+			<Dialog
+				open={resetPasswordDialogOpen}
+				onOpenChange={setResetPasswordDialogOpen}
+			>
+				<DialogContent>
+					<DialogHeader>
+						<DialogTitle>Send Password Reset Email</DialogTitle>
+						<DialogDescription>
+							Send a password reset email to this user so they can set a new
+							password.
+						</DialogDescription>
+					</DialogHeader>
+
+					{selectedCampaigner && (
+						<div className="space-y-4">
+							{resetPasswordSuccess ? (
+								<div className="flex items-center gap-3 rounded-md bg-green-50 p-4 dark:bg-green-900/20">
+									<CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+									<div>
+										<p className="font-medium text-green-800 dark:text-green-300">
+											Password reset email sent!
+										</p>
+										<p className="text-sm text-green-700 dark:text-green-400">
+											{selectedCampaigner.email}
+										</p>
+									</div>
+								</div>
+							) : (
+								<div className="bg-muted p-3 rounded-lg">
+									<div className="font-medium">
+										{selectedCampaigner.displayName || "Unnamed"}
+									</div>
+									<div className="text-sm text-muted-foreground">
+										{selectedCampaigner.email}
+									</div>
+								</div>
+							)}
+						</div>
+					)}
+
+					<DialogFooter>
+						<Button
+							variant="outline"
+							onClick={() => setResetPasswordDialogOpen(false)}
+							disabled={isSubmitting}
+						>
+							{resetPasswordSuccess ? "Close" : "Cancel"}
+						</Button>
+						{!resetPasswordSuccess && (
+							<Button onClick={handleSendPasswordReset} disabled={isSubmitting}>
+								{isSubmitting && (
+									<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+								)}
+								Send Reset Email
+							</Button>
+						)}
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>

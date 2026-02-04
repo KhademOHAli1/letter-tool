@@ -13,6 +13,9 @@ export const serverEnv = {
 	SUPABASE_URL: process.env.SUPABASE_URL,
 	SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
 
+	// Site URL for auth redirects (used in password reset, invitations)
+	SITE_URL: process.env.SITE_URL || process.env.NEXT_PUBLIC_APP_URL,
+
 	// Security: Rate limiting (configurable without redeploy)
 	RATE_LIMIT_MAX: Number.parseInt(process.env.RATE_LIMIT_MAX || "10", 10),
 	RATE_LIMIT_WINDOW_SECONDS: Number.parseInt(

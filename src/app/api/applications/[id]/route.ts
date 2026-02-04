@@ -7,6 +7,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { isSuperAdmin } from "@/lib/auth/permissions";
 import { getSession } from "@/lib/auth/server";
+import { serverEnv } from "@/lib/env";
 import { reviewApplicationSchema } from "@/lib/schemas";
 import { createServerSupabaseClient } from "@/lib/supabase";
 
@@ -121,14 +122,17 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
 				);
 			}
 
-			// Check if user already exists and update their profile
+			// Check if user already exists
 			const { data: existingUser } = await supabase
 				.from("user_profiles")
 				.select("id")
 				.eq("email", application.email)
 				.single();
 
+			let newUserId: string | null = null;
+
 			if (existingUser) {
+				// User exists - update their profile
 				await supabase
 					.from("user_profiles")
 					.update({
@@ -146,6 +150,56 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
 					.from("campaigner_applications")
 					.update({ user_id: existingUser.id })
 					.eq("id", id);
+			} else {
+				// User doesn't exist - create a new auth user and send invite
+				const tempPassword = crypto.randomUUID();
+
+				const { data: authData, error: authError } =
+					await supabase.auth.admin.createUser({
+						email: application.email,
+						password: tempPassword,
+						email_confirm: true, // Mark email as confirmed
+						user_metadata: {
+							display_name: application.name,
+						},
+					});
+
+				if (authError) {
+					console.error("Failed to create auth user:", authError);
+					// Log the error but don't fail the approval - user can be created manually
+				} else if (authData.user) {
+					newUserId = authData.user.id;
+
+					// Update the user profile that was auto-created by the trigger
+					await supabase
+						.from("user_profiles")
+						.update({
+							display_name: application.name,
+							organization_name: application.organization_name,
+							organization_website: application.organization_website,
+							role: "organizer",
+							account_status: "active",
+							approved_at: new Date().toISOString(),
+							approved_by: userId,
+						})
+						.eq("id", newUserId);
+
+					// Link user to application
+					await supabase
+						.from("campaigner_applications")
+						.update({ user_id: newUserId })
+						.eq("id", id);
+
+					// Send password reset email as invitation
+					const siteUrl =
+						serverEnv.SITE_URL ||
+						request.headers.get("origin") ||
+						`${request.headers.get("x-forwarded-proto") || "https"}://${request.headers.get("host")}`;
+
+					await supabase.auth.resetPasswordForEmail(application.email, {
+						redirectTo: `${siteUrl}/auth/reset-password`,
+					});
+				}
 			}
 
 			// Log activity
