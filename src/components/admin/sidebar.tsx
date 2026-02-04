@@ -19,6 +19,7 @@ import {
 	PlusCircle,
 	Settings,
 	Shield,
+	User,
 	Users,
 	X,
 } from "lucide-react";
@@ -57,6 +58,11 @@ const adminNavItems: NavItem[] = [
 		icon: <BarChart3 className="h-5 w-5" />,
 	},
 	{
+		href: "/admin/profile",
+		label: "Profile",
+		icon: <User className="h-5 w-5" />,
+	},
+	{
 		href: "/admin/settings",
 		label: "Settings",
 		icon: <Settings className="h-5 w-5" />,
@@ -84,11 +90,6 @@ const superAdminNavItems: NavItem[] = [
 		href: "/admin/activity",
 		label: "Activity Logs",
 		icon: <Activity className="h-5 w-5" />,
-	},
-	{
-		href: "/admin/platform-settings",
-		label: "Platform Settings",
-		icon: <Settings className="h-5 w-5" />,
 	},
 ];
 

@@ -26,6 +26,7 @@ import type { PlatformSetting } from "@/lib/types";
 
 interface SettingsClientProps {
 	settings: PlatformSetting[];
+	showHeader?: boolean;
 }
 
 const SETTING_GROUPS: Record<
@@ -123,7 +124,10 @@ const SETTING_LABELS: Record<
 	},
 };
 
-export function SettingsClient({ settings }: SettingsClientProps) {
+export function SettingsClient({
+	settings,
+	showHeader = true,
+}: SettingsClientProps) {
 	const router = useRouter();
 	const [editedSettings, setEditedSettings] = useState<Record<string, unknown>>(
 		Object.fromEntries(settings.map((s) => [s.key, s.value])),
@@ -254,12 +258,14 @@ export function SettingsClient({ settings }: SettingsClientProps) {
 
 	return (
 		<div className="space-y-6">
-			<div>
-				<h1 className="text-2xl font-bold">Platform Settings</h1>
-				<p className="text-muted-foreground">
-					Configure platform-wide settings and defaults
-				</p>
-			</div>
+			{showHeader && (
+				<div>
+					<h1 className="text-2xl font-bold">Platform Settings</h1>
+					<p className="text-muted-foreground">
+						Configure platform-wide settings and defaults
+					</p>
+				</div>
+			)}
 
 			{error && (
 				<Alert variant="destructive">
