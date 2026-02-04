@@ -10,18 +10,31 @@ import {
 	Loader2,
 	Mail,
 	Megaphone,
-	Settings,
 	Shield,
 	Users,
+	Wrench,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import type { PlatformSetting } from "@/lib/types";
 
 interface SettingsClientProps {
@@ -122,6 +135,12 @@ const SETTING_LABELS: Record<
 		description: "Maximum character length for generated letters",
 		type: "number",
 	},
+};
+
+const formatSettingLabel = (key: string) => {
+	return key
+		.replace(/[_-]+/g, " ")
+		.replace(/\b\w/g, (char) => char.toUpperCase());
 };
 
 export function SettingsClient({
@@ -311,60 +330,121 @@ export function SettingsClient({
 				(s) =>
 					!Object.values(SETTING_GROUPS).some((g) => g.keys.includes(s.key)),
 			).length > 0 && (
-				<Card>
-					<CardHeader>
-						<CardTitle className="flex items-center gap-2">
-							<Settings className="h-5 w-5" />
-							Other Settings
-						</CardTitle>
-					</CardHeader>
-					<CardContent className="space-y-6">
-						{settings
-							.filter(
-								(s) =>
-									!Object.values(SETTING_GROUPS).some((g) =>
-										g.keys.includes(s.key),
-									),
-							)
-							.map((setting) => (
-								<div
-									key={setting.key}
-									className="pb-4 border-b last:border-0 last:pb-0"
-								>
-									<div className="space-y-2">
-										<Label>{setting.key}</Label>
-										{setting.description && (
-											<p className="text-sm text-muted-foreground">
-												{setting.description}
-											</p>
-										)}
-										<div className="flex items-center gap-2">
-											<Input
-												value={String(editedSettings[setting.key] ?? "")}
-												onChange={(e) =>
-													handleChange(setting.key, e.target.value)
-												}
-												className="max-w-xs"
-											/>
-											{hasChanged(setting.key) && (
-												<Button
-													size="sm"
-													onClick={() => handleSave(setting.key)}
-													disabled={savingKey === setting.key}
-												>
-													{savingKey === setting.key ? (
-														<Loader2 className="h-4 w-4 animate-spin" />
-													) : savedKey === setting.key ? (
-														<Check className="h-4 w-4" />
-													) : (
-														"Save"
-													)}
-												</Button>
-											)}
-										</div>
-									</div>
+				<Card className="overflow-hidden border-dashed">
+					<CardHeader className="bg-muted/30">
+						<div className="flex items-center justify-between">
+							<div className="flex items-center gap-3">
+								<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
+									<Wrench className="h-5 w-5 text-muted-foreground" />
 								</div>
-							))}
+								<div>
+									<CardTitle className="text-lg">Other Settings</CardTitle>
+									<CardDescription>
+										Advanced configuration options
+									</CardDescription>
+								</div>
+							</div>
+							<Badge variant="outline" className="text-xs">
+								{
+									settings.filter(
+										(s) =>
+											!Object.values(SETTING_GROUPS).some((g) =>
+												g.keys.includes(s.key),
+											),
+									).length
+								}{" "}
+								items
+							</Badge>
+						</div>
+					</CardHeader>
+					<CardContent className="p-0">
+						<TooltipProvider>
+							<div className="divide-y">
+								{settings
+									.filter(
+										(s) =>
+											!Object.values(SETTING_GROUPS).some((g) =>
+												g.keys.includes(s.key),
+											),
+									)
+									.map((setting, index) => (
+										<div
+											key={setting.key}
+											className="group relative p-5 transition-colors hover:bg-muted/40"
+										>
+											<div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+												<div className="flex items-start gap-4">
+													<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-slate-100 to-slate-200 text-sm font-medium text-slate-600 dark:from-slate-800 dark:to-slate-700 dark:text-slate-300">
+														{index + 1}
+													</div>
+													<div className="space-y-1.5">
+														<div className="flex items-center gap-2">
+															<span className="font-medium">
+																{formatSettingLabel(setting.key)}
+															</span>
+															<Tooltip>
+																<TooltipTrigger asChild>
+																	<Badge
+																		variant="secondary"
+																		className="cursor-help font-mono text-[10px] px-1.5 py-0"
+																	>
+																		{setting.key}
+																	</Badge>
+																</TooltipTrigger>
+																<TooltipContent side="top">
+																	<p>Database key: {setting.key}</p>
+																</TooltipContent>
+															</Tooltip>
+														</div>
+														<p className="text-sm text-muted-foreground leading-relaxed max-w-md">
+															{setting.description ||
+																"No description provided for this setting."}
+														</p>
+													</div>
+												</div>
+
+												<div className="flex items-center gap-3 lg:w-85">
+													<div className="relative flex-1">
+														<Input
+															value={String(editedSettings[setting.key] ?? "")}
+															onChange={(e) =>
+																handleChange(setting.key, e.target.value)
+															}
+															className="pr-10 font-mono text-sm"
+														/>
+														{hasChanged(setting.key) && (
+															<span className="absolute right-3 top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+														)}
+													</div>
+													<Button
+														size="sm"
+														variant={
+															hasChanged(setting.key) ? "default" : "ghost"
+														}
+														onClick={() => handleSave(setting.key)}
+														disabled={
+															!hasChanged(setting.key) ||
+															savingKey === setting.key
+														}
+														className="min-w-17.5 transition-all"
+													>
+														{savingKey === setting.key ? (
+															<Loader2 className="h-4 w-4 animate-spin" />
+														) : savedKey === setting.key ? (
+															<>
+																<Check className="mr-1 h-4 w-4 text-green-500" />
+																Saved
+															</>
+														) : (
+															"Save"
+														)}
+													</Button>
+												</div>
+											</div>
+										</div>
+									))}
+							</div>
+						</TooltipProvider>
 					</CardContent>
 				</Card>
 			)}
