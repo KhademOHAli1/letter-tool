@@ -33,9 +33,15 @@ export interface UserProfile {
 	planTier: PlanTier;
 	organizationName: string | null;
 	organizationWebsite: string | null;
+	bio: string | null;
 	monthlyLetterQuota: number;
 	monthlyLettersUsed: number;
 	maxCampaigns: number;
+	quotaResetAt: string | null;
+	approvedAt: string | null;
+	approvedBy: string | null;
+	suspendedAt: string | null;
+	suspendedReason: string | null;
 	createdAt: string;
 	updatedAt: string;
 }
